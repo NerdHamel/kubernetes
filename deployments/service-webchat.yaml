@@ -17,9 +17,11 @@ spec:
               image: dev-docker.cognigy.com:5000/service-webchat:c599ffe0
               resources:
                 limits:
-                    memory: "512Mi"
+                    memory: "300Mi"
+                    cpu: "50m"
                 requests:
-                    memory: "60Mi"
+                    memory: "200Mi"
+                    cpu: "20m"
               envFrom:
               - configMapRef:
                     name: cognigy-env
