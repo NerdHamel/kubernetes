@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-endpoint
+spec:
+    selector:
+        matchLabels:
+            app: service-endpoint
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-endpoint
+        spec:
+            containers:
+            - name: service-endpoint
+              image: dev-docker.cognigy.com:5000/service-endpoint:c599ffe0
+              resources:
+                limits:
+                    memory: "512Mi"
+                requests:
+                    memory: "60Mi"
+              envFrom:
+              - configMapRef:
+                  name: cognigy-env
+              env:
+              - name: FB_VERIFY_TOKEN
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-facebook
+                        key: fb-verify-token
+              - name: JWT_SECRET
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-jwt
+                        key: secret
+              - name: RABBITMQ_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-rabbitmq
+                        key: rabbitmq-password
+              volumeMounts:
+              - name: redis-persistent-password
+                mountPath: "/var/run/secrets"
+
+            volumes:
+            - name: redis-persistent-password
+              secret:
+                  secretName: cognigy-redis-persistent-password
+    
+            imagePullSecrets:
+            - name: cognigy-registry-token

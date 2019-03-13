@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-custom-modules
+spec:
+    selector:
+        matchLabels:
+            app: service-custom-modules
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-custom-modules
+        spec:
+            containers:
+            - name: service-custom-modules
+              image: dev-docker.cognigy.com:5000/service-custom-modules:c599ffe0
+              resources:
+                limits:
+                    memory: "512Mi"
+                requests:
+                    memory: "60Mi"
+              volumeMounts:
+              - name: flow-modules-nfs
+                mountPath: "/app/flowModules"
+              env:
+              - name: RABBITMQ_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-rabbitmq
+                        key: rabbitmq-password
+              - name: CUSTOM_MODULES_DB_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-service-custom-modules
+                        key: db-password
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+            volumes:
+            - name: flow-modules-nfs
+              persistentVolumeClaim:
+                claimName: flow-modules-nfs
+            imagePullSecrets:
+            - name: cognigy-registry-token

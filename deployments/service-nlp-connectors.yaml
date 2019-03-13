@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-nlp-connectors
+spec:
+    selector:
+        matchLabels:
+            app: service-nlp-connectors
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-nlp-connectors
+        spec:
+            containers:
+            - name: service-nlp-connectors
+              image: dev-docker.cognigy.com:5000/service-nlp-connectors:c599ffe0
+              resources:
+                requests:
+                    memory: "60Mi"
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+              env:
+              - name: NLP_CONNECTORS_DB_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-service-nlp-connectors
+                        key: db-password
+              - name: RABBITMQ_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-rabbitmq
+                        key: rabbitmq-password
+            imagePullSecrets:
+            - name: cognigy-registry-token

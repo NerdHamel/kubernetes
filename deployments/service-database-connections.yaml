@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-database-connections
+spec:
+    selector:
+        matchLabels:
+            app: service-database-connections
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-database-connections
+        spec:
+            containers:
+            - name: service-database-connections
+              image: dev-docker.cognigy.com:5000/service-database-connections:c599ffe0
+              resources:
+                requests:
+                    memory: "100Mi"
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+              env:
+              - name: DB_CONNECTIONS_DB_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-service-database-connections
+                        key: db-password
+              - name: SECURITY_SMTP_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-smtp
+                        key: security-smtp-password
+              - name: RABBITMQ_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-rabbitmq
+                        key: rabbitmq-password
+            imagePullSecrets:
+            - name: cognigy-registry-token

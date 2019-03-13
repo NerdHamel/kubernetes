@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-forms
+spec:
+    selector:
+        matchLabels:
+            app: service-forms
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-forms
+        spec:
+            containers:
+            - name: service-forms
+              image: dev-docker.cognigy.com:5000/service-forms:c599ffe0
+              resources:
+                requests:
+                    memory: "60Mi"
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+              env:
+              - name: FORMS_DB_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-service-forms
+                        key: db-password
+              - name: RABBITMQ_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-rabbitmq
+                        key: rabbitmq-password
+            imagePullSecrets:
+            - name: cognigy-registry-token

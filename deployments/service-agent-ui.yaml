@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-agent-ui
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: service-agent-ui
+  template:
+    metadata:
+      labels:
+        app: service-agent-ui
+    spec:
+      containers:
+        - image: dev-docker.cognigy.com:5000/service-agent-ui:c599ffe0
+          name: service-agent-ui
+          ports:
+            - containerPort: 9000
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+                optional: false
+      imagePullSecrets:
+        - name: cognigy-registry-token

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-analytics-realtime
+spec:
+    selector:
+        matchLabels:
+            app: service-analytics-realtime
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-analytics-realtime
+        spec:
+            containers:
+            - name: service-analytics-realtime
+              image: dev-docker.cognigy.com:5000/service-analytics-realtime:c599ffe0
+              resources:
+                limits:
+                    memory: "512Mi"
+                requests:
+                    memory: "60Mi"
+              env:
+              - name: RABBITMQ_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-rabbitmq
+                        key: rabbitmq-password
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+            imagePullSecrets:
+            - name: cognigy-registry-token

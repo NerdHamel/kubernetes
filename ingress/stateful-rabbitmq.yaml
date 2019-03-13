@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: mongo
+    annotations:
+        kubernetes.io/ingress.class: "external"
+    labels:
+        app: mongo
+spec:
+    rules:
+    - host: mongo
+      http:
+        paths:
+            - backend:
+                serviceName: mongo
+                servicePort: 27017

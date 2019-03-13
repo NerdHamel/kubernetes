@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-api
+spec:
+    selector:
+        matchLabels:
+            app: service-api
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-api
+        spec:
+            containers:
+            - name: service-api
+              image: dev-docker.cognigy.com:5000/service-api:c599ffe0
+              resources:
+                limits:
+                    memory: "300Mi"
+                requests:
+                    memory: "200Mi"
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+              env:
+              - name: AUTHENTICATION_DB_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-service-api
+                        key: db-password
+              - name: JWT_SECRET
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-jwt
+                        key: secret
+              - name: RABBITMQ_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-rabbitmq
+                        key: rabbitmq-password
+              - name: AMAZON_CLIENT_ID
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-amazon-credentials
+                        key: amazon-client-id
+              - name: AMAZON_CLIENT_SECRET
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-amazon-credentials
+                        key: amazon-client-secret
+              - name: INTERNAL_API_USERNAME
+                value: user
+              - name: INTERNAL_API_PASSWORD
+                value: pass
+            imagePullSecrets:
+            - name: cognigy-registry-token

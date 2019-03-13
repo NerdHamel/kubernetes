@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-agent-ui
+  labels:
+    app: service-analytics-odata
+spec:
+  ports:
+      - port: 9000
+  selector:
+    app: service-agent-ui

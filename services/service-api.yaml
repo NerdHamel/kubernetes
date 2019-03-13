@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: service-api
+    labels:
+        app: service-api
+spec:
+    ports:
+    - name: service-api
+      port: 3000
+      targetPort: 3000
+      protocol: TCP
+    selector:
+        app: service-api

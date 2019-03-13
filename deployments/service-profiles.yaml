@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-profiles
+spec:
+    selector:
+        matchLabels:
+            app: service-profiles
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-profiles
+        spec:
+            containers:
+            - name: service-profiles
+              image: dev-docker.cognigy.com:5000/service-profiles:c599ffe0
+              resources:
+                requests:
+                    memory: "60Mi"
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+              env:
+              - name: PROFILES_DB_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-service-profiles
+                        key: db-password
+              - name: RABBITMQ_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-rabbitmq
+                        key: rabbitmq-password
+            imagePullSecrets:
+            - name: cognigy-registry-token
