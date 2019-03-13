@@ -16,8 +16,12 @@ spec:
             - name: service-flows
               image: dev-docker.cognigy.com:5000/service-flows:c599ffe0
               resources:
+                limits:
+                    memory: "200Mi"
+                    cpu: "50m"
                 requests:
                     memory: "100Mi"
+                    cpu: "20m"
               # mount persistent volume claim for 'flow modules' (custom nodes)
               volumeMounts:
               - name: flow-modules-nfs

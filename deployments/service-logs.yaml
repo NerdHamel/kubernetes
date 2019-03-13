@@ -17,9 +17,11 @@ spec:
               image: dev-docker.cognigy.com:5000/service-logs:c599ffe0
               resources:
                 limits:
-                    memory: "150Mi"
+                    memory: "200Mi"
+                    cpu: "50m"
                 requests:
                     memory: "100Mi"
+                    cpu: "20m"
               envFrom:
               - configMapRef:
                     name: cognigy-env

@@ -18,8 +18,10 @@ spec:
               resources:
                 limits:
                     memory: "1Gi"
+                    cpu: "50m"
                 requests:
-                    memory: "250Mi"
+                    memory: "200Mi"
+                    cpu: "20m"
               # mount persistent volume claim for 'flow modules' (custom nodes)
               volumeMounts:
               - name: flow-modules-nfs

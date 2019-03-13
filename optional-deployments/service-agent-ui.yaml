@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: service-ui
+    name: service-agent-ui
 spec:
     selector:
         matchLabels:
-            app: service-ui
+            app: service-agent-ui
     replicas: 1
     template:
         metadata:
             labels:
-                app: service-ui
+                app: service-agent-ui
         spec:
             containers:
-            - name: service-ui
-              image: dev-docker.cognigy.com:5000/service-ui:c599ffe0
+            - name: service-agent-ui
+              image: dev-docker.cognigy.com:5000/service-agent-ui:c599ffe0
               resources:
                 limits:
                     memory: "200Mi"
@@ -22,8 +22,10 @@ spec:
                 requests:
                     memory: "100Mi"
                     cpu: "20m"
+              ports:
+                - containerPort: 9000
               envFrom:
               - configMapRef:
-                    name: cognigy-env
+                  name: cognigy-env
             imagePullSecrets:
-            - name: cognigy-registry-token
+              - name: cognigy-registry-token

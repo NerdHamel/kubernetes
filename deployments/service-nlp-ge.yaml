@@ -16,8 +16,12 @@ spec:
             - name: service-nlp-ge
               image: dev-docker.cognigy.com:5000/service-nlp:c6d34f53
               resources:
+                limits:
+                    memory: "5.0Gi"
+                    cpu: "500m"
                 requests:
-                    memory: "2.0Gi"
+                    memory: "4.0Gi"
+                    cpu: "200m"
               # mount persistent volume claim for nlp config and models
               volumeMounts:
               - name: nlp-models-nfs
