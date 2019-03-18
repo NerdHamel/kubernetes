@@ -240,3 +240,7 @@ data:
 
     REDIS_PERSISTENT_PORT: "6379"
     REDIS_PERSISTENT_HOST: redis-persistent
+
+    # used by the management ui
+    # INTERNAL_API_USERNAME:
+    # INTERNAL_API_PASSWORD:
