@@ -1,3 +1,7 @@
+# NOTE:
+We currently work on a first version of the K8s files. Please do not use the manifest files within this repository, yet!
+
+
 # COGNIGY.AI in k8s
 
 ## Kubernetes secrets
