@@ -36,5 +36,10 @@ spec:
                     secretKeyRef:
                         name: cognigy-rabbitmq
                         key: rabbitmq-password
+              - name: SECURITY_SMTP_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-smtp
+                        key: security-smtp-password
             imagePullSecrets:
             - name: cognigy-registry-token
