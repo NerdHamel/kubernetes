@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-execution
+spec:
+    selector:
+        matchLabels:
+            app: service-execution
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-execution
+        spec:
+            containers:
+            - name: service-execution
+              image: dev-docker.cognigy.com:5000/service-execution:c599ffe0
+              resources:
+                limits:
+                    memory: "70Mi"
+                    cpu: "50m"
+                requests:
+                    memory: "60Mi"
+                    cpu: "50m"
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+              env:
+              - name: RABBITMQ_CONNECTION_STRING
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-service-execution
+                        key: db-password
+            imagePullSecrets:
+            - name: cognigy-registry-token
