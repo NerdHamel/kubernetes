@@ -1,13 +1,61 @@
-# NOTE:
-We currently work on a first version of the K8s files. Please do not use the manifest files within this repository, yet!
-
-
 # COGNIGY.AI in k8s
+This is the official Kubernetes (``k8s``) manifest repository for COGNIGY.AI. The following notes should give you a basic understand on how our product can be deployed on top of Kubernetes.
 
-## Kubernetes secrets
-### Image pull secret
-In order to pull the ``docker images`` from the productive ``docker registry`` of Cognigy, you need to define this an image pull secret: ``cognigy-registry-token``
+The API-objects we are using are tested with Kubernetes 1.9 - everything should work with more modern version of K8s as well.
 
+## Introduction
+This repository has the following folder-structure:
+```
+| - core
+| --- config-maps
+| --- deployments
+| --- ingress
+| --- secrets.dist
+| --- services
+| --- stateful-deployments
+| --- volume-claims
+| --- volumes
+|
+| - livechat
+| --- deployments
+| --- ingress
+| --- services
+|
+| - management-ui
+| --- deployments
+| --- services
+```
+
+The main three folders are ``core``, ``livechat`` and ``management-ui``. All of these directories contain sub-folders which contain K8s API objects of various sorts, such as:
+- deployments
+- ingress objects
+- secrets
+- services
+- volume-claims
+- volumes
+- config-maps
+
+We selected this folder structure to make it a bit more easy for you to understand and deploy our application. The ``core`` folder contains the actual API objects you will need to deploy a fully functional COGNIY.AI system. The other two folders within the root of this repository contain additional software that can be instaled side-by-side with COGNIGY.AI. Those additional tools will not be functional without a working COGNIGY.AI deployment.
+
+## Setup
+This section will guide you through the process of setting up your COGNIGY.AI installation. Will no longer need it, once your initial deployment succeeded.
+
+### Config map
+---
+COGNIGY.AI uses K8s' concept of config-maps for its full configuration. The directory ``core/config-maps`` contains all config-maps which you can edit and modify to your needs.
+
+After you are done with your modifications, deploy those within your K8s cluster:
+```
+kubectl apply -f core/config-maps
+```
+
+### Image Pull Secret
+---
+In order to pull the required ``docker images`` from Cognigy's production registry, you need to define a so-called ``image pull secret``. Kubernetes will use this secret in order to authenticate against our docker registry in order to retrieve docker images for a release.
+
+We will provide the necessary ``username:password`` pair when you obtain your COGNIGY.AI license.
+
+In order to create the image pull secret, issue the following command:
 ```
 kubectl create secret docker-registry cognigy-registry-token \
     --docker-server=docker.cognigy.com:5000 \
@@ -15,67 +63,131 @@ kubectl create secret docker-registry cognigy-registry-token \
     --docker-password=<password>
 ```
 
-### Secrets for Deployments / Pods
-The following ``secrets`` need to be defined within the ``kubernetes cluster`` so COGNIGY.AI can startup without issues:
+### Secrets
+---
+COGNIGY.AI heavily uses secrets, a K8s API object that allows you to store secret information in a secure way within your cluster. Secrets will be made accessible to our software during runtime.
 
-| secret name | key | description for value |
-| ----------- | --- | --------------------- |
-| cognigy-mongo-server | ``mongo-initdb-root-password`` | An alphanumeric string, at least 64 characters |
-| cognigy-rabbitmq | ``rabbitmq-password`` | An alphanumeric string, at least 32 characters |
-| cognigy-jwt | ``secret`` | An alphanumeric string, at least 128 characters |
-| cognigy-smtp | ``security-smtp-password`` | An alphanumeric string, at least 20 characters |
-| cognigy-odata | ``odata-super-api-key`` | An alphanumeric string, at least 32 characters |
-| cognigy-amazon-credentials | ``amazon-client-id``| The client id from amazon.developers.com |
-| cognigy-amazon-credentials | ``amazon-client-secret`` | The client secret from amazon.developers.com |
-| cognigy-facebook | ``fb-verify-token`` | An alphanumeric string, at least 32 characters |
-| cognigy-service-ai | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-alexa-management | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-analytics-collector-provider | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-analytics-conversation-collector-provider | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-api | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-database-connections | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-endpoints | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-flows | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-forms | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-lexicons | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-logs | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-nlp | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-nlp-connectors | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-playbooks | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-profiles | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-projects | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-security | ``db-password`` | An alphanumeric string, at least 128 characters |
-| cognigy-service-settings | ``db-password`` | An alphanumeric string, at least 128 characters |
+The ``core/secrets.dist`` folder contains empty API objects you can use to prepare your correct secrets and finally deploy them. The first step within preparing your secrets is to rename the ``secrets.dist`` folder to ``secrets``. We have a ``.gitignore`` file within this repository which avoids that you accidentally push your final secrets to the public world.
 
-You also need to create a secret for the redis-persistent.conf file in the secrets repository:
+Let's have a look at one of these files:
+```
+apiVersion: v1
+kind: Secret
+metadata:
+    name: cognigy-facebook
+type: Opaque
+data:
+    # -> base64 encoded
+    fb-verify-token: 
+```
 
+The secret has some meta-data and a data part which contains the actual secret. In this example, the key is ``fb-verify-token`` and the actual value was not select. You can now create a random value for this using OpenSSL:
+```
+openssl rand -hex 32
+```
+
+This will genreate 32 bytes of random values encoded as HEX - these values are safe to use them as passwords, secrets and tokens. The secret API objects contain suggestions on what length should be used for best performance/security.
+
+Store the raw-value (plain text values) of your generated secrets somewhere in a safe place. We use a password-manager like KeyPassX. In order to fill the actual secret API objects, your secret values now need to get ``base64`` encoded. You can do this with:
+```
+echo <your-secret> -n | base64 -w0
+```
+
+Take the value that was created and store it within your secret API object as followed:
+```
+apiVersion: v1
+kind: Secret
+metadata:
+    name: cognigy-facebook
+type: Opaque
+data:
+    # -> base64 encoded
+    fb-verify-token: MWNmOTVlMmI5Nzg0YjQ0MWUyNTkxNTMyOGZiMzYzZjk4MzY3Nzc3YTg2MjI0ZjY3ZDI1YzQ1ZDM4Mjc1NjVlOSAtbgo=
+```
+
+You can now use the same procedure for all files within your ``core/secrets`` directory and finally deploy those API objects into your cluster issuing:
+```
+kubectl apply -f core/secrets
+```
+
+We have one special secret which is not create from these API objects - the configuration for ``redis persistent``. To create this secret, issue the following command:
 ```
 kubectl create secret generic redis-persistent.conf --from-file=secrets/redis-persistent.conf 
 ```
 
-## Deploying volumes & volume-claims
-### Volumes
-Cognigy.AI is currently using shared volumes powered by NFS and a volume where mongodb can persiste data. First we need to create directories on a machine that runes the ``nfs server``:
+### Storage
+#### Introduction
+---
+COGNIGY.AI needs to persist data in order to work properly. The simplest way to persist data is by using NFS as a volume-provider within your Kubernetes cluster.
+
+Please bare in mind, that the performance of your NFS is crucial in order to have a high performance COGNIGY.AI installation! Don't put your NFS onto a slow network!
+
+We usually setup a server and create the following directories in which NFS can store the actual data:
 ```
 sudo mkdir -p /var/opt/cognigy/data/models
 sudo mkdir /var/opt/cognigy/data/config
 sudo mkdir /var/opt/cognigy/data/flow-modules
 ```
 
-Then I am also creating a folder where my ``volume`` for the ``MongoDB`` can persist its data:
+If you NFS is fast, you can also utilize it for MongoDB and Redis (persistent) if you deploy data-stores in a fully containerized way as well. In this case, we would create additional directories where those data-stores can persist their data:
 ```
-sudo mkdir -p /var/opt/cognigy/kube-mongo
-```
-
-## Creating databases for services
-Go into your database container (improve me!).
-```
-kubectl exec -it <mongo-pod-name> bash
-
-mongo -u admin -p <admin-password> --authenticationDatabase admin
+sudo mkdir -p /var/opt/cognigy/mongo
+sudo mkdir -p /var/opt/cognigy/redis-persistent
 ```
 
-To create a database for e.g the ``service-profiles`` service, do the following while you are in the ``Mongo shell``:
+#### Persistent Volumes
+---
+Persistent volumes (PVs) allow containerized applications to store their state (files, configuration, cache) in a persistent way either on the host or somewhere in the cloud. In order to run COGNIGY.AI you need to create persistent volumes so deployments (and pods) can mount persistent volumes by issuing so-called ``persistent volume claims``.
+
+Have a look at the contents of ``core/volumes`` and inspect all of the following PVs:
+- flow-modules-nfs.yaml
+- nlp-config-nfs.yaml
+- nlp-models-nfs.yaml
+- redis-persistent.yaml
+- stateful-mongo-server.yaml
+--> add new NLP local volume!
+
+You will need to adjust the ``server`` and the ``path`` part within the NFS configuration within all of these PVs objects. The value of the ``storage`` capacity can also be adjusted, in case you need more for your use-case.
+
+If you finished all of your adjustments, deploy the PV objects into your cluster:
+```
+kubectl apply -f core/volumes/
+```
+
+#### Persistent Volume Claims
+Persistent volume claims (PVCs) are the actual way how Pods express their needs for storage. They claim a part of a PV. Kubernetes will reserve this block of the whole PV specifically for them!
+
+All of the PVC objects are within ``core/volume-claims``. You might want to adjust the ``storage`` request value in case you also modified the PV objects. Please ensure that the storage request is actually lower than what your PVs offer.
+
+If you are done with your modifications, deploy the objects using:
+```
+kubectl apply -f core/volume-claims/
+```
+
+#### Stateful deployments
+COGNIGY.AI is dependent on MongoDB, Redis, a second Redis which persists data and RabbitMQ. Those components need to be available in order so COGNIGY.AI can be deployed and started.
+
+To make it easier to separate our software from those dependencies, we created the ``core/stateful-deployments`` which only contain deployment objects for databases and the message broker. Feel free to have a look at those files.
+
+If you are done, deploy those objects using:
+```
+kubectl apply -f core/stateful-deployments/
+```
+
+#### Initializing MongoDB
+After you have deployed all of the stateful deployments, wait until all of your Pods are up and running.
+
+We now need to create various databases within MongoDB and create users for the individual databases. In order to create those databases and users, let's connect to our running MongoDB by executing the ``mongo`` (client) command within the MongoDB pod. In order to do that, first get the name/id of your MongoDB pod:
+```
+kubectl get po
+```
+
+Find the actual Pod name of your MongoDB copy and copy it. Then execute the following command and replace ``<mongo-pod-name>`` as well as ``<mongo-admin-password>``:
+```
+kubectl exec -it <mongo-pod-name> mongo -u admin -p <mongo-admin-password> --authenticaitonDatabase admin
+```
+
+You should now see the mongo client prompt. In order to create all databases and users, execute the following command for all of the databases you see within the list below:
 ```
 use service-profiles
 db.createUser({
@@ -85,167 +197,68 @@ db.createUser({
         { role: "readWrite", db: "service-profiles" }
     ]
 })
+```
 
-use service-alexa-management
-db.createUser({
-    user: "service-alexa-management",
-    pwd: "REy58sqn8Dh6J5axNuU42ScqWN7cnJwXmcLcW7NDAMpC4DKqLe4Q3E6Xkht5W58stnKY6ajz3WeZYVT8cCeLgZET34wf22nAc65jQ8KZuf2TQ6qA7jsJXcSX6nH7yY9G",
-    roles: [
-        { role: "readWrite", db: "service-alexa-management" }
-    ]
-})
+Be sure to replace 'service-profiles' with the actual name from the list below and also replace the password (the part after 'pwd') with the actual clear-type (not the base64 encoded one) password you have generated earlier in the Secrets step (the ones you might have stored in your password manager).
 
-use service-analytics-collector-provider
-db.createUser({
-    user: "service-analytics-collector-provider",
-    pwd: "Xt2HmZrTtL4yQPX5NaQzd5LH8f5tWvMbjA9HGNuX4kzcaUAWdZSNBXRs8gKnMsTDJQKM6VMHHuXnwRvkm2QNZddARh4jCeHCaym2eJtubjFbQwvDxtRNsH2sv2DMe87q",
-    roles: [
-        { role: "readWrite", db: "service-analytics-collector-provider" }
-    ]
-})
-
-use service-analytics-conversation-collector-provider
-db.createUser({
-    user: "service-analytics-conversation-collector-provider",
-    pwd: "JZATuCYwsmEj4pp8nQZxDSHKHU2NXgGRjZqHuWXLXhbaQMnz2NrVheKP6G8PeUGxDuAgrc6CUqQ94CAzjAyu3x4ncdc9VAw57j5mD3Xuwy2WQ99ckAeEjfSUr4MCR3Kp",
-    roles: [
-        { role: "readWrite", db: "service-analytics-conversation-collector-provider" }
-    ]
-})
-
-use service-database-connections
-db.createUser({
-    user: "service-database-connections",
-    pwd: "ZNYBLmgHZrLJKpHt5zGwmuSW84JyPRcT66KFmEUJ8SJ3Q8uWxvdsGxKKcV7wemevEvdjynty7J8vh8gSbpdxY23kBt9FtsHCwXPVSzmnW2cwcpM54qvG2QJamf9XbuKf",
-    roles: [
-        { role: "readWrite", db: "service-database-connections" }
-    ]
-})
-
-use service-endpoints
-db.createUser({
-    user: "service-endpoints",
-    pwd: "5nEzYFN4xGj3bEwpYnYjfn7qjzqkPbQEQgmU7fAbcSrtedDyFN7cp6LsK7S7Pam85TUbFkG2vPEZ7GhPMzBQbfgnuecG7swEJPmjUhYayAjzh7zxDjAyMUUXyuGn2ZyF",
-    roles: [
-        { role: "readWrite", db: "service-endpoints" }
-    ]
-})
-
-use service-forms
-db.createUser({
-    user: "service-forms",
-    pwd: "p3wqHrRyBh5K8XKxtJ6YfesVZEPDXspZLbaCEgnrYtv6JjTFyTGFqtN7cvDwGGZCkT2pz7k8hL5Yk8Watq7qMjKUDVR4DaBpRWXUUkKWX43VFLfwmXaYjRwywS9dTpbJ",
-    roles: [
-        { role: "readWrite", db: "service-forms" }
-    ]
-})
-
-use service-lexicons
-db.createUser({
-    user: "service-lexicons",
-    pwd: "uPyRWnTUeXhff2jch2eAzzBH4Wq5ZMwn2a4s8WcaJbGdbhTs7LJts5b5YWKTWyXaF4ffgdkfxcY2wNDaKScCaD9N8MBhJK8SmGbfdP3NH9GAwVnWUF8ZNSUzWDeGeWr8",
-    roles: [
-        { role: "readWrite", db: "service-lexicons" }
-    ]
-})
-
-use service-logs
-db.createUser({
-    user: "service-logs",
-    pwd: "gHFh75ttXTU8p6EzH3VMfDKKGzKP8vYpAUmjxCMMcbry2yjR2AmmdMCRU3DN8D6TW2hdXxSZhs4nMc9Ue7vGPVDEJC7E88MGsPeV9V7RRJmmkDFt6EXApaqHqUR6gz4x",
-    roles: [
-        { role: "readWrite", db: "service-logs" }
-    ]
-})
-
-use service-nlp-connectors
-db.createUser({
-    user: "service-nlp-connectors",
-    pwd: "GQNDWLsLbsL83BqJPJLXfPeksAKjhANFnNpaRXkUgctH9ZxegzphF9XAvFvjzhtwgWkYxGqcJEZXYHmkXXYA75rJG9TvuSMjHxWpG7ncFHSRUQzKKcXqCbHXH7z2rUEH",
-    roles: [
-        { role: "readWrite", db: "service-nlp-connectors" }
-    ]
-})
-
-use service-playbooks
-db.createUser({
-    user: "service-playbooks",
-    pwd: "BTqacuFhwXKAJSfv9SD77xm2aWZHKn3yDHdUNYuqSm9Y5SS2yTc54N2JcvcWQXn7zqYq9gwykSKZtN8qBLdaax7SA8BqbsefJgarxYFsfXMjsA4CuFcSHTjMVSUtT6qW",
-    roles: [
-        { role: "readWrite", db: "service-playbooks" }
-    ]
-})
-
-use service-projects
-db.createUser({
-    user: "service-projects",
-    pwd: "ZMfQAhAR9fTW7nRr38Bur94tVqVtqShHZpK4FdKypxUT7kvQRZqMT6a5dK6SqNkQVdUWywrwxeGHqgEVcDXpGGZNVWyLB5Yx8pNtAgQnBUVDnBbYzVpwKfVMBaXtXmTY",
-    roles: [
-        { role: "readWrite", db: "service-projects" }
-    ]
-})
-
-use service-security
-db.createUser({
-    user: "service-security",
-    pwd: "LtTErcw8NayyjR4vL5pfp7Zfse7H5ubhKSF3bHyTyqh3Ej2tJa3vqGU9hevgDfKe3qrnqEp4VUCxgRa6mj27rCgmFEWVkXYM6pnHbpQZpjvUbKrLuAxDPwGUmSRsdKc4",
-    roles: [
-        { role: "readWrite", db: "service-security" }
-    ]
-})
-
-use service-settings
-db.createUser({
-    user: "service-settings",
-    pwd: "apM7T3HnLc6RRCJfkVfKYjb6KMM8bJUSXabzLCejr4w5zGpVnzR8N4P8TqBCzc6LxZftdrMGYzsZYxPR8LSpdZe9vWqG9CK27TSWEAYNdwzTgyRQKjX4Xw4WG4BMhHwE",
-    roles: [
-        { role: "readWrite", db: "service-settings" }
-    ]
-})
-
-use service-api
-db.createUser({
-    user: "service-api",
-    pwd: "Wygp2H9D9VwEhsS8sha7sZC4ndDWJd2xSGaZZjdp6bPv42r673JHn73k4eYSrpRg5J3YJnunkVYhgRyHWFtHQHASRQWNfSK29KHHF2Hj86W97dqwEYfZyYKpvLVrsVxj",
-    roles: [
-        { role: "readWrite", db: "service-api" }
-    ]
-})
-
+An example for ``service-ai`` from the list would look like:
+```
 use service-ai
 db.createUser({
     user: "service-ai",
-    pwd: "W4LxTPzM8mLuwVzhU6d7QU7H3rcBvjjpdhCcgPpfK4adnzkVHtqgN5SXKmYaM8MUj8QPK4rkYC5u7mBWR3KLAcnFP6uu9smzKUfSthmhng7hXdZHV3ttBea8uetdQsCv",
+    pwd: "my-super-secure-service-ai-password",
     roles: [
         { role: "readWrite", db: "service-ai" }
     ]
 })
-
-use service-flows
-db.createUser({
-    user: "service-flows",
-    pwd: "5hp64W7uTR8exEZJwWFspQ3w47zmcbeHmBtRxGUakfj38dAYnqG5MYrd5a9NfqnrbFNWmgdgN4Wd4Q4M9p3Ba7gQULMcyHLa7GvhYANjarAw8ALQxm7PeNQaazqnTybF",
-    roles: [
-        { role: "readWrite", db: "service-flows" }
-    ]
-})
-
-use service-nlp
-db.createUser({
-    user: "service-nlp",
-    pwd: "T4G9vegv7HZerQjBQBFV7X7EKsPqz22Vcwcw3mqb4Z7C85mEHgYuCjnSMx85qxGdgSfJPELTHkrtGZqBX3CSY9qQ9cB4euPAAmdMm9QRrddrdzLnKYPCw65VLuYUsZCy",
-    roles: [
-        { role: "readWrite", db: "service-nlp" }
-    ]
-})
-
 ```
 
+Execute the command above for every element within the following list:
 
-## Deploying everything within the cluster
-Now we need to deploy all ``kubernetes API`` objects into the cluster. Here is an example of how to deploy ``redis``:
+| database/user name | Optional notes |
+| ------------------ | ----- |
+| service-ai | - |
+| service-alexa-management | - |
+| service-analytics-collector-provider | Used by ``service-analytics-collecter`` as well as ``service-analytics-provider `` |
+| service-analytics-conversation-collector-provider | Used by ``service-analytics-conversation-collector`` as well as ``service-analytics-conversation-provider`` |
+| service-api | - |
+| service-custom-modules | - |
+| service-database-connections | - |
+| service-endpoints | - |
+| service-files | - |
+| service-flows | - |
+| service-forms | - |
+| service-lexicons | - |
+| service-logs | - |
+| service-nlp | - |
+| service-nlp-connectors | - |
+| service-playbooks | - |
+| service-profiles | - |
+| service-projects | - |
+| service-secrets | - |
+| service-security | - |
+| service-settings | - |
 
+If you want to use the additional ``livechat`` product, you also need to create the database/user for:
+
+| database/user name | Optional notes |
+| ------------------ | ----- |
+| service-handover | - |
+
+After you created all of the databases within MongoDB, quite the shell by typing ``exit``. You can now apply our main ``deployment`` objects by executing:
 ```
-kubectl create -f deployments/stateful-redis.yaml
-kubectl create -f services/stateful-redis.yaml
+kubectl apply -f core/deployments/
+kubectl apply -f core/services/
+```
+
+### Availability of your installation
+COGNIGY.AI exposes several software components which need to be available from outside of your installation. These are services such as ``endpoint``, ``ui`` and ``api``. Our customers use these services to build new Conversational AIs (ui, api) and make them available to other platforms like ``Facebook Messenger``.
+
+We use a modern ``Ingress Controller`` which allows external web-traffic to reach certain software components within your cluster - it's called Traefik. Traefik will be deployed as part of cognigy. Its API object resides within ``core/deployments``.
+
+The Ingress objects stored within ``core/ingress`` control how Traefik can reach your internal services and can make them accessible. Traefik will also take care about TLS/SSL termination etc.
+
+In order to deploy all of your ingress configurations execute:
+```
+kubectl apply -f core/ingress/
 ```
