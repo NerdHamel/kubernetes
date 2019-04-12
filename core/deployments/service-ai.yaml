@@ -22,10 +22,6 @@ spec:
                 requests:
                     memory: "200Mi"
                     cpu: "20m"
-              # mount persistent volume claim for 'flow modules' (custom nodes)
-              volumeMounts:
-              - name: flow-modules-nfs
-                mountPath: "/app/flowModules"
               envFrom:
               - configMapRef:
                     name: cognigy-env
@@ -40,9 +36,5 @@ spec:
                     secretKeyRef:
                         name: cognigy-rabbitmq
                         key: rabbitmq-password
-            volumes:
-            - name: flow-modules-nfs
-              persistentVolumeClaim:
-                claimName: flow-modules-nfs
             imagePullSecrets:
             - name: cognigy-registry-token
