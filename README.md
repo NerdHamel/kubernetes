@@ -19,6 +19,7 @@ This repository has the following folder-structure:
 | - livechat
 | --- deployments
 | --- ingress
+| --- secrets
 | --- services
 |
 | - management-ui
