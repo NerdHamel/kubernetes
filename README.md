@@ -1,3 +1,10 @@
+# Todo
+- add new NLP services
+- check volumes / volume-claims
+- add new execution service
+- check securityContext NLP
+
+
 # COGNIGY.AI in k8s
 This is the official Kubernetes (``k8s``) manifest repository for COGNIGY.AI. The following notes should give you a basic understand on how our product can be deployed on top of Kubernetes.
 
