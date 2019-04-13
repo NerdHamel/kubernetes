@@ -38,6 +38,15 @@ spec:
                 mountPath: /var/run/secrets
               - name: flow-modules-nfs
                 mountPath: "/app/flowModules"
+              livenessProbe:
+                exec:
+                  command:
+                  - node
+                  - /opt/healthcheck.js
+                initialDelaySeconds: 30
+                periodSeconds: 30
+                failureThreshold: 1
+                timeoutSeconds: 2
 
             volumes:
             - name: rabbitmq-connection-string

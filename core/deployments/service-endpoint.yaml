@@ -45,6 +45,15 @@ spec:
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/rabbitmqConnectionString
                 subPath: rabbitmqConnectionString
+              livenessProbe:
+                exec:
+                  command:
+                  - node
+                  - /opt/healthcheck.js
+                initialDelaySeconds: 30
+                periodSeconds: 30
+                failureThreshold: 1
+                timeoutSeconds: 2
 
             volumes:
             - name: redis-persistent-password
