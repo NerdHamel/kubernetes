@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-nlp-score-en
+spec:
+    selector:
+        matchLabels:
+            app: service-nlp-score-en
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-nlp-score-en
+        spec:
+            containers:
+            - name: service-nlp-score-en
+              image: docker.cognigy.com:5000/service-nlp:5d0ed4a5
+              resources:
+                limits:
+                    memory: "5.0Gi"
+                    cpu: "500m"
+                requests:
+                    memory: "4.0Gi"
+                    cpu: "200m"
+              # mount persistent volume claim for nlp config and models
+              volumeMounts:
+              - name: nlp-models-nfs
+                mountPath: "/data/models"
+              - name: nlp-config-nfs
+                mountPath: "/data/config"
+              - name: local-nlp-models
+                mountPath: "/data/local"
+              envFrom:
+                - configMapRef:
+                    name: cognigy-env
+              env:
+              - name: LANGUAGES_TO_RUN
+                value: en-US
+              - name: SCORE
+                value: true
+              - name: NLP_DB_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-service-nlp
+                        key: db-password
+
+            volumes:
+            - name: nlp-models-nfs
+              persistentVolumeClaim:
+                claimName: nlp-models-nfs
+            - name: nlp-config-nfs
+              persistentVolumeClaim:
+                claimName: nlp-config-nfs
+            - name: rabbitmq-connection-string
+              secret:
+                secretName: cognigy-rabbitmq
+                items:
+                  - key: connection-string
+                    path: rabbitmqConnectionString
+
+            imagePullSecrets:
+            - name: cognigy-registry-token
