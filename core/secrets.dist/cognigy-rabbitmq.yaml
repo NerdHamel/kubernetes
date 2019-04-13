@@ -4,5 +4,9 @@ metadata:
     name: cognigy-rabbitmq
 type: Opaque
 data:
-    # use 32 bytes of random value, hex
-    rabbitmq-password: 
+    # The RabbitMQ connection string (amqp://user:password@host:port)
+    connection-string:
+
+    # The RabbitMQ password. Is the same as the password in the connection string
+    # but is used by RabbitMQ itself to intialize password protection.
+    rabbitmq-password:  
