@@ -15,7 +15,7 @@ spec:
         app: service-handover
     spec:
       containers:
-        - image: dev-docker.cognigy.com:5000/service-handover:c599ffe0
+        - image: docker.cognigy.com:5000/service-handover:5d0ed4a5
           name: service-handover
           ports:
           - containerPort: 80

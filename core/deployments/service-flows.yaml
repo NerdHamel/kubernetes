@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-flows
-              image: dev-docker.cognigy.com:5000/service-flows:c599ffe0
+              image: docker.cognigy.com:5000/service-flows:5d0ed4a5
               resources:
                 limits:
                     memory: "200Mi"
@@ -22,10 +22,6 @@ spec:
                 requests:
                     memory: "100Mi"
                     cpu: "20m"
-              # mount persistent volume claim for 'flow modules' (custom nodes)
-              volumeMounts:
-              - name: flow-modules-nfs
-                mountPath: "/app/flowModules"
               envFrom:
               - configMapRef:
                     name: cognigy-env
@@ -35,12 +31,21 @@ spec:
                     secretKeyRef:
                         name: cognigy-service-flows
                         key: db-password
-              - name: RABBITMQ_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-rabbitmq
-                        key: rabbitmq-password
+              volumeMounts:
+              - name: rabbitmq-connection-string
+
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets
+              - name: flow-modules-nfs
+                mountPath: "/app/flowModules"
+
             volumes:
+            - name: rabbitmq-connection-string
+              secret:
+                secretName: cognigy-rabbitmq
+                items:
+                  - key: connection-string
+                    path: rabbitmqConnectionString
             - name: flow-modules-nfs
               persistentVolumeClaim:
                 claimName: flow-modules-nfs

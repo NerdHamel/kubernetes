@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-endpoint
-              image: dev-docker.cognigy.com:5000/service-endpoint:c599ffe0
+              image: docker.cognigy.com:5000/service-endpoint:5d0ed4a5
               resources:
                 limits:
                     memory: "512Mi"
@@ -36,19 +36,26 @@ spec:
                     secretKeyRef:
                         name: cognigy-jwt
                         key: secret
-              - name: RABBITMQ_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-rabbitmq
-                        key: rabbitmq-password
               volumeMounts:
               - name: redis-persistent-password
-                mountPath: "/var/run/secrets"
+                mountPath: "/var/run/secrets/redis-persistent-password.conf"
+                subPath: redis-persistent-password.conf
+              - name: rabbitmq-connection-string
+
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
 
             volumes:
             - name: redis-persistent-password
               secret:
                   secretName: cognigy-redis-persistent-password
+            - name: rabbitmq-connection-string
+              secret:
+                secretName: cognigy-rabbitmq
+                items:
+                  - key: connection-string
+                    path: rabbitmqConnectionString
     
             imagePullSecrets:
             - name: cognigy-registry-token

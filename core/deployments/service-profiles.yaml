@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-profiles
-              image: dev-docker.cognigy.com:5000/service-profiles:c599ffe0
+              image: docker.cognigy.com:5000/service-profiles:5d0ed4a5
               resources:
                 limits:
                     memory: "200Mi"
@@ -31,10 +31,18 @@ spec:
                     secretKeyRef:
                         name: cognigy-service-profiles
                         key: db-password
-              - name: RABBITMQ_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-rabbitmq
-                        key: rabbitmq-password
+              volumeMounts:
+              - name: rabbitmq-connection-string
+
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets
+
+            volumes:
+            - name: rabbitmq-connection-string
+              secret:
+                secretName: cognigy-rabbitmq
+                items:
+                  - key: connection-string
+                    path: rabbitmqConnectionString
             imagePullSecrets:
             - name: cognigy-registry-token
