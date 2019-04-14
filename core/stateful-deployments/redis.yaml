@@ -26,4 +26,4 @@ spec:
               - name: redis
                 containerPort: 6379
             imagePullSecrets:
-            - name: cognigy-registry-token-prod
+            - name: cognigy-registry-token

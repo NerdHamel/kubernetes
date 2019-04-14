@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: service-nlp-2.0.0-en
+    name: service-nlp-2-0-0-en
 spec:
     selector:
         matchLabels:
-            app: service-nlp-2.0.0-en
+            app: service-nlp-2-0-0-en
     replicas: 1
     template:
         metadata:
             labels:
-                app: service-nlp-2.0.0-en
+                app: service-nlp-2-0-0-en
         spec:
             containers:
-            - name: service-nlp-en
-              image: docker.cognigy.com:5000/service-nlp:5d0ed4a5
+            - name: service-nlp-2-0-0-en
+              image: docker.cognigy.com:5000/service-nlp-2_0_0:f85266a7
               resources:
-                requests:
-                    memory: "2.3Gi"
-                    cpu: "200m"
                 limits:
-                    memory: "3.45Gi"
+                    memory: "5.0Gi"
+                    cpu: "2000m"
+                requests:
+                    memory: "4.0Gi"
                     cpu: "200m"
               # mount persistent volume claim for nlp config and models
               volumeMounts:
@@ -28,6 +28,10 @@ spec:
                 mountPath: "/data/models"
               - name: nlp-config-nfs
                 mountPath: "/data/config"
+              - name: rabbitmq-connection-string
+
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets
               envFrom:
                 - configMapRef:
                     name: cognigy-env
@@ -39,11 +43,7 @@ spec:
                     secretKeyRef:
                         name: cognigy-service-nlp
                         key: db-password
-              - name: RABBITMQ_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-rabbitmq
-                        key: rabbitmq-password
+
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:
@@ -51,5 +51,12 @@ spec:
             - name: nlp-config-nfs
               persistentVolumeClaim:
                 claimName: nlp-config-nfs
+            - name: rabbitmq-connection-string
+              secret:
+                secretName: cognigy-rabbitmq
+                items:
+                  - key: connection-string
+                    path: rabbitmqConnectionString
+
             imagePullSecrets:
             - name: cognigy-registry-token

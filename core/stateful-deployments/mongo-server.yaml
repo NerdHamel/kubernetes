@@ -42,4 +42,4 @@ spec:
               persistentVolumeClaim:
                   claimName: mongo-pv-claim
             imagePullSecrets:
-            - name: cognigy-registry-token-prod
+            - name: cognigy-registry-token

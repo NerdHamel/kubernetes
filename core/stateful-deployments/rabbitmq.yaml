@@ -36,4 +36,4 @@ spec:
                         name: cognigy-rabbitmq
                         key: rabbitmq-password
             imagePullSecrets:
-            - name: cognigy-registry-token-prod
+            - name: cognigy-registry-token
