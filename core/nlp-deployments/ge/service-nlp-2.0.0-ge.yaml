@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: service-nlp-2-0-0-en
+    name: service-nlp-2-0-0-ge
 spec:
     selector:
         matchLabels:
-            app: service-nlp-2-0-0-en
+            app: service-nlp-2-0-0-ge
     replicas: 1
     template:
         metadata:
             labels:
-                app: service-nlp-2-0-0-en
+                app: service-nlp-2-0-0-ge
         spec:
             containers:
-            - name: service-nlp-2-0-0-en
+            - name: service-nlp-2-0-0-ge
               image: docker.cognigy.com:5000/service-nlp-2_0_0:f85266a7
               resources:
                 limits:
@@ -37,7 +37,7 @@ spec:
                     name: cognigy-env
               env:
               - name: LANGUAGES_TO_RUN
-                value: en-US
+                value: "da-DK,nn-NO,it-IT,fr-FR,ar-AE,ja-JP,pl-PL,ge-GE"
               - name: NLP_DB_PASSWORD
                 valueFrom:
                     secretKeyRef:
