@@ -16,6 +16,8 @@ This repository has the following folder-structure:
 | - core
 | --- config-maps
 | --- deployments
+| --- nlp-deployments
+| ------- en
 | --- ingress
 | --- secrets.dist
 | --- services
