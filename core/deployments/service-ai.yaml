@@ -16,12 +16,12 @@ spec:
             - name: service-ai
               image: docker.cognigy.com:5000/service-ai:5d0ed4a5
               resources:
-                limits:
-                    memory: "1Gi"
-                    cpu: "50m"
                 requests:
-                    memory: "200Mi"
-                    cpu: "20m"
+                    memory: "300Mi"
+                    cpu: "200m"
+                limits:
+                    memory: "500Gi"
+                    cpu: "200m"
               envFrom:
               - configMapRef:
                     name: cognigy-env

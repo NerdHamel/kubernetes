@@ -16,12 +16,12 @@ spec:
             - name: service-endpoints
               image: docker.cognigy.com:5000/service-endpoints:5d0ed4a5
               resources:
-                limits:
-                    memory: "200Mi"
-                    cpu: "50m"
                 requests:
-                    memory: "100Mi"
+                    memory: "50Mi"
                     cpu: "20m"
+                limits:
+                    memory: "75Mi"
+                    cpu: "50m"
               envFrom:
               - configMapRef:
                     name: cognigy-env

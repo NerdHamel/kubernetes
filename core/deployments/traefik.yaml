@@ -31,8 +31,6 @@ spec:
               volumeMounts:
                  - name: traefik
                    mountPath: /run/secrets/
-
-
             volumes:
             - name: traefik
               secret:

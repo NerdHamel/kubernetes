@@ -16,12 +16,12 @@ spec:
             - name: service-analytics-odata
               image: docker.cognigy.com:5000/service-analytics-odata:5d0ed4a5
               resources:
-                limits:
-                    memory: "512Mi"
-                    cpu: "50m"
                 requests:
-                    memory: "100Mi"
-                    cpu: "20m"
+                    memory: "300Mi"
+                    cpu: "46m"
+                limits:
+                    memory: "450Mi"
+                    cpu: "46m"
               envFrom:
               - configMapRef:
                     name: cognigy-env

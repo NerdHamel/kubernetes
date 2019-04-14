@@ -16,12 +16,12 @@ spec:
             - name: service-execution
               image: docker.cognigy.com:5000/service-execution:5d0ed4a5
               resources:
-                limits:
-                    memory: "70Mi"
-                    cpu: "500m"
                 requests:
-                    memory: "60Mi"
-                    cpu: "500m"
+                    memory: "25Mi"
+                    cpu: "46m"
+                limits:
+                    memory: "37Mi"
+                    cpu: "46m"
               volumeMounts:
               - name: rabbitmq-connection-string
 
