@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-lexicons
-              image: docker.cognigy.com:5000/service-lexicons:5d0ed4a5
+              image: docker.cognigy.com:5000/service-lexicons:2079b600
               resources:
                 requests:
                     memory: "150Mi"

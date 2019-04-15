@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-cleanup
-              image: docker.cognigy.com:5000/service-cleanup:2df72935
+              image: docker.cognigy.com:5000/service-cleanup:2079b600
               resources:
                 requests:
                     memory: "50Mi"

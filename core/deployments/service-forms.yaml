@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-forms
-              image: docker.cognigy.com:5000/service-forms:5d0ed4a5
+              image: docker.cognigy.com:5000/service-forms:2079b600
               resources:
                 requests:
                     memory: "150Mi"
