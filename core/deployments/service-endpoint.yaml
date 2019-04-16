@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-endpoint
+spec:
+    selector:
+        matchLabels:
+            app: service-endpoint
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-endpoint
+        spec:
+            containers:
+            - name: service-endpoint
+              image: docker.cognigy.com:5000/service-endpoint:2079b600
+              resources:
+                requests:
+                    memory: "50Mi"
+                    cpu: "200m"
+                limits:
+                    memory: "75Mi"
+                    cpu: "200m"
+              envFrom:
+              - configMapRef:
+                  name: cognigy-env
+              env:
+              - name: FB_VERIFY_TOKEN
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-facebook
+                        key: fb-verify-token
+              - name: JWT_SECRET
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-jwt
+                        key: secret
+              volumeMounts:
+              - name: redis-persistent-password
+                mountPath: "/var/run/secrets/redis-persistent-password.conf"
+                subPath: redis-persistent-password.conf
+              - name: rabbitmq-connection-string
+
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
+              livenessProbe:
+                exec:
+                  command:
+                  - node
+                  - /opt/healthcheck.js
+                initialDelaySeconds: 30
+                periodSeconds: 30
+                failureThreshold: 1
+                timeoutSeconds: 2
+
+            volumes:
+            - name: redis-persistent-password
+              secret:
+                  secretName: cognigy-redis-persistent-password
+            - name: rabbitmq-connection-string
+              secret:
+                secretName: cognigy-rabbitmq
+                items:
+                  - key: connection-string
+                    path: rabbitmqConnectionString
+    
+            imagePullSecrets:
+            - name: cognigy-registry-token

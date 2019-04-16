@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: traefik
+spec:
+    selector:
+        matchLabels:
+            app: traefik
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: traefik
+        spec:
+            containers:
+            - name: traefik
+              image: docker.cognigy.com:5000/traefik:1.7.9-alpine
+              args: [
+                "--api",
+                "--kubernetes",
+                "--entryPoints=Name:http Address::80",
+                "--entryPoints=Name:https Address::443 TLS:/run/secrets/traefik.cert,/run/secrets/traefik.key",
+                "--defaultentrypoints=http,https",
+                "--logLevel=DEBUG"
+              ]
+              ports:
+                - name: http
+                  containerPort: 80
+                - name: https
+                  containerPort: 443
+              volumeMounts:
+                 - name: traefik
+                   mountPath: /var/run/secrets/
+            volumes:
+            - name: traefik
+              secret:
+                  secretName: cognigy-traefik
+                  items:
+                    - key: tls.crt
+                      path: traefik.cert
+                    - key: tls.key
+                      path: traefik.key
+            imagePullSecrets:
+            - name: cognigy-registry-token

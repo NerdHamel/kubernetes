@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-webchat
+spec:
+    selector:
+        matchLabels:
+            app: service-webchat
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-webchat
+        spec:
+            containers:
+            - name: service-webchat
+              image: docker.cognigy.com:5000/service-webchat:2079b600
+              resources:
+                requests:
+                    memory: "25Mi"
+                    cpu: "46m"
+                limits:
+                    memory: "37Mi"
+                    cpu: "46m"
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+            imagePullSecrets:
+            - name: cognigy-registry-token

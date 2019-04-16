@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-lexicons
+spec:
+    selector:
+        matchLabels:
+            app: service-lexicons
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-lexicons
+        spec:
+            containers:
+            - name: service-lexicons
+              image: docker.cognigy.com:5000/service-lexicons:2079b600
+              resources:
+                requests:
+                    memory: "150Mi"
+                    cpu: "46m"
+                limits:
+                    memory: "225Mi"
+                    cpu: "46m"
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+              env:
+              - name: LEXICONS_DB_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-service-lexicons
+                        key: db-password
+              volumeMounts:
+              - name: rabbitmq-connection-string
+
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets
+              livenessProbe:
+                exec:
+                  command:
+                  - node
+                  - /opt/healthcheck.js
+                initialDelaySeconds: 30
+                periodSeconds: 30
+                failureThreshold: 1
+                timeoutSeconds: 2
+
+            volumes:
+            - name: rabbitmq-connection-string
+              secret:
+                secretName: cognigy-rabbitmq
+                items:
+                  - key: connection-string
+                    path: rabbitmqConnectionString
+            imagePullSecrets:
+            - name: cognigy-registry-token

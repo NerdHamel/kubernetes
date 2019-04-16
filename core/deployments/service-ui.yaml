@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-ui
+spec:
+    selector:
+        matchLabels:
+            app: service-ui
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-ui
+        spec:
+            containers:
+            - name: service-ui
+              image: docker.cognigy.com:5000/service-ui:deba73b2
+              resources:
+                requests:
+                    memory: "50Mi"
+                    cpu: "46m"
+                limits:
+                    memory: "75Mi"
+                    cpu: "46m"
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+            imagePullSecrets:
+            - name: cognigy-registry-token

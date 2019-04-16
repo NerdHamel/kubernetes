@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-nlp-2-0-0-de
+spec:
+    selector:
+        matchLabels:
+            app: service-nlp-2-0-0-de
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-nlp-2-0-0-de
+        spec:
+            containers:
+            - name: service-nlp-2-0-0-de
+              image: docker.cognigy.com:5000/service-nlp-2_0_0:f85266a7
+              resources:
+                limits:
+                    memory: "5.0Gi"
+                    cpu: "2000m"
+                requests:
+                    memory: "4.0Gi"
+                    cpu: "200m"
+              # mount persistent volume claim for nlp config and models
+              volumeMounts:
+              - name: nlp-models-nfs
+                mountPath: "/data/models"
+              - name: nlp-config-nfs
+                mountPath: "/data/config"
+              - name: rabbitmq-connection-string
+
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets
+              envFrom:
+                - configMapRef:
+                    name: cognigy-env
+              env:
+              - name: LANGUAGES_TO_RUN
+                value: de-DE
+              - name: NLP_DB_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-service-nlp
+                        key: db-password
+
+            volumes:
+            - name: nlp-models-nfs
+              persistentVolumeClaim:
+                claimName: nlp-models-nfs
+            - name: nlp-config-nfs
+              persistentVolumeClaim:
+                claimName: nlp-config-nfs
+            - name: rabbitmq-connection-string
+              secret:
+                secretName: cognigy-rabbitmq
+                items:
+                  - key: connection-string
+                    path: rabbitmqConnectionString
+
+            imagePullSecrets:
+            - name: cognigy-registry-token

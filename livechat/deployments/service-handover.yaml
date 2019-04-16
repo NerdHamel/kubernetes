@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-handover
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: service-handover
+  template:
+    metadata:
+      labels:
+        app: service-handover
+    spec:
+      containers:
+        - image: docker.cognigy.com:5000/service-handover:2079b600
+          name: service-handover
+          ports:
+          - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+          env:
+            - name: HANDOVER_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-service-handover
+                  key: db-password
+            - name: RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-rabbitmq
+                  key: rabbitmq-password
+      imagePullSecrets:
+        - name: cognigy-registry-token

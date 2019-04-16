@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: service-profiles
+spec:
+    selector:
+        matchLabels:
+            app: service-profiles
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: service-profiles
+        spec:
+            containers:
+            - name: service-profiles
+              image: docker.cognigy.com:5000/service-profiles:836847c2
+              resources:
+                requests:
+                    memory: "50Mi"
+                    cpu: "46m"
+                limits:
+                    memory: "75Mi"
+                    cpu: "46m"
+              envFrom:
+              - configMapRef:
+                    name: cognigy-env
+              env:
+              - name: PROFILES_DB_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: cognigy-service-profiles
+                        key: db-password
+              volumeMounts:
+              - name: rabbitmq-connection-string
+
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets
+              livenessProbe:
+                exec:
+                  command:
+                  - node
+                  - /opt/healthcheck.js
+                initialDelaySeconds: 30
+                periodSeconds: 30
+                failureThreshold: 1
+                timeoutSeconds: 2
+
+            volumes:
+            - name: rabbitmq-connection-string
+              secret:
+                secretName: cognigy-rabbitmq
+                items:
+                  - key: connection-string
+                    path: rabbitmqConnectionString
+            imagePullSecrets:
+            - name: cognigy-registry-token

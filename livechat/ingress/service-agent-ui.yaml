@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: service-agent-ui
+spec:
+    rules:
+    - host: livechat
+      http:
+        paths:
+        - path: /
+          backend:
+              serviceName: service-agent-ui
+              servicePort: 9000

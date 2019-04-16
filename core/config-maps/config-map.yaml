@@ -1,0 +1,249 @@
+# This file contains the main configuration for COGNIGY.AI.
+# This API object should be deployed first, since all API objects of
+# type deployment are dependent on it.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: cognigy-env
+
+data:
+    NODE_ENV: production
+
+    RABBITMQ_HOST: rabbitmq
+    RABBITMQ_PORT: "5672"
+    RABBITMQ_USER: cognigy
+    # RABBITMQ_PASSWORD: long and strong password // from secret
+
+    REDIS_HOST: redis
+    REDIS_PORT: "6379"
+
+    # generate token signing
+    # JWT_SECRET is a secret! (service-api, service-endpoint)
+
+    # cleanup and constraint configuration
+    QUEUE_CLEANUP_INTERVAL: "20"
+    QUEUE_CLEANUP_IDLE_SINCE_MINUTES: "3"
+
+    # limits (api requests, db queries, context-size)
+    MESSAGE_TTL_SECONDS: "120"
+    MAX_MEMORY_OBJECT_SIZE: "65536"
+    HTTP_JSON_BODY_LIMIT: "65536"
+    MAX_BYTE_SIZE: "524288"
+    RESPONSE_BYTES_LIMIT: "524288"
+
+    # features (enable / disable)
+    FEATURE_CUSTOM_NODES: "true"
+    RSS_FEED_URL: https://hello.cognigy.com/product/tag/enterprise/rss.xml
+
+    # log cleanup
+    LOG_ENTRIES_TTL_IN_MINUTES: "1440"
+    LOG_ENTRIES_BUFFER_IN_SECONDS: "5"
+
+    # statsd metrics
+    STATSD_CLIENT_HOST: "172.17.0.1"
+    STATSD_CLIENT_PORT: "8125"
+
+    # SMTP server for 'forgot password' functionality
+    SECURITY_SMTP_HOST: "test"
+    SECURITY_SMTP_PORT: "test"
+    SECURITY_SMTP_TLS_REQUIRED: "test"
+    SECURITY_SMTP_USERNAME: "test"
+    SECURITY_SMTP_FROM: "test"
+    # SECURITY_SMTP_PASSWORD is a secret! (service-database-connections)
+
+    # DNS names
+    FRONTEND_BASE_URL_WITH_PROTOCOL: http://ui
+    BACKEND_BASE_URL_WITH_PROTOCOL: http://api
+    ENDPOINT_BASE_URL_WITH_PROTOCOL: http://endpoint
+    WEBCHAT_BASE_URL_WITH_PROTOCOL: http://webchat
+    ENDPOINT_BASE_URL: http://endpoint
+    ODATA_HOSTNAME: http://odata
+
+    # ODATA configuration
+    # ODATA_SUPER_API_KEY is a secret (service-analytics-odata)
+    ODATA_PORT: "80"
+
+    # service-ai
+    AI_DB_HOST: mongo-server
+    AI_DB_PORT: "27017"
+    AI_DB_NAME: service-ai
+    AI_DB_USERNAME: service-ai
+    # AI_DB_PASSWORD is a secret!
+
+    # service-alexa-management
+    ALEXA_MANAGEMENT_DB_HOST: mongo-server
+    ALEXA_MANAGEMENT_DB_PORT: "27017"
+    ALEXA_MANAGEMENT_DB_NAME: service-alexa-management
+    ALEXA_MANAGEMENT_DB_USERNAME: service-alexa-management
+    # ALEXA_MANAGEMENT_DB_PASSWORD: is a secret!
+    # AMAZON_CLIENT_ID is a secret!
+    # AMAZON_CLIENT_SECRET is a secret!
+
+    # service-analytics-collector & service-analytics-reporter
+    ANALYTICS_COLLECTOR_DB_HOST: mongo-server
+    ANALYTICS_COLLECTOR_DB_PORT: "27017"
+    ANALYTICS_COLLECTOR_DB_NAME: service-analytics-collector-provider
+    ANALYTICS_COLLECTOR_DB_USERNAME: service-analytics-collector-provider
+    # ANALYTICS_COLLECTOR_DB_PASSWORD is a secret!
+
+    ANALYTICS_REPORTER_DB_HOST: mongo-server
+    ANALYTICS_REPORTER_DB_PORT: "27017"
+    ANALYTICS_REPORTER_DB_NAME: service-analytics-collector-provider
+    ANALYTICS_REPORTER_DB_USERNAME: service-analytics-collector-provider
+    # ANALYTICS_REPORTER_DB_PASSWORD is a secret!
+
+    # service-analytics-conversation-provider & service-analytics-conversation-collector
+    CONVERSATION_PROVIDER_DB_HOST: mongo-server
+    CONVERSATION_PROVIDER_DB_PORT: "27017"
+    CONVERSATION_PROVIDER_DB_NAME: service-analytics-conversation-collector-provider
+    CONVERSATION_PROVIDER_DB_USERNAME: service-analytics-conversation-collector-provider
+    # CONVERSATION_PROVIDER_DB_PASSWORD is a secret!
+
+    CONVERSATION_COLLECTOR_DB_HOST: mongo-server
+    CONVERSATION_COLLECTOR_DB_PORT: "27017"
+    CONVERSATION_COLLECTOR_DB_NAME: service-analytics-conversation-collector-provider
+    CONVERSATION_COLLECTOR_DB_USERNAME: service-analytics-conversation-collector-provider
+    # CONVERSATION_COLLECTOR_DB_PASSWORD is a secret!
+
+    # service-api
+    AUTHENTICATION_DB_HOST: mongo-server
+    AUTHENTICATION_DB_PORT: "27017"
+    AUTHENTICATION_DB_NAME: service-api
+    AUTHENTICATION_DB_USERNAME: service-api
+    # AUTHENTICATION_DB_PASSWORD is a secret!
+
+    # service-database-connections
+    DB_CONNECTIONS_DB_HOST: mongo-server
+    DB_CONNECTIONS_DB_PORT: "27017"
+    DB_CONNECTIONS_DB_NAME: service-database-connections
+    DB_CONNECTIONS_DB_USERNAME: service-database-connections
+    # DB_CONNECTIONS_DB_PASSWORD is a secret!
+
+    # service-endpoint
+    # FB_VERIFY_TOKEN is a secret!
+    ALEXA_END_SESSION_AFTER_EACH_REPLY: "true"
+
+    # service-endpoints
+    ENDPOINTS_DB_HOST: mongo-server
+    ENDPOINTS_DB_PORT: "27017"
+    ENDPOINTS_DB_NAME: service-endpoints
+    ENDPOINTS_DB_USERNAME: service-endpoints
+    # ENDPOINTS_DB_PASSWORD is a secret!
+
+    # service-flows
+    FLOWS_DB_HOST: mongo-server
+    FLOWS_DB_PORT: "27017"
+    FLOWS_DB_NAME: service-flows
+    FLOWS_DB_USERNAME: service-flows
+    # FLOWS_DB_PASSWORD is a secret!
+
+    # service-forms
+    FORMS_DB_HOST: mongo-server
+    FORMS_DB_PORT: "27017"
+    FORMS_DB_NAME: service-forms
+    FORMS_DB_USERNAME: service-forms
+    # FORMS_DB_PASSWORD is a secret!
+
+    # service-lexicons
+    LEXICONS_DB_HOST: mongo-server
+    LEXICONS_DB_PORT: "27017"
+    LEXICONS_DB_NAME: service-lexicons
+    LEXICONS_DB_USERNAME: service-lexicons
+    # LEXICONS_DB_PASSWORD is a secret!
+
+    # service-logs
+    LOG_DB_HOST: mongo-server
+    LOG_DB_PORT: "27017"
+    LOG_DB_NAME: service-logs
+    LOG_DB_USERNAME: service-logs
+    # LOG_DB_PASSWORD is a secret!
+
+    # service-nlp (all nlp languages!)
+    NLP_DB_HOST: mongo-server
+    NLP_DB_PORT: "27017"
+    NLP_DB_NAME: service-nlp
+    NLP_DB_USERNAME: service-nlp
+    # NLP_DB_PASSWORD is a secret!
+    CNLP_CORES: "1"
+    LANGUAGE_CONFIG_PATH: /data/config/languages.json
+
+    # service-nlp-connectors
+    NLP_CONNECTORS_DB_HOST: mongo-server
+    NLP_CONNECTORS_DB_PORT: "27017"
+    NLP_CONNECTORS_DB_NAME: service-nlp-connectors
+    NLP_CONNECTORS_DB_USERNAME: service-nlp-connectors
+    # NLP_CONNECTORS_DB_PASSWORD is a secret!
+
+    # service-playbooks
+    PLAYBOOKS_DB_HOST: mongo-server
+    PLAYBOOKS_DB_PORT: "27017"
+    PLAYBOOKS_DB_NAME: service-playbooks
+    PLAYBOOKS_DB_USERNAME: service-playbooks
+    # PLAYBOOKS_DB_PASSWORD is a secret!
+
+    # service-profiles
+    PROFILES_DB_HOST: mongo-server
+    PROFILES_DB_PORT: "27017"
+    PROFILES_DB_NAME: service-profiles
+    PROFILES_DB_USERNAME: service-profiles
+    # PROFILES_DB_PASSWORD is a secret!
+
+    # service-projects
+    PROJECTS_DB_HOST: mongo-server
+    PROJECTS_DB_PORT: "27017"
+    PROJECTS_DB_NAME: service-projects
+    PROJECTS_DB_USERNAME: service-projects
+    # PROJECTS_DB_PASSWORD is a secret!
+
+    # service-security
+    SECURITY_DB_HOST: mongo-server
+    SECURITY_DB_PORT: "27017"
+    SECURITY_DB_NAME: service-security
+    SECURITY_DB_USERNAME: service-security
+    # SECURITY_DB_PASSWORD is a secret!
+
+    # service-settings
+    SETTINGS_DB_HOST: mongo-server
+    SETTINGS_DB_PORT: "27017"
+    SETTINGS_DB_NAME: service-settings
+    SETTINGS_DB_USERNAME: service-settings
+    # SETTINGS_DB_PASSWORD is a secret!
+
+    # service-secrets
+    SECRETS_DB_HOST: mongo-server
+    SECRETS_DB_PORT: "27017"
+    SECRETS_DB_NAME: service-secrets
+    SECRETS_DB_USERNAME: service-secrets
+    # SECRETS_DB_PASSWORD is a secret!
+
+    # service-files
+    FILES_DB_USERNAME: service-files
+    FILES_DB_HOST: "mongo-server"
+    FILES_DB_PORT: "27017"
+    FILES_DB_NAME: service-files
+    # FILES_DB_PASSWORD is a secret!
+
+    # service-custom-modules
+    CUSTOM_MODULES_DB_USERNAME: service-custom-modules
+    CUSTOM_MODULES_DB_HOST: mongo-server
+    CUSTOM_MODULES_DB_PORT: "27017"
+    CUSTOM_MODULES_DB_NAME: service-custom-modules
+    # CUSTOM_MODULES_DB_PASSWORD is a secret!
+
+    # service-handover
+    HANDOVER_DB_HOST: mongo-server
+    HANDOVER_DB_PORT: "27017"
+    HANDOVER_DB_USERNAME: service-handover
+    HANDOVER_DB_NAME: service-handover
+    # HANDOVER_DB_PASSWORD is a secret!
+
+    FEATURE_LIVECHAT: "true"
+
+    NLP_MULTI_LANGUAGE_MODEL_PATH: /data/models/xx_ent_wiki_sm-2.0.0/xx_ent_wiki_sm/xx_ent_wiki_sm-2.0.0
+
+    REDIS_PERSISTENT_PORT: "6379"
+    REDIS_PERSISTENT_HOST: redis-persistent
+
+    # used by the management ui
+    # INTERNAL_API_USERNAME:
+    # INTERNAL_API_PASSWORD:
