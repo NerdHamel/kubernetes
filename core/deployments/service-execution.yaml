@@ -23,6 +23,8 @@ spec:
                     memory: "37Mi"
                     cpu: "46m"
               volumeMounts:
+              - name: flow-modules-nfs
+                mountPath: "/app/flowModules"
               - name: rabbitmq-connection-string
 
                 # This will mount the file in /run/secrets. Alpine Linux bug
@@ -38,6 +40,9 @@ spec:
                 timeoutSeconds: 2
 
             volumes:
+            - name: flow-modules-nfs
+              persistentVolumeClaim:
+                claimName: flow-modules-nfs
             - name: rabbitmq-connection-string
               secret:
                 secretName: cognigy-rabbitmq
