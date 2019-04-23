@@ -21,7 +21,6 @@ spec:
                 "--entryPoints=Name:http Address::80",
                 "--entryPoints=Name:https Address::443 TLS:/run/secrets/traefik.cert,/run/secrets/traefik.key",
                 "--defaultentrypoints=http,https",
-                "--logLevel=DEBUG"
               ]
               ports:
                 - name: http
