@@ -11,8 +11,7 @@ spec:
     persistentVolumeReclaimPolicy: Delete
     storageClassName: redis-persistent
     local:
-        # change me!
-        path: /var/opt/cognigy/kube-redis
+        path: /var/opt/cognigy/redis-persistent
     nodeAffinity:
         required:
             nodeSelectorTerms:
@@ -21,4 +20,4 @@ spec:
                 operator: In
                 values:
                 # change me!
-                - monty0157
+                - 

@@ -11,8 +11,7 @@ spec:
     persistentVolumeReclaimPolicy: Delete
     storageClassName: local-storage
     local:
-        # change me!
-        path: /var/opt/cognigy/kube-mongo
+        path: /var/opt/cognigy/mongo
     nodeAffinity:
         required:
             nodeSelectorTerms:
@@ -21,4 +20,4 @@ spec:
                 operator: In
                 values:
                 # change me!
-                - monty0157
+                - 
