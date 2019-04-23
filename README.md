@@ -23,7 +23,7 @@ This repository has the following folder-structure:
 | --- services
 | --- stateful-deployments
 | --- volume-claims
-| --- volumes
+| --- volumes.dist
 |
 | - livechat
 | --- deployments
@@ -120,10 +120,10 @@ You can now use the same procedure for all files within your ``core/secrets`` di
 kubectl apply -f core/secrets
 ```
 
-We have one special secret which is not create from these API objects - the configuration for ``redis persistent``. To create this secret, issue the following command:
+<!-- We have one special secret which is not create from these API objects - the configuration for ``redis persistent``. To create this secret, issue the following command:
 ```
-kubectl create secret generic redis-persistent.conf --from-file=secrets/redis-persistent.conf 
-```
+kubectl create secret generic cognigy-redis-persistent-password --from-file=core/secrets/redis-persistent-password.yaml
+``` -->
 
 ### Storage
 #### Introduction
@@ -139,7 +139,9 @@ sudo mkdir /var/opt/cognigy/data/config
 sudo mkdir /var/opt/cognigy/data/flow-modules
 ```
 
-If you NFS is fast, you can also utilize it for MongoDB and Redis (persistent) if you deploy data-stores in a fully containerized way as well. In this case, we would create additional directories where those data-stores can persist their data:
+If your NFS is fast, you can also utilize it for MongoDB and Redis (persistent). We don't do this usually, cause databases suffer from bad disk-performance. Instead, we are using local volumes that will give you the full speed of your SSD storage.
+
+Please also create the following additional directories where MongoDB and Redis (persistent) can store their data:
 ```
 sudo mkdir -p /var/opt/cognigy/mongo
 sudo mkdir -p /var/opt/cognigy/redis-persistent
@@ -147,17 +149,20 @@ sudo mkdir -p /var/opt/cognigy/redis-persistent
 
 #### Persistent Volumes
 ---
-Persistent volumes (PVs) allow containerized applications to store their state (files, configuration, cache) in a persistent way either on the host or somewhere in the cloud. In order to run COGNIGY.AI you need to create persistent volumes so deployments (and pods) can mount persistent volumes by issuing so-called ``persistent volume claims``.
+Persistent volumes (PVs) allow containerized applications to store their state (files, configuration, cache) in a persistent way either on the host or somewhere in the cloud. In order to run COGNIGY.AI you need to create persistent volumes so pods (defined by deployments) can mount persistent volumes by issuing so-called ``persistent volume claims``.
 
-Have a look at the contents of ``core/volumes`` and inspect all of the following PVs:
+Have a look at the contents of ``core/volumes.dist`` and inspect all of the following PVs:
 - flow-modules-nfs.yaml
 - nlp-config-nfs.yaml
 - nlp-models-nfs.yaml
 - redis-persistent.yaml
 - stateful-mongo-server.yaml
---> add new NLP local volume!
 
-You will need to adjust the ``server`` and the ``path`` part within the NFS configuration within all of these PVs objects. The value of the ``storage`` capacity can also be adjusted, in case you need more for your use-case.
+The reason why we named this directory ``.dist`` is the fact, that you definitely need to change these files before you apply them to your cluster. You should not update those files in the future when Cognigy provides new files for a new release. Simply create a copy of the folder and name it ``volumes``. Do all of your modifications within the ``volumes`` folder and leave ``volumes.dist`` untouched.
+
+We essentially have grouped them and are using ``NFS`` for some of those volumes (they have the ``-nfs`` prefix in their names). The other volumes for ``redis-persistent`` and ``mongo`` use local volumes that are persistent on one of the hosts directly.
+
+Be sure to exchange the ``server/path`` pair within the ``-nfs``-prefixed files as well as the ``machine-name`` (#change me!) for your local volumes.
 
 If you finished all of your adjustments, deploy the PV objects into your cluster:
 ```

@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
     name: redis-persistent
 spec:
     selector:
         matchLabels:
             app: redis-persistent
-    serviceName: redis-persistent
     replicas: 1
     template:
         metadata:
@@ -32,7 +31,6 @@ spec:
                 mountPath: /run/secrets/
               - name: redis-persistent-config
                 mountPath: /run/config
-
             volumes:
             - name: redis-password-config
               secret:
@@ -40,23 +38,11 @@ spec:
                 items:
                 - key: redis-persistent-password.conf
                   path: redis-password.conf
-
             - name: redis-persistent-config
               configMap:
                 name: redis-persistent
-
+            - name: redis-data
+              persistentVolumeClaim:
+                  claimName: redis-persistent-pvc
             imagePullSecrets:
             - name: cognigy-registry-token
-
-    volumeClaimTemplates:
-    - metadata:
-        name: redis-data
-        labels:
-            app: cognigy
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        storageClassName: redis-persistent
-        resources:
-          requests:
-            storage: 10Gi
