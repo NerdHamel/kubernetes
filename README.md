@@ -234,7 +234,7 @@ Execute the command above for every element within the following list:
 | ------------------ | ----- |
 | service-ai | - |
 | service-alexa-management | - |
-| service-analytics-collector-provider | Used by ``service-analytics-collecter`` as well as ``service-analytics-provider `` |
+| service-analytics-collector-provider | Used by ``service-analytics-collector``, ``service-analytics-odata`` as well as ``service-analytics-reporter`` |
 | service-analytics-conversation-collector-provider | Used by ``service-analytics-conversation-collector`` as well as ``service-analytics-conversation-provider`` |
 | service-api | - |
 | service-custom-modules | - |
@@ -262,8 +262,8 @@ If you want to use the additional ``livechat`` product, you also need to create 
 
 After you created all of the databases within MongoDB, quite the shell by typing ``exit``. You can now apply our main ``deployment`` objects by executing:
 ```
-kubectl apply -f core/deployments/
 kubectl apply -f core/services/
+kubectl apply -f core/deployments/
 ```
 
 ### Availability of your installation
