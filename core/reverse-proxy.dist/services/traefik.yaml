@@ -18,7 +18,8 @@ spec:
       port: 8080
       name: admin
     externalIPs:
-      - 10.215.25.130
+      # Change me!
+      - 10.215.25.112
     type: LoadBalancer
     selector:
         app: traefik

@@ -266,11 +266,19 @@ kubectl apply -f core/deployments/
 ### Availability of your installation
 COGNIGY.AI exposes several software components which need to be available from outside of your installation. These are services such as ``endpoint``, ``ui`` and ``api``. Our customers use these services to build new Conversational AIs (ui, api) and make them available to other platforms like ``Facebook Messenger``.
 
-We use a modern ``Ingress Controller`` which allows external web-traffic to reach certain software components within your cluster - it's called Traefik. Traefik will be deployed as part of cognigy. Its API object resides within ``core/deployments``.
+In the folder ``core/reverse-proxy.dist``, you will find the necessary API objects to expose COGNIGY.AI. You should therefore rename the folder to ``reverse-proxy``, since we need to make some changes.
 
-The Ingress objects stored within ``core/ingress`` control how Traefik can reach your internal services and can make them accessible. Traefik will also take care about TLS/SSL termination etc.
+We use a modern ``Ingress Controller`` which allows external web-traffic to reach certain software components within your cluster - it's called Traefik. If you do not have your own reverse proxy set up, then you can deploy Traefik. Do this by first changing the external IP address in the file ``core/reverse-proxy/services/traefik.yaml`` to be the external IP of your server, and afterwards, you can run the two commands below to deploy Traefik:
+
+```
+kubectl apply -f core/reverse-proxy/services/
+kubectl apply -f core/reverse-proxy/deployments/
+```
+
+The Ingress objects stored within ``core/reverse-proxy/ingress`` control how the reverse proxy can reach your internal services and can make them accessible. If you use Traefik as the reverse proxy, then you can simply apply these files to make COGNIGY.AI accessible. If you are using a different reverse proxy, then you should modify them to work with this reverse proxy (e.g. modify the ingress annotation class).
 
 In order to deploy all of your ingress configurations execute:
+
 ```
 kubectl apply -f core/ingress/
 ```
