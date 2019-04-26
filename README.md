@@ -18,6 +18,8 @@ This repository has the following folder-structure:
 | --- deployments
 | --- nlp-deployments
 | ------- en
+| ------- de
+| ------- ge
 | --- ingress
 | --- secrets.dist
 | --- services
@@ -45,10 +47,10 @@ The main three folders are ``core``, ``livechat`` and ``management-ui``. All of 
 - volumes
 - config-maps
 
-We selected this folder structure to make it a bit more easy for you to understand and deploy our application. The ``core`` folder contains the actual API objects you will need to deploy a fully functional COGNIY.AI system. The other two folders within the root of this repository contain additional software that can be instaled side-by-side with COGNIGY.AI. Those additional tools will not be functional without a working COGNIGY.AI deployment.
+We selected this folder structure to make it a bit more easy for you to understand and deploy our application. The ``core`` folder contains the actual API objects you will need to deploy a fully functional COGNIY.AI system. The other two folders within the root of this repository contain additional software that can be installed side-by-side with COGNIGY.AI. Those additional tools will not be functional without a working COGNIGY.AI deployment.
 
 ## Setup
-This section will guide you through the process of setting up your COGNIGY.AI installation. Will no longer need it, once your initial deployment succeeded.
+This section will guide you through the process of setting up your COGNIGY.AI installation. You will no longer need it, once your initial deployment succeeded.
 
 ### Config map
 ---
@@ -91,7 +93,7 @@ data:
     fb-verify-token: 
 ```
 
-The secret has some meta-data and a data part which contains the actual secret. In this example, the key is ``fb-verify-token`` and the actual value was not select. You can now create a random value for this using OpenSSL:
+The secret has some meta-data and a data part which contains the actual secret. In this example, the key is ``fb-verify-token`` and the actual value was not created. You can now create a random value for this using OpenSSL:
 ```
 openssl rand -hex 32
 ```
@@ -119,11 +121,6 @@ You can now use the same procedure for all files within your ``core/secrets`` di
 ```
 kubectl apply -f core/secrets
 ```
-
-<!-- We have one special secret which is not create from these API objects - the configuration for ``redis persistent``. To create this secret, issue the following command:
-```
-kubectl create secret generic cognigy-redis-persistent-password --from-file=core/secrets/redis-persistent-password.yaml
-``` -->
 
 ### Storage
 #### Introduction

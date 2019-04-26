@@ -7,8 +7,8 @@ metadata:
 spec:
     ports:
     - name: service-ui
-      port: 9000
-      targetPort: 9000
+      port: 8000
+      targetPort: 8000
       protocol: TCP
     selector:
         app: service-ui

@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-parser
-              image: docker.cognigy.com:5000/service-parser:e14880d5
+              image: docker.cognigy.com:5000/service-parser:e31b2cd2
               resources:
                 requests:
                     memory: "25Mi"
