@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-custom-modules
-              image: docker.cognigy.com:5000/service-custom-modules:2079b600
+              image: docker.cognigy.com:5000/service-custom-modules:e14880d5
               resources:
                 requests:
                     memory: "50Mi"

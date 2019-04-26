@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: service-nlp-2-0-0-en
+    name: service-nlp-tokens-en
 spec:
     selector:
         matchLabels:
-            app: service-nlp-2-0-0-en
+            app: service-nlp-tokens-en
     replicas: 1
     template:
         metadata:
             labels:
-                app: service-nlp-2-0-0-en
+                app: service-nlp-tokens-en
         spec:
             containers:
-            - name: service-nlp-2-0-0-en
-              image: docker.cognigy.com:5000/service-nlp-2_0_0:f85266a7
+            - name: service-nlp-tokens-en
+              image: dev-docker.cognigy.com:5000/service-nlp-tokens:bc60050a
               resources:
                 limits:
-                    memory: "5.0Gi"
+                    memory: "2Gi"
                     cpu: "500m"
                 requests:
-                    memory: "4.0Gi"
+                    memory: "1.5Gi"
                     cpu: "500m"
               # mount persistent volume claim for nlp config and models
               volumeMounts:
@@ -38,11 +38,6 @@ spec:
               env:
               - name: LANGUAGES_TO_RUN
                 value: en-US
-              - name: NLP_DB_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-service-nlp
-                        key: db-password
 
             volumes:
             - name: nlp-models-nfs

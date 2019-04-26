@@ -18,10 +18,10 @@ spec:
               resources:
                 limits:
                     memory: "5.0Gi"
-                    cpu: "2000m"
+                    cpu: "500m"
                 requests:
                     memory: "4.0Gi"
-                    cpu: "200m"
+                    cpu: "500m"
               # mount persistent volume claim for nlp config and models
               volumeMounts:
               - name: nlp-models-nfs

@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: service-nlp-2-0-0-en
+    name: service-nlp-score-de
 spec:
     selector:
         matchLabels:
-            app: service-nlp-2-0-0-en
+            app: service-nlp-score-de
     replicas: 1
     template:
         metadata:
             labels:
-                app: service-nlp-2-0-0-en
+                app: service-nlp-score-de
         spec:
             containers:
-            - name: service-nlp-2-0-0-en
-              image: docker.cognigy.com:5000/service-nlp-2_0_0:f85266a7
+            - name: service-nlp-score-de
+              image: dev-docker.cognigy.com:5000/service-nlp:4277c95e
               resources:
                 limits:
-                    memory: "5.0Gi"
+                    memory: "1Gi"
                     cpu: "500m"
                 requests:
-                    memory: "4.0Gi"
+                    memory: "500Mi"
                     cpu: "500m"
               # mount persistent volume claim for nlp config and models
               volumeMounts:
@@ -32,12 +32,16 @@ spec:
 
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets
+              - name: local
+                mountPath: /data/local
               envFrom:
                 - configMapRef:
                     name: cognigy-env
               env:
               - name: LANGUAGES_TO_RUN
-                value: en-US
+                value: de-DE
+              - name: SCORE
+                value: "true"
               - name: NLP_DB_PASSWORD
                 valueFrom:
                     secretKeyRef:
@@ -57,6 +61,8 @@ spec:
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
+            - name: local
+              emptyDir: {}
 
             imagePullSecrets:
             - name: cognigy-registry-token

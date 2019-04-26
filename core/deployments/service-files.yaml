@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-files
-              image: docker.cognigy.com:5000/service-files:2079b600
+              image: docker.cognigy.com:5000/service-files:e14880d5
               resources:
                 requests:
                     memory: "50Mi"

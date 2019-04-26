@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-settings
-              image: docker.cognigy.com:5000/service-settings:2079b600
+              image: docker.cognigy.com:5000/service-settings:e14880d5
               resources:
                 requests:
                     memory: "150Mi"

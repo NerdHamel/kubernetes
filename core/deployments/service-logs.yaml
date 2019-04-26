@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-logs
-              image: docker.cognigy.com:5000/service-logs:2079b600
+              image: docker.cognigy.com:5000/service-logs:e14880d5
               resources:
                 requests:
                     memory: "50Mi"

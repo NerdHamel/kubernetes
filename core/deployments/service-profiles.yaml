@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-profiles
-              image: docker.cognigy.com:5000/service-profiles:836847c2
+              image: docker.cognigy.com:5000/service-profiles:e14880d5
               resources:
                 requests:
                     memory: "50Mi"

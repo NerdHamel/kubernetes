@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-analytics-reporter
-              image: docker.cognigy.com:5000/service-analytics-reporter:2079b600
+              image: docker.cognigy.com:5000/service-analytics-reporter:e14880d5
               resources:
                 requests:
                     memory: "50Mi"

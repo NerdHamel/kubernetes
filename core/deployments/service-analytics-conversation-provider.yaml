@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-analytics-conversation-provider
-              image: docker.cognigy.com:5000/service-analytics-conversation-provider:2079b600
+              image: docker.cognigy.com:5000/service-analytics-conversation-provider:e14880d5
               resources:
                 requests:
                     memory: "50Mi"

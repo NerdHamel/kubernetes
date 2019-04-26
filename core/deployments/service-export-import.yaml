@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-export-import
-              image: docker.cognigy.com:5000/service-export-import:2079b600
+              image: docker.cognigy.com:5000/service-export-import:e14880d5
               resources:
                 requests:
                     memory: "300Mi"

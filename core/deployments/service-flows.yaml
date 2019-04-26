@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-flows
-              image: docker.cognigy.com:5000/service-flows:2079b600
+              image: docker.cognigy.com:5000/service-flows:d40daa8c
               resources:
                 requests:
                     memory: "150Mi"

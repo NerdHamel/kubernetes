@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-alexa-management
-              image: docker.cognigy.com:5000/service-alexa-management:2079b600
+              image: docker.cognigy.com:5000/service-alexa-management:e14880d5
               resources:
                 requests:
                     memory: "50Mi"
