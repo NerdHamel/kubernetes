@@ -42,6 +42,8 @@ spec:
                 value: ja-JP,da-DK,es-ES,nl-NL,zh-CN
               - name: SCORE
                 value: "true"
+              - name: CNLP_CORES
+                value: "1"
               - name: NLP_DB_PASSWORD
                 valueFrom:
                     secretKeyRef:

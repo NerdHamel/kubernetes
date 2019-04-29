@@ -10,4 +10,4 @@ spec:
         - path: /
           backend:
               serviceName: service-agent-ui
-              servicePort: 9000
+              servicePort: 8000

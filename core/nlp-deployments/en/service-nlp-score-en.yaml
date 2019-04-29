@@ -40,6 +40,8 @@ spec:
               env:
               - name: LANGUAGES_TO_RUN
                 value: en-US
+              - name: CNLP_CORES
+                value: "1"
               - name: SCORE
                 value: "true"
               - name: NLP_DB_PASSWORD

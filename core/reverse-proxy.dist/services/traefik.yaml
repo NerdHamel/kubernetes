@@ -19,7 +19,7 @@ spec:
       name: admin
     externalIPs:
       # Change me!
-      - 10.215.25.112
+      -
     type: LoadBalancer
     selector:
         app: traefik

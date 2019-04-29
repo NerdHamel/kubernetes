@@ -51,6 +51,15 @@ data:
     SECURITY_SMTP_FROM: "test"
     # SECURITY_SMTP_PASSWORD is a secret! (service-database-connections)
 
+    # Domains to whitelist for cors for the API
+    API_CORS_WHITELIST: ""
+    
+    # Max execution time for custom modules
+    MAX_MODULE_EXECUTION_TIME_IN_SECONDS: "20"
+
+    # Max amount of events (actions) that can be called in a custom module
+    MODULE_MAX_EVENT_EMISSIONS: "10"
+
     # DNS names
     FRONTEND_BASE_URL_WITH_PROTOCOL: http://ui
     BACKEND_BASE_URL_WITH_PROTOCOL: http://api
@@ -164,7 +173,7 @@ data:
     NLP_DB_NAME: service-nlp
     NLP_DB_USERNAME: service-nlp
     # NLP_DB_PASSWORD is a secret!
-    CNLP_CORES: "1"
+    CNLP_CORES: "4"
     LANGUAGE_CONFIG_PATH: /data/config/languages.json
 
     # service-nlp-connectors

@@ -15,6 +15,13 @@ spec:
             containers:
             - name: traefik
               image: docker.cognigy.com:5000/traefik:1.7.9-alpine
+              resources:
+                requests:
+                    memory: "70Mi"
+                    cpu: "200m"
+                limits:
+                    memory: "200Mi"
+                    cpu: "2000m"
               args: [
                 "--api",
                 "--kubernetes",

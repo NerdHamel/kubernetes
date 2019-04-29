@@ -1,10 +1,3 @@
-# Todo
-- add new NLP services
-- check volumes / volume-claims
-- add new execution service
-- check securityContext NLP
-
-
 # COGNIGY.AI in k8s
 This is the official Kubernetes (``k8s``) manifest repository for COGNIGY.AI. The following notes should give you a basic understand on how our product can be deployed on top of Kubernetes.
 
@@ -17,10 +10,11 @@ This repository has the following folder-structure:
 | --- config-maps
 | --- deployments
 | --- nlp-deployments
-| ------- en
 | ------- de
+| ------- en
 | ------- ge
 | --- ingress
+| --- reverse-proxy.dist
 | --- secrets.dist
 | --- services
 | --- stateful-deployments
@@ -55,6 +49,8 @@ This section will guide you through the process of setting up your COGNIGY.AI in
 ### Config map
 ---
 COGNIGY.AI uses K8s' concept of config-maps for its full configuration. The directory ``core/config-maps`` contains all config-maps which you can edit and modify to your needs.
+
+You will definitely need to modifye the BASE_URL entries to match the URLS you use in your application (e.g. ui.company.com).
 
 After you are done with your modifications, deploy those within your K8s cluster:
 ```
