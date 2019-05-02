@@ -73,10 +73,10 @@ data:
     ODATA_PORT: "80"
 
     # service-ai
-    AI_DB_HOST: mongo-server
-    AI_DB_PORT: "27017"
-    AI_DB_NAME: service-ai
-    AI_DB_USERNAME: service-ai
+    # AI_DB_HOST: mongo-server
+    # AI_DB_PORT: "27017"
+    # AI_DB_NAME: service-ai
+    # AI_DB_USERNAME: service-ai
     # AI_DB_PASSWORD is a secret!
 
     # service-alexa-management
