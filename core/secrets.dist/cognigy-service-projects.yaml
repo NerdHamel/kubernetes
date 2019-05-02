@@ -4,5 +4,9 @@ metadata:
     name: cognigy-service-projects
 type: Opaque
 data:
+    # The full mongodb connection string, has a schema of:
+    # mongodb://service-xx:<password>@<host>:<port>/xx or different for replica-set
+    connection-string:
+
     # use 64 bytes of random value, hex
-    db-password: 
+    # db-password: 
