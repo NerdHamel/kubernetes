@@ -25,17 +25,21 @@ spec:
               envFrom:
               - configMapRef:
                     name: cognigy-env
-              env:
-              - name: FILES_DB_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-service-files
-                        key: db-password
+              # env:
+              # - name: FILES_DB_PASSWORD
+              #   valueFrom:
+              #       secretKeyRef:
+              #           name: cognigy-service-files
+              #           key: db-password
               volumeMounts:
               - name: rabbitmq-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
+              - name: mongodb-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/mongodbConnectionString
+                subPath: mongodbConnectionString
               livenessProbe:
                 exec:
                   command:
@@ -53,6 +57,13 @@ spec:
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
+            - name: mongodb-connection-string
+              secret:
+                secretName: cognigy-service-files
+                items:
+                  - key: connection-string
+                    path: mongodbConnectionString
+
             imagePullSecrets:
             - name: cognigy-registry-token
 

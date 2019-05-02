@@ -48,9 +48,13 @@ spec:
                         key: db-password
               volumeMounts:
               - name: rabbitmq-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
+              - name: mongodb-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/mongodbConnectionString
+                subPath: mongodbConnectionString
               livenessProbe:
                 exec:
                   command:
@@ -68,5 +72,6 @@ spec:
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
+
             imagePullSecrets:
             - name: cognigy-registry-token

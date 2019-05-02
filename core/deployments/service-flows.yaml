@@ -25,17 +25,21 @@ spec:
               envFrom:
               - configMapRef:
                     name: cognigy-env
-              env:
-              - name: FLOWS_DB_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-service-flows
-                        key: db-password
+              # env:
+              # - name: FLOWS_DB_PASSWORD
+              #   valueFrom:
+              #       secretKeyRef:
+              #           name: cognigy-service-flows
+              #           key: db-password
               volumeMounts:
               - name: rabbitmq-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
+              - name: mongodb-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/mongodbConnectionString
+                subPath: mongodbConnectionString
               - name: flow-modules-nfs
                 mountPath: "/app/flowModules"
               livenessProbe:
@@ -58,5 +62,12 @@ spec:
             - name: flow-modules-nfs
               persistentVolumeClaim:
                 claimName: flow-modules-nfs
+            - name: mongodb-connection-string
+              secret:
+                secretName: cognigy-service-flows
+                items:
+                  - key: connection-string
+                    path: mongodbConnectionString
+
             imagePullSecrets:
             - name: cognigy-registry-token

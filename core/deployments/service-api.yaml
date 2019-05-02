@@ -26,11 +26,11 @@ spec:
               - configMapRef:
                     name: cognigy-env
               env:
-              - name: AUTHENTICATION_DB_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-service-api
-                        key: db-password
+              # - name: AUTHENTICATION_DB_PASSWORD
+              #   valueFrom:
+              #       secretKeyRef:
+              #           name: cognigy-service-api
+              #           key: db-password
               - name: JWT_SECRET
                 valueFrom:
                     secretKeyRef:
@@ -52,9 +52,13 @@ spec:
                 value: pass
               volumeMounts:
               - name: rabbitmq-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
+              - name: mongodb-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/mongodbConnectionString
+                subPath: mongodbConnectionString
               livenessProbe:
                 exec:
                   command:
@@ -72,5 +76,11 @@ spec:
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
+            - name: mongodb-connection-string
+              secret:
+                secretName: cognigy-service-api
+                items:
+                  - key: connection-string
+                    path: mongodbConnectionString
             imagePullSecrets:
             - name: cognigy-registry-token

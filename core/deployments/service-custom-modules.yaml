@@ -26,15 +26,19 @@ spec:
               - name: flow-modules-nfs
                 mountPath: "/app/flowModules"
               - name: rabbitmq-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets
-              env:
-              - name: CUSTOM_MODULES_DB_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-service-custom-modules
-                        key: db-password
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
+              - name: mongodb-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/mongodbConnectionString
+                subPath: mongodbConnectionString
+              # env:
+              # - name: CUSTOM_MODULES_DB_PASSWORD
+              #   valueFrom:
+              #       secretKeyRef:
+              #           name: cognigy-service-custom-modules
+              #           key: db-password
               envFrom:
               - configMapRef:
                     name: cognigy-env
@@ -58,6 +62,12 @@ spec:
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
+            - name: mongodb-connection-string
+              secret:
+                secretName: cognigy-service-custom-modules
+                items:
+                  - key: connection-string
+                    path: mongodbConnectionString
 
             imagePullSecrets:
             - name: cognigy-registry-token

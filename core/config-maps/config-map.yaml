@@ -80,52 +80,52 @@ data:
     # AI_DB_PASSWORD is a secret!
 
     # service-alexa-management
-    ALEXA_MANAGEMENT_DB_HOST: mongo-server
-    ALEXA_MANAGEMENT_DB_PORT: "27017"
-    ALEXA_MANAGEMENT_DB_NAME: service-alexa-management
-    ALEXA_MANAGEMENT_DB_USERNAME: service-alexa-management
+    # ALEXA_MANAGEMENT_DB_HOST: mongo-server
+    # ALEXA_MANAGEMENT_DB_PORT: "27017"
+    # ALEXA_MANAGEMENT_DB_NAME: service-alexa-management
+    # ALEXA_MANAGEMENT_DB_USERNAME: service-alexa-management
     # ALEXA_MANAGEMENT_DB_PASSWORD: is a secret!
     # AMAZON_CLIENT_ID is a secret!
     # AMAZON_CLIENT_SECRET is a secret!
 
     # service-analytics-collector & service-analytics-reporter
-    ANALYTICS_COLLECTOR_DB_HOST: mongo-server
-    ANALYTICS_COLLECTOR_DB_PORT: "27017"
-    ANALYTICS_COLLECTOR_DB_NAME: service-analytics-collector-provider
-    ANALYTICS_COLLECTOR_DB_USERNAME: service-analytics-collector-provider
+    # ANALYTICS_COLLECTOR_DB_HOST: mongo-server
+    # ANALYTICS_COLLECTOR_DB_PORT: "27017"
+    # ANALYTICS_COLLECTOR_DB_NAME: service-analytics-collector-provider
+    # ANALYTICS_COLLECTOR_DB_USERNAME: service-analytics-collector-provider
     # ANALYTICS_COLLECTOR_DB_PASSWORD is a secret!
 
-    ANALYTICS_REPORTER_DB_HOST: mongo-server
-    ANALYTICS_REPORTER_DB_PORT: "27017"
-    ANALYTICS_REPORTER_DB_NAME: service-analytics-collector-provider
-    ANALYTICS_REPORTER_DB_USERNAME: service-analytics-collector-provider
+    # ANALYTICS_REPORTER_DB_HOST: mongo-server
+    # ANALYTICS_REPORTER_DB_PORT: "27017"
+    # ANALYTICS_REPORTER_DB_NAME: service-analytics-collector-provider
+    # ANALYTICS_REPORTER_DB_USERNAME: service-analytics-collector-provider
     # ANALYTICS_REPORTER_DB_PASSWORD is a secret!
 
     # service-analytics-conversation-provider & service-analytics-conversation-collector
-    CONVERSATION_PROVIDER_DB_HOST: mongo-server
-    CONVERSATION_PROVIDER_DB_PORT: "27017"
-    CONVERSATION_PROVIDER_DB_NAME: service-analytics-conversation-collector-provider
-    CONVERSATION_PROVIDER_DB_USERNAME: service-analytics-conversation-collector-provider
+    # CONVERSATION_PROVIDER_DB_HOST: mongo-server
+    # CONVERSATION_PROVIDER_DB_PORT: "27017"
+    # CONVERSATION_PROVIDER_DB_NAME: service-analytics-conversation-collector-provider
+    # CONVERSATION_PROVIDER_DB_USERNAME: service-analytics-conversation-collector-provider
     # CONVERSATION_PROVIDER_DB_PASSWORD is a secret!
 
-    CONVERSATION_COLLECTOR_DB_HOST: mongo-server
-    CONVERSATION_COLLECTOR_DB_PORT: "27017"
-    CONVERSATION_COLLECTOR_DB_NAME: service-analytics-conversation-collector-provider
-    CONVERSATION_COLLECTOR_DB_USERNAME: service-analytics-conversation-collector-provider
+    # CONVERSATION_COLLECTOR_DB_HOST: mongo-server
+    # CONVERSATION_COLLECTOR_DB_PORT: "27017"
+    # CONVERSATION_COLLECTOR_DB_NAME: service-analytics-conversation-collector-provider
+    # CONVERSATION_COLLECTOR_DB_USERNAME: service-analytics-conversation-collector-provider
     # CONVERSATION_COLLECTOR_DB_PASSWORD is a secret!
 
     # service-api
-    AUTHENTICATION_DB_HOST: mongo-server
-    AUTHENTICATION_DB_PORT: "27017"
-    AUTHENTICATION_DB_NAME: service-api
-    AUTHENTICATION_DB_USERNAME: service-api
+    # AUTHENTICATION_DB_HOST: mongo-server
+    # AUTHENTICATION_DB_PORT: "27017"
+    # AUTHENTICATION_DB_NAME: service-api
+    # AUTHENTICATION_DB_USERNAME: service-api
     # AUTHENTICATION_DB_PASSWORD is a secret!
 
     # service-database-connections
-    DB_CONNECTIONS_DB_HOST: mongo-server
-    DB_CONNECTIONS_DB_PORT: "27017"
-    DB_CONNECTIONS_DB_NAME: service-database-connections
-    DB_CONNECTIONS_DB_USERNAME: service-database-connections
+    # DB_CONNECTIONS_DB_HOST: mongo-server
+    # DB_CONNECTIONS_DB_PORT: "27017"
+    # DB_CONNECTIONS_DB_NAME: service-database-connections
+    # DB_CONNECTIONS_DB_USERNAME: service-database-connections
     # DB_CONNECTIONS_DB_PASSWORD is a secret!
 
     # service-endpoint
@@ -133,38 +133,38 @@ data:
     ALEXA_END_SESSION_AFTER_EACH_REPLY: "true"
 
     # service-endpoints
-    ENDPOINTS_DB_HOST: mongo-server
-    ENDPOINTS_DB_PORT: "27017"
-    ENDPOINTS_DB_NAME: service-endpoints
-    ENDPOINTS_DB_USERNAME: service-endpoints
+    # ENDPOINTS_DB_HOST: mongo-server
+    # ENDPOINTS_DB_PORT: "27017"
+    # ENDPOINTS_DB_NAME: service-endpoints
+    # ENDPOINTS_DB_USERNAME: service-endpoints
     # ENDPOINTS_DB_PASSWORD is a secret!
 
     # service-flows
-    FLOWS_DB_HOST: mongo-server
-    FLOWS_DB_PORT: "27017"
-    FLOWS_DB_NAME: service-flows
-    FLOWS_DB_USERNAME: service-flows
+    # FLOWS_DB_HOST: mongo-server
+    # FLOWS_DB_PORT: "27017"
+    # FLOWS_DB_NAME: service-flows
+    # FLOWS_DB_USERNAME: service-flows
     # FLOWS_DB_PASSWORD is a secret!
 
     # service-forms
-    FORMS_DB_HOST: mongo-server
-    FORMS_DB_PORT: "27017"
-    FORMS_DB_NAME: service-forms
-    FORMS_DB_USERNAME: service-forms
+    # FORMS_DB_HOST: mongo-server
+    # FORMS_DB_PORT: "27017"
+    # FORMS_DB_NAME: service-forms
+    # FORMS_DB_USERNAME: service-forms
     # FORMS_DB_PASSWORD is a secret!
 
     # service-lexicons
-    LEXICONS_DB_HOST: mongo-server
-    LEXICONS_DB_PORT: "27017"
-    LEXICONS_DB_NAME: service-lexicons
-    LEXICONS_DB_USERNAME: service-lexicons
+    # LEXICONS_DB_HOST: mongo-server
+    # LEXICONS_DB_PORT: "27017"
+    # LEXICONS_DB_NAME: service-lexicons
+    # LEXICONS_DB_USERNAME: service-lexicons
     # LEXICONS_DB_PASSWORD is a secret!
 
     # service-logs
-    LOG_DB_HOST: mongo-server
-    LOG_DB_PORT: "27017"
-    LOG_DB_NAME: service-logs
-    LOG_DB_USERNAME: service-logs
+    # LOG_DB_HOST: mongo-server
+    # LOG_DB_PORT: "27017"
+    # LOG_DB_NAME: service-logs
+    # LOG_DB_USERNAME: service-logs
     # LOG_DB_PASSWORD is a secret!
 
     # service-nlp (all nlp languages!)
@@ -177,66 +177,66 @@ data:
     LANGUAGE_CONFIG_PATH: /data/config/languages.json
 
     # service-nlp-connectors
-    NLP_CONNECTORS_DB_HOST: mongo-server
-    NLP_CONNECTORS_DB_PORT: "27017"
-    NLP_CONNECTORS_DB_NAME: service-nlp-connectors
-    NLP_CONNECTORS_DB_USERNAME: service-nlp-connectors
+    # NLP_CONNECTORS_DB_HOST: mongo-server
+    # NLP_CONNECTORS_DB_PORT: "27017"
+    # NLP_CONNECTORS_DB_NAME: service-nlp-connectors
+    # NLP_CONNECTORS_DB_USERNAME: service-nlp-connectors
     # NLP_CONNECTORS_DB_PASSWORD is a secret!
 
     # service-playbooks
-    PLAYBOOKS_DB_HOST: mongo-server
-    PLAYBOOKS_DB_PORT: "27017"
-    PLAYBOOKS_DB_NAME: service-playbooks
-    PLAYBOOKS_DB_USERNAME: service-playbooks
+    # PLAYBOOKS_DB_HOST: mongo-server
+    # PLAYBOOKS_DB_PORT: "27017"
+    # PLAYBOOKS_DB_NAME: service-playbooks
+    # PLAYBOOKS_DB_USERNAME: service-playbooks
     # PLAYBOOKS_DB_PASSWORD is a secret!
 
     # service-profiles
-    PROFILES_DB_HOST: mongo-server
-    PROFILES_DB_PORT: "27017"
-    PROFILES_DB_NAME: service-profiles
-    PROFILES_DB_USERNAME: service-profiles
+    # PROFILES_DB_HOST: mongo-server
+    # PROFILES_DB_PORT: "27017"
+    # PROFILES_DB_NAME: service-profiles
+    # PROFILES_DB_USERNAME: service-profiles
     # PROFILES_DB_PASSWORD is a secret!
 
     # service-projects
-    PROJECTS_DB_HOST: mongo-server
-    PROJECTS_DB_PORT: "27017"
-    PROJECTS_DB_NAME: service-projects
-    PROJECTS_DB_USERNAME: service-projects
+    # PROJECTS_DB_HOST: mongo-server
+    # PROJECTS_DB_PORT: "27017"
+    # PROJECTS_DB_NAME: service-projects
+    # PROJECTS_DB_USERNAME: service-projects
     # PROJECTS_DB_PASSWORD is a secret!
 
-    # service-security
-    SECURITY_DB_HOST: mongo-server
-    SECURITY_DB_PORT: "27017"
-    SECURITY_DB_NAME: service-security
-    SECURITY_DB_USERNAME: service-security
+    # # service-security
+    # SECURITY_DB_HOST: mongo-server
+    # SECURITY_DB_PORT: "27017"
+    # SECURITY_DB_NAME: service-security
+    # SECURITY_DB_USERNAME: service-security
     # SECURITY_DB_PASSWORD is a secret!
 
     # service-settings
-    SETTINGS_DB_HOST: mongo-server
-    SETTINGS_DB_PORT: "27017"
-    SETTINGS_DB_NAME: service-settings
-    SETTINGS_DB_USERNAME: service-settings
+    # SETTINGS_DB_HOST: mongo-server
+    # SETTINGS_DB_PORT: "27017"
+    # SETTINGS_DB_NAME: service-settings
+    # SETTINGS_DB_USERNAME: service-settings
     # SETTINGS_DB_PASSWORD is a secret!
 
     # service-secrets
-    SECRETS_DB_HOST: mongo-server
-    SECRETS_DB_PORT: "27017"
-    SECRETS_DB_NAME: service-secrets
-    SECRETS_DB_USERNAME: service-secrets
+    # SECRETS_DB_HOST: mongo-server
+    # SECRETS_DB_PORT: "27017"
+    # SECRETS_DB_NAME: service-secrets
+    # SECRETS_DB_USERNAME: service-secrets
     # SECRETS_DB_PASSWORD is a secret!
 
     # service-files
-    FILES_DB_USERNAME: service-files
-    FILES_DB_HOST: "mongo-server"
-    FILES_DB_PORT: "27017"
-    FILES_DB_NAME: service-files
+    # FILES_DB_USERNAME: service-files
+    # FILES_DB_HOST: "mongo-server"
+    # FILES_DB_PORT: "27017"
+    # FILES_DB_NAME: service-files
     # FILES_DB_PASSWORD is a secret!
 
     # service-custom-modules
-    CUSTOM_MODULES_DB_USERNAME: service-custom-modules
-    CUSTOM_MODULES_DB_HOST: mongo-server
-    CUSTOM_MODULES_DB_PORT: "27017"
-    CUSTOM_MODULES_DB_NAME: service-custom-modules
+    # CUSTOM_MODULES_DB_USERNAME: service-custom-modules
+    # CUSTOM_MODULES_DB_HOST: mongo-server
+    # CUSTOM_MODULES_DB_PORT: "27017"
+    # CUSTOM_MODULES_DB_NAME: service-custom-modules
     # CUSTOM_MODULES_DB_PASSWORD is a secret!
 
     # service-handover
