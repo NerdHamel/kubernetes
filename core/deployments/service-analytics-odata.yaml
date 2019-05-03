@@ -51,10 +51,6 @@ spec:
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/rabbitmqConnectionString
                 subPath: rabbitmqConnectionString
-              - name: mongodb-connection-string
-                # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets/mongodbConnectionString
-                subPath: mongodbConnectionString
               livenessProbe:
                 exec:
                   command:
