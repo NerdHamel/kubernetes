@@ -46,10 +46,6 @@ spec:
                     secretKeyRef:
                         name: cognigy-amazon-credentials
                         key: amazon-client-secret
-              - name: INTERNAL_API_USERNAME
-                value: user
-              - name: INTERNAL_API_PASSWORD
-                value: pass
               volumeMounts:
               - name: rabbitmq-connection-string
                 # This will mount the file in /run/secrets. Alpine Linux bug
