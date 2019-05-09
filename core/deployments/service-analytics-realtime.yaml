@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-analytics-realtime
-              image: docker.cognigy.com:5000/service-analytics-realtime:e14880d5
+              image: docker.cognigy.com:5000/service-analytics-realtime:3210993f15c704ccf0fd3bcddfdd704ff7e16be7
               resources:
                 requests:
                     memory: "50Mi"
