@@ -15,8 +15,15 @@ spec:
         app: service-handover
     spec:
       containers:
-        - image: docker.cognigy.com:5000/service-handover:2079b600
+        - image: docker.cognigy.com:5000/service-handover:3210993f15c704ccf0fd3bcddfdd704ff7e16be7
           name: service-handover
+          resources:
+            requests:
+                memory: "50Mi"
+                cpu: "46m"
+            limits:
+                memory: "75Mi"
+                cpu: "46m"
           ports:
           - containerPort: 80
           envFrom:

@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-analytics-collector
-              image: docker.cognigy.com:5000/service-analytics-collector:d0bf2921
+              image: docker.cognigy.com:5000/service-analytics-collector:3210993f15c704ccf0fd3bcddfdd704ff7e16be7
               resources:
                 requests:
                     memory: "50Mi"
@@ -25,17 +25,21 @@ spec:
               envFrom:
               - configMapRef:
                     name: cognigy-env
-              env:
-              - name: ANALYTICS_COLLECTOR_DB_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-service-analytics-collector-provider
-                        key: db-password
+              # env:
+              # - name: ANALYTICS_COLLECTOR_DB_PASSWORD
+              #   valueFrom:
+              #       secretKeyRef:
+              #           name: cognigy-service-analytics-collector-provider
+              #           key: db-password
               volumeMounts:
               - name: rabbitmq-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
+              - name: mongodb-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/mongodbConnectionString
+                subPath: mongodbConnectionString
               livenessProbe:
                 exec:
                   command:
@@ -53,5 +57,11 @@ spec:
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
+            - name: mongodb-connection-string
+              secret:
+                secretName: cognigy-service-analytics-collector-provider
+                items:
+                  - key: connection-string
+                    path: mongodbConnectionString
             imagePullSecrets:
             - name: cognigy-registry-token

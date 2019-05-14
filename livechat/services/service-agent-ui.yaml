@@ -6,6 +6,6 @@ metadata:
     app: service-analytics-odata
 spec:
   ports:
-      - port: 9000
+      - port: 8000
   selector:
     app: service-agent-ui

@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-nlp-2-0-0-ge
-              image: docker.cognigy.com:5000/service-nlp-2_0_0:f85266a7
+              image: docker.cognigy.com:5000/service-nlp-2_0_0:3210993f15c704ccf0fd3bcddfdd704ff7e16be7
               resources:
                 limits:
                     memory: "5.0Gi"
@@ -29,20 +29,24 @@ spec:
               - name: nlp-config-nfs
                 mountPath: "/data/config"
               - name: rabbitmq-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
+              - name: mongodb-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/mongodbConnectionString
+                subPath: mongodbConnectionString
               envFrom:
                 - configMapRef:
                     name: cognigy-env
               env:
               - name: LANGUAGES_TO_RUN
                 value: "da-DK,nn-NO,it-IT,fr-FR,ar-AE,ja-JP,pl-PL,ge-GE"
-              - name: NLP_DB_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-service-nlp
-                        key: db-password
+              # - name: NLP_DB_PASSWORD
+              #   valueFrom:
+              #       secretKeyRef:
+              #           name: cognigy-service-nlp
+              #           key: db-password
 
             volumes:
             - name: nlp-models-nfs
@@ -57,6 +61,12 @@ spec:
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
+            - name: mongodb-connection-string
+              secret:
+                secretName: cognigy-service-nlp
+                items:
+                  - key: connection-string
+                    path: mongodbConnectionString
 
             imagePullSecrets:
             - name: cognigy-registry-token

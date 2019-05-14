@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-analytics-odata
-              image: docker.cognigy.com:5000/service-analytics-odata:e14880d5
+              image: docker.cognigy.com:5000/service-analytics-odata:3210993f15c704ccf0fd3bcddfdd704ff7e16be7
               resources:
                 requests:
                     memory: "300Mi"
@@ -48,9 +48,9 @@ spec:
                         key: db-password
               volumeMounts:
               - name: rabbitmq-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
               livenessProbe:
                 exec:
                   command:
@@ -68,5 +68,6 @@ spec:
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
+
             imagePullSecrets:
             - name: cognigy-registry-token

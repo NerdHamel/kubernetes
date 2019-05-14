@@ -20,4 +20,4 @@ spec:
                 operator: In
                 values:
                 # change me!
-                - benni-thinkcentre-m910q
+                -

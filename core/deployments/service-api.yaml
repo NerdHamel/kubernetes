@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-api
-              image: docker.cognigy.com:5000/service-api:e14880d5
+              image: docker.cognigy.com:5000/service-api:3210993f15c704ccf0fd3bcddfdd704ff7e16be7
               resources:
                 requests:
                     memory: "150Mi"
@@ -26,11 +26,11 @@ spec:
               - configMapRef:
                     name: cognigy-env
               env:
-              - name: AUTHENTICATION_DB_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-service-api
-                        key: db-password
+              # - name: AUTHENTICATION_DB_PASSWORD
+              #   valueFrom:
+              #       secretKeyRef:
+              #           name: cognigy-service-api
+              #           key: db-password
               - name: JWT_SECRET
                 valueFrom:
                     secretKeyRef:
@@ -46,15 +46,15 @@ spec:
                     secretKeyRef:
                         name: cognigy-amazon-credentials
                         key: amazon-client-secret
-              - name: INTERNAL_API_USERNAME
-                value: user
-              - name: INTERNAL_API_PASSWORD
-                value: pass
               volumeMounts:
               - name: rabbitmq-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
+              - name: mongodb-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/mongodbConnectionString
+                subPath: mongodbConnectionString
               livenessProbe:
                 exec:
                   command:
@@ -72,5 +72,11 @@ spec:
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
+            - name: mongodb-connection-string
+              secret:
+                secretName: cognigy-service-api
+                items:
+                  - key: connection-string
+                    path: mongodbConnectionString
             imagePullSecrets:
             - name: cognigy-registry-token

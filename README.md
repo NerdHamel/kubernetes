@@ -1,10 +1,3 @@
-# Todo
-- add new NLP services
-- check volumes / volume-claims
-- add new execution service
-- check securityContext NLP
-
-
 # COGNIGY.AI in k8s
 This is the official Kubernetes (``k8s``) manifest repository for COGNIGY.AI. The following notes should give you a basic understand on how our product can be deployed on top of Kubernetes.
 
@@ -17,8 +10,11 @@ This repository has the following folder-structure:
 | --- config-maps
 | --- deployments
 | --- nlp-deployments
+| ------- de
 | ------- en
+| ------- ge
 | --- ingress
+| --- reverse-proxy.dist
 | --- secrets.dist
 | --- services
 | --- stateful-deployments
@@ -45,14 +41,16 @@ The main three folders are ``core``, ``livechat`` and ``management-ui``. All of 
 - volumes
 - config-maps
 
-We selected this folder structure to make it a bit more easy for you to understand and deploy our application. The ``core`` folder contains the actual API objects you will need to deploy a fully functional COGNIY.AI system. The other two folders within the root of this repository contain additional software that can be instaled side-by-side with COGNIGY.AI. Those additional tools will not be functional without a working COGNIGY.AI deployment.
+We selected this folder structure to make it a bit more easy for you to understand and deploy our application. The ``core`` folder contains the actual API objects you will need to deploy a fully functional COGNIY.AI system. The other two folders within the root of this repository contain additional software that can be installed side-by-side with COGNIGY.AI. Those additional tools will not be functional without a working COGNIGY.AI deployment.
 
 ## Setup
-This section will guide you through the process of setting up your COGNIGY.AI installation. Will no longer need it, once your initial deployment succeeded.
+This section will guide you through the process of setting up your COGNIGY.AI installation. You will no longer need it, once your initial deployment succeeded.
 
 ### Config map
 ---
 COGNIGY.AI uses K8s' concept of config-maps for its full configuration. The directory ``core/config-maps`` contains all config-maps which you can edit and modify to your needs.
+
+You will definitely need to modifye the BASE_URL entries to match the URLS you use in your application (e.g. ui.company.com).
 
 After you are done with your modifications, deploy those within your K8s cluster:
 ```
@@ -91,7 +89,7 @@ data:
     fb-verify-token: 
 ```
 
-The secret has some meta-data and a data part which contains the actual secret. In this example, the key is ``fb-verify-token`` and the actual value was not select. You can now create a random value for this using OpenSSL:
+The secret has some meta-data and a data part which contains the actual secret. In this example, the key is ``fb-verify-token`` and the actual value was not created. You can now create a random value for this using OpenSSL:
 ```
 openssl rand -hex 32
 ```
@@ -119,11 +117,6 @@ You can now use the same procedure for all files within your ``core/secrets`` di
 ```
 kubectl apply -f core/secrets
 ```
-
-<!-- We have one special secret which is not create from these API objects - the configuration for ``redis persistent``. To create this secret, issue the following command:
-```
-kubectl create secret generic cognigy-redis-persistent-password --from-file=core/secrets/redis-persistent-password.yaml
-``` -->
 
 ### Storage
 #### Introduction
@@ -269,11 +262,19 @@ kubectl apply -f core/deployments/
 ### Availability of your installation
 COGNIGY.AI exposes several software components which need to be available from outside of your installation. These are services such as ``endpoint``, ``ui`` and ``api``. Our customers use these services to build new Conversational AIs (ui, api) and make them available to other platforms like ``Facebook Messenger``.
 
-We use a modern ``Ingress Controller`` which allows external web-traffic to reach certain software components within your cluster - it's called Traefik. Traefik will be deployed as part of cognigy. Its API object resides within ``core/deployments``.
+In the folder ``core/reverse-proxy.dist``, you will find the necessary API objects to expose COGNIGY.AI. You should therefore rename the folder to ``reverse-proxy``, since we need to make some changes.
 
-The Ingress objects stored within ``core/ingress`` control how Traefik can reach your internal services and can make them accessible. Traefik will also take care about TLS/SSL termination etc.
+We use a modern ``Ingress Controller`` which allows external web-traffic to reach certain software components within your cluster - it's called Traefik. If you do not have your own reverse proxy set up, then you can deploy Traefik. Do this by first changing the external IP address in the file ``core/reverse-proxy/services/traefik.yaml`` to be the external IP of your server, and afterwards, you can run the two commands below to deploy Traefik:
+
+```
+kubectl apply -f core/reverse-proxy/services/
+kubectl apply -f core/reverse-proxy/deployments/
+```
+
+The Ingress objects stored within ``core/reverse-proxy/ingress`` control how the reverse proxy can reach your internal services and can make them accessible. If you use Traefik as the reverse proxy, then you can simply apply these files to make COGNIGY.AI accessible. If you are using a different reverse proxy, then you should modify them to work with this reverse proxy (e.g. modify the ingress annotation class).
 
 In order to deploy all of your ingress configurations execute:
+
 ```
 kubectl apply -f core/ingress/
 ```
