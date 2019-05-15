@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-ai
-              image: docker.cognigy.com:5000/service-ai:99ba663d3f00162fe35450059dc01bc08f078d32
+              image: docker.cognigy.com:5000/service-ai:36e2bad173d5f784200d02a18dda564c70b249eb
               resources:
                 requests:
                     memory: "300Mi"
@@ -33,6 +33,7 @@ spec:
               #           key: db-password
               volumeMounts:
               - name: rabbitmq-connection-string
+<<<<<<< HEAD
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/rabbitmqConnectionString
                 subPath: rabbitmqConnectionString
@@ -40,6 +41,20 @@ spec:
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/mongodbConnectionString
                 subPath: mongodbConnectionString
+=======
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/rabbitmqConnectionString
+                subPath: rabbitmqConnectionString
+              - name: mongodb-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/mongodbConnectionString
+                subPath: mongodbConnectionString
+              - name: rabbitmq-api-connection-string
+
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /var/run/secrets/rabbitmqAPIConnectionString
+                subPath: rabbitmqAPIConnectionString
+>>>>>>> bdc27583b24c521b5ddc2d016f02fdc885ff55d0
               livenessProbe:
                 exec:
                   command:
@@ -62,5 +77,14 @@ spec:
                 items:
                   - key: connection-string
                     path: mongodbConnectionString
+<<<<<<< HEAD
+=======
+            - name: rabbitmq-api-connection-string
+              secret:
+                secretName: cognigy-rabbitmq
+                items:
+                  - key: connection-string-api
+                    path: rabbitmqAPIConnectionString
+>>>>>>> bdc27583b24c521b5ddc2d016f02fdc885ff55d0
             imagePullSecrets:
             - name: cognigy-registry-token

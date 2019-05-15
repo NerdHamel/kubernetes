@@ -10,3 +10,6 @@ data:
     # The RabbitMQ password. Is the same as the password in the connection string
     # but is used by RabbitMQ itself to intialize password protection.
     rabbitmq-password:  
+
+    # The connection string to the RabbitMQ API (http(s)://user:password@host:port/api)
+    connection-string-api:
