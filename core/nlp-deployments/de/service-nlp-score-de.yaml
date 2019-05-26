@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-nlp-score-de
-              image: docker.cognigy.com:5000/service-nlp:3210993f15c704ccf0fd3bcddfdd704ff7e16be7
+              image: docker.cognigy.com:5000/service-nlp:616d1744e07e34aa81099304296e4a5e2ebd2b51
               resources:
                 limits:
                     memory: "1Gi"
