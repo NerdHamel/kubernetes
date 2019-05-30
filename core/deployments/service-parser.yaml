@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-parser
-              image: docker.cognigy.com:5000/service-parser:616d1744e07e34aa81099304296e4a5e2ebd2b51
+              image: docker.cognigy.com:5000/service-parser:59ab503ee3c18e32533c65f66ee559c3a19ca99d
               resources:
                 requests:
                     memory: "25Mi"
@@ -25,12 +25,6 @@ spec:
               envFrom:
               - configMapRef:
                     name: cognigy-env
-              # env:
-              # - name: LEXICONS_DB_PASSWORD
-              #   valueFrom:
-              #       secretKeyRef:
-              #           name: cognigy-service-lexicons
-              #           key: db-password
               volumeMounts:
               - name: rabbitmq-connection-string
                 # This will mount the file in /run/secrets. Alpine Linux bug
@@ -40,7 +34,6 @@ spec:
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/mongodbConnectionString
                 subPath: mongodbConnectionString
-
             volumes:
             - name: rabbitmq-connection-string
               secret:
@@ -54,6 +47,5 @@ spec:
                 items:
                   - key: connection-string
                     path: mongodbConnectionString
-
             imagePullSecrets:
             - name: cognigy-registry-token

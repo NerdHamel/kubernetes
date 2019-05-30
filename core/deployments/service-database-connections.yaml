@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-database-connections
-              image: docker.cognigy.com:5000/service-database-connections:27e9d3c2375437d52f632c6555cdddbfc0b48831
+              image: docker.cognigy.com:5000/service-database-connections:59ab503ee3c18e32533c65f66ee559c3a19ca99d
               resources:
                 requests:
                     memory: "50Mi"
@@ -26,11 +26,6 @@ spec:
               - configMapRef:
                     name: cognigy-env
               env:
-              # - name: DB_CONNECTIONS_DB_PASSWORD
-              #   valueFrom:
-              #       secretKeyRef:
-              #           name: cognigy-service-database-connections
-              #           key: db-password
               - name: SECURITY_SMTP_PASSWORD
                 valueFrom:
                     secretKeyRef:
@@ -54,7 +49,6 @@ spec:
                 periodSeconds: 30
                 failureThreshold: 1
                 timeoutSeconds: 2
-
             volumes:
             - name: rabbitmq-connection-string
               secret:

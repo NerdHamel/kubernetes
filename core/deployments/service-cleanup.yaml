@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-cleanup
-              image: docker.cognigy.com:5000/service-cleanup:27e9d3c2375437d52f632c6555cdddbfc0b48831
+              image: docker.cognigy.com:5000/service-cleanup:59ab503ee3c18e32533c65f66ee559c3a19ca99d
               resources:
                 requests:
                     memory: "50Mi"
@@ -27,13 +27,10 @@ spec:
                     name: cognigy-env
               volumeMounts:
               - name: rabbitmq-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/rabbitmqConnectionString
                 subPath: rabbitmqConnectionString
-
               - name: rabbitmq-api-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/rabbitmqAPIConnectionString
                 subPath: rabbitmqAPIConnectionString
@@ -46,7 +43,6 @@ spec:
                 periodSeconds: 30
                 failureThreshold: 1
                 timeoutSeconds: 2
-
             volumes:
             - name: rabbitmq-connection-string
               secret:

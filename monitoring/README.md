@@ -1,3 +1,3 @@
 # Info
 This is still WIP
-(docker.cognigy.com:5000/service-monitoring:27e9d3c2375437d52f632c6555cdddbfc0b48831)
+(docker.cognigy.com:5000/service-monitoring:59ab503ee3c18e32533c65f66ee559c3a19ca99d)

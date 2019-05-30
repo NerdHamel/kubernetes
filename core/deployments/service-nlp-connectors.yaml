@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-nlp-connectors
-              image: docker.cognigy.com:5000/service-nlp-connectors:27e9d3c2375437d52f632c6555cdddbfc0b48831
+              image: docker.cognigy.com:5000/service-nlp-connectors:59ab503ee3c18e32533c65f66ee559c3a19ca99d
               resources:
                 requests:
                     memory: "50Mi"
@@ -25,12 +25,6 @@ spec:
               envFrom:
               - configMapRef:
                     name: cognigy-env
-              # env:
-              # - name: NLP_CONNECTORS_DB_PASSWORD
-              #   valueFrom:
-              #       secretKeyRef:
-              #           name: cognigy-service-nlp-connectors
-              #           key: db-password
               volumeMounts:
               - name: rabbitmq-connection-string
                 # This will mount the file in /run/secrets. Alpine Linux bug
@@ -49,7 +43,6 @@ spec:
                 periodSeconds: 30
                 failureThreshold: 1
                 timeoutSeconds: 2
-
             volumes:
             - name: rabbitmq-connection-string
               secret:
@@ -63,6 +56,5 @@ spec:
                 items:
                   - key: connection-string
                     path: mongodbConnectionString
-
             imagePullSecrets:
             - name: cognigy-registry-token

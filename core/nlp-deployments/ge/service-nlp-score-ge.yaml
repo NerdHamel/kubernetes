@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-nlp-score-ge
-              image: docker.cognigy.com:5000/service-nlp:616d1744e07e34aa81099304296e4a5e2ebd2b51
+              image: docker.cognigy.com:5000/service-nlp:54d71e0a299e35157f59496112e145bf7b9cf37d
               resources:
                 limits:
                     memory: "1Gi"
@@ -48,12 +48,6 @@ spec:
                 value: "true"
               - name: CNLP_CORES
                 value: "1"
-              # - name: NLP_DB_PASSWORD
-              #   valueFrom:
-              #       secretKeyRef:
-              #           name: cognigy-service-nlp
-              #           key: db-password
-
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:
@@ -75,6 +69,5 @@ spec:
                 items:
                   - key: connection-string
                     path: mongodbConnectionString
-
             imagePullSecrets:
             - name: cognigy-registry-token
