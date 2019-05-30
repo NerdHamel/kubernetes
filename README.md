@@ -30,9 +30,14 @@ This repository has the following folder-structure:
 | - management-ui
 | --- deployments
 | --- services
+|
+| - monitoring
+| --- config-maps
+| --- deployments
+| --- secrets.dist
 ```
 
-The main three folders are ``core``, ``livechat`` and ``management-ui``. All of these directories contain sub-folders which contain K8s API objects of various sorts, such as:
+The main folders are ``core``, ``livechat``, ``management-ui`` and ``monitoring``. All of these direcotries potential contain sub-folders which contain K8s API objects of various sorts, such as:
 - deployments
 - ingress objects
 - secrets
