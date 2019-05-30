@@ -34,7 +34,6 @@ spec:
           subPath: datasource.yml
         - name: grafana-admin-password
           mountPath: /run/secrets/grafana-admin-password
-
       volumes:
       - name: grafana-dashboard-config
         # todo
@@ -48,6 +47,5 @@ spec:
           items:
             - key: password
               path: grafana-admin-password
-
       imagePullSecrets:
       - name: cognigy-registry-token
