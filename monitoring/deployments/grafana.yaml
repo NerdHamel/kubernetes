@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: grafana
-        image: grafana/grafana:6.1.6
+        image: docker.cognigy.com:5000/grafana:6.1.6
         resources:
           requests:
             memory: 50M
@@ -36,11 +36,14 @@ spec:
           mountPath: /run/secrets/grafana-admin-password
       volumes:
       - name: grafana-dashboard-config
-        # todo
+        configMap:
+          name: dashboard-config
       - name: grafana-dashboard-cognigy
-        # todo
+        configMap:
+          name: cognigy-dashboard-config
       - name: grafana-datasources
-        # todo
+        configMap:
+          name: datasource-config
       - name: grafana-admin-password
         secret:
           secretName: grafana-admin-password

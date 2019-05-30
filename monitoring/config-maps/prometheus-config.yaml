@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+data:
+  prometheusConfig.yml: |-
+    # this is where the actual prometheus-config starts
+    global:
+      scrape_interval: 1m
+      scrape_timeout: 10s
+      evaluation_interval: 1m
+
+    scrape_configs:
+    # service-monitoring
+    - job_name: service-monitoring
+      scrape_interval: 5s
+      scrape_timeout: 5s
+      metrics_path: /metrics
+      scheme: http
+      basic_auth:
+        username: prometheus
+        password_file: /run/secrets/prometheus-password
+        dns_sd_configs:
+        - names:
+          - 'tasks.service-monitoring'
+          type: 'A'
+          port: 8000

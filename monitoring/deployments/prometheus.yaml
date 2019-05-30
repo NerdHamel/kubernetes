@@ -35,20 +35,21 @@ spec:
         - name: prometheus-password
           mountPath: /run/secrets/prometheus-password
           subPath: prometheus-password
-
       volumes:
       - name: prometheus
-        # todo
+        configMap:
+          name: prometheus-config
       - name: alerting-rules
-        # todo
+        configMap:
+          name: alerting-rules-config
       - name: recording-rules
-        # todo
+        configMap:
+          name: recording-rules-config
       - name: prometheus-password
         secret:
           secretName: prometheus-password
           items:
             - key: password
               path: prometheus-password
-
       imagePullSecrets:
       - name: cognigy-registry-token
