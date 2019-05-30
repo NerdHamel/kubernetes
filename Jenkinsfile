@@ -7,6 +7,7 @@ node {
 		stage('Validate') {
 			sh """wget https://github.com/instrumenta/kubeval/releases/download/0.9.2/kubeval-linux-amd64.tar.gz && \
 				tar xf kubeval-linux-amd64.tar.gz && \
+				chmod +x validate.sh && \
 				./validate.sh
 			""";
 		}
