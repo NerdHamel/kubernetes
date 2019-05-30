@@ -25,9 +25,9 @@ spec:
               # mount persistent volume claim for nlp config and models
               volumeMounts:
               - name: nlp-models-nfs
-                mountPath: "/data/models"
-              - name: nlp-config-nfs
-                mountPath: "/data/config"
+                mountPath: /data/models
+              - name: languages-config
+                mountPath: /languages
               - name: rabbitmq-connection-string
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/rabbitmqConnectionString
@@ -42,13 +42,15 @@ spec:
               env:
               - name: LANGUAGES_TO_RUN
                 value: de-DE
+              - name: LANGUAGE_CONFIG_PATH
+                value: /languages
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:
                 claimName: nlp-models-nfs
-            - name: nlp-config-nfs
-              persistentVolumeClaim:
-                claimName: nlp-config-nfs
+            - name: languages-config
+              configMap:
+                name: languages-config
             - name: rabbitmq-connection-string
               secret:
                 secretName: cognigy-rabbitmq
