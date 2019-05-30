@@ -23,7 +23,8 @@ spec:
             memory: "200Mi"
             cpu: "200m"
         env:
-        - PROMETHEUS_USERNAME=prometheus
+        - name: PROMETHEUS_USERNAME
+          value: prometheus
         volumeMounts:
         - name: prometheus-password
           mountPath: /run/secrets/prometheus-password
