@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # first download kubeval, uncompress
-wget https://github.com/instrumenta/kubeval/releases/download/0.9.2/kubeval-linux-amd64.tar.gz
+wget --quiet https://github.com/instrumenta/kubeval/releases/download/0.9.2/kubeval-linux-amd64.tar.gz
 tar xf kubeval-linux-amd64.tar.gz
 
 # validate all files
