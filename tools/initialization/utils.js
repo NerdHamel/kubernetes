@@ -1,4 +1,4 @@
-const { readdirSync, statSync, mkdirSync, readFileSync, writeFileSync } = require("fs");
+const { statSync, mkdirSync, readFileSync, writeFileSync } = require("fs");
 const { randomBytes } = require("crypto");
 const { join } = require("path");
 const { safeLoad, safeDump } = require("js-yaml");
@@ -11,9 +11,17 @@ function toBase64(str) {
 	return Buffer.from(str).toString('base64');
 }
 
-const dummySecret = 'aaa';
-const createCompactSecret = () => createRandomString(64);
-const createLongSecret = () => createRandomString(128);
+function createCompactSecret() {
+	return createRandomString(64);
+}
+
+function createLongSecret() {
+	return createRandomString(128);
+}
+
+function createDummySecret() {
+	return 'aaa';
+}
 
 function generateSecretsFolder() {
 	/** Check whether 'core/secrets' already exists */
@@ -100,7 +108,7 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'security-smtp-password': toBase64(dummySecret)
+				'security-smtp-password': toBase64(createDummySecret())
 			}
 		};
 	}
@@ -110,8 +118,8 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'tls.crt': toBase64(dummySecret),
-				'tls.key': toBase64(dummySecret)
+				'tls.crt': toBase64(createDummySecret()),
+				'tls.key': toBase64(createDummySecret())
 			}
 		};
 	}
@@ -131,8 +139,8 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'amazon-client-id': toBase64(dummySecret),
-				'amazon-client-secret': toBase64(dummySecret)
+				'amazon-client-id': toBase64(createDummySecret()),
+				'amazon-client-secret': toBase64(createDummySecret())
 			}
 		};
 	}
@@ -170,9 +178,9 @@ function fillSecret(secret) {
 	return secret;
 }
 
-function writeFile(secret, filename) {
+function writeSecret(secret, filename) {
 	let yaml = "";
-	
+
 	try {
 		yaml = safeDump(secret);
 	} catch (err) {
@@ -183,24 +191,10 @@ function writeFile(secret, filename) {
 	writeFileSync(join('core', 'secrets', filename), yaml);
 }
 
-(async () => {
-	try {
-		/** Generate the 'core/secrets' folder if necessary */
-		generateSecretsFolder();
-
-		/** Read dir contents fo 'core/secrets.dist' */
-		const files = readdirSync(join('core', 'secrets.dist'));
-
-		/** Read and parse all yaml files (k8s secrets) */
-		for (const file of files) {
-			const parsedSecret = readAndParseYaml(join('core', 'secrets.dist', file));
-			const finalSecret = fillSecret(parsedSecret);
-			writeFile(finalSecret, file);
-		}
-	} catch (err) {
-		console.log(`An error occured. Exiting now. Error was: ${err}`);
-		process.exit(1);
-	}
-
-	process.exit(0);
-})();
+module.exports = {
+	generateSecretsFolder,
+	readAndParseYaml,
+	readFileSync,
+	fillSecret,
+	writeSecret
+}
