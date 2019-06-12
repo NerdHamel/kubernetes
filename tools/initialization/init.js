@@ -7,7 +7,7 @@ const { generateSecretsFolder, readAndParseYaml, fillSecret, writeSecret } = req
 		/** Generate the 'core/secrets' folder if necessary */
 		generateSecretsFolder();
 
-		/** Read dir contents fo 'core/secrets.dist' */
+		/** Read dir contents for 'core/secrets.dist' */
 		const files = readdirSync(join('core', 'secrets.dist'));
 
 		/** Read and parse all yaml files (k8s secrets) */

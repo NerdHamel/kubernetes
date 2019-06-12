@@ -25,13 +25,7 @@ function createDummySecret() {
 
 function generateSecretsFolder() {
 	/** Check whether 'core/secrets' already exists */
-	let secretsExist = true;
-
-	try {
-		statSync(join('core', 'secrets'));
-	} catch (err) {
-		secretsExist = false;
-	}
+	const secretsExist = checkSecretsFolder();
 
 	/** Abort if we already have a 'core/secrets' folder */
 	if (secretsExist) {
@@ -46,6 +40,19 @@ function generateSecretsFolder() {
 		console.log("Unable to create folder 'secrets'. Exiting now.");
 		process.exit(0);
 	}
+}
+
+function checkSecretsFolder() {
+	/** Check whether 'core/secrets' is there */
+	let secretExists = true;
+
+	try {
+		statSync(join('core', 'secrets'));
+	} catch (err) {
+		secretsExist = false;
+	}
+
+	return secretExists;
 }
 
 function readAndParseYaml(path) {
@@ -193,6 +200,7 @@ function writeSecret(secret, filename) {
 
 module.exports = {
 	generateSecretsFolder,
+	checkSecretsFolder,
 	readAndParseYaml,
 	readFileSync,
 	fillSecret,
