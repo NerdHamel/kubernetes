@@ -4,7 +4,11 @@ const { join } = require("path");
 const { safeLoad, safeDump } = require("js-yaml");
 
 function createRandomString(length) {
-	return randomBytes(length).toString('base64');
+	return randomBytes(length).toString('hex');
+}
+
+function toBase64(str) {
+	return Buffer.from(str).toString('base64');
 }
 
 const dummySecret = 'aaa';
@@ -61,9 +65,9 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'connection-string': connectionString,
-				'rabbitmq-password': rabbitPassword,
-				'connection-string-api': connectionStringApi
+				'connection-string': toBase64(connectionString),
+				'rabbitmq-password': toBase64(rabbitPassword),
+				'connection-string-api': toBase64(connectionStringApi)
 			}
 		};
 	}
@@ -76,7 +80,7 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'connection-string': connectionString
+				'connection-string': toBase64(connectionString)
 			}
 		};
 	}
@@ -86,7 +90,7 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'mongo-initdb-root-password': createLongSecret()
+				'mongo-initdb-root-password': toBase64(createLongSecret())
 			}
 		};
 	}
@@ -96,7 +100,7 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'security-smtp-password': dummySecret
+				'security-smtp-password': toBase64(dummySecret)
 			}
 		};
 	}
@@ -106,8 +110,8 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'tls.crt': dummySecret,
-				'tls.key': dummySecret
+				'tls.crt': toBase64(dummySecret),
+				'tls.key': toBase64(dummySecret)
 			}
 		};
 	}
@@ -117,7 +121,7 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'redis-persistent-password.conf': `requirepass ${createCompactSecret()}`
+				'redis-persistent-password.conf': toBase64(`requirepass ${createCompactSecret()}`)
 			}
 		};
 	}
@@ -127,8 +131,8 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'amazon-client-id': dummySecret,
-				'amazon-client-secret': dummySecret
+				'amazon-client-id': toBase64(dummySecret),
+				'amazon-client-secret': toBase64(dummySecret)
 			}
 		};
 	}
@@ -138,7 +142,7 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'fb-verify-token': createCompactSecret()
+				'fb-verify-token': toBase64(createCompactSecret())
 			}
 		};
 	}
@@ -148,7 +152,7 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'secret': createLongSecret()
+				'secret': toBase64(createLongSecret())
 			}
 		};
 	}
@@ -158,7 +162,7 @@ function fillSecret(secret) {
 			...secret,
 			data: {
 				...data,
-				'odata-super-api-key': createCompactSecret()
+				'odata-super-api-key': toBase64(createCompactSecret())
 			}
 		}
 	}
