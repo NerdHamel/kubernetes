@@ -3,3 +3,5 @@ core/volumes/
 core/reverse-proxy/
 
 monitoring/secrets/
+
+node_modules/
