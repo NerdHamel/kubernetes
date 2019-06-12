@@ -1,11 +1,6 @@
 const { readdirSync } = require("fs");
 const { join } = require("path");
-const {
-	generateSecretsFolder,
-	readAndParseYaml,
-	fillSecret,
-	writeSecret
-} = require("./utils");
+const { generateSecretsFolder, readAndParseYaml, fillSecret, writeSecret } = require("./utils");
 
 (async () => {
 	try {
