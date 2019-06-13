@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: prometheus-config
 data:
-  prometheusConfig.yml: |-
+  prometheus.yml: |-
     # this is where the actual prometheus-config starts
     global:
       scrape_interval: 1m
@@ -20,8 +20,8 @@ data:
       basic_auth:
         username: prometheus
         password_file: /run/secrets/prometheus-password
-        dns_sd_configs:
-        - names:
-          - 'tasks.service-monitoring'
-          type: 'A'
-          port: 8000
+      dns_sd_configs:
+      - names:
+        - 'service-monitoring'
+        type: 'A'
+        port: 8000
