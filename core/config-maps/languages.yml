@@ -4,7 +4,6 @@ metadata:
   name: languages-config
 data:
   languages.json: |-
-    # Actual contents of 'languages.json'
     [
         {
             "id": "en-US",
