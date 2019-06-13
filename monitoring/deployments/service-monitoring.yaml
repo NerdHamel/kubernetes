@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-monitoring
+spec:
+  selector:
+    matchLabels:
+      app: service-monitoring
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-monitoring
+    spec:
+      containers:
+      - name: service-monitoring
+        image: docker.cognigy.com:5000/service-monitoring:59ab503ee3c18e32533c65f66ee559c3a19ca99d
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "100m"
+          limits:
+            memory: "200Mi"
+            cpu: "200m"
+        env:
+        - name: PROMETHEUS_USERNAME
+          value: prometheus
+        volumeMounts:
+        - name: rabbitmq-connection-string
+          # This will mount the file in /run/secrets. Alpine Linux bug
+          mountPath: /var/run/secrets/rabbitmqConnectionString
+          subPath: rabbitmqConnectionString
+        - name: prometheus-password
+          mountPath: /run/secrets/prometheus-password
+          subPath: prometheus-password
+        livenessProbe:
+          exec:
+            command:
+            - node
+            - /opt/healthcheck.js
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          failureThreshold: 1
+          timeoutSeconds: 2
+      volumes:
+      - name: rabbitmq-connection-string
+        secret:
+          secretName: cognigy-rabbitmq
+          items:
+            - key: connection-string
+              path: rabbitmqConnectionString
+      - name: prometheus-password
+        secret:
+          secretName: prometheus-password
+          items:
+          - key: password
+            path: prometheus-password
+      imagePullSecrets:
+      - name: cognigy-registry-token

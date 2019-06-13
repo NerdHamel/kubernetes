@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: prometheus
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+      - name: prometheus
+        image: docker.cognigy.com:5000/prometheus:2.5.0
+        args:
+          - '--config.file=/run/config/prometheus.yml'
+          - '--storage.tsdb.path=/prometheus'
+          - '--storage.tsdb.retention=7d'
+        resources:
+          requests:
+            memory: 1G
+            cpu: 200m
+          limits:
+            memory: 2G
+            cpu: 500m
+        volumeMounts:
+        - name: prometheus-nfs
+          mountPath: /prometheus
+        - name: prometheus
+          mountPath: /run/config/prometheus.yml
+          subPath: prometheus.yml
+        - name: alerting-rules
+          mountPath: /run/config/alertingRules.yml
+          subPath: alertingRules.yml
+        - name: recording-rules
+          mountPath: /run/config/recordingRules.yml
+          subPath: recordingRules.yml
+        - name: prometheus-password
+          mountPath: /run/secrets/prometheus-password
+          subPath: prometheus-password
+      volumes:
+      - name: prometheus-nfs
+        persistentVolumeClaim:
+          claimName: prometheus
+      - name: prometheus
+        configMap:
+          name: prometheus-config
+      - name: alerting-rules
+        configMap:
+          name: alerting-rules-config
+      - name: recording-rules
+        configMap:
+          name: recording-rules-config
+      - name: prometheus-password
+        secret:
+          secretName: prometheus-password
+          items:
+            - key: password
+              path: prometheus-password
+      imagePullSecrets:
+      - name: cognigy-registry-token

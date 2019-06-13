@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: recording-rules-config
+data:
+  recordingRules.yml: |-
+    # This is where the content of the 'recordingRules.yml' starts
+    # groups:
+    # - name: example
+    #   interval: 10s
+    #   rules:
+    #   - record: service:container_state_change
+    #     expr: count(container_last_seen{container_label_com_docker_swarm_service_name=~"cognigy.*"}) by (container_label_com_docker_swarm_service_name)

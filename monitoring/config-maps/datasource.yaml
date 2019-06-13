@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datasource-config
+data:
+  datasource.yml: |-
+    # this is where the actual datasource.yml starts
+    apiVersion: 1
+
+    deleteDatasources:
+    - name: Prometheus
+      orgId: 1
+
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      access: proxy
+      orgId: 1
+      url: http://prometheus:9090
+      version: 1
+      editable: false
