@@ -41,7 +41,7 @@ spec:
       volumes:
       - name: prometheus-password
         secret:
-          secretName: prometheus
+          secretName: prometheus-password
           items:
           - key: password
             path: prometheus-password
