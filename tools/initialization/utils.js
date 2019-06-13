@@ -1,4 +1,4 @@
-const { statSync, mkdirSync, readFileSync, writeFileSync } = require("fs");
+const { existsSync, mkdirSync, readFileSync, writeFileSync } = require("fs");
 const { randomBytes } = require("crypto");
 const { join } = require("path");
 const { safeLoad, safeDump } = require("js-yaml");
@@ -44,15 +44,7 @@ function generateSecretsFolder() {
 
 function checkSecretsFolder() {
 	/** Check whether 'core/secrets' is there */
-	let secretExists = true;
-
-	try {
-		statSync(join('core', 'secrets'));
-	} catch (err) {
-		secretsExist = false;
-	}
-
-	return secretExists;
+	return existsSync(join('core', 'secrets'));
 }
 
 function readAndParseYaml(path) {
@@ -77,12 +69,14 @@ function fillSecret(secret) {
 		const connectionStringApi = `http://cognigy:${rabbitPassword}@rabbitmq:15672/api`;
 
 		return {
-			...secret,
-			data: {
-				...data,
-				'connection-string': toBase64(connectionString),
-				'rabbitmq-password': toBase64(rabbitPassword),
-				'connection-string-api': toBase64(connectionStringApi)
+			secret: {
+				...secret,
+				data: {
+					...data,
+					'connection-string': toBase64(connectionString),
+					'rabbitmq-password': toBase64(rabbitPassword),
+					'connection-string-api': toBase64(connectionStringApi)
+				}
 			}
 		};
 	}
@@ -92,97 +86,133 @@ function fillSecret(secret) {
 		const connectionString = `mongodb://${serviceName}:${dbPassword}@mongo-server:27017/${serviceName}`;
 
 		return {
-			...secret,
-			data: {
-				...data,
-				'connection-string': toBase64(connectionString)
-			}
-		};
+			secret: {
+				...secret,
+				data: {
+					...data,
+					'connection-string': toBase64(connectionString)
+				}
+			},
+			serviceName,
+			dbPassword
+		}
 	}
 
 	if (data['mongo-initdb-root-password'] !== undefined) {
 		return {
-			...secret,
-			data: {
-				...data,
-				'mongo-initdb-root-password': toBase64(createLongSecret())
+			secret: {
+				...secret,
+				data: {
+					...data,
+					'mongo-initdb-root-password': toBase64(createLongSecret())
+				}
 			}
 		};
 	}
 
 	if (data['security-smtp-password'] !== undefined) {
 		return {
-			...secret,
-			data: {
-				...data,
-				'security-smtp-password': toBase64(createDummySecret())
+			secret: {
+				...secret,
+				data: {
+					...data,
+					'security-smtp-password': toBase64(createDummySecret())
+				}
 			}
 		};
 	}
 
 	if (data['tls.crt'] !== undefined && data['tls.key'] !== undefined) {
 		return {
-			...secret,
-			data: {
-				...data,
-				'tls.crt': toBase64(createDummySecret()),
-				'tls.key': toBase64(createDummySecret())
+			secret: {
+				...secret,
+				data: {
+					...data,
+					'tls.crt': toBase64(createDummySecret()),
+					'tls.key': toBase64(createDummySecret())
+				}
 			}
 		};
 	}
 
 	if (data['redis-persistent-password.conf'] !== undefined) {
 		return {
-			...secret,
-			data: {
-				...data,
-				'redis-persistent-password.conf': toBase64(`requirepass ${createCompactSecret()}`)
+			secret: {
+				...secret,
+				data: {
+					...data,
+					'redis-persistent-password.conf': toBase64(`requirepass ${createCompactSecret()}`)
+				}
 			}
 		};
 	}
 
 	if (data['amazon-client-id'] !== undefined && data['amazon-client-secret'] !== undefined) {
 		return {
-			...secret,
-			data: {
-				...data,
-				'amazon-client-id': toBase64(createDummySecret()),
-				'amazon-client-secret': toBase64(createDummySecret())
+			secret: {
+				...secret,
+				data: {
+					...data,
+					'amazon-client-id': toBase64(createDummySecret()),
+					'amazon-client-secret': toBase64(createDummySecret())
+				}
 			}
 		};
 	}
 
 	if (data['fb-verify-token'] !== undefined) {
 		return {
-			...secret,
-			data: {
-				...data,
-				'fb-verify-token': toBase64(createCompactSecret())
+			secret: {
+				...secret,
+				data: {
+					...data,
+					'fb-verify-token': toBase64(createCompactSecret())
+				}
 			}
 		};
 	}
 
 	if (data['secret'] !== undefined) {
 		return {
-			...secret,
-			data: {
-				...data,
-				'secret': toBase64(createLongSecret())
+			secret: {
+				...secret,
+				data: {
+					...data,
+					'secret': toBase64(createLongSecret())
+				}
 			}
 		};
 	}
 
 	if (data['odata-super-api-key'] !== undefined) {
 		return {
-			...secret,
-			data: {
-				...data,
-				'odata-super-api-key': toBase64(createCompactSecret())
+			secret: {
+				...secret,
+				data: {
+					...data,
+					'odata-super-api-key': toBase64(createCompactSecret())
+				}
 			}
-		}
+		};
 	}
 
-	return secret;
+	console.log(`Unknown secret. Can't fill it!`);
+}
+
+function createSingleDatabaseScriptSnippet(serviceName, dbPassword) {
+	if (!serviceName || !dbPassword) return "";
+
+	let snippet =
+	`use ${serviceName}\n` +
+	`db.createUser({\n` +
+	`	user: "${serviceName}",\n` +
+	`	pwd: "${dbPassword}",\n` +
+	`	roles: [\n` +
+	`		{ role: "readWrite", db: "${serviceName}" }\n` +
+	`	]\n` +
+	`});\n\n`;
+
+	return snippet;
 }
 
 function writeSecret(secret, filename) {
@@ -198,11 +228,17 @@ function writeSecret(secret, filename) {
 	writeFileSync(join('core', 'secrets', filename), yaml);
 }
 
+function writeDatabaseInitialization(contents) {
+	writeFileSync(join('.', `dbinit.js`), contents);
+}
+
 module.exports = {
 	generateSecretsFolder,
 	checkSecretsFolder,
 	readAndParseYaml,
 	readFileSync,
 	fillSecret,
-	writeSecret
+	createSingleDatabaseScriptSnippet,
+	writeSecret,
+	writeDatabaseInitialization
 }

@@ -5,3 +5,4 @@ core/reverse-proxy/
 monitoring/secrets/
 
 node_modules/
+dbinit.js
