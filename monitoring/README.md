@@ -24,6 +24,9 @@ This directory has the following folder-structure:
 | - config-maps
 | - deployments
 | - secrets.dist
+| - services
+| - volume-claims
+| - volumes.dist
 ```
 
 ## Setup
@@ -40,25 +43,58 @@ After you are done with your modifications, deploy those within your K8s cluster
 kubectl apply -f monitoring/config-maps
 ```
 
-Image Pull Secret
+### Image Pull Secret
 ---
 In order to pull ``docker images`` from our production registry, you need to define a so-called ``image pull secret``. Kubernetes will use it to authenticate against Cognigy's production registry.
 
 Please have a look at our README file within the root of this repository for further details.
 
-Secrets
+### Secrets
 ---
 We are using secrets for our monitoring stack as well. Secrets are a secure way to make sensitive data available for a running container.
 
-The ``monitoring/secrets.dist`` folder contains empty API objects for K8s secrets. Create a copy of this folder and name it ``secrets``.
+We have two secrets within the monitoring stack. Please create a copy of the ``monitoring/secrets.dist`` folder, name it ``secrets`` and apply the necessary changes to the ``monitoring/secrets`` files.
 
-We have to define secrets for:
-- grafana
-- prometheus
+You can find more information on how to apply the changes to the secret blueprint-files in the main README within the root of this repository.
 
-Modify both files within ``monitoring/secrets``. For more information, have a look at the README file within the root of this repository.
+After your modifications, apply your changes to the cluster:
 
-After you did all modifications, apply the secrets to your cluster:
 ```
 kubectl apply -f monitoring/secrets
+```
+
+### Storage
+#### Introduction
+---
+Our main product already stores certain data which is made accessible using ``NFS``.
+
+For the monitoring stack we need additional folders being shared through NFS.
+
+We usually store the files for **grafana** and **prometheus** within the following folders:
+```
+sudo mkdir -p /var/opt/cognigy/grafana
+sudo mkdir /var/opt/cognigy/prometheus
+```
+
+#### Persistent Volumes
+---
+Persistent Volumes (PV) are used to make the NFS shares accessible within your K8s cluster. Check the contents of ``monitoring/volumes.dist``, create a copy of the folder, name it ``volumes`` and open them within a text editor.
+
+You will need to change the ``path`` and the ``server`` within the ``nfs`` section. After you applied your changes, apply the files to your cluster:
+```
+kubectl apply -f monitoring/volumes
+```
+
+#### Persistent Volume Claims
+---
+Persistent Volume Claims (PVC) connect your PVs with the actual Pods being scheduled in your K8s cluster. You can simply apply those files to your cluster:
+```
+kubectl apply -f monitoring/volume-claims
+```
+
+### Deployments & Services
+After all PVs, PVCs, Secrets and Config-Maps were applied to the cluster, we can finally apply the last objects to our cluster:
+```
+kubectl apply -f monitoring/services
+kubectl apply -f monitoring/deployments
 ```
