@@ -22,7 +22,12 @@ spec:
           limits:
             memory: 100M
             cpu: 200m
+        env:
+        - name: GF_SECURITY_ADMIN_PASSWORD__FILE
+          value: /run/secrets/grafana-admin-password
         volumeMounts:
+        - name: grafana-nfs
+          mountPath: /var/lib/grafana
         - name: grafana-dashboard-config
           mountPath: /etc/grafana/provisioning/dashboards/dashboard.yml
           subPath: dashboard.yml
@@ -34,7 +39,11 @@ spec:
           subPath: datasource.yml
         - name: grafana-admin-password
           mountPath: /run/secrets/grafana-admin-password
+          subPath: grafana-admin-password
       volumes:
+      - name: grafana-nfs
+        persistentVolumeClaim:
+          claimName: grafana
       - name: grafana-dashboard-config
         configMap:
           name: dashboard-config

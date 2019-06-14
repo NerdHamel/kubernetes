@@ -4,7 +4,6 @@ metadata:
   name: cognigy-dashboard-config
 data:
   cognigy.json: |-
-    # This is where the actual cognigy.json starts
     {
         "annotations": {
             "list": [

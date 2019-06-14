@@ -9,6 +9,15 @@ metadata:
 data:
     NODE_ENV: production
 
+    # Enable the creation of metrics which will then get consumed
+    # by our 'service-monitoring'.
+    MONITOR_RPC_CALLS: "true"
+
+    RABBITMQ_HOST: rabbitmq
+    RABBITMQ_PORT: "5672"
+    RABBITMQ_USER: cognigy
+    # RABBITMQ_PASSWORD: long and strong password // from secret
+
     # Redis configuration, will soon be a connection string
     REDIS_HOST: redis
     REDIS_PORT: "6379"
