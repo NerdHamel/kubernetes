@@ -9,7 +9,8 @@ metadata:
 data:
     NODE_ENV: production
 
-    # publish metrics
+    # Enable the creation of metrics which will then get consumed
+    # by our 'service-monitoring'.
     MONITOR_RPC_CALLS: "true"
 
     # Redis configuration, will soon be a connection string
