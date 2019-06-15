@@ -9,6 +9,9 @@ metadata:
 data:
     NODE_ENV: production
 
+    # publish metrics
+    MONITOR_RPC_CALLS: "true"
+
     # Redis configuration, will soon be a connection string
     REDIS_HOST: redis
     REDIS_PORT: "6379"
