@@ -133,7 +133,6 @@ Please bare in mind, that the performance of your NFS is crucial in order to hav
 We usually setup a server and create the following directories in which NFS can store the actual data:
 ```
 sudo mkdir -p /var/opt/cognigy/data/models
-sudo mkdir /var/opt/cognigy/data/config
 sudo mkdir /var/opt/cognigy/data/flow-modules
 ```
 
