@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-analytics-odata
-              image: docker.cognigy.com:5000/service-analytics-odata:59ab503ee3c18e32533c65f66ee559c3a19ca99d
+              image: office-docker.cognigy.com:5000/service-analytics-odata:4d9d3b9e6bfdfe4ff756fdac3634670b3a6fb190
               resources:
                 requests:
                     memory: "300Mi"
@@ -26,31 +26,34 @@ spec:
               - configMapRef:
                     name: cognigy-env
               env:
-              - name: ANALYTICS_COLLECTOR_DB_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-service-analytics-collector-provider
-                        key: db-password
+              - name: ANALYTICS_COLLECTOR_DB_NAME
+                value: service-analytics-collector
+              - name: SECURITY_DB_NAME
+                value: service-security
+              - name: FLOWS_DB_NAME
+                value: service-flows
               - name: ODATA_SUPER_API_KEY
                 valueFrom:
                     secretKeyRef:
                         name: cognigy-odata
                         key: odata-super-api-key
-              - name: SECURITY_DB_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-service-security
-                        key: db-password
-              - name: FLOWS_DB_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-service-flows
-                        key: db-password
               volumeMounts:
               - name: rabbitmq-connection-string
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/rabbitmqConnectionString
                 subPath: rabbitmqConnectionString
+              - name: analytics-collector-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /run/secrets/analyticsCollectorConnectionString
+                subPath: analyticsCollectorConnectionString
+              - name: security-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /run/secrets/securityConnectionString
+                subPath: securityConnectionString
+              - name: flows-connection-string
+                # This will mount the file in /run/secrets. Alpine Linux bug
+                mountPath: /run/secrets/flowsConnectionString
+                subPath: flowsConnectionString
               livenessProbe:
                 exec:
                   command:
@@ -67,5 +70,23 @@ spec:
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
+            - name: analytics-collector-connection-string
+              secret:
+                secretName: cognigy-service-analytics-collector-provider
+                items:
+                  - key: connection-string
+                    path: analyticsCollectorConnectionString
+            - name: security-connection-string
+              secret:
+                secretName: cognigy-service-security
+                items:
+                  - key: connection-string
+                    path: securityConnectionString
+            - name: flows-connection-string
+              secret:
+                secretName: cognigy-service-flows
+                items:
+                  - key: connection-string
+                    path: flowsConnectionString
             imagePullSecrets:
             - name: cognigy-registry-token
