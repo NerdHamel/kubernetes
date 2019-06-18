@@ -43,7 +43,7 @@ spec:
               - name: LANGUAGES_TO_RUN
                 value: "da-DK,nn-NO,it-IT,fr-FR,ar-AE,ja-JP,pl-PL,ge-GE"
               - name: LANGUAGE_CONFIG_PATH
-                value: /languages
+                value: /languages/languages.json
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:
