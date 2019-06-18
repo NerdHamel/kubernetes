@@ -101,23 +101,56 @@ Furthermore, it will create a ``dbinit.js`` file which you can use to create all
 ### Storage
 #### Introduction
 ---
-COGNIGY.AI needs to persist data in order to work properly. The simplest way to persist data is by using NFS as a volume-provider within your Kubernetes cluster.
+COGNIGY.AI needs to persist data in order to work properly. We e.g. have dependencies against MongoDB and Redis. Both software products are databases which need to persist their data in a reliable and persistent way.
 
-Please bare in mind, that the performance of your NFS is crucial in order to have a high performance COGNIGY.AI installation! Don't put your NFS onto a slow network!
+Kubernetes has a concept of ``Persistent Volumes (PV)`` and ``Persistent Volume Claims (PVC)``. A Pod can express its need for persistent storage using a PVC. The PVC gets bound to a PV and can use a certain amount of the storage available from a PV.
 
-We usually setup a server and create the following directories in which NFS can store the actual data:
+Cluster administrators need to configure PVs and make them available within the cluster. There are multiple ways on how this can be achieved and it is mostly dependent on the cloud provider and the infrastructure available. If a Cognigy.AI installation gets spawned on ``AWS``, services such as ``EBS`` and ``EFS`` can be used. In a on-premise scenario, the easiest way to get started ist to use ``local volumes`` for performance critical PVs (e.g. databases) and ``NFS backed`` PVs for non-performance critical situations.
+
+All information will be stored on one of the Kubernetes hosts - this is not optimal but a starting point. So let's first create the folders where the actual data will get persisted:
 ```
 sudo mkdir -p /var/opt/cognigy/data/models
 sudo mkdir /var/opt/cognigy/data/flow-modules
 ```
-
-If your NFS is fast, you can also utilize it for MongoDB and Redis (persistent). We don't do this usually, cause databases suffer from bad disk-performance. Instead, we are using local volumes that will give you the full speed of your SSD storage.
 
 Please also create the following additional directories where MongoDB and Redis (persistent) can store their data:
 ```
 sudo mkdir -p /var/opt/cognigy/mongo
 sudo mkdir -p /var/opt/cognigy/redis-persistent
 ```
+
+#### NFS configuration
+If you want to utilize NFS because you are e.g. not in a cloud environment and can't use services such as ``EBS`` or ``EFS``, you first need to install the ``nfs server`` component on the machine where the data gets finally persisted.
+
+If you are using a Debian based OS, the nfs server can be installed using the following command:
+```
+sudo apt get update
+sudo apt get install nfs-kernel-server
+```
+
+After the package was installed, you will now need to write a configuration file, which tells the NFS server the locations within the local file system it should offer on the network. Open the following file using a text editor: ``/etc/exports`` and place the following content into the file:
+```
+# /etc/exports: the access control list for filesystems which may be exported
+#		to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+#
+# Example for NFSv4:
+# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+#
+/var/opt/cognigy/data/models <ip>(rw,fsid=0,insecure,no_subtree_check,sync)
+/var/opt/cognigy/data/flow-modules <ip>(rw,fsid=1,insecure,no_subtree_check,sync)
+```
+
+Replace the ``<ip>`` part with a valid CIDR-block, e.g. the one from your internal network. Machines within this address block will have access to the files shared through NFS. Also be sure, that you are adding an entry per folder you want to share - adjust the ``fsid`` and increment it on any additional entry.
+
+After you wrote the changes to disk, let's restart the NFS server in order to re-load its configuration. This can be achived through the following command on Debian based operating systems:
+```
+sudo service nfs-kernel-server restart
+```
+
 
 #### Persistent Volumes
 ---
