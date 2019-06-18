@@ -27,7 +27,7 @@ spec:
               - name: nlp-models-nfs
                 mountPath: /data/models
               - name: languages-config
-                mountPath: /languages/languages.json
+                mountPath: /languages
               - name: rabbitmq-connection-string
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/rabbitmqConnectionString
@@ -45,7 +45,7 @@ spec:
               - name: TRAIN
                 value: "true"
               - name: LANGUAGE_CONFIG_PATH
-                value: /languages
+                value: /languages/languages.json
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:
