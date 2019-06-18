@@ -2,4 +2,4 @@ core/secrets/
 core/volumes/
 core/reverse-proxy/
 
-monitoring/secrets
+monitoring/secrets/

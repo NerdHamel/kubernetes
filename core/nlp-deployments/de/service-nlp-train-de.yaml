@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-nlp-train-de
-              image: docker.cognigy.com:5000/service-nlp:3210993f15c704ccf0fd3bcddfdd704ff7e16be7
+              image: docker.cognigy.com:5000/service-nlp:54d71e0a299e35157f59496112e145bf7b9cf37d
               resources:
                 limits:
                     memory: "1Gi"
@@ -25,9 +25,9 @@ spec:
               # mount persistent volume claim for nlp config and models
               volumeMounts:
               - name: nlp-models-nfs
-                mountPath: "/data/models"
-              - name: nlp-config-nfs
-                mountPath: "/data/config"
+                mountPath: /data/models
+              - name: languages-config
+                mountPath: /languages
               - name: rabbitmq-connection-string
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/rabbitmqConnectionString
@@ -46,33 +46,28 @@ spec:
                 value: de-DE
               - name: TRAIN
                 value: "true"
-              # - name: NLP_DB_PASSWORD
-              #   valueFrom:
-              #       secretKeyRef:
-              #           name: cognigy-service-nlp
-              #           key: db-password
-
+              - name: LANGUAGE_CONFIG_PATH
+                value: /languages/languages.json
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:
                 claimName: nlp-models-nfs
-            - name: nlp-config-nfs
-              persistentVolumeClaim:
-                claimName: nlp-config-nfs
+            - name: languages-config
+              configMap:
+                name: languages-config
             - name: rabbitmq-connection-string
               secret:
                 secretName: cognigy-rabbitmq
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
-            - name: local
-              emptyDir: {}
             - name: mongodb-connection-string
               secret:
                 secretName: cognigy-service-nlp
                 items:
                   - key: connection-string
                     path: mongodbConnectionString
-
+            - name: local
+              emptyDir: {}
             imagePullSecrets:
             - name: cognigy-registry-token

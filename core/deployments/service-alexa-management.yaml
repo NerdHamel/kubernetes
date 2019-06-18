@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-alexa-management
-              image: docker.cognigy.com:5000/service-alexa-management:3210993f15c704ccf0fd3bcddfdd704ff7e16be7
+              image: docker.cognigy.com:5000/service-alexa-management:59ab503ee3c18e32533c65f66ee559c3a19ca99d
               resources:
                 requests:
                     memory: "50Mi"
@@ -26,11 +26,6 @@ spec:
               - configMapRef:
                     name: cognigy-env
               env:
-              # - name: ALEXA_MANAGEMENT_DB_PASSWORD
-              #   valueFrom:
-              #       secretKeyRef:
-              #           name: cognigy-service-alexa-management
-              #           key: db-password
               - name: AMAZON_CLIENT_ID
                 valueFrom:
                     secretKeyRef:
@@ -59,7 +54,6 @@ spec:
                 periodSeconds: 30
                 failureThreshold: 1
                 timeoutSeconds: 2
-
             volumes:
             - name: rabbitmq-connection-string
               secret:

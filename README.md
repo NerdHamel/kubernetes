@@ -30,9 +30,14 @@ This repository has the following folder-structure:
 | - management-ui
 | --- deployments
 | --- services
+|
+| - monitoring
+| --- config-maps
+| --- deployments
+| --- secrets.dist
 ```
 
-The main three folders are ``core``, ``livechat`` and ``management-ui``. All of these directories contain sub-folders which contain K8s API objects of various sorts, such as:
+The main folders are ``core``, ``livechat``, ``management-ui`` and ``monitoring``. All of these direcotries potential contain sub-folders which contain K8s API objects of various sorts, such as:
 - deployments
 - ingress objects
 - secrets
@@ -98,7 +103,7 @@ This will genreate 32 bytes of random values encoded as HEX - these values are s
 
 Store the raw-value (plain text values) of your generated secrets somewhere in a safe place. We use a password-manager like KeyPassX. In order to fill the actual secret API objects, your secret values now need to get ``base64`` encoded. You can do this with:
 ```
-echo <your-secret> -n | base64 -w0
+echo -n <your-secret> | base64 -w0
 ```
 
 Take the value that was created and store it within your secret API object as followed:

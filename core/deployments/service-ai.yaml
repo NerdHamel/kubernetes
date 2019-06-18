@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-ai
-              image: docker.cognigy.com:5000/service-ai:36e2bad173d5f784200d02a18dda564c70b249eb
+              image: docker.cognigy.com:5000/service-ai:2b8c83566356b22410ab2bdab7cdce550f6ea527
               resources:
                 requests:
                     memory: "300Mi"
@@ -25,12 +25,6 @@ spec:
               envFrom:
               - configMapRef:
                     name: cognigy-env
-              # env:
-              # - name: AI_DB_PASSWORD
-              #   valueFrom:
-              #       secretKeyRef:
-              #           name: cognigy-service-ai
-              #           key: db-password
               volumeMounts:
               - name: rabbitmq-connection-string
                 # This will mount the file in /run/secrets. Alpine Linux bug
@@ -41,7 +35,6 @@ spec:
                 mountPath: /var/run/secrets/mongodbConnectionString
                 subPath: mongodbConnectionString
               - name: rabbitmq-api-connection-string
-
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/rabbitmqAPIConnectionString
                 subPath: rabbitmqAPIConnectionString
