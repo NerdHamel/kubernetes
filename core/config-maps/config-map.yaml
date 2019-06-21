@@ -9,7 +9,8 @@ metadata:
 data:
     NODE_ENV: production
 
-    # publish metrics
+    # Enable the creation of metrics which will then get consumed
+    # by our 'service-monitoring'.
     MONITOR_RPC_CALLS: "true"
 
     # Redis configuration, will soon be a connection string
@@ -60,7 +61,7 @@ data:
     ENDPOINT_BASE_URL_WITH_PROTOCOL: http://endpoint
     WEBCHAT_BASE_URL_WITH_PROTOCOL: http://webchat
     ENDPOINT_BASE_URL: http://endpoint
-    ODATA_HOSTNAME: http://odata
+    ODATA_HOSTNAME: odata
 
     # Endpoint configuration for Alexa
     ALEXA_END_SESSION_AFTER_EACH_REPLY: "true"

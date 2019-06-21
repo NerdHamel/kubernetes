@@ -3,3 +3,9 @@ core/volumes/
 core/reverse-proxy/
 
 monitoring/secrets/
+
+node_modules/
+dbinit.js
+
+core/volume-claims/cognigy-repo.yaml
+core/local-deployments
