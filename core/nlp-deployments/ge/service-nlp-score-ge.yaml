@@ -36,6 +36,8 @@ spec:
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/mongodbConnectionString
                 subPath: mongodbConnectionString
+              - name: local
+                mountPath: /data/local
               envFrom:
                 - configMapRef:
                     name: cognigy-env
@@ -45,7 +47,7 @@ spec:
               - name: SCORE
                 value: "true"
               - name: LANGUAGE_CONFIG_PATH
-                value: /languages/languages/languages.json
+                value: /languages/languages.json
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:
@@ -65,5 +67,7 @@ spec:
                 items:
                   - key: connection-string
                     path: mongodbConnectionString
+            - name: local
+              emptyDir: {}
             imagePullSecrets:
             - name: cognigy-registry-token
