@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-database-connections
-              image: docker.cognigy.com:5000/service-database-connections:59ab503ee3c18e32533c65f66ee559c3a19ca99d
+              image: docker.cognigy.com:5000/service-database-connections:b6a2c601fcd65641c19d53622d230821c51addd8
               resources:
                 requests:
                     memory: "50Mi"

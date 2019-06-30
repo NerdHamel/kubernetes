@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-api
-              image: docker.cognigy.com:5000/service-api:59ab503ee3c18e32533c65f66ee559c3a19ca99d
+              image: docker.cognigy.com:5000/service-api:6c964113a09681d954b220d1e65507e1e893396d
               resources:
                 requests:
                     memory: "150Mi"

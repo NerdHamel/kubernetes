@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-playbooks
-              image: docker.cognigy.com:5000/service-playbooks:59ab503ee3c18e32533c65f66ee559c3a19ca99d
+              image: docker.cognigy.com:5000/service-playbooks:3ee40cef2fc57118af7ccd4a74ef9b11ecab465b
               resources:
                 requests:
                     memory: "50Mi"

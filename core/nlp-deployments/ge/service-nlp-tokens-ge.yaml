@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-nlp-tokens-ge
-              image: docker.cognigy.com:5000/service-nlp-tokens:59ab503ee3c18e32533c65f66ee559c3a19ca99d
+              image: docker.cognigy.com:5000/service-nlp-tokens:dd049a1f1b3c19df4a1c94af945c299796e28966
               resources:
                 limits:
                     memory: "2Gi"

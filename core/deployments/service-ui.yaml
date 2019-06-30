@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-ui
-              image: docker.cognigy.com:5000/service-ui:c706929b4f38ba2e01794ef747f9e00e91fe2a9d
+              image: docker.cognigy.com:5000/service-ui:4b8aff10bbbcc8cb581861a69f00c285cfba7ec7
               resources:
                 requests:
                     memory: "50Mi"

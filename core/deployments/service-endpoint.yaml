@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-endpoint
-              image: docker.cognigy.com:5000/service-endpoint:59ab503ee3c18e32533c65f66ee559c3a19ca99d
+              image: docker.cognigy.com:5000/service-endpoint:085ab321c7a7f983a3f403e1f756865d96ea3059
               resources:
                 requests:
                     memory: "50Mi"
