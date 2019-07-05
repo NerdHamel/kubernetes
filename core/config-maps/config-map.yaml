@@ -43,9 +43,9 @@ data:
     # SMTP server for 'forgot password' functionality
     SECURITY_SMTP_HOST: "test"
     SECURITY_SMTP_PORT: "test"
-    SECURITY_SMTP_TLS_REQUIRED: "test"
     SECURITY_SMTP_USERNAME: "test"
     SECURITY_SMTP_FROM: "test"
+    SECURITY_SMTP_CONNECTION_TYPE: "starttls"
     # SECURITY_SMTP_PASSWORD is a secret!
 
     # Domains to whitelist for cors for the API (service-api)
