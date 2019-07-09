@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-nlp-score-en
-              image: docker.cognigy.com:5000/service-nlp:193513c655ce7f3c2d125667a7d6320eb7f17ab5
+              image: dev-docker.cognigy.com:5000/service-nlp:5d934124e8852aea52c6c690606e375a46d81c10
               resources:
                 limits:
                     memory: "1Gi"
@@ -48,6 +48,19 @@ spec:
                 value: "true"
               - name: LANGUAGE_CONFIG_PATH
                 value: /languages/languages.json
+            initContainers:
+              - name: model-downloader 
+                image: "dev-docker.cognigy.com:5000/model-downloader:2"
+                volumeMounts:
+                - name: nlp-models-nfs
+                  mountPath: /data/models
+                - name: languages-config
+                  mountPath: /languages
+                env:
+                - name: LANGUAGES_TO_RUN
+                  value: en-US
+                - name: LANGUAGE_CONFIG_PATH
+                  value: /languages/languages.json
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:
