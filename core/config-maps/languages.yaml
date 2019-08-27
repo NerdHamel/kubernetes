@@ -1,145 +1,154 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: languages-config
+    name: languages-config
 data:
-  languages.json: |-
-    [
-        {
-            "id": "en-US",
-            "name": "English (US)",
-            "nlp": "en",
-            "nlpModel": "/data/models/en_core_web_lg-2.0.0/en_core_web_lg/en_core_web_lg-2.0.0",
-            "vectorModel": "/data/models/en_vectors_web_lg-2.0.0/en_vectors_web_lg/en_vectors_web_lg-2.0.0",
-            "spacyAlpha": null,
-            "magnitude": "/data/models/glove.840B.300d.magnitude",
-            "spacyLanguageClass": "spacy.lang.en.English",
-            "embeddings": "/data/models/embeddings/lm-news-english-{}-1024-v0.2rc.pt"
-        },
-        {
-            "id": "de-DE",
-            "name": "German (DE)",
-            "nlp": "de",
-            "nlpModel": "/data/models/de_core_news_sm-2.0.0/de_core_news_sm/de_core_news_sm-2.0.0",
-            "vectorModel": "/data/models/de_wiki_news-1.1.0/de_wiki_news/de_wiki_news-1.1.0",
-            "spacyAlpha": null,
-            "magnitude": "/data/models/de_wiki_news.magnitude",
-            "spacyLanguageClass": "spacy.lang.de.German",
-            "embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
-        },
-        {
-            "id": "ja-JP",
-            "name": "Japanese",
-            "nlp": "ja",
-            "nlpModel": null,
-            "vectorModel": "/data/models/ja_fast_text-1.0/ja_fast_text/ja_fast_text-1.0",
-            "spacyAlpha": "Japanese",
-            "spacyLanguageClass": "spacy.lang.ja.Japanese",
-            "magnitude": "/data/models/fast_text_ja-1_0_0.magnitude"
-        },
-        {
-            "id": "da-DK",
-            "name": "Danish",
-            "nlp": "da",
-            "nlpModel": null,
-            "vectorModel": null,
-            "spacyAlpha": "Danish",
-            "spacyLanguageClass": "spacy.lang.da.Danish"
-        },
-        {
-            "id": "th-TH",
-            "name": "Thai (Beta)",
-            "nlp": "th",
-            "nlpModel": null,
-            "vectorModel": null,
-            "spacyAlpha": "Thai",
-            "spacyLanguageClass": "spacy.lang.th.Thai"
-        },
-        {
-            "id": "es-ES",
-            "name": "Spanish",
-            "nlp": "es",
-            "nlpModel": "/data/models/es_core_news_md-2.0.0/es_core_news_md/es_core_news_md-2.0.0",
-            "vectorModel": "/data/models/es_core_news_md-2.0.0/es_core_news_md/es_core_news_md-2.0.0",
-            "spacyAlpha": null,
-            "spacyLanguageClass": "spacy.lang.es.Spanish",
-            "magnitude": "/data/models/cognigy_spanish-1_0_0.magnitude",
-            "embeddings": "/data/models/embeddings/lm-es-{}-fast.pt"
-        },
-        {
-            "id": "nl-NL",
-            "name": "Dutch",
-            "nlp": "nl",
-            "nlpModel": "/data/models/nl_core_news_sm-2.0.0/nl_core_news_sm/nl_core_news_sm-2.0.0",
-            "vectorModel": null,
-            "spacyAlpha": null,
-            "spacyLanguageClass": "spacy.lang.nl.Dutch",
-            "magnitude": "/data/models/cognigy_dutch-1_0_0.magnitude"
-        },
-        {
-            "id": "ge-GE",
-            "name": "Generic Multilingual",
-            "nlp": "ge",
-            "nlpModel": null,
-            "vectorModel": null,
-            "spacyAlpha": null,
-            "spacyLanguageClass": "spacy.lang.xx.MultiLanguage"
-        },
-        {
-            "id": "nn-NO",
-            "name": "Norwegian",
-            "nlp": "nn",
-            "nlpModel": null,
-            "vectorModel": null,
-            "spacyAlpha": null,
-            "spacyLanguageClass": "spacy.lang.nb.Norwegian"
-        },
-        {
-            "id": "pl-PL",
-            "name": "Polish",
-            "nlp": "pl",
-            "nlpModel": null,
-            "vectorModel": null,
-            "spacyAlpha": null,
-            "spacyLanguageClass": "spacy.lang.pl.Polish",
-            "embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
-        },
-        {
-            "id": "it-IT",
-            "name": "Italian",
-            "nlp": "it",
-            "nlpModel": null,
-            "vectorModel": null,
-            "spacyAlpha": null,
-            "spacyLanguageClass": "spacy.lang.it.Italian",
-            "embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
-        },
-        {
-            "id": "fr-FR",
-            "name": "French",
-            "nlp": "fr",
-            "nlpModel": null,
-            "vectorModel": null,
-            "spacyAlpha": null,
-            "spacyLanguageClass": "spacy.lang.fr.French",
-            "embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
-        },
-        {
-            "id": "ar-AE",
-            "name": "Arabic (beta)",
-            "nlp": null,
-            "nlpModel": null,
-            "vectorModel": null,
-            "spacyAlpha": null,
-            "spacyLanguageClass": null
-        },
-        {
-            "id": "zh-CN",
-            "name": "Chinese (Beta)",
-            "nlp": "zh",
-            "nlpModel": null,
-            "vectorModel": null,
-            "spacyAlpha": "Chinese",
-            "spacyLanguageClass": "spacy.lang.zh.Chinese"
-        }
-    ]
+    languages.json: |-
+        [
+            {
+                "id": "en-US",
+                "name": "English (US)",
+                "nlp": "en",
+                "nlpModel": "/data/models/en_core_web_lg-2.0.0/en_core_web_lg/en_core_web_lg-2.0.0",
+                "vectorModel": "/data/models/en_vectors_web_lg-2.0.0/en_vectors_web_lg/en_vectors_web_lg-2.0.0",
+                "spacyAlpha": null,
+                "magnitude": "/data/models/glove.840B.300d.magnitude",
+                "spacyLanguageClass": "spacy.lang.en.English",
+                "embeddings": "/data/models/embeddings/lm-news-english-{}-1024-v0.2rc.pt"
+            },
+            {
+                "id": "de-DE",
+                "name": "German (DE)",
+                "nlp": "de",
+                "nlpModel": "/data/models/de_core_news_sm-2.0.0/de_core_news_sm/de_core_news_sm-2.0.0",
+                "vectorModel": "/data/models/de_wiki_news-1.1.0/de_wiki_news/de_wiki_news-1.1.0",
+                "spacyAlpha": null,
+                "magnitude": "/data/models/de_wiki_news.magnitude",
+                "spacyLanguageClass": "spacy.lang.de.German",
+                "embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
+            },
+            {
+                "id": "ja-JP",
+                "name": "Japanese",
+                "nlp": "ja",
+                "nlpModel": null,
+                "vectorModel": "/data/models/ja_fast_text-1.0/ja_fast_text/ja_fast_text-1.0",
+                "spacyAlpha": "Japanese",
+                "spacyLanguageClass": "spacy.lang.ja.Japanese",
+                "magnitude": "/data/models/fast_text_ja-1_0_0.magnitude"
+            },
+            {
+                "id": "da-DK",
+                "name": "Danish",
+                "nlp": "da",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": "Danish",
+                "spacyLanguageClass": "spacy.lang.da.Danish"
+            },
+            {
+                "id": "th-TH",
+                "name": "Thai (Beta)",
+                "nlp": "th",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": "Thai",
+                "spacyLanguageClass": "spacy.lang.th.Thai"
+            },
+            {
+                "id": "es-ES",
+                "name": "Spanish",
+                "nlp": "es",
+                "nlpModel": "/data/models/es_core_news_md-2.0.0/es_core_news_md/es_core_news_md-2.0.0",
+                "vectorModel": "/data/models/es_core_news_md-2.0.0/es_core_news_md/es_core_news_md-2.0.0",
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.es.Spanish",
+                "magnitude": "/data/models/cognigy_spanish-1_0_0.magnitude",
+                "embeddings": "/data/models/embeddings/lm-es-{}-fast.pt"
+            },
+            {
+                "id": "nl-NL",
+                "name": "Dutch",
+                "nlp": "nl",
+                "nlpModel": "/data/models/nl_core_news_sm-2.0.0/nl_core_news_sm/nl_core_news_sm-2.0.0",
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.nl.Dutch",
+                "magnitude": "/data/models/cognigy_dutch-1_0_0.magnitude"
+            },
+            {
+                "id": "ge-GE",
+                "name": "Generic Multilingual",
+                "nlp": "ge",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.xx.MultiLanguage"
+            },
+            {
+                "id": "nn-NO",
+                "name": "Norwegian",
+                "nlp": "nn",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.nb.Norwegian"
+            },
+            {
+                "id": "pl-PL",
+                "name": "Polish",
+                "nlp": "pl",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.pl.Polish",
+                "embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
+            },
+            {
+                "id": "it-IT",
+                "name": "Italian",
+                "nlp": "it",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.it.Italian",
+                "embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
+            },
+            {
+                "id": "fr-FR",
+                "name": "French",
+                "nlp": "fr",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.fr.French",
+                "embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
+            },
+            {
+                "id": "ar-AE",
+                "name": "Arabic (beta)",
+                "nlp": null,
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": null
+            },
+            {
+                "id": "zh-CN",
+                "name": "Chinese (Beta)",
+                "nlp": "zh",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": "Chinese",
+                "spacyLanguageClass": "spacy.lang.zh.Chinese"
+            },
+            {
+                "id": "pt-PT",
+                "name": "Portuguese",
+                "nlp": null,
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.pt.Portuguese"
+            }
+        ]
