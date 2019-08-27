@@ -27,7 +27,7 @@ spec:
                     name: cognigy-env
               env:
               - name: ANALYTICS_COLLECTOR_DB_NAME
-                value: service-analytics-collector
+                value: service-analytics-collector-provider
               - name: SECURITY_DB_NAME
                 value: service-security
               - name: FLOWS_DB_NAME
