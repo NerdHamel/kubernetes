@@ -31,6 +31,16 @@ spec:
               - name: rabbitmq-connection-string
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets
+              livenessProbe:
+                exec:
+                  command:
+                  - python
+                  - u
+                  - cnlp/health_check.py
+                initialDelaySeconds: 900
+                periodSeconds: 60
+                failureThreshold: 1
+                timeoutSeconds: 15
               envFrom:
                 - configMapRef:
                     name: cognigy-env
