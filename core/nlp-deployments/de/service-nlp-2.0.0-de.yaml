@@ -54,6 +54,8 @@ spec:
                 value: de-DE
               - name: LANGUAGE_CONFIG_PATH
                 value: /languages/languages.json
+              - name: NLP_REDIS_LOCK
+                value: "false"
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:

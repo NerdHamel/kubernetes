@@ -36,24 +36,16 @@ spec:
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/mongodbConnectionString
                 subPath: mongodbConnectionString
-              livenessProbe:
-                exec:
-                  command:
-                  - python
-                  - u
-                  - cnlp/health_check.py
-                initialDelaySeconds: 900
-                periodSeconds: 60
-                failureThreshold: 1
-                timeoutSeconds: 15
               envFrom:
                 - configMapRef:
                     name: cognigy-env
               env:
               - name: LANGUAGES_TO_RUN
-                value: "da-DK,nn-NO,it-IT,fr-FR,ar-AE,ja-JP,pl-PL,ge-GE"
+                value: "da-DK,nn-NO,it-IT,fr-FR,ar-AE,ja-JP,pl-PL,ge-GE,pt-PT"
               - name: LANGUAGE_CONFIG_PATH
                 value: /languages/languages.json
+              - name: NLP_REDIS_LOCK
+                value: "false"
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:

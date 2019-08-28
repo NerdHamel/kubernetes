@@ -46,9 +46,11 @@ spec:
                     name: cognigy-env
               env:
               - name: LANGUAGES_TO_RUN
-                value: ja-JP,da-DK,es-ES,nl-NL,zh-CN
+                value: ja-JP,da-DK,es-ES,nl-NL,zh-CN,pt-PT
               - name: LANGUAGE_CONFIG_PATH
                 value: /languages/languages.json
+              - name: NLP_REDIS_LOCK
+                value: "false"
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:

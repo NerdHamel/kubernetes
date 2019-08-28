@@ -17,7 +17,7 @@ spec:
               image: docker.cognigy.com:5000/service-nlp:193513c655ce7f3c2d125667a7d6320eb7f17ab5
               resources:
                 limits:
-                    memory: "1Gi"
+                    memory: "3Gi"
                     cpu: "500m"
                 requests:
                     memory: "500Mi"
@@ -38,26 +38,18 @@ spec:
                 subPath: mongodbConnectionString
               - name: local
                 mountPath: /data/local
-              livenessProbe:
-                exec:
-                  command:
-                  - python
-                  - u
-                  - health_check.py
-                initialDelaySeconds: 900
-                periodSeconds: 60
-                failureThreshold: 1
-                timeoutSeconds: 15
               envFrom:
                 - configMapRef:
                     name: cognigy-env
               env:
               - name: LANGUAGES_TO_RUN
-                value: ja-JP,da-DK,es-ES,nl-NL,zh-CN
+                value: ja-JP,da-DK,es-ES,nl-NL,zh-CN,pt-PT
               - name: TRAIN
                 value: "true"
               - name: LANGUAGE_CONFIG_PATH
                 value: /languages/languages.json
+              - name: NLP_REDIS_LOCK
+                value: "false"
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:

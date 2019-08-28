@@ -145,7 +145,7 @@ data:
             {
                 "id": "pt-PT",
                 "name": "Portuguese",
-                "nlp": null,
+                "nlp": "pt",
                 "nlpModel": null,
                 "vectorModel": null,
                 "spacyAlpha": null,

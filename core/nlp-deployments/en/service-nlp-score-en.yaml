@@ -58,19 +58,8 @@ spec:
                 value: "true"
               - name: LANGUAGE_CONFIG_PATH
                 value: /languages/languages.json
-            initContainers:
-              - name: model-downloader 
-                image: "dev-docker.cognigy.com:5000/model-downloader:2"
-                volumeMounts:
-                - name: nlp-models-nfs
-                  mountPath: /data/models
-                - name: languages-config
-                  mountPath: /languages
-                env:
-                - name: LANGUAGES_TO_RUN
-                  value: en-US
-                - name: LANGUAGE_CONFIG_PATH
-                  value: /languages/languages.json
+              - name: NLP_REDIS_LOCK
+                value: "false"
             volumes:
             - name: nlp-models-nfs
               persistentVolumeClaim:
