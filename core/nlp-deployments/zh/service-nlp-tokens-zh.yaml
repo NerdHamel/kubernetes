@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: service-nlp-2-0-0-ge
+    name: service-nlp-tokens-zh
 spec:
     selector:
         matchLabels:
-            app: service-nlp-2-0-0-ge
+            app: service-nlp-tokens-zh
     replicas: 1
     template:
         metadata:
             labels:
-                app: service-nlp-2-0-0-ge
+                app: service-nlp-tokens-zh
         spec:
             containers:
-            - name: service-nlp-2-0-0-ge
-              image: docker.cognigy.com:5000/service-nlp-2_0_0:193513c655ce7f3c2d125667a7d6320eb7f17ab5
+            - name: service-nlp-tokens-zh
+              image: docker.cognigy.com:5000/service-nlp-tokens:193513c655ce7f3c2d125667a7d6320eb7f17ab5
               resources:
                 limits:
-                    memory: "5.0Gi"
+                    memory: "2Gi"
                     cpu: "500m"
                 requests:
-                    memory: "4.0Gi"
+                    memory: "1.5Gi"
                     cpu: "500m"
               # mount persistent volume claim for nlp config and models
               volumeMounts:
@@ -30,18 +30,23 @@ spec:
                 mountPath: /languages
               - name: rabbitmq-connection-string
                 # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets/rabbitmqConnectionString
-                subPath: rabbitmqConnectionString
-              - name: mongodb-connection-string
-                # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets/mongodbConnectionString
-                subPath: mongodbConnectionString
+                mountPath: /var/run/secrets
+              livenessProbe:
+                exec:
+                  command:
+                  - python
+                  - u
+                  - cnlp/health_check.py
+                initialDelaySeconds: 900
+                periodSeconds: 60
+                failureThreshold: 1
+                timeoutSeconds: 15
               envFrom:
                 - configMapRef:
                     name: cognigy-env
               env:
               - name: LANGUAGES_TO_RUN
-                value: "da-DK,nn-NO,it-IT,fr-FR,ar-AE,pl-PL,ge-GE,pt-PT,th-TH"
+                value: zh-CN
               - name: LANGUAGE_CONFIG_PATH
                 value: /languages/languages.json
               - name: NLP_REDIS_LOCK
@@ -59,11 +64,5 @@ spec:
                 items:
                   - key: connection-string
                     path: rabbitmqConnectionString
-            - name: mongodb-connection-string
-              secret:
-                secretName: cognigy-service-nlp
-                items:
-                  - key: connection-string
-                    path: mongodbConnectionString
             imagePullSecrets:
             - name: cognigy-registry-token

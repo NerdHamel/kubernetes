@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: service-nlp-2-0-0-ge
+    name: service-nlp-2-0-0-nl
 spec:
     selector:
         matchLabels:
-            app: service-nlp-2-0-0-ge
+            app: service-nlp-2-0-0-nl
     replicas: 1
     template:
         metadata:
             labels:
-                app: service-nlp-2-0-0-ge
+                app: service-nlp-2-0-0-nl
         spec:
             containers:
-            - name: service-nlp-2-0-0-ge
+            - name: service-nlp-2-0-0-nl
               image: docker.cognigy.com:5000/service-nlp-2_0_0:193513c655ce7f3c2d125667a7d6320eb7f17ab5
               resources:
                 limits:
@@ -41,7 +41,7 @@ spec:
                     name: cognigy-env
               env:
               - name: LANGUAGES_TO_RUN
-                value: "da-DK,nn-NO,it-IT,fr-FR,ar-AE,pl-PL,ge-GE,pt-PT,th-TH"
+                value: "nl-NL"
               - name: LANGUAGE_CONFIG_PATH
                 value: /languages/languages.json
               - name: NLP_REDIS_LOCK

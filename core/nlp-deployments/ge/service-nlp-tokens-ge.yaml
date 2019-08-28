@@ -46,7 +46,7 @@ spec:
                     name: cognigy-env
               env:
               - name: LANGUAGES_TO_RUN
-                value: ja-JP,da-DK,es-ES,nl-NL,zh-CN,pt-PT
+                value: da-DK,nn-NO,it-IT,fr-FR,ar-AE,pl-PL,ge-GE,pt-PT,th-TH
               - name: LANGUAGE_CONFIG_PATH
                 value: /languages/languages.json
               - name: NLP_REDIS_LOCK
