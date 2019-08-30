@@ -36,6 +36,12 @@ spec:
                 # This will mount the file in /run/secrets. Alpine Linux bug
                 mountPath: /var/run/secrets/mongodbConnectionString
                 subPath: mongodbConnectionString
+              livenessProbe:
+                exec:
+                  command:
+                  - python
+                  - -u
+                  - cnlp/health_check.py
               envFrom:
                 - configMapRef:
                     name: cognigy-env

@@ -38,6 +38,16 @@ spec:
                 subPath: mongodbConnectionString
               - name: local
                 mountPath: /data/local
+              livenessProbe:
+                exec:
+                  command:
+                  - python
+                  - -u
+                  - health_check.py
+                initialDelaySeconds: 900
+                periodSeconds: 60
+                failureThreshold: 1
+                timeoutSeconds: 15
               envFrom:
                 - configMapRef:
                     name: cognigy-env
