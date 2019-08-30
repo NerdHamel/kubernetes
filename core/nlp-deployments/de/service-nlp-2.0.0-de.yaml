@@ -40,7 +40,7 @@ spec:
                 exec:
                   command:
                   - python
-                  - u
+                  - -u
                   - cnlp/health_check.py
                 initialDelaySeconds: 900
                 periodSeconds: 60
