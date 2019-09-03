@@ -33,6 +33,8 @@ spec:
               value: service-security
             - name: FLOWS_DB_NAME
               value: service-flows
+            - name: CONVERSATION_COLLECTOR_DB_NAME
+              value: service-analytics-conversation-collector-provider
             - name: ODATA_SUPER_API_KEY
               valueFrom:
                 secretKeyRef:
@@ -51,6 +53,9 @@ spec:
             - name: flows-connection-string
               mountPath: /run/secrets/flowsConnectionString
               subPath: flowsConnectionString
+            - name: conversations-connection-string
+              mountPath: /run/secrets/conversationsConnectionString
+              subPath: conversationsConnectionString
           livenessProbe:
             exec:
               command:
@@ -85,5 +90,11 @@ spec:
             items:
               - key: connection-string
                 path: flowsConnectionString
+        - name: conversations-connection-string
+          secret:
+            secretName: cognigy-service-analytics-conversation-collector-provider
+            items:
+              - key: connection-string
+                path: conversationsConnectionString
       imagePullSecrets:
         - name: cognigy-registry-token
