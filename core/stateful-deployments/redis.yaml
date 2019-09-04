@@ -15,13 +15,13 @@ spec:
             containers:
             - name: redis
               image: docker.cognigy.com:5000/redis:4.0.2-alpine
-            #   resources:
-            #     limits:
-            #         memory: "512Mi"
-            #         cpu: "500m"
-            #     requests:
-            #         memory: "100Mi"
-            #         cpu: "200m"
+              resources:
+                limits:
+                    memory: "512Mi"
+                    cpu: "500m"
+                requests:
+                    memory: "100Mi"
+                    cpu: "200m"
               ports:
               - name: redis
                 containerPort: 6379
