@@ -97,16 +97,5 @@ After all PVs, PVCs, Secrets and Config-Maps were applied to the cluster, we can
 ```
 kubectl apply -f monitoring/services
 kubectl apply -f monitoring/deployments
-```
-
-### CAdvisor
-Edit /var/snap/microk8s/current/args/kubelet and append this line
-
---docker unix://${SNAP_DATA}/docker.sock
-sudo systemctl restart snap.microk8s.daemon-kubelet
-
-To find the podId of a pod:
-
-```
-kubectl get pod <pod> -o yaml | grep uid | tail -n1
+kubectl apply -f monitoring/daemonsets
 ```
