@@ -25,3 +25,11 @@ data:
         - 'service-monitoring'
         type: 'A'
         port: 8000
+
+    - job_name: cadvisor
+      scrape_interval: 5s
+      dns_sd_configs:
+      - names:
+        - 'cadvisor'
+        type: 'A'
+        port: 8080
