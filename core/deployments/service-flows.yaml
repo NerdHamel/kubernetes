@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-flows
-          image: 'office-docker.cognigy.com:5000/service-flows:ed110d48a995398796892b07d47b61ff42d4d1ce'
+          image: 'office-docker.cognigy.com:5000/service-flows:5b17d68e2010875dba071feccf883c8b6674b48b'
           resources:
             requests:
               cpu: '0.5'
