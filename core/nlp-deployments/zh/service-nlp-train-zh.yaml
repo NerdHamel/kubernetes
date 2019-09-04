@@ -18,10 +18,10 @@ spec:
           resources:
             requests:
               cpu: '0.350'
-              memory: 500M
+              memory: 400M
             limits:
               cpu: '0.5'
-              memory: 400M
+              memory: 500M
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
