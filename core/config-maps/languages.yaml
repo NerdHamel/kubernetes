@@ -127,11 +127,11 @@ data:
             {
                 "id": "ar-AE",
                 "name": "Arabic (beta)",
-                "nlp": null,
+                "nlp": "ar",
                 "nlpModel": null,
                 "vectorModel": null,
                 "spacyAlpha": null,
-                "spacyLanguageClass": null
+                "spacyLanguageClass": "spacy.lang.ar.Arabic"
             },
             {
                 "id": "zh-CN",
