@@ -1,76 +1,74 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: service-api
+  name: service-api
 spec:
-    selector:
-        matchLabels:
-            app: service-api
-    replicas: 1
-    template:
-        metadata:
-            labels:
-                app: service-api
-        spec:
-            containers:
-            - name: service-api
-              image: docker.cognigy.com:5000/service-api:6f902ca3bd53fe18fd1afc027e10b907a676a018
-              resources:
-                requests:
-                    memory: "150Mi"
-                    cpu: "200m"
-                limits:
-                    memory: "225Mi"
-                    cpu: "200m"
-              envFrom:
-              - configMapRef:
-                    name: cognigy-env
-              env:
-              - name: JWT_SECRET
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-jwt
-                        key: secret
-              - name: AMAZON_CLIENT_ID
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-amazon-credentials
-                        key: amazon-client-id
-              - name: AMAZON_CLIENT_SECRET
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-amazon-credentials
-                        key: amazon-client-secret
-              volumeMounts:
-              - name: rabbitmq-connection-string
-                # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets/rabbitmqConnectionString
-                subPath: rabbitmqConnectionString
-              - name: mongodb-connection-string
-                # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets/mongodbConnectionString
-                subPath: mongodbConnectionString
-              livenessProbe:
-                exec:
-                  command:
-                  - node
-                  - /opt/healthcheck.js
-                initialDelaySeconds: 30
-                periodSeconds: 30
-                failureThreshold: 1
-                timeoutSeconds: 2
-            volumes:
+  selector:
+    matchLabels:
+      app: service-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-api
+    spec:
+      containers:
+        - name: service-api
+          image: 'docker.cognigy.com:5000/service-api:8f6ef7dd99ecf26389b297c351de8aacb4387532'
+          resources:
+            requests:
+              cpu: '0.2'
+              memory: 280M
+            limits:
+              cpu: '0.2'
+              memory: 350M
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-jwt
+                  key: secret
+            - name: AMAZON_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-amazon-credentials
+                  key: amazon-client-id
+            - name: AMAZON_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-amazon-credentials
+                  key: amazon-client-secret
+          volumeMounts:
             - name: rabbitmq-connection-string
-              secret:
-                secretName: cognigy-rabbitmq
-                items:
-                  - key: connection-string
-                    path: rabbitmqConnectionString
+              mountPath: /var/run/secrets/rabbitmqConnectionString
+              subPath: rabbitmqConnectionString
             - name: mongodb-connection-string
-              secret:
-                secretName: cognigy-service-api
-                items:
-                  - key: connection-string
-                    path: mongodbConnectionString
-            imagePullSecrets:
-            - name: cognigy-registry-token
+              mountPath: /var/run/secrets/mongodbConnectionString
+              subPath: mongodbConnectionString
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - /opt/healthcheck.js
+            failureThreshold: 3
+            initialDelaySeconds: 90
+            periodSeconds: 60
+            timeoutSeconds: 10
+      volumes:
+        - name: rabbitmq-connection-string
+          secret:
+            secretName: cognigy-rabbitmq
+            items:
+              - key: connection-string
+                path: rabbitmqConnectionString
+        - name: mongodb-connection-string
+          secret:
+            secretName: cognigy-service-api
+            items:
+              - key: connection-string
+                path: mongodbConnectionString
+      imagePullSecrets:
+        - name: cognigy-registry-token

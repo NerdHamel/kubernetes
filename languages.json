@@ -8,7 +8,7 @@
 		"spacyAlpha": null,
 		"magnitude": "/data/models/glove.840B.300d.magnitude",
 		"spacyLanguageClass": "spacy.lang.en.English",
-		"embeddings": "https://downloads.cognigy.com/lm-news-english-{}-1024-v0.2rc.pt"
+		"embeddings": "/data/models/embeddings/lm-news-english-{}-1024-v0.2rc.pt"
 	},
 	{
 		"id": "de-DE",
@@ -19,7 +19,7 @@
 		"spacyAlpha": null,
 		"magnitude": "/data/models/de_wiki_news.magnitude",
 		"spacyLanguageClass": "spacy.lang.de.German",
-		"embeddings": "https://downloads.cognigy.com/lm-multi-{}-fast-v0.1.pt"
+		"embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
 	},
 	{
 		"id": "ja-JP",
@@ -41,7 +41,7 @@
 		"spacyLanguageClass": "spacy.lang.da.Danish"
 	},
 	{
-		"id": "th-Th",
+		"id": "th-TH",
 		"name": "Thai (Beta)",
 		"nlp": "th",
 		"nlpModel": null,
@@ -58,7 +58,7 @@
 		"spacyAlpha": null,
 		"spacyLanguageClass": "spacy.lang.es.Spanish",
 		"magnitude": "/data/models/cognigy_spanish-1_0_0.magnitude",
-		"embeddings": "https://downloads.cognigy.com/lm-es-{}-fast.pt"
+		"embeddings": "/data/models/embeddings/lm-es-{}-fast.pt"
 	},
 	{
 		"id": "nl-NL",
@@ -96,7 +96,7 @@
 		"vectorModel": null,
 		"spacyAlpha": null,
 		"spacyLanguageClass": "spacy.lang.pl.Polish",
-		"embeddings": "https://downloads.cognigy.com/lm-multi-{}-fast-v0.1.pt"
+		"embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
 	},
 	{
 		"id": "it-IT",
@@ -106,7 +106,7 @@
 		"vectorModel": null,
 		"spacyAlpha": null,
 		"spacyLanguageClass": "spacy.lang.it.Italian",
-		"embeddings": "https://downloads.cognigy.com/lm-multi-{}-fast-v0.1.pt"
+		"embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
 	},
 	{
 		"id": "fr-FR",
@@ -116,16 +116,16 @@
 		"vectorModel": null,
 		"spacyAlpha": null,
 		"spacyLanguageClass": "spacy.lang.fr.French",
-		"embeddings": "https://downloads.cognigy.com/lm-multi-{}-fast-v0.1.pt"
+		"embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
 	},
 	{
 		"id": "ar-AE",
 		"name": "Arabic (beta)",
-		"nlp": null,
+		"nlp": "ar",
 		"nlpModel": null,
 		"vectorModel": null,
 		"spacyAlpha": null,
-		"spacyLanguageClass": null
+		"spacyLanguageClass": "spacy.lang.ar.Arabic"
 	},
 	{
 		"id": "zh-CN",
@@ -135,5 +135,14 @@
 		"vectorModel": null,
 		"spacyAlpha": "Chinese",
 		"spacyLanguageClass": "spacy.lang.zh.Chinese"
+	},
+	{
+		"id": "pt-PT",
+		"name": "Portuguese",
+		"nlp": "pt",
+		"nlpModel": null,
+		"vectorModel": null,
+		"spacyAlpha": null,
+		"spacyLanguageClass": "spacy.lang.pt.Portuguese"
 	}
 ]

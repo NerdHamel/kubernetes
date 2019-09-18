@@ -97,4 +97,5 @@ After all PVs, PVCs, Secrets and Config-Maps were applied to the cluster, we can
 ```
 kubectl apply -f monitoring/services
 kubectl apply -f monitoring/deployments
+kubectl apply -f monitoring/daemonsets
 ```

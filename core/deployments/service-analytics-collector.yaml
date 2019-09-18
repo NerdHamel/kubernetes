@@ -1,60 +1,58 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: service-analytics-collector
+  name: service-analytics-collector
 spec:
-    selector:
-        matchLabels:
-            app: service-analytics-collector
-    replicas: 1
-    template:
-        metadata:
-            labels:
-                app: service-analytics-collector
-        spec:
-            containers:
-            - name: service-analytics-collector
-              image: docker.cognigy.com:5000/service-analytics-collector:193513c655ce7f3c2d125667a7d6320eb7f17ab5
-              resources:
-                requests:
-                    memory: "100Mi"
-                    cpu: "50m"
-                limits:
-                    memory: "150Mi"
-                    cpu: "200m"
-              envFrom:
-              - configMapRef:
-                    name: cognigy-env
-              volumeMounts:
-              - name: rabbitmq-connection-string
-                # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets/rabbitmqConnectionString
-                subPath: rabbitmqConnectionString
-              - name: mongodb-connection-string
-                # This will mount the file in /run/secrets. Alpine Linux bug
-                mountPath: /var/run/secrets/mongodbConnectionString
-                subPath: mongodbConnectionString
-              livenessProbe:
-                exec:
-                  command:
-                  - node
-                  - /opt/healthcheck.js
-                initialDelaySeconds: 30
-                periodSeconds: 30
-                failureThreshold: 1
-                timeoutSeconds: 2
-            volumes:
+  selector:
+    matchLabels:
+      app: service-analytics-collector
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-analytics-collector
+    spec:
+      containers:
+        - name: service-analytics-collector
+          image: 'docker.cognigy.com:5000/service-analytics-collector:8f6ef7dd99ecf26389b297c351de8aacb4387532'
+          resources:
+            requests:
+              cpu: '0.300'
+              memory: 160M
+            limits:
+              cpu: '0.300'
+              memory: 200M
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+          volumeMounts:
             - name: rabbitmq-connection-string
-              secret:
-                secretName: cognigy-rabbitmq
-                items:
-                  - key: connection-string
-                    path: rabbitmqConnectionString
+              mountPath: /var/run/secrets/rabbitmqConnectionString
+              subPath: rabbitmqConnectionString
             - name: mongodb-connection-string
-              secret:
-                secretName: cognigy-service-analytics-collector-provider
-                items:
-                  - key: connection-string
-                    path: mongodbConnectionString
-            imagePullSecrets:
-            - name: cognigy-registry-token
+              mountPath: /var/run/secrets/mongodbConnectionString
+              subPath: mongodbConnectionString
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - /opt/healthcheck.js
+            failureThreshold: 3
+            initialDelaySeconds: 90
+            periodSeconds: 60
+            timeoutSeconds: 10
+      volumes:
+        - name: rabbitmq-connection-string
+          secret:
+            secretName: cognigy-rabbitmq
+            items:
+              - key: connection-string
+                path: rabbitmqConnectionString
+        - name: mongodb-connection-string
+          secret:
+            secretName: cognigy-service-analytics-collector-provider
+            items:
+              - key: connection-string
+                path: mongodbConnectionString
+      imagePullSecrets:
+        - name: cognigy-registry-token
