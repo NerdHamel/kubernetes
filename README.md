@@ -12,16 +12,14 @@ Since we officially added Kubernetes support with our 3.4.0 release of COGNIGY.A
 - The volume-claim "stateful-mongo-server.yaml" was renamed to "mongo-server.yaml"
 - The volume "stateful-mongo-server.yaml" was renamed to "mongo-server.yaml"
 
-We added a new secret to the deployment service-analytics-odata so that it can use the new conversations ODATA API.
-
-We added the environment variable "NLP_REDIS_LOCK=false" to all nlp deployments
-
-We split the "ge" nlp deployment into several languages that now all reside in seperate folders witin the core/nlp-deployments folder
-
-We also changed the config-map "languages.yaml" to add Portugese support and change some settings for Arabic. You therefore need to re-apply this config-map
+In addition, the did the following things:
+- We added a ``new secret`` to the deployment ``service-analytics-odata`` so that it can use the new conversations ODATA API.
+- We added the environment variable ``NLP_REDIS_LOCK=false`` to all nlp deployments.
+- We split the ``GE`` nlp deployment into several languages that now all reside in seperate folders witin the ``core/nlp-deployments`` folder.
+- We also changed the config-map ``languages.yaml`` to add ``Portugese support`` and change some settings for ``Arabic``. You therefore need to re-apply this config-map.
 
 ### New limits
-We also changed the limits of all of the deployments for our 3.4.0 release based on monitoring results, as well as changed the livenessProbe. 
+We also ``changed the limits of all of the deployments`` for our 3.4.0 release based on monitoring results, as well as changed the ``livenessProbe``. 
 
 ### Monitoring
-We added "cadvisor" support for monitoring. To use this, you have to re-apply the config-map "monitoring/config-maps/prometheus-config.yaml" and deploy the daemonset "monitoring/daemonsets/cadvisor.yaml".
+We added ``cadvisor support`` for monitoring. To use this, you have to re-apply the config-map ``monitoring/config-maps/prometheus-config.yaml`` and deploy the daemonset ``monitoring/daemonsets/cadvisor.yaml``.
