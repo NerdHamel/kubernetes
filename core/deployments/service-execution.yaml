@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-execution
-          image: 'office-docker.cognigy.com:5000/service-execution:5b17d68e2010875dba071feccf883c8b6674b48b'
+          image: 'office-docker.cognigy.com:5000/service-execution:8f6ef7dd99ecf26389b297c351de8aacb4387532'
           resources:
             requests:
-              cpu: '0.2'
+              cpu: '0.500'
               memory: 240M
             limits:
-              cpu: '0.200'
+              cpu: '0.500'
               memory: 300M
           volumeMounts:
             - name: flow-modules-nfs

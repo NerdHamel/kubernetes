@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-projects
-          image: 'office-docker.cognigy.com:5000/service-projects:5b17d68e2010875dba071feccf883c8b6674b48b'
+          image: 'office-docker.cognigy.com:5000/service-projects:e6cfd9cd534fe7cc4c860437d4ee2028b6b47609'
           resources:
             requests:
               cpu: '0.1'
