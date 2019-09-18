@@ -1,2 +1,2 @@
 # COGNIGY.AI in k8s
-This is the official Kubernetes (``k8s``) manifest repository for COGNIGY.AI. You will need these files in order to deploy Cognigy.AI on top of Kubernetes. For dedicated instructions on how you can use this repository, please have a look at our [production documentation](https://docs.cognigy.com/docs/installat-and-dev-ops-guide).
+This is the official Kubernetes (``k8s``) manifest repository for COGNIGY.AI. You will need these files in order to deploy Cognigy.AI on top of Kubernetes. For dedicated instructions on how you can use this repository, please have a look at our [production documentation](https://docs.cognigy.com/docs/installation-and-dev-ops-guide).
