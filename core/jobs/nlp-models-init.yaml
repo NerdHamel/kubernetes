@@ -25,7 +25,7 @@ spec:
             volumes:
             - name: nlp-models
               persistentVolumeClaim:
-                claimName: nlp-models
+                claimName: nlp-models-nfs
             restartPolicy: Never
 
             imagePullSecrets:
