@@ -23,3 +23,6 @@ We also ``changed the limits of all of the deployments`` for our 3.4.0 release b
 
 ### Monitoring
 We added ``cadvisor support`` for monitoring. To use this, you have to re-apply the config-map ``monitoring/config-maps/prometheus-config.yaml`` and deploy the daemonset ``monitoring/daemonsets/cadvisor.yaml``.
+
+### Management UI
+You also need to update the ```Management UI``` to be compatible with 3.4.0. To do this, re-apply the deployment ``management-ui/deployments/management-ui.yaml``
