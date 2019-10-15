@@ -17,11 +17,11 @@ spec:
           image: 'docker.cognigy.com:5000/service-nlp:8f6ef7dd99ecf26389b297c351de8aacb4387532'
           resources:
             requests:
-              cpu: '0.350'
-              memory: 400M
+              cpu: '1'
+              memory: 960M
             limits:
-              cpu: '0.5'
-              memory: 500M
+              cpu: '2'
+              memory: 1200M
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
