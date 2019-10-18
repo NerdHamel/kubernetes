@@ -6,7 +6,18 @@ This changelog contains changes to the structure of this repository. You can fin
 
 ## 3.4.1
 ### Modification of files
-Nothing major changes except referenced Docker images.
+The referenced Docker images were changed.
+
+### New limits
+We have adjusted the limits for the ``service-logs`` microservice:
+
+Old values
+- memory request: 60M
+- memory limit: 75M
+
+New values
+- memory request: 100M
+- memory limit: 120M
 
 ## 3.4.0
 ### Modification of files
