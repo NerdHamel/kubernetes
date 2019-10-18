@@ -4,8 +4,22 @@ This is the official Kubernetes (``k8s``) manifest repository for COGNIGY.AI. Yo
 # CHANGELOG
 This changelog contains changes to the structure of this repository. You can find the changelog for COGNIGY.AI [here](https://docs.cognigy.com/docs/release-notes) 
 
-## 3.4.0
+## 3.4.1
+### Modification of files
+The referenced Docker images were changed.
 
+### New limits
+We have adjusted the limits for the ``service-logs`` microservice:
+
+Old values
+- memory request: 60M
+- memory limit: 75M
+
+New values
+- memory request: 100M
+- memory limit: 120M
+
+## 3.4.0
 ### Modification of files
 Since we officially added Kubernetes support with our 3.4.0 release of COGNIGY.AI, we changed the structure of the repository a bit. We renamed several things:
 - service-nlp-2.0.0-<language>.yaml was renamed to service-nlp-2-0-0-<language>.yaml
@@ -23,3 +37,6 @@ We also ``changed the limits of all of the deployments`` for our 3.4.0 release b
 
 ### Monitoring
 We added ``cadvisor support`` for monitoring. To use this, you have to re-apply the config-map ``monitoring/config-maps/prometheus-config.yaml`` and deploy the daemonset ``monitoring/daemonsets/cadvisor.yaml``.
+
+### Management UI
+You also need to update the ```Management UI``` to be compatible with 3.4.0. To do this, re-apply the deployment ``management-ui/deployments/management-ui.yaml``

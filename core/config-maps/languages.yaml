@@ -140,7 +140,8 @@ data:
                 "nlpModel": null,
                 "vectorModel": null,
                 "spacyAlpha": "Chinese",
-                "spacyLanguageClass": "spacy.lang.zh.Chinese"
+                "spacyLanguageClass": "spacy.lang.zh.Chinese",
+                "embeddings": "/data/models/bert-base-chinese"
             },
             {
                 "id": "pt-PT",
