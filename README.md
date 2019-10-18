@@ -4,8 +4,11 @@ This is the official Kubernetes (``k8s``) manifest repository for COGNIGY.AI. Yo
 # CHANGELOG
 This changelog contains changes to the structure of this repository. You can find the changelog for COGNIGY.AI [here](https://docs.cognigy.com/docs/release-notes) 
 
-## 3.4.0
+## 3.4.1
+### Modification of files
+Nothing major changes except referenced Docker images.
 
+## 3.4.0
 ### Modification of files
 Since we officially added Kubernetes support with our 3.4.0 release of COGNIGY.AI, we changed the structure of the repository a bit. We renamed several things:
 - service-nlp-2.0.0-<language>.yaml was renamed to service-nlp-2-0-0-<language>.yaml
