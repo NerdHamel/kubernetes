@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-ui
-  labels:
-    app: service-ui
+    name: service-ui
+    labels:
+        app: service-ui
 spec:
-  ports:
-  - name: service-ui
-    port: 8000
-    targetPort: 8000
-    protocol: TCP
-  selector:
-    app: service-ui
+    ports:
+        - name: service-ui
+          port: 8000
+          targetPort: 8000
+          protocol: TCP
+    selector:
+        app: service-ui

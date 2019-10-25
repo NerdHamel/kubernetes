@@ -7,11 +7,11 @@ spec:
         spec:
             containers:
             - name: nlp-models-init
-              image: docker.cognigy.com:5000/nlp-models-init:1
+              image: docker.cognigy.com:5000/nlp-models-init:2
               env:
                   - name: "NLU_MODELS_TO_INSTALL"
-                    # Add the NLU models that you wish to install
-                    value: "en-US,de-DE,es-ES,nl-NL,ja-JP"
+                    # Add the NLU lodels that you wish to install
+                    value: "en-US,de-DE,es-ES,nl-NL,ja-JP,zh-CN"
               resources:
                 requests:
                     memory: "50Mi"
