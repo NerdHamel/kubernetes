@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: service-agent-ui
   labels:
-    app: service-analytics-odata
+    app: service-agent-ui
 spec:
   ports:
       - port: 8000
