@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: service-agent-ui
-              image: docker.cognigy.com:5000/service-agent-ui:193513c655ce7f3c2d125667a7d6320eb7f17ab5
+              image: docker.cognigy.com:5000/service-agent-ui:bd930ff1a7665bfbcaefe60e86c5d2cdf3e0cdbf
               resources:
                 limits:
                     memory: "200Mi"
@@ -22,8 +22,6 @@ spec:
                 requests:
                     memory: "100Mi"
                     cpu: "20m"
-              ports:
-                - containerPort: 9000
               envFrom:
               - configMapRef:
                   name: cognigy-env
