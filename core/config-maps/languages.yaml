@@ -48,7 +48,7 @@ data:
             },
             {
                 "id": "th-TH",
-                "name": "Thai (Beta)",
+                "name": "Thai",
                 "nlp": "th",
                 "nlpModel": null,
                 "vectorModel": null,
@@ -126,16 +126,17 @@ data:
             },
             {
                 "id": "ar-AE",
-                "name": "Arabic (beta)",
+                "name": "Arabic",
                 "nlp": "ar",
                 "nlpModel": null,
                 "vectorModel": null,
                 "spacyAlpha": null,
-                "spacyLanguageClass": "spacy.lang.ar.Arabic"
+                "spacyLanguageClass": "spacy.lang.ar.Arabic",
+                "embeddings": "ar-{}"
             },
             {
                 "id": "zh-CN",
-                "name": "Chinese (Beta)",
+                "name": "Chinese",
                 "nlp": "zh",
                 "nlpModel": null,
                 "vectorModel": null,
@@ -151,5 +152,14 @@ data:
                 "vectorModel": null,
                 "spacyAlpha": null,
                 "spacyLanguageClass": "spacy.lang.pt.Portuguese"
+            },
+            {
+                "id": "ko-KO",
+                "name": "Korean",
+                "nlp": "ko",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.ko.Korean"
             }
         ]
