@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-ner
-          image: 'office-docker.cognigy.com:5000/service-nlp-ner:7a728875cc7e1ed0cfd2aa270320cb08e8c191ec'
+          image: 'docker.cognigy.com:5000/service-nlp-ner:7a728875cc7e1ed0cfd2aa270320cb08e8c191ec'
           resources:
             requests:
               cpu: '0.3'
@@ -55,4 +55,4 @@ spec:
               - key: connection-string-api
                 path: rabbitmqAPIConnectionString
       imagePullSecrets:
-        - name: cognigy-registry-token-office
+        - name: cognigy-registry-token
