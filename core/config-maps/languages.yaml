@@ -154,7 +154,7 @@ data:
                 "spacyLanguageClass": "spacy.lang.pt.Portuguese"
             },
             {
-                "id": "ko-KO",
+                "id": "ko-KR",
                 "name": "Korean",
                 "nlp": "ko",
                 "nlpModel": null,

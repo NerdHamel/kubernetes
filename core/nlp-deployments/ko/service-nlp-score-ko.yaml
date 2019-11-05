@@ -50,7 +50,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: ko-KO
+              value: ko-KR
             - name: SCORE
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
