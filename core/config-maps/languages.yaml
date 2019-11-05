@@ -132,7 +132,7 @@ data:
                 "vectorModel": null,
                 "spacyAlpha": null,
                 "spacyLanguageClass": "spacy.lang.ar.Arabic",
-                "embeddings": "ar-{}"
+                "embeddings": "/data/models/embeddings/lm-ar-opus-large-{}-v0.1.pt"
             },
             {
                 "id": "zh-CN",
@@ -160,6 +160,7 @@ data:
                 "nlpModel": null,
                 "vectorModel": null,
                 "spacyAlpha": null,
-                "spacyLanguageClass": "spacy.lang.ko.Korean"
+                "spacyLanguageClass": "spacy.lang.ko.Korean",
+                "magnitude": "/data/models/cognigy_korean-1_0_0.magnitude"
             }
         ]
