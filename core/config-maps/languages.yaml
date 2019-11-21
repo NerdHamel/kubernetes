@@ -132,7 +132,7 @@ data:
                 "vectorModel": null,
                 "spacyAlpha": null,
                 "spacyLanguageClass": "spacy.lang.ar.Arabic",
-                "embeddings": "/data/models/embeddings/lm-ar-opus-large-{}-v0.1.pt"
+                "embeddings": "/data/models/arabic-1_0_0/lm-ar-opus-large-{}-v0.1.pt"
             },
             {
                 "id": "zh-CN",
