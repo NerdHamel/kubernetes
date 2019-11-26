@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-nlp-ner
+spec:
+  selector:
+    matchLabels:
+      app: service-nlp-ner
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-nlp-ner
+    spec:
+      containers:
+        - name: service-nlp-ner
+          image: 'docker.cognigy.com:5000/service-nlp-ner:7a728875cc7e1ed0cfd2aa270320cb08e8c191ec'
+          resources:
+            requests:
+              cpu: '0.3'
+              memory: 100M
+            limits:
+              cpu: '0.4'
+              memory: 150M
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+          volumeMounts:
+            - name: rabbitmq-connection-string
+              mountPath: /var/run/secrets/rabbitmqConnectionString
+              subPath: rabbitmqConnectionString
+            - name: rabbitmq-api-connection-string
+              mountPath: /var/run/secrets/rabbitmqAPIConnectionString
+              subPath: rabbitmqAPIConnectionString
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - /opt/healthcheck.js
+            failureThreshold: 3
+            initialDelaySeconds: 90
+            periodSeconds: 60
+            timeoutSeconds: 10
+      volumes:
+        - name: rabbitmq-connection-string
+          secret:
+            secretName: cognigy-rabbitmq
+            items:
+              - key: connection-string
+                path: rabbitmqConnectionString
+        - name: rabbitmq-api-connection-string
+          secret:
+            secretName: cognigy-rabbitmq
+            items:
+              - key: connection-string-api
+                path: rabbitmqAPIConnectionString
+      imagePullSecrets:
+        - name: cognigy-registry-token

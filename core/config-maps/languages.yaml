@@ -48,7 +48,7 @@ data:
             },
             {
                 "id": "th-TH",
-                "name": "Thai (Beta)",
+                "name": "Thai",
                 "nlp": "th",
                 "nlpModel": null,
                 "vectorModel": null,
@@ -126,16 +126,17 @@ data:
             },
             {
                 "id": "ar-AE",
-                "name": "Arabic (beta)",
+                "name": "Arabic",
                 "nlp": "ar",
                 "nlpModel": null,
                 "vectorModel": null,
                 "spacyAlpha": null,
-                "spacyLanguageClass": "spacy.lang.ar.Arabic"
+                "spacyLanguageClass": "spacy.lang.ar.Arabic",
+                "embeddings": "/data/models/arabic-1_0_0/lm-ar-opus-large-{}-v0.1.pt"
             },
             {
                 "id": "zh-CN",
-                "name": "Chinese (Beta)",
+                "name": "Chinese",
                 "nlp": "zh",
                 "nlpModel": null,
                 "vectorModel": null,
@@ -151,5 +152,15 @@ data:
                 "vectorModel": null,
                 "spacyAlpha": null,
                 "spacyLanguageClass": "spacy.lang.pt.Portuguese"
+            },
+            {
+                "id": "ko-KR",
+                "name": "Korean",
+                "nlp": "ko",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.ko.Korean",
+                "magnitude": "/data/models/cognigy_korean-1_0_0.magnitude"
             }
         ]

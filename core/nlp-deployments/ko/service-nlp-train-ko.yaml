@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-score-ge
+  name: service-nlp-train-ko
 spec:
   selector:
     matchLabels:
-      app: service-nlp-score-ge
+      app: service-nlp-train-ko
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-score-ge
+        app: service-nlp-train-ko
     spec:
       containers:
-        - name: service-nlp-score-ge
-          image: 'docker.cognigy.com:5000/service-nlp:dd18b2c2beefeca2ac0e9e3884b1720f9e6bb85f'
+        - name: service-nlp-train-ko
+          image: 'office-docker.cognigy.com:5000/service-nlp:50c94d007841b14b6021014f13760298bad7b465'
           resources:
             requests:
-              cpu: '0.350'
-              memory: 800M
+              cpu: '1'
+              memory: 960M
             limits:
-              cpu: '0.5'
-              memory: 1000M
+              cpu: '2'
+              memory: 1200M
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
@@ -50,8 +50,8 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: 'da-DK,nn-NO,it-IT,fr-FR,pl-PL,ge-GE,pt-PT,th-TH'
-            - name: SCORE
+              value: ko-KR
+            - name: TRAIN
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
               value: /languages/languages.json
@@ -79,4 +79,4 @@ spec:
         - name: local
           emptyDir: {}
       imagePullSecrets:
-        - name: cognigy-registry-token
+        - name: cognigy-registry-token-office
