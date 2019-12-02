@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
         - name: service-export-import
-          image: 'docker.cognigy.com:5000/service-export-import:c200120c72f6ef9025dff53e9ab514ed4e142007'
+          image: 'docker.cognigy.com:5000/service-export-import:59b859ed5b6976c1ceed2ae06ba17aaacda54f6c'
           resources:
             requests:
               cpu: '0.2'
-              memory: 360M
+              memory: 680M
             limits:
-              cpu: '0.2'
-              memory: 450M
+              cpu: '0.5'
+              memory: 850M
           envFrom:
             - configMapRef:
                 name: cognigy-env

@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
         - name: service-projects
-          image: 'docker.cognigy.com:5000/service-projects:8ea6754d27179a86973d3250185d1efa2f1359f4'
+          image: 'docker.cognigy.com:5000/service-projects:59b859ed5b6976c1ceed2ae06ba17aaacda54f6c'
           resources:
             requests:
-              cpu: '0.1'
-              memory: 60M
+              cpu: '0.2'
+              memory: 256M
             limits:
-              cpu: '0.1'
-              memory: 75M
+              cpu: '0.2'
+              memory: 512M
           envFrom:
             - configMapRef:
                 name: cognigy-env

@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-ko
-          image: 'office-docker.cognigy.com:5000/service-nlp:50c94d007841b14b6021014f13760298bad7b465'
+          image: 'docker.cognigy.com:5000/service-nlp:59b859ed5b6976c1ceed2ae06ba17aaacda54f6c'
           resources:
             requests:
-              cpu: '1'
+              cpu: '0.350'
               memory: 960M
             limits:
-              cpu: '2'
+              cpu: '0.5'
               memory: 1200M
           volumeMounts:
             - name: nlp-models-nfs
