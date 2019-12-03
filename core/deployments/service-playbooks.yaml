@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-playbooks
-          image: 'docker.cognigy.com:5000/service-playbooks:ac1539471da44a01379ff12f3e42ff26b779018b'
+          image: 'docker.cognigy.com:5000/service-playbooks:506e33654b3c47c252bad587b4e494501835a07f'
           resources:
             requests:
               cpu: '0.1'
