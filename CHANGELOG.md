@@ -1,3 +1,30 @@
+## 3.4.3
+### Modification of files
+The referenced Docker images were changed.
+
+### New services
+We added the following new folders:
+- core/nlp-deployments/ko
+- core/nlp-deployments/ar
+- core/deployments/service-nlp-ner
+
+The ``service-nlp-ner`` is used for ``entity recognition`` and currently only important for our new languages ``Arabic`` and ``Korean``. There is no need for you to deploy this when you are not utilizing these two new languages! The service will be mandatory in the future, though.
+
+### New limits
+We have adjusted the limits for the ``service-export-import`` microservice:
+
+Old values
+- memory request: 360M
+- memory limit: 450M
+- cpu limit: 0.2
+
+New values
+- memory request: 680M
+- memory limit: 850M
+- cpu limit: 0.5
+
+---
+
 ## 3.4.2
 ### Modification of files
 The referenced Docker images were changed.

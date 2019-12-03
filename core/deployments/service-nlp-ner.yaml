@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-analytics-conversation-provider
+  name: service-nlp-ner
 spec:
   selector:
     matchLabels:
-      app: service-analytics-conversation-provider
+      app: service-nlp-ner
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-analytics-conversation-provider
+        app: service-nlp-ner
     spec:
       containers:
-        - name: service-analytics-conversation-provider
-          image: 'docker.cognigy.com:5000/service-analytics-conversation-provider:506e33654b3c47c252bad587b4e494501835a07f'
+        - name: service-nlp-ner
+          image: 'docker.cognigy.com:5000/service-nlp-ner:506e33654b3c47c252bad587b4e494501835a07f'
           resources:
             requests:
-              cpu: '0.1'
-              memory: 60M
+              cpu: '0.3'
+              memory: 100M
             limits:
-              cpu: '0.1'
-              memory: 75M
+              cpu: '0.4'
+              memory: 150M
           envFrom:
             - configMapRef:
                 name: cognigy-env
@@ -29,9 +29,9 @@ spec:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
-            - name: mongodb-connection-string
-              mountPath: /var/run/secrets/mongodbConnectionString
-              subPath: mongodbConnectionString
+            - name: rabbitmq-api-connection-string
+              mountPath: /var/run/secrets/rabbitmqAPIConnectionString
+              subPath: rabbitmqAPIConnectionString
           livenessProbe:
             exec:
               command:
@@ -48,11 +48,11 @@ spec:
             items:
               - key: connection-string
                 path: rabbitmqConnectionString
-        - name: mongodb-connection-string
+        - name: rabbitmq-api-connection-string
           secret:
-            secretName: cognigy-service-analytics-conversation-collector-provider
+            secretName: cognigy-rabbitmq
             items:
-              - key: connection-string
-                path: mongodbConnectionString
+              - key: connection-string-api
+                path: rabbitmqAPIConnectionString
       imagePullSecrets:
         - name: cognigy-registry-token

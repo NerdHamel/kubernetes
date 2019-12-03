@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-train-en
+  name: service-nlp-score-ar
 spec:
   selector:
     matchLabels:
-      app: service-nlp-train-en
+      app: service-nlp-score-ar
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-train-en
+        app: service-nlp-score-ar
     spec:
       containers:
-        - name: service-nlp-train-en
+        - name: service-nlp-score-ar
           image: 'docker.cognigy.com:5000/service-nlp:506e33654b3c47c252bad587b4e494501835a07f'
           resources:
             requests:
@@ -50,8 +50,8 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: en-US
-            - name: TRAIN
+              value: ar-AE
+            - name: SCORE
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
               value: /languages/languages.json
