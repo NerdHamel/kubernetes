@@ -79,4 +79,4 @@ spec:
         - name: local
           emptyDir: {}
       imagePullSecrets:
-        - name: cognigy-registry-token-office
+        - name: cognigy-registry-token
