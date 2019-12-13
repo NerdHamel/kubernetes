@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-nlp-train-fr
+spec:
+  selector:
+    matchLabels:
+      app: service-nlp-train-fr
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-nlp-train-fr
+    spec:
+      containers:
+        - name: service-nlp-train-fr
+          image: 'docker.cognigy.com:5000/service-nlp:506e33654b3c47c252bad587b4e494501835a07f'
+          resources:
+            requests:
+              cpu: '0.350'
+              memory: 960M
+            limits:
+              cpu: '0.5'
+              memory: 1200M
+          volumeMounts:
+            - name: nlp-models-nfs
+              mountPath: /data/models
+            - name: languages-config
+              mountPath: /languages
+            - name: rabbitmq-connection-string
+              mountPath: /var/run/secrets/rabbitmqConnectionString
+              subPath: rabbitmqConnectionString
+            - name: mongodb-connection-string
+              mountPath: /var/run/secrets/mongodbConnectionString
+              subPath: mongodbConnectionString
+            - name: local
+              mountPath: /data/local
+          livenessProbe:
+            exec:
+              command:
+                - python
+                - '-u'
+                - health_check.py
+            failureThreshold: 1
+            initialDelaySeconds: 900
+            periodSeconds: 60
+            timeoutSeconds: 15
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+          env:
+            - name: LANGUAGES_TO_RUN
+              value: fr-FR
+            - name: TRAIN
+              value: 'true'
+            - name: LANGUAGE_CONFIG_PATH
+              value: /languages/languages.json
+            - name: NLP_REDIS_LOCK
+              value: 'false'
+      volumes:
+        - name: nlp-models-nfs
+          persistentVolumeClaim:
+            claimName: nlp-models-nfs
+        - name: languages-config
+          configMap:
+            name: languages-config
+        - name: rabbitmq-connection-string
+          secret:
+            secretName: cognigy-rabbitmq
+            items:
+              - key: connection-string
+                path: rabbitmqConnectionString
+        - name: mongodb-connection-string
+          secret:
+            secretName: cognigy-service-nlp
+            items:
+              - key: connection-string
+                path: mongodbConnectionString
+        - name: local
+          emptyDir: {}
+      imagePullSecrets:
+        - name: cognigy-registry-token
