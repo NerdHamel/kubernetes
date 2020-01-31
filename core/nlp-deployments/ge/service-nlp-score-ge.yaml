@@ -50,7 +50,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: 'da-DK,nn-NO,it-IT,fr-FR,pl-PL,ge-GE,pt-PT,th-TH'
+              value: 'da-DK,nn-NO,it-IT,pl-PL,ge-GE,pt-PT,th-TH'
             - name: SCORE
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
