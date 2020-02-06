@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-endpoints
+  name: service-handover
 spec:
   selector:
     matchLabels:
-      app: service-endpoints
+      app: service-handover
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-endpoints
+        app: service-handover
     spec:
       containers:
-        - name: service-endpoints
-          image: 'docker.cognigy.com:5000/service-endpoints:34198775430d142d24f9395c8467cdd6871eaffe'
+        - image: 'docker.cognigy.com:5000/service-handover:34198775430d142d24f9395c8467cdd6871eaffe'
+          name: service-handover
           resources:
             requests:
               cpu: '0.1'
@@ -22,9 +22,6 @@ spec:
             limits:
               cpu: '0.1'
               memory: 75M
-          envFrom:
-            - configMapRef:
-                name: cognigy-env
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
@@ -32,6 +29,9 @@ spec:
             - name: mongodb-connection-string
               mountPath: /var/run/secrets/mongodbConnectionString
               subPath: mongodbConnectionString
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
           livenessProbe:
             exec:
               command:
@@ -50,7 +50,7 @@ spec:
                 path: rabbitmqConnectionString
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-endpoints
+            secretName: cognigy-service-handover
             items:
               - key: connection-string
                 path: mongodbConnectionString

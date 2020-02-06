@@ -122,6 +122,7 @@ data:
                 "vectorModel": null,
                 "spacyAlpha": null,
                 "spacyLanguageClass": "spacy.lang.fr.French",
+                "magnitude": "/data/models/fr_1.0.0.magnitude",
                 "embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
             },
             {

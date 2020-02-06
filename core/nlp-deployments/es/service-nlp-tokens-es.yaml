@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-tokens-es
-          image: 'docker.cognigy.com:5000/service-nlp-tokens:01b0606bcf668cead228ccba5b97527c4d8ba39c'
+          image: 'docker.cognigy.com:5000/service-nlp-tokens:34198775430d142d24f9395c8467cdd6871eaffe'
           resources:
             requests:
               cpu: '0.350'

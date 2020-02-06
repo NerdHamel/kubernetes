@@ -1,3 +1,24 @@
+## 3.5.0
+### Modification of files
+With this release the referenced Docker images have changed. We also have implemented the following changes for which manual action is required:
+
+#### service-handover
+The ``service-handover`` deployment was removed from the ``livechat/deployments`` folder and was moved into ``core/deployments`` as this service is now required to run our product and use our new handover interface. This service also needs its own database and secret - hence we have also moved the ``cognigy-service-handover`` secret from ``livechat/secrets`` to ``core/secrets.dist``. You will have to create a new database for ``service-handover`` within your MongoDB and you will have to fill the ``cognigy-service-handover`` secret with the correct connection string. Please consult the ``secrets.md`` file which contains information on how you can create the secret.
+
+#### cognigy-rce-credentials secret
+We have added a new secret that will be used as a verify token for the ``RingCentral Engage handover integration``. Please follow the steps in the ``secrets.md`` file and create a random token of 32 characters to be used in this secret.
+
+#### management-ui
+We have also updated the docker image for the ``management-ui`` deployment. The updated ``management-ui`` is only compatible with 3.5.0, so please do not use the new docker image for older versions of Cognigy.AI.
+
+### New services
+We added the following new folders:
+- core/nlp-deployments/fr
+
+The additional language we are now offering requires that you re-apply the ``languages`` config-map (located in core/config-maps), before you apply the new French NLU services.
+
+---
+
 ## 3.4.4
 ### Modification of files
 The referenced Docker images were changed.
