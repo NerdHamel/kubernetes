@@ -41,7 +41,7 @@ spec:
                 path: rabbitmqConnectionString
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-lexicons
+            secretName: cognigy-service-resources
             items:
               - key: connection-string
                 path: mongodbConnectionString
