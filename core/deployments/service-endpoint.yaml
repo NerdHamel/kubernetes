@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-endpoint
-          image: 'docker.cognigy.com:5000/service-endpoint:34198775430d142d24f9395c8467cdd6871eaffe'
+          image: 'docker.cognigy.com:5000/service-endpoint:acaa0ac0ac507339611d2b8325f0dacf477b3269'
           resources:
             requests:
               cpu: '0.2'
@@ -35,7 +35,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: cognigy-rce-credentials
-                  key: rce-verify-token    
+                  key: rce-verify-token
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:

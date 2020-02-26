@@ -1,3 +1,12 @@
+## 3.5.1
+### Modification of files
+The referenced Docker images were changed.
+
+#### management-ui
+We have also updated the docker image for the ``management-ui`` deployment. The updated ``management-ui`` version is compatible with Cognigy.AI 3.5.1.
+
+---
+
 ## 3.5.0
 ### Modification of files
 With this release the referenced Docker images have changed. We also have implemented the following changes for which manual action is required:
