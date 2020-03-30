@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-ai
-          image: 'docker.cognigy.com:5000/service-ai:06e10ebd59e4b0afaecc707869a30657d548af6d'
+          image: 'docker.cognigy.com:5000/service-ai:43102a99329b1556cdc7b9ee679c390f5d77afde'
           resources:
             requests:
               cpu: '0.4'
@@ -35,6 +35,9 @@ spec:
             - name: rabbitmq-api-connection-string
               mountPath: /var/run/secrets/rabbitmqAPIConnectionString
               subPath: rabbitmqAPIConnectionString
+            - name: redis-persistent-password
+              mountPath: /var/run/secrets/redis-persistent-password.conf
+              subPath: redis-persistent-password.conf
           livenessProbe:
             exec:
               command:
@@ -63,5 +66,8 @@ spec:
             items:
               - key: connection-string-api
                 path: rabbitmqAPIConnectionString
+        - name: redis-persistent-password
+          secret:
+            secretName: cognigy-redis-persistent-password
       imagePullSecrets:
         - name: cognigy-registry-token

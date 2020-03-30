@@ -1,40 +1,46 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-tokens-zh
+  name: service-nlp-train-sv
 spec:
   selector:
     matchLabels:
-      app: service-nlp-tokens-zh
+      app: service-nlp-train-sv
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-tokens-zh
+        app: service-nlp-train-sv
     spec:
       containers:
-        - name: service-nlp-tokens-zh
-          image: 'docker.cognigy.com:5000/service-nlp-tokens:06e10ebd59e4b0afaecc707869a30657d548af6d'
+        - name: service-nlp-train-sv
+          image: 'docker.cognigy.com:5000/service-nlp:67399dba2529b255d8d6fb10b1948d9022da256f'
           resources:
             requests:
               cpu: '0.350'
-              memory: 200M
+              memory: 960M
             limits:
-              cpu: '0.5'
-              memory: 250M
+              cpu: '2.0'
+              memory: 1500M
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
             - name: languages-config
               mountPath: /languages
             - name: rabbitmq-connection-string
-              mountPath: /var/run/secrets
+              mountPath: /var/run/secrets/rabbitmqConnectionString
+              subPath: rabbitmqConnectionString
+            - name: mongodb-connection-string
+              mountPath: /var/run/secrets/mongodbConnectionString
+              subPath: mongodbConnectionString
+            - name: local
+              mountPath: /data/local
           livenessProbe:
             exec:
               command:
                 - python
                 - '-u'
-                - cnlp/health_check.py
+                - health_check.py
             failureThreshold: 1
             initialDelaySeconds: 900
             periodSeconds: 60
@@ -44,7 +50,9 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: zh-CN
+              value: sv-SE
+            - name: TRAIN
+              value: 'true'
             - name: LANGUAGE_CONFIG_PATH
               value: /languages/languages.json
             - name: NLP_REDIS_LOCK
@@ -62,5 +70,13 @@ spec:
             items:
               - key: connection-string
                 path: rabbitmqConnectionString
+        - name: mongodb-connection-string
+          secret:
+            secretName: cognigy-service-nlp
+            items:
+              - key: connection-string
+                path: mongodbConnectionString
+        - name: local
+          emptyDir: {}
       imagePullSecrets:
         - name: cognigy-registry-token

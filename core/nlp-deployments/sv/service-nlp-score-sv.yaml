@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-2-0-0-zh
+  name: service-nlp-score-sv
 spec:
   selector:
     matchLabels:
-      app: service-nlp-2-0-0-zh
+      app: service-nlp-score-sv
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-2-0-0-zh
+        app: service-nlp-score-sv
     spec:
       containers:
-        - name: service-nlp-2-0-0-zh
-          image: 'docker.cognigy.com:5000/service-nlp-2_0_0:06e10ebd59e4b0afaecc707869a30657d548af6d'
+        - name: service-nlp-score-sv
+          image: 'docker.cognigy.com:5000/service-nlp:67399dba2529b255d8d6fb10b1948d9022da256f'
           resources:
             requests:
               cpu: '0.350'
-              memory: 800M
+              memory: 960M
             limits:
-              cpu: '0.5'
-              memory: 1000M
+              cpu: '1.0'
+              memory: 1500M
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
@@ -33,12 +33,14 @@ spec:
             - name: mongodb-connection-string
               mountPath: /var/run/secrets/mongodbConnectionString
               subPath: mongodbConnectionString
+            - name: local
+              mountPath: /data/local
           livenessProbe:
             exec:
               command:
                 - python
                 - '-u'
-                - cnlp/health_check.py
+                - health_check.py
             failureThreshold: 1
             initialDelaySeconds: 900
             periodSeconds: 60
@@ -48,7 +50,9 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: zh-CN
+              value: sv-SE
+            - name: SCORE
+              value: 'true'
             - name: LANGUAGE_CONFIG_PATH
               value: /languages/languages.json
             - name: NLP_REDIS_LOCK
@@ -72,5 +76,7 @@ spec:
             items:
               - key: connection-string
                 path: mongodbConnectionString
+        - name: local
+          emptyDir: {}
       imagePullSecrets:
         - name: cognigy-registry-token

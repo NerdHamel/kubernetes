@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-train-ja
+  name: service-nlp-score-fi
 spec:
   selector:
     matchLabels:
-      app: service-nlp-train-ja
+      app: service-nlp-score-fi
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-train-ja
+        app: service-nlp-score-fi
     spec:
       containers:
-        - name: service-nlp-train-ja
+        - name: service-nlp-score-fi
           image: 'docker.cognigy.com:5000/service-nlp:67399dba2529b255d8d6fb10b1948d9022da256f'
           resources:
             requests:
@@ -21,7 +21,7 @@ spec:
               memory: 960M
             limits:
               cpu: '0.5'
-              memory: 1200M
+              memory: 1500M
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
@@ -50,8 +50,8 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: ja-JP
-            - name: TRAIN
+              value: fi-FI
+            - name: SCORE
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
               value: /languages/languages.json

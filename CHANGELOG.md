@@ -1,3 +1,45 @@
+# 3.6.0
+## Modification of files
+The referenced Docker images were changed.
+
+## New limits
+We have adjusted the limits for the ``service-agent-ui`` microservice:
+
+Old values
+- memory request: 100M
+- memory limit: 200M
+- cpu request: 0.02
+- cpu limit: 0.05
+
+New values
+- memory request: 60M
+- memory limit: 75M
+- cpu request: 0.1
+- cpu limit: 0.1
+
+We have adjusted the limits for the ``service-monitoring`` microservice:
+
+Old values
+- cpu request: 0.1
+
+New values
+- cpu request: 0.16
+
+### management-ui
+We have also updated the docker image for the ``management-ui`` deployment. You need the new version of our ``management-ui`` in order to fully compatible with 3.6.0. This new images is not backwards compatible with Cognigy.AI versions prior to 3.6.0 - so please don't use it with an older version.
+
+## New services
+We added the following new folders:
+- core/nlp-deployments/sv
+- core/nlp-deployments/fi
+
+The additional language we are now offering requires that you re-apply the ``languages`` config-map (located in core/config-maps), before you apply the new NLU services for Finnish & Swedish.
+
+## AWS folder
+We have moved certain files which were previously located in core/volume-claims to an AWS folder in the root of this repository. These files are only compatible when deploying our software in an AWS cloud environment and were confusing our customers.
+
+---
+
 # 3.5.2
 ## Modification of files
 The referenced Docker images were changed.

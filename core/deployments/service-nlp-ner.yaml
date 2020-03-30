@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-nlp-ner
-          image: 'docker.cognigy.com:5000/service-nlp-ner:06e10ebd59e4b0afaecc707869a30657d548af6d'
+          image: 'docker.cognigy.com:5000/service-nlp-ner:67399dba2529b255d8d6fb10b1948d9022da256f'
           resources:
             requests:
               cpu: '0.3'
               memory: 100M
             limits:
-              cpu: '0.4'
+              cpu: '0.6'
               memory: 150M
           envFrom:
             - configMapRef:
