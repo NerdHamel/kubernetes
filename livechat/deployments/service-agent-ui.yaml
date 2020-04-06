@@ -16,12 +16,12 @@ spec:
             - name: service-agent-ui
               image: docker.cognigy.com:5000/service-agent-ui:bd930ff1a7665bfbcaefe60e86c5d2cdf3e0cdbf
               resources:
-                limits:
-                    memory: "200Mi"
-                    cpu: "50m"
                 requests:
-                    memory: "100Mi"
-                    cpu: "20m"
+                    cpu: "0.1"
+                    memory: "60M"
+                limits:
+                    cpu: "0.1"
+                    memory: "75M"
               envFrom:
               - configMapRef:
                   name: cognigy-env

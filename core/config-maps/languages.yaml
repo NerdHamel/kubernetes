@@ -122,6 +122,7 @@ data:
                 "vectorModel": null,
                 "spacyAlpha": null,
                 "spacyLanguageClass": "spacy.lang.fr.French",
+                "magnitude": "/data/models/fr_1.0.0.magnitude",
                 "embeddings": "/data/models/embeddings/lm-multi-{}-fast-v0.1.pt"
             },
             {
@@ -162,5 +163,27 @@ data:
                 "spacyAlpha": null,
                 "spacyLanguageClass": "spacy.lang.ko.Korean",
                 "magnitude": "/data/models/cognigy_korean-1_0_0.magnitude"
+            },
+            {
+                "id": "fi-FI",
+                "name": "Finnish",
+                "nlp": "fi",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.fi.Finnish",
+                "embeddings": "/data/models/bert-base-finnish-uncased",
+                "magnitude": "/data/models/finnish_4B_parsebank_skgram.magnitude"
+            },
+            {
+                "id": "sv-SE",
+                "name": "Swedish",
+                "nlp": "sv",
+                "nlpModel": null,
+                "vectorModel": null,
+                "spacyAlpha": null,
+                "spacyLanguageClass": "spacy.lang.sv.Swedish",
+                "embeddings": "/data/models/swe-uncased_L-12_H-768_A-12_pytorch",
+                "magnitude": "/data/models/swedish_1.0.0.magnitude"
             }
         ]

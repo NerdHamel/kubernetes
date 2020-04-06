@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-endpoint
-          image: 'docker.cognigy.com:5000/service-endpoint:ec0c7a92abd037fac9b9cfc0a3f82c9b56d32c32'
+          image: 'docker.cognigy.com:5000/service-endpoint:6b9efbb14be4cf0ab4bac8cfe9c2195b26b4e870'
           resources:
             requests:
               cpu: '0.2'
@@ -31,6 +31,11 @@ spec:
                 secretKeyRef:
                   name: cognigy-facebook
                   key: fb-verify-token
+            - name: RCE_VERIFY_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-rce-credentials
+                  key: rce-verify-token
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:

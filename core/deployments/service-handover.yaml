@@ -1,30 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-flows
+  name: service-handover
 spec:
   selector:
     matchLabels:
-      app: service-flows
+      app: service-handover
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-flows
+        app: service-handover
     spec:
       containers:
-        - name: service-flows
-          image: 'docker.cognigy.com:5000/service-flows:6b9efbb14be4cf0ab4bac8cfe9c2195b26b4e870'
+        - image: 'docker.cognigy.com:5000/service-handover:6b9efbb14be4cf0ab4bac8cfe9c2195b26b4e870'
+          name: service-handover
           resources:
             requests:
-              cpu: '0.5'
-              memory: 280M
+              cpu: '0.1'
+              memory: 60M
             limits:
-              cpu: '0.5'
-              memory: 350M
-          envFrom:
-            - configMapRef:
-                name: cognigy-env
+              cpu: '0.1'
+              memory: 75M
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
@@ -32,8 +29,9 @@ spec:
             - name: mongodb-connection-string
               mountPath: /var/run/secrets/mongodbConnectionString
               subPath: mongodbConnectionString
-            - name: flow-modules-nfs
-              mountPath: /app/flowModules
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
           livenessProbe:
             exec:
               command:
@@ -50,12 +48,9 @@ spec:
             items:
               - key: connection-string
                 path: rabbitmqConnectionString
-        - name: flow-modules-nfs
-          persistentVolumeClaim:
-            claimName: flow-modules-nfs
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-flows
+            secretName: cognigy-service-handover
             items:
               - key: connection-string
                 path: mongodbConnectionString
