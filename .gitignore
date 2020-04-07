@@ -10,3 +10,6 @@ dbinit.js
 
 core/volume-claims/cognigy-repo.yaml
 core/local-deployments
+
+# do not track the "initializatin" binary
+initialization

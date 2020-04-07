@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-score-ko
+  name: service-nlp-train-sv
 spec:
   selector:
     matchLabels:
-      app: service-nlp-score-ko
+      app: service-nlp-train-sv
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-score-ko
+        app: service-nlp-train-sv
     spec:
       containers:
-        - name: service-nlp-score-ko
+        - name: service-nlp-train-sv
           image: 'docker.cognigy.com:5000/service-nlp:6b9efbb14be4cf0ab4bac8cfe9c2195b26b4e870'
           resources:
             requests:
               cpu: '0.350'
               memory: 960M
             limits:
-              cpu: '0.5'
-              memory: 1200M
+              cpu: '2.0'
+              memory: 1500M
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
@@ -50,8 +50,8 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: ko-KR
-            - name: SCORE
+              value: sv-SE
+            - name: TRAIN
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
               value: /languages/languages.json

@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-score-ko
+  name: service-nlp-score-fi
 spec:
   selector:
     matchLabels:
-      app: service-nlp-score-ko
+      app: service-nlp-score-fi
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-score-ko
+        app: service-nlp-score-fi
     spec:
       containers:
-        - name: service-nlp-score-ko
+        - name: service-nlp-score-fi
           image: 'docker.cognigy.com:5000/service-nlp:6b9efbb14be4cf0ab4bac8cfe9c2195b26b4e870'
           resources:
             requests:
@@ -21,7 +21,7 @@ spec:
               memory: 960M
             limits:
               cpu: '0.5'
-              memory: 1200M
+              memory: 1500M
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
@@ -50,7 +50,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: ko-KR
+              value: fi-FI
             - name: SCORE
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
