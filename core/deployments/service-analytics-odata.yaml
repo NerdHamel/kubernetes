@@ -55,6 +55,9 @@ spec:
             - name: conversations-connection-string
               mountPath: /run/secrets/conversationsConnectionString
               subPath: conversationsConnectionString
+            - name: redis-password
+              mountPath: /var/run/secrets/redis-password.conf
+              subPath: redis-password.conf
           livenessProbe:
             exec:
               command:
@@ -95,5 +98,8 @@ spec:
             items:
               - key: connection-string
                 path: conversationsConnectionString
+        - name: redis-password
+          secret:
+            secretName: cognigy-redis-password                
       imagePullSecrets:
         - name: cognigy-registry-token
