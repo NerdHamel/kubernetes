@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: redis
-              image: docker.cognigy.com:5000/redis:4.0.2-alpine
+              image: docker.cognigy.com:5000/redis:5.0.8_cognigy_4.X
               resources:
                 limits:
                     memory: "512Mi"
@@ -25,5 +25,20 @@ spec:
               ports:
               - name: redis
                 containerPort: 6379
+              volumeMounts:
+              - name: redis-password-config
+                mountPath: /var/run/secrets/
+              - name: redis-config
+                mountPath: /var/run/config
+            volumes:
+            - name: redis-password-config
+              secret:
+                secretName: cognigy-redis-password
+                items:
+                - key: redis-password.conf
+                  path: redis-password.conf
+            - name: redis-config
+              configMap:
+                name: redis
             imagePullSecrets:
             - name: cognigy-registry-token

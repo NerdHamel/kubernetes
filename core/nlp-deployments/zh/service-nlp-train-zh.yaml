@@ -35,6 +35,9 @@ spec:
               subPath: mongodbConnectionString
             - name: local
               mountPath: /data/local
+            - name: redis-password
+              mountPath: /var/run/secrets/redis-password.conf
+              subPath: redis-password.conf              
           livenessProbe:
             exec:
               command:
@@ -77,6 +80,9 @@ spec:
               - key: connection-string
                 path: mongodbConnectionString
         - name: local
+        - name: redis-password
+          secret:
+            secretName: cognigy-redis-password        
           emptyDir: {}
       imagePullSecrets:
         - name: cognigy-registry-token
