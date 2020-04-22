@@ -37,7 +37,7 @@ spec:
               mountPath: /data/local
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
-              subPath: redis-password.conf            
+              subPath: redis-password.conf
           livenessProbe:
             exec:
               command:
@@ -83,6 +83,6 @@ spec:
           emptyDir: {}
         - name: redis-password
           secret:
-            secretName: cognigy-redis-password          
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token

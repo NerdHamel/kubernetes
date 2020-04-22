@@ -83,6 +83,6 @@ spec:
           emptyDir: {}
         - name: redis-password
           secret:
-            secretName: cognigy-redis-password          
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token
