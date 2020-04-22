@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-security
-          image: 'docker.cognigy.com:5000/service-security:6b9efbb14be4cf0ab4bac8cfe9c2195b26b4e870'
+          image: 'docker.cognigy.com:5000/service-security:0633e01daa3d44f18747f3abf5dc7977a0d3ecc7'
           resources:
             requests:
               cpu: '0.2'

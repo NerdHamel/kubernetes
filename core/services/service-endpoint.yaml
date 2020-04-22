@@ -9,6 +9,8 @@ metadata:
         # sticky-sessions. If you are not using traefik, this
         # annotation will do nothing.
         traefik.ingress.kubernetes.io/affinity: "true"
+        traefik.ingress.kubernetes.io/session-secure: "true"
+        traefik.ingress.kubernetes.io/session-same-site: "none"
 spec:
     ports:
         - name: service-endpoint

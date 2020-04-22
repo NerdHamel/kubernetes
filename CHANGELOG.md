@@ -1,3 +1,15 @@
+# 3.6.1
+## Modification of files
+The referenced Docker images were changed.
+
+### Traefik
+If you are using Traefik as your ingress controller within your Kubernetes cluster, be sure to update it as we have updated it to v1.7.24 in order to fix a cookie-related issue.
+
+### Services
+Please be sure to re-apply your services in the ``core/services`` folder as we have added additional annotations to the kubernetes services for ``api`` and ``endpoint``. You can skip this step if you are not using Traefik as your ingress controller.
+
+---
+
 # 3.6.0
 ## Modification of files
 The referenced Docker images were changed.
