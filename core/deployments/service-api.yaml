@@ -41,6 +41,11 @@ spec:
                 secretKeyRef:
                   name: cognigy-amazon-credentials
                   key: amazon-client-secret
+            - name: SYSTEM_SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-smtp
+                  key: system-smtp-password
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString

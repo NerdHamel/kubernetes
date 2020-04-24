@@ -21,7 +21,7 @@ spec:
               memory: 60M
             limits:
               cpu: '0.1'
-              memory: 75M
+              memory: 100M
           envFrom:
             - configMapRef:
                 name: cognigy-env
