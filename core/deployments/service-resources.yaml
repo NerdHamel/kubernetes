@@ -18,10 +18,10 @@ spec:
           resources:
             requests:
               cpu: '0.1'
-              memory: 60M
+              memory: 512M
             limits:
               cpu: '0.1'
-              memory: 100M
+              memory: 512M
           envFrom:
             - configMapRef:
                 name: cognigy-env

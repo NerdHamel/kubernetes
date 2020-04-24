@@ -14,8 +14,8 @@ spec:
         spec:
             containers:
             - name: mongo-server
-              image: docker.cognigy.com:5000/mongo:3.4.3
-              args: ["--auth"]
+              image: docker.cognigy.com:5000/mongo:4.2.5_cognigy-4.X
+              args: ["--auth", "--replSet=rs0"]
               resources:
                 limits:
                     memory: "5Gi"
