@@ -41,12 +41,12 @@ data:
     LOG_ENTRIES_BUFFER_IN_SECONDS: "5"
 
     # SMTP server for 'forgot password' functionality
-    SECURITY_SMTP_HOST: "test"
-    SECURITY_SMTP_PORT: "test"
-    SECURITY_SMTP_USERNAME: "test"
-    SECURITY_SMTP_FROM: "test"
-    SECURITY_SMTP_CONNECTION_TYPE: "starttls"
-    # SECURITY_SMTP_PASSWORD is a secret!
+    SYSTEM_SMTP_HOST: "test"
+    SYSTEM_SMTP_PORT: "test"
+    SYSTEM_SMTP_USERNAME: "test"
+    SYSTEM_SMTP_FROM: "test"
+    SYSTEM_SMTP_CONNECTION_TYPE: "starttls"
+    # SYSTEM_SMTP_PASSWORD is a secret!
 
     # Domains to whitelist for cors for the API (service-api)
     API_CORS_WHITELIST: ""

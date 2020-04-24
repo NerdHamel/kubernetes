@@ -25,12 +25,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognigy-env
-          env:
-            - name: SECURITY_SMTP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: cognigy-smtp
-                  key: security-smtp-password
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString

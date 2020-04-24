@@ -5,4 +5,4 @@ metadata:
 type: Opaque
 data:
     # use 16 bytes of random value, hex
-    security-smtp-password: 
+    system-smtp-password: 
