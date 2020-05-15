@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-settings
-          image: 'docker.cognigy.com:5000/service-settings:0633e01daa3d44f18747f3abf5dc7977a0d3ecc7'
+          image: 'docker.cognigy.com:5000/service-settings:cc7d863ec1c0223d07a3b1bc9feac7992f6bd409'
           resources:
             requests:
               cpu: '0.1'
