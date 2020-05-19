@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: redis-persistent
-              image: docker.cognigy.com:5000/redis-cognigy:3.2.0
+              image: docker.cognigy.com:5000/redis:5.0.8_cognigy_4.X
               resources:
                 limits:
                     memory: "512Mi"
@@ -28,9 +28,9 @@ spec:
               - name: redis-data
                 mountPath: /data
               - name: redis-password-config
-                mountPath: /run/secrets/
+                mountPath: /var/run/secrets/
               - name: redis-persistent-config
-                mountPath: /run/config
+                mountPath: /var/run/config
             volumes:
             - name: redis-password-config
               secret:
