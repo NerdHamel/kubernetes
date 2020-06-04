@@ -69,7 +69,7 @@ spec:
           secret:
             secretName: cognigy-redis-persistent-password
         - name: flow-modules-nfs
-        persistentVolumeClaim:
-          claimName: flow-modules-nfs
+          persistentVolumeClaim:
+            claimName: flow-modules-nfs
       imagePullSecrets:
         - name: cognigy-registry-token
