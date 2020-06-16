@@ -34,7 +34,12 @@ spec:
               subPath: mongodbConnectionString
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
-              subPath: redis-password.conf              
+              subPath: redis-password.conf
+            - name: redis-persistent-password
+              mountPath: /var/run/secrets/redis-persistent-password.conf
+              subPath: redis-persistent-password.conf
+            - name: flow-modules-nfs
+              mountPath: /app/flowModules
           livenessProbe:
             exec:
               command:
@@ -59,6 +64,12 @@ spec:
                 path: mongodbConnectionString
         - name: redis-password
           secret:
-            secretName: cognigy-redis-password                
+            secretName: cognigy-redis-password
+        - name: redis-persistent-password
+          secret:
+            secretName: cognigy-redis-persistent-password
+        - name: flow-modules-nfs
+          persistentVolumeClaim:
+            claimName: flow-modules-nfs
       imagePullSecrets:
         - name: cognigy-registry-token
