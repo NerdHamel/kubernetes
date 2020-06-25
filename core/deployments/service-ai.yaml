@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-ai
-          image: 'docker.cognigy.com:5000/service-ai:6b9efbb14be4cf0ab4bac8cfe9c2195b26b4e870'
+          image: 'office-docker.cognigy.com:5000/service-ai:ce107bb38b69ea7dec1dedb91ca061d944b4a587'
           resources:
             requests:
               cpu: '0.4'
@@ -76,7 +76,7 @@ spec:
             secretName: cognigy-redis-persistent-password
         - name: redis-password
           secret:
-            secretName: cognigy-redis-password            
+            secretName: cognigy-redis-password
         - name: flow-modules-nfs
           persistentVolumeClaim:
             claimName: flow-modules-nfs

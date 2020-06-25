@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-resources
-          image: 'docker.cognigy.com:5000/service-resources:5c2f0a5512e59f69a696356b4731ea3e4a21f4d3'
+          image: 'office-docker.cognigy.com:5000/service-resources:64840ef0dc81029438320dcaca3c839fd50dfae1'
           resources:
             requests:
-              cpu: '0.1'
+              cpu: '0.2'
               memory: 512M
             limits:
-              cpu: '0.1'
+              cpu: '0.5'
               memory: 512M
           envFrom:
             - configMapRef:

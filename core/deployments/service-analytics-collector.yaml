@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-analytics-collector
-          image: 'docker.cognigy.com:5000/service-analytics-collector:6b9efbb14be4cf0ab4bac8cfe9c2195b26b4e870'
+          image: 'office-docker.cognigy.com:5000/service-analytics-collector:64840ef0dc81029438320dcaca3c839fd50dfae1'
           resources:
             requests:
               cpu: '0.300'
@@ -34,7 +34,7 @@ spec:
               subPath: mongodbConnectionString
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
-              subPath: redis-password.conf              
+              subPath: redis-password.conf
           livenessProbe:
             exec:
               command:
@@ -59,6 +59,6 @@ spec:
                 path: mongodbConnectionString
         - name: redis-password
           secret:
-            secretName: cognigy-redis-password                   
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token

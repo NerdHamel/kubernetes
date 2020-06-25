@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-parser
-          image: 'docker.cognigy.com:5000/service-parser:6b9efbb14be4cf0ab4bac8cfe9c2195b26b4e870'
+          image: 'office-docker.cognigy.com:5000/service-nlp-ar:37680b75729c8b6a3ed422b79bfbeb977440bfab'
           resources:
             requests:
               cpu: '0.1'
@@ -34,7 +34,7 @@ spec:
               subPath: mongodbConnectionString
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
-              subPath: redis-password.conf              
+              subPath: redis-password.conf
       volumes:
         - name: rabbitmq-connection-string
           secret:
@@ -50,6 +50,6 @@ spec:
                 path: mongodbConnectionString
         - name: redis-password
           secret:
-            secretName: cognigy-redis-password                
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token

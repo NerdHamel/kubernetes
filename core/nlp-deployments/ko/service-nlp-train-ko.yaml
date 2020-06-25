@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-ko
-          image: 'docker.cognigy.com:5000/service-nlp:6b9efbb14be4cf0ab4bac8cfe9c2195b26b4e870'
+          image: 'office-docker.cognigy.com:5000/service-nlp-ko:37680b75729c8b6a3ed422b79bfbeb977440bfab'
           resources:
             requests:
               cpu: '0.350'
               memory: 960M
             limits:
-              cpu: '0.5'
-              memory: 1200M
+              cpu: '1'
+              memory: 2500M
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
@@ -37,7 +37,7 @@ spec:
               mountPath: /data/local
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
-              subPath: redis-password.conf              
+              subPath: redis-password.conf
           livenessProbe:
             exec:
               command:
@@ -83,6 +83,6 @@ spec:
           emptyDir: {}
         - name: redis-password
           secret:
-            secretName: cognigy-redis-password          
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token
