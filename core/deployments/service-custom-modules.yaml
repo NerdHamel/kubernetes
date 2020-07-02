@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-custom-modules
-          image: 'office-docker.cognigy.com:5000/service-custom-modules:64840ef0dc81029438320dcaca3c839fd50dfae1'
+          image: 'office-docker.cognigy.com:5000/service-custom-modules:107726b6af70d9246f1cd463b2ca366e2413e367'
           resources:
             requests:
               cpu: '0.1'

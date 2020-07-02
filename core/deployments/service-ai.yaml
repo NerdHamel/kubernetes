@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-ai
-          image: 'office-docker.cognigy.com:5000/service-ai:ce107bb38b69ea7dec1dedb91ca061d944b4a587'
+          image: 'office-docker.cognigy.com:5000/service-ai:107726b6af70d9246f1cd463b2ca366e2413e367'
           resources:
             requests:
               cpu: '0.4'
