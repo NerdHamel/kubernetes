@@ -139,16 +139,6 @@ data:
         annotations:
           summary: Service nlp-tokens-GE is down.
           description: Service nlp-tokens-GE has been down for the last 5 minutes. No container of the service is running.
-      
-      - alert: FlowsDown
-        expr: absent(count(container_last_seen{container_label_com_docker_swarm_service_name="cognigy_service-flows"})) == 1
-        for: 5m
-        labels:
-          severity: email
-          hostname: <HOST>
-        annotations:
-          summary: Service Flows is down.
-          description: Service Flows has been down for the last 5 minutes. No container of the service is running.
     
       - alert: EndpointDown
         expr: absent(count(container_last_seen{container_label_com_docker_swarm_service_name="cognigy_service-endpoint"})) == 1
