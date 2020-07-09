@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-analytics-reporter
-          image: 'office-docker.cognigy.com:5000/service-analytics-reporter:eabb9b8633a6447fd6702310e6a42c495eefe998'
+          image: 'office-docker.cognigy.com:5000/service-analytics-reporter:f2c85a354205cd2c0d1b282595e200e666e10aef'
           resources:
             requests:
               cpu: '0.1'
