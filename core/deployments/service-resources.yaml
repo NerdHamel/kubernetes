@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-resources
-          image: 'office-docker.cognigy.com:5000/service-resources:f133704f624a4bd238dadc7bdc027e670a23f443'
+          image: 'office-docker.cognigy.com:5000/service-resources:d926de7d33e5dd8d717d611d153e45503efaaeca'
           resources:
             requests:
               cpu: '0.2'
@@ -34,7 +34,7 @@ spec:
               subPath: mongodbConnectionString
             - name: nlu-db-connection-string
               mountPath: /var/run/secrets/nluDBConnectionString
-              subPath: nluDBConnectionString              
+              subPath: nluDBConnectionString
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
               subPath: redis-password.conf
@@ -70,7 +70,7 @@ spec:
             secretName: cognigy-service-nlp
             items:
               - key: connection-string
-                path: nluDBConnectionString                
+                path: nluDBConnectionString
         - name: redis-password
           secret:
             secretName: cognigy-redis-password
