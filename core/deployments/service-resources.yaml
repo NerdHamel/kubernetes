@@ -70,7 +70,7 @@ spec:
             secretName: cognigy-service-nlp
             items:
               - key: connection-string
-                path: mongodbConnectionString                
+                path: nluDBConnectionString                
         - name: redis-password
           secret:
             secretName: cognigy-redis-password
