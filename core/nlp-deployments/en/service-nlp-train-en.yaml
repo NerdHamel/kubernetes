@@ -53,7 +53,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: en-US
+              value: en-US,en-AU,en-CA,en-IN,en-GB
             - name: TRAIN
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
