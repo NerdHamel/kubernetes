@@ -17,11 +17,11 @@ spec:
           image: 'office-docker.cognigy.com:5000/service-custom-modules:cda1d84c8b3c9e69b2e6b6da0f14ea37b9408264'
           resources:
             requests:
-              cpu: '0.1'
-              memory: 180M
+              cpu: '0.3'
+              memory: 512M
             limits:
-              cpu: '0.1'
-              memory: 225M
+              cpu: '0.2'
+              memory: 256M
           volumeMounts:
             - name: flow-modules-nfs
               mountPath: /app/flowModules
