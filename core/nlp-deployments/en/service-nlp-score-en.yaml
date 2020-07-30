@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-score-en
-          image: 'office-docker.cognigy.com:5000/service-nlp:cda1d84c8b3c9e69b2e6b6da0f14ea37b9408264'
+          image: 'office-docker.cognigy.com:5000/service-nlp:25f871f2c6caee2a6057f7f756017ae6ac6487af'
           resources:
             requests:
               cpu: '0.350'
@@ -53,7 +53,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: en-US,en-AU,en-CA,en-IN,en-GB
+              value: 'en-US,en-AU,en-CA,en-IN,en-GB'
             - name: SCORE
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
