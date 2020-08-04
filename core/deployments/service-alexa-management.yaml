@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-alexa-management
-          image: 'office-docker.cognigy.com:5000/service-alexa-management:d249b2cab369055cf6ba182285a6b517b2324b44'
+          image: 'office-docker.cognigy.com:5000/service-alexa-management:9018959bde2bb84edcf1f263620e5b1e5e979dc7'
           resources:
             requests:
               cpu: '0.1'
