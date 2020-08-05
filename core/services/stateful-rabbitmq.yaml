@@ -14,5 +14,9 @@ spec:
           port: 15672
           targetPort: 15672
           protocol: TCP
+        - name: rabbitmq-prometheus
+          port: 15692
+          protocol: TCP
+          targetPort: 15692
     selector:
         app: rabbitmq
