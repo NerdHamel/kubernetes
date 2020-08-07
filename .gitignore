@@ -5,6 +5,8 @@ core/reverse-proxy/
 monitoring/secrets/
 monitoring/volumes/
 
+monitoring-v3/service-monitoring/secrets
+
 node_modules/
 dbinit.js
 
