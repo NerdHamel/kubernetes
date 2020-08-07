@@ -16,7 +16,6 @@ data:
     receivers:
     - name: pager
       pagerduty_configs:
-        # direct email alert to Tanzeem
         - service_key: <api-key>
     
     inhibit_rules:
