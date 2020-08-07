@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-forms
-          image: 'docker.cognigy.com:5000/service-forms:aa7a4786fe2a8ea6fa100c7fe41d4ca667ca2614'
+          image: 'docker.cognigy.com:5000/service-forms:051648aa068cb0de3ca473c7bc4d02ca26d1276b'
           resources:
             requests:
               cpu: '0.1'
