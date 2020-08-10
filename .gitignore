@@ -6,6 +6,7 @@ monitoring/secrets/
 monitoring/volumes/
 
 monitoring-v3/service-monitoring/secrets
+monitoring-v3/grafana/secrets
 
 node_modules/
 dbinit.js
