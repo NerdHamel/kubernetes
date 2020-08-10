@@ -44,15 +44,6 @@ data:
           summary: RedisPersistent is down.
           description: RedisPersistent has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: FlowsDown
-        expr: absent(count(kube_deployment_status_replicas{deployment="service-flows"})) == 1
-        for: 1m
-        labels:
-          hostname: <Host>
-        annotations:
-          summary: service-flows is down.
-          description: service-flows has been down for the last 1 minute(s). No container of the service is running.
-      
       - alert: EndpointDown
         expr: absent(count(kube_deployment_status_replicas{deployment="service-endpoint"})) == 1
         for: 1m
