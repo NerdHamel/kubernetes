@@ -76,7 +76,7 @@ data:
               "steppedLine": false,
               "targets": [
                   {
-                      "expr": "sum( increase( traefik_backend_requests_total{backend=\""<endpoint-url>/\", code=~\"5\\\\d\\\\d\"}[$__interval] ) )",
+                      "expr": "sum( increase( traefik_backend_requests_total{backend=\"<endpoint-url>/\", code=~\"5\\\\d\\\\d\"}[$__interval] ) )",
                       "format": "time_series",
                       "intervalFactor": 1,
                       "refId": "A"
