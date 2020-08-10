@@ -35,7 +35,7 @@ then
   perl -0 -i -pe "s/<RUN_NLP_SV>((\W|\w)*?)<\/RUN_NLP_SV>//g" prometheus/configmaps/alertrule.yaml
 fi
 
-if [ "$host" == "app.cognigy.cloud" ]
+if [ "$host" == "app.cognigy.cloud" ] || [ "$host" == "lhg.cognigy.cloud" ]
 then 
   perl -0 -i -pe "s/<RUN_NLP_GE>((\W|\w)*?)<\/RUN_NLP_GE>//g" prometheus/configmaps/alertrule.yaml
   perl -0 -i -pe "s/<RUN_NLP_ES>((\W|\w)*?)<\/RUN_NLP_ES>//g" prometheus/configmaps/alertrule.yaml
