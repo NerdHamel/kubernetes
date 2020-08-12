@@ -7618,7 +7618,7 @@ data:
               "refId": "B"
             },
             {
-              "expr": "kube_pod_container_resource_limits_cpu_cores{pod=~\"mongo-server-.*\"}",
+              "expr": "avg(kube_pod_container_resource_limits_cpu_cores{pod=~\"mongo-server-.*\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "refId": "C"
@@ -7808,7 +7808,7 @@ data:
               "refId": "B"
             },
             {
-              "expr": "kube_pod_container_resource_limits_cpu_cores{pod=~\"rabbitmq-.*\"}",
+              "expr": "avg(kube_pod_container_resource_limits_cpu_cores{pod=~\"rabbitmq-.*\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "refId": "C"
@@ -7998,7 +7998,7 @@ data:
               "refId": "B"
             },
             {
-              "expr": "kube_pod_container_resource_limits_cpu_cores{pod=~\"redis-.*\"}",
+              "expr": "avg(kube_pod_container_resource_limits_cpu_cores{pod=~\"redis-.*\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "refId": "C"
@@ -8188,7 +8188,7 @@ data:
               "refId": "B"
             },
             {
-              "expr": "kube_pod_container_resource_limits_cpu_cores{pod=~\"redis-persistent-.*\"}",
+              "expr": "avg(kube_pod_container_resource_limits_cpu_cores{pod=~\"redis-persistent-.*\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "refId": "C"
