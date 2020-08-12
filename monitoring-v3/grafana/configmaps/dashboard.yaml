@@ -751,14 +751,14 @@ data:
                       "refId": "A"
                   },
                   {
-                      "expr": "kube_pod_container_resource_requests_cpu_cores{pod=~\"service-ai-.*\"}",
+                      "expr": "avg(kube_pod_container_resource_requests_cpu_cores{pod=~\"service-ai-.*\"})",
                       "format": "time_series",
                       "hide": false,
                       "intervalFactor": 1,
                       "refId": "B"
                   },
                   {
-                      "expr": "kube_pod_container_resource_limits_cpu_cores{pod=~\"service-ai-.*\"}",
+                      "expr": "avg(kube_pod_container_resource_limits_cpu_cores{pod=~\"service-ai-.*\"})",
                       "format": "time_series",
                       "hide": true,
                       "intervalFactor": 1,
@@ -1031,13 +1031,13 @@ data:
                       "refId": "A"
                   },
                   {
-                      "expr": "kube_pod_container_resource_requests_cpu_cores{pod=~\"service-nlp-ner-.*\"}",
+                      "expr": "avg(kube_pod_container_resource_requests_cpu_cores{pod=~\"service-nlp-ner-.*\"})",
                       "format": "time_series",
                       "intervalFactor": 1,
                       "refId": "B"
                   },
                   {
-                      "expr": "kube_pod_container_resource_limits_cpu_cores{pod=~\"service-nlp-ner-.*\"}",
+                      "expr": "avg(kube_pod_container_resource_limits_cpu_cores{pod=~\"service-nlp-ner-.*\"})",
                       "format": "time_series",
                       "intervalFactor": 1,
                       "refId": "C"
