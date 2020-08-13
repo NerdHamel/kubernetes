@@ -8,7 +8,7 @@ data:
     groups:
     - name: cognigy alert
       rules:
-      - alert: DatabaseDeploymentDown
+      - alert: Database Deployment Down
         expr: absent(count(kube_deployment_status_replicas{deployment="mongo-server"})) == 1
         for: 1m
         labels:
@@ -17,7 +17,7 @@ data:
           summary: Database (MongoDB) deployment is down.
           description: Database (MongoDB) deployment has been down for the last 1 minute(s).
       
-      - alert: DatabasePodDown
+      - alert: Database Pod Down
         expr: absent(kube_pod_container_status_running{container="mongo-server"}) == 1
         for: 1m
         labels:
@@ -26,7 +26,7 @@ data:
           summary: Database (MongoDB) Pod is down.
           description: Database (MongoDB) Pod has been down for the last 1 minute(s).
       
-      - alert: ReplicaofMongoServiceDown
+      - alert: Replica of Mongo Service Down
         expr: kube_deployment_status_replicas_unavailable{deployment="mongo-server"} > 0
         for: 1m
         labels:
@@ -35,7 +35,7 @@ data:
           summary: Replica of Mongo service is down
           description: Replica of Mongo service is down for the last 1 minute(s).
       
-      - alert: MongoRestarted
+      - alert: Mongo Restarted
         expr: rate(kube_pod_container_status_restarts_total{container="mongo-server"}[15m]) > 0
         for: 1m
         labels:
@@ -44,7 +44,7 @@ data:
           summary: Database (MongoDB) got restared
           description: Database (MongoDB) got restared
       
-      - alert: RabbitMQDeploymentDown
+      - alert: RabbitMQ Deployment Down
         expr: absent(count(kube_deployment_status_replicas{deployment="rabbitmq"})) == 1
         for: 1m
         labels:
@@ -53,7 +53,7 @@ data:
           summary: RabbitMQ deployment is down.
           description: RabbitMQ has been down for the last 1 minute(s).
       
-      - alert: RabbitMQPodDown
+      - alert: RabbitMQ Pod Down
         expr: absent(kube_pod_container_status_running{container="rabbitmq"}) == 1
         for: 1m
         labels:
@@ -62,7 +62,7 @@ data:
           summary: RabbitMQ Pod is down.
           description: RabbitMQ Pod has been down for the last 1 minute(s).
       
-      - alert: ReplicaOfRabbitMQDown
+      - alert: Replica of RabbitMQ Down
         expr: kube_deployment_status_replicas_unavailable{deployment="rabbitmq"} > 0
         for: 1m
         labels:
@@ -71,7 +71,7 @@ data:
           summary: Replica of RabbitMQ is down.
           description: Replica of RabbitMQ is down for the last 1 minute(s).
       
-      - alert: RabbitMQRestarted
+      - alert: RabbitMQ Restarted
         expr: rate(kube_pod_container_status_restarts_total{container="rabbitmq"}[15m]) > 0
         for: 1m
         labels:
@@ -80,7 +80,7 @@ data:
           summary: RabbitMQ got restared
           description: RabbitMQ got restared
       
-      - alert: RedisDeploymentDown
+      - alert: Redis Deployment Down
         expr: absent(count(kube_deployment_status_replicas{deployment="redis"})) == 1
         for: 1m
         labels:
@@ -89,7 +89,7 @@ data:
           summary: Redis deployment is down.
           description: Redis deployment has been down for the last 1 minute(s).
       
-      - alert: RedisPodDown
+      - alert: Redis Pod Down
         expr: absent(kube_pod_container_status_running{container="redis"}) == 1
         for: 1m
         labels:
@@ -98,7 +98,7 @@ data:
           summary: Redis Pod is down.
           description: Redis Pod has been down for the last 1 minute(s).
       
-      - alert: ReplicaOfRedisDown
+      - alert: Replica Of Redis Down
         expr: kube_deployment_status_replicas_unavailable{deployment="redis"} > 0
         for: 1m
         labels:
@@ -107,7 +107,7 @@ data:
           summary: Replica of Redis is down.
           description: Replica of Redis is down for the last 1 minute(s).
       
-      - alert: RedisRestarted
+      - alert: Redis Restarted
         expr: rate(kube_pod_container_status_restarts_total{container="redis"}[15m]) > 0
         for: 1m
         labels:
@@ -116,7 +116,7 @@ data:
           summary: Redis got restared
           description: Redis got restared
       
-      - alert: RedisPersistentDeploymentDown
+      - alert: Redis Persistent Deployment Down
         expr: absent(count(kube_deployment_status_replicas{deployment="redis-persistent"})) == 1
         for: 1m
         labels:
@@ -125,7 +125,7 @@ data:
           summary: RedisPersistent deployment is down.
           description: RedisPersistent deployment has been down for the last 1 minute(s).
       
-      - alert: RedisPersistentPodDown
+      - alert: Redis Persistent Pod Down
         expr: absent(kube_pod_container_status_running{container="redis-persistent"}) == 1
         for: 1m
         labels:
@@ -134,7 +134,7 @@ data:
           summary: Redis Persistent Pod is down.
           description: Redis Persistent Pod has been down for the last 1 minute(s).
       
-      - alert: ReplicaOfRedisPersistentDown
+      - alert: Replica Of Redis Persistent Down
         expr: kube_deployment_status_replicas_unavailable{deployment="redis-persistent"} > 0
         for: 1m
         labels:
@@ -143,7 +143,7 @@ data:
           summary: Replica of Redis Persistent is down.
           description: Replica of Redis Persistent is down for the last 1 minute(s).
       
-      - alert: RedisPersistentRestarted
+      - alert: Redis Persistent Restarted
         expr: rate(kube_pod_container_status_restarts_total{container="redis-persistent"}[15m]) > 0
         for: 1m
         labels:
@@ -152,7 +152,7 @@ data:
           summary: Redis Persistent got restared
           description: Redis Persistent got restared
       
-      - alert: FlowsDeploymentDown
+      - alert: Flows Deployment Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-flows"})) == 1
         for: 1m
         labels:
@@ -161,7 +161,7 @@ data:
           summary: service-flows Deployment is down.
           description: service-flows has been down for the last 1 minute(s).
       
-      - alert: FlowPodDown
+      - alert: Flow Pod Down
         expr: absent(kube_pod_container_status_running{container="service-flows"}) == 1
         for: 1m
         labels:
@@ -170,7 +170,7 @@ data:
           summary: Flow Pod is down.
           description: Flow Pod has been down for the last 1 minute(s).
       
-      - alert: ReplicaOfFLowDown
+      - alert: Replica Of FLow Down
         expr: kube_deployment_status_replicas_unavailable{deployment="service-flows"} > 0
         for: 1m
         labels:
@@ -179,7 +179,7 @@ data:
           summary: Replica of flow is down.
           description: Replica of flow is down for the last 1 minute(s).
       
-      - alert: EndpointDeploymentDown
+      - alert: Endpoint Deployment Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-endpoint"})) == 1
         for: 1m
         labels:
@@ -188,7 +188,7 @@ data:
           summary: service-endpoint deployment is down.
           description: service-endpoint deployment has been down for the last 1 minute(s).
       
-      - alert: EndpointPodDown
+      - alert: Endpoint Pod Down
         expr: absent(kube_pod_container_status_running{container="service-endpoint"}) == 1
         for: 1m
         labels:
@@ -197,7 +197,7 @@ data:
           summary: Endpoint Pod is down.
           description: Endpoint Pod has been down for the last 1 minute(s).
       
-      - alert: ReplicaOfEndpointDown
+      - alert: Replica Of Endpoint Down
         expr: kube_deployment_status_replicas_unavailable{deployment="service-endpoint"} > 0
         for: 1m
         labels:
@@ -206,7 +206,7 @@ data:
           summary: Replica of Endpoint is down.
           description: Replica of Endpoint is down for the last 1 minute(s).
          
-      - alert: AIDeploymentDown
+      - alert: AI Deployment Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-ai"})) == 1
         for: 1m
         labels:
@@ -215,7 +215,7 @@ data:
           summary: service-ai deployment is down.
           description: service-ai deployment has been down for the last 1 minute(s).
       
-      - alert: AIPodDown
+      - alert: AI Pod Down
         expr: absent(kube_pod_container_status_running{container="service-ai"}) == 1
         for: 1m
         labels:
@@ -224,7 +224,7 @@ data:
           summary: AI Pod is down.
           description: AI Pod has been down for the last 1 minute(s).
       
-      - alert: AIRestarted
+      - alert: AI Restarted
         expr: rate(kube_pod_container_status_restarts_total{container="service-ai"}[15m]) > 0
         for: 1m
         labels:
@@ -233,7 +233,7 @@ data:
           summary: AI got restared
           description: AI got restared
       
-      - alert: ReplicaOfAIDown
+      - alert: Replica Of AI Down
         expr: kube_deployment_status_replicas_unavailable{deployment="service-ai"} > 0
         for: 1m
         labels:
