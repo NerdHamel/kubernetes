@@ -123,7 +123,16 @@ data:
           hostname: <Host>
         annotations:
           summary: service-flows Deployment is down.
-          description: service-flows has been down for the last 1 minute(s). /n
+          description: service-flows has been down for the last 1 minute(s).
+      
+      - alert: FlowPodDown
+        expr: absent(kube_pod_container_status_running{container="service-flows"}) == 1
+        for: 1m
+        labels:
+          hostname: <Host>
+        annotations:
+          summary: Flow Pod is down.
+          description: Flow Pod has been down for the last 1 minute(s).
       
       - alert: EndpointDeploymentDown
         expr: absent(count(kube_deployment_status_replicas{deployment="service-endpoint"})) == 1
@@ -134,6 +143,24 @@ data:
           summary: service-endpoint deployment is down.
           description: service-endpoint deployment has been down for the last 1 minute(s).
       
+      - alert: EndpointPodDown
+        expr: absent(kube_pod_container_status_running{container="service-endpoint"}) == 1
+        for: 1m
+        labels:
+          hostname: <Host>
+        annotations:
+          summary: Endpoint Pod is down.
+          description: Endpoint Pod has been down for the last 1 minute(s).
+      
+      - alert: ReplicaOfEndpointDown
+        expr: kube_deployment_status_replicas_unavailable{deployment="service-endpoint"} > 0
+        for: 1m
+        labels:
+          hostname: <Host>
+        annotations:
+          summary: Replica of Endpoint is down.
+          description: Replica of Endpoint is down for the last 1 minute(s).
+         
       - alert: AIDeploymentDown
         expr: absent(count(kube_deployment_status_replicas{deployment="service-ai"})) == 1
         for: 1m
@@ -142,6 +169,24 @@ data:
         annotations:
           summary: service-ai deployment is down.
           description: service-ai deployment has been down for the last 1 minute(s).
+      
+      - alert: AIPodDown
+        expr: absent(kube_pod_container_status_running{container="service-ai"}) == 1
+        for: 1m
+        labels:
+          hostname: <Host>
+        annotations:
+          summary: AI Pod is down.
+          description: AI Pod has been down for the last 1 minute(s).
+      
+      - alert: ReplicaOfAIDown
+        expr: kube_deployment_status_replicas_unavailable{deployment="service-ai"} > 0
+        for: 1m
+        labels:
+          hostname: <Host>
+        annotations:
+          summary: Replica of AI is down.
+          description: Replica of AI is down for the last 1 minute(s).
       
       - alert: QueueTimeout
         expr: increase(cognigy_rpc_timeout_total[5m]) > 5
