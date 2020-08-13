@@ -54,6 +54,7 @@ then
   perl -0 -i -pe "s/<RUN_NLP_ZH>((\W|\w)*?)<\/RUN_NLP_ZH>//g" prometheus/configmaps/alertrule.yaml
   perl -0 -i -pe "s/<RUN_NLP_FI>((\W|\w)*?)<\/RUN_NLP_FI>//g" prometheus/configmaps/alertrule.yaml
   perl -0 -i -pe "s/<RUN_NLP_SV>((\W|\w)*?)<\/RUN_NLP_SV>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_JA>((\W|\w)*?)<\/RUN_NLP_JA>//g" prometheus/configmaps/alertrule.yaml
 fi
 
 sed -i "s/<RUN_NLP_DE>//g" prometheus/configmaps/alertrule.yaml
