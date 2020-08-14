@@ -845,7 +845,7 @@ data:
               "steppedLine": false,
               "targets": [
                   {
-                      "expr": "avg(container_memory_usage_bytes{container="service-ai"})",
+                      "expr": "avg(container_memory_usage_bytes{container=\"service-ai\"})",
                       "format": "time_series",
                       "hide": false,
                       "instant": false,
@@ -1121,7 +1121,7 @@ data:
               "steppedLine": false,
               "targets": [
                   {
-                      "expr": "avg(container_memory_usage_bytes{container="service-nlp-ner"})",
+                      "expr": "avg(container_memory_usage_bytes{container=\"service-nlp-ner\"})",
                       "format": "time_series",
                       "intervalFactor": 1,
                       "refId": "A"
