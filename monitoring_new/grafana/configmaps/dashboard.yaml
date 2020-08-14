@@ -6243,7 +6243,7 @@ data:
               "steppedLine": false,
               "targets": [
                   {
-                      "expr": "container_memory_working_set_bytes{container=\"service-ai\"}",
+                      "expr": "avg(container_memory_usage_bytes{container=\"service-ai\"})",
                       "format": "time_series",
                       "hide": false,
                       "instant": false,
@@ -6519,7 +6519,7 @@ data:
               "steppedLine": false,
               "targets": [
                   {
-                      "expr": "container_memory_working_set_bytes{container_name=\"service-nlp-ner\"}",
+                      "expr": "avg(container_memory_usage_bytes{container=\"service-nlp-ner\"})",
                       "format": "time_series",
                       "intervalFactor": 1,
                       "refId": "A"
@@ -7701,7 +7701,7 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate( container_memory_working_set_bytes{container=\"mongo-server\"}[5m] )",
+              "expr": "avg(container_memory_usage_bytes{container=\"mongo-server\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "refId": "A"
@@ -7891,7 +7891,7 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate( container_memory_working_set_bytes{container=\"rabbitmq\"}[5m] )",
+              "expr": "avg(container_memory_usage_bytes{container=\"rabbitmq\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "refId": "A"
@@ -8081,7 +8081,7 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate( container_memory_working_set_bytes{container=\"redis\"}[5m] )",
+              "expr": "avg(container_memory_usage_bytes{container=\"redis\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "refId": "A"
@@ -8271,7 +8271,7 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate( container_memory_working_set_bytes{container=\"redis-persistent\"}[5m] )",
+              "expr": "avg(container_memory_usage_bytes{container=\"redis-persistent\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "refId": "A"
