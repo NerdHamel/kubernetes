@@ -152,33 +152,6 @@ data:
           summary: Redis Persistent got restared
           description: Redis Persistent got restared
       
-      - alert: Flows Deployment Down
-        expr: absent(count(kube_deployment_status_replicas{deployment="service-flows"})) == 1
-        for: 1m
-        labels:
-          hostname: <Host>
-        annotations:
-          summary: service-flows Deployment is down.
-          description: service-flows has been down for the last 1 minute(s).
-      
-      - alert: Flow Pod Down
-        expr: absent(kube_pod_container_status_running{container="service-flows"}) == 1
-        for: 1m
-        labels:
-          hostname: <Host>
-        annotations:
-          summary: Flow Pod is down.
-          description: Flow Pod has been down for the last 1 minute(s).
-      
-      - alert: Replica Of FLow Down
-        expr: kube_deployment_status_replicas_unavailable{deployment="service-flows"} > 0
-        for: 1m
-        labels:
-          hostname: <Host>
-        annotations:
-          summary: Replica of flow is down.
-          description: Replica of flow is down for the last 1 minute(s).
-      
       - alert: Endpoint Deployment Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-endpoint"})) == 1
         for: 1m
