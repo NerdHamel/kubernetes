@@ -279,278 +279,243 @@ data:
           description: 'High CPU utilisation detected for instance {{ $labels.instance_id }} tagged as: {{ $labels.instance_name_tag }}. The utilisation is currently:{{ $value }}%'
                
       <RUN_NLP_DE>
-      - alert: NLP_DE_TRAIN Deployment Down
+      - alert: NLP_DE_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-de"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-de deployment is down.
-          description: service-nlp-train-de deployment has been down for the last 1 minute(s).  
+          summary: service-nlp-train-de is down.
+          description: service-nlp-train-de has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: NLP_DE_SCORE Deployment Down
+      - alert: NLP_DE_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-de"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-de deployment is down.
-          description: service-nlp-score-de deployment has been down for the last 1 minute(s).
-      
-      - alert: NLP_DE_TOKENS Deployment Down
-        expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-tokens-de"})) == 1
-        for: 1m
-        labels:
-          hostname: <Host>
-        annotations:
-          summary: service-nlp-tokens-de deployment is down.
-          description: service-nlp-tokens-de deployment has been down for the last 1 minute(s).
-      
-      - alert: NLP-2-0-0-DE Deployment Down
-        expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-2-0-0-de"})) == 1
-        for: 1m
-        labels:
-          hostname: <Host>
-        annotations:
-          summary: service-nlp-2-0-0-de deployment is down.
-          description: service-nlp-2-0-0-de deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-de is down.
+          description: service-nlp-score-de has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_DE>
 
      <RUN_NLP_EN>
-      - alert: NLP_EN_TRAIN Deployment Down
+      - alert: NLP_EN_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-en"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-en deployment is down.
-          description: service-nlp-train-en deployment has been down for the last 1 minute(s).
+          summary: service-nlp-train-en is down.
+          description: service-nlp-train-en has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: NLP_EN_SCORE Deployment Down
+      - alert: NLP_EN_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-en"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-en deployment is down.
-          description: service-nlp-score-en deployment has been down for the last 1 minute(s).
-      
-      - alert: NLP_EN_TOKEN Deployment Down
-        expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-tokens-en"})) == 1
-        for: 1m
-        labels:
-          hostname: <Host>
-        annotations:
-          summary: service-nlp-tokens-en deployment is down.
-          description: service-nlp-tokens-en deployment has been down for the last 1 minute(s).
-      
-      - alert: NLP-2-0-0-EN Deployment Down
-        expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-2-0-0-en"})) == 1
-        for: 1m
-        labels:
-          hostname: <Host>
-        annotations:
-          summary: service-nlp-2-0-0-en deployment is down.
-          description: service-nlp-2-0-0-en deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-en is down.
+          description: service-nlp-score-en has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_EN>
 
      <RUN_NLP_GE>
-      - alert: NLP_GE_TRAIN Deployment Down
+      - alert: NLP_GE_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-ge"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-ge deployment is down.
-          description: service-nlp-train-ge deployment has been down for the last 1 minute(s).
+          summary: service-nlp-train-ge is down.
+          description: service-nlp-train-ge has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: NLP_GE_SCORE Deployment Down
+      - alert: NLP_GE_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-ge"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-ge deployment is down.
-          description: service-nlp-score-ge deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-ge is down.
+          description: service-nlp-score-ge has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_GE>
 
      <RUN_NLP_ES>
-      - alert: NLP_ES_TRAIN Deployment Down
+      - alert: NLP_ES_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-es"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-es deployment is down.
-          description: service-nlp-train-es deployment has been down for the last 1 minute(s).
+          summary: service-nlp-train-es is down.
+          description: service-nlp-train-es has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: NLP_ES_SCORE Deployment Down
+      - alert: NLP_ES_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-es"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-es deployment is down.
-          description: service-nlp-score-es deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-es is down.
+          description: service-nlp-score-es has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_ES>
 
      <RUN_NLP_NL>
-      - alert: NLP_NL_TRAIN Deployment Down
+      - alert: NLP_NL_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-nl"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-nl deployment is down.
-          description: service-nlp-train-nl deployment has been down for the last 1 minute(s).
+          summary: service-nlp-train-nl is down.
+          description: service-nlp-train-nl has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: NLP_NL_SCORE Deployment Down
+      - alert: NLP_NL_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-nl"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-nl deployment is down.
-          description: service-nlp-score-nl deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-nl is down.
+          description: service-nlp-score-nl has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_NL>
 
      <RUN_NLP_FR>
-      - alert: NLP_FR_TRAIN Deployment Down
+      - alert: NLP_FR_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-fr"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-fr deployment is down.
-          description: service-nlp-train-fr deployment has been down for the last 1 minute(s).
+          summary: service-nlp-train-fr is down.
+          description: service-nlp-train-fr has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: NLP_FR_SCORE Deployment Down
+      - alert: NLP_FR_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-fr"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-fr Deployment is down.
-          description: service-nlp-score-fr Deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-fr is down.
+          description: service-nlp-score-fr has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_FR>
 
      <RUN_NLP_JA>
-      - alert: NLP_JA_TRAIN Deployment Down
+      - alert: NLP_JA_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-ja"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-ja Deployment is down.
-          description: service-nlp-train-ja Deployment has been down for the last 1 minute(s).
+          summary: service-nlp-train-ja is down.
+          description: service-nlp-train-ja has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: NLP_JA_SCORE Deployment Down
+      - alert: NLP_JA_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-ja"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-ja Deployment is down.
-          description: service-nlp-score-ja Deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-ja is down.
+          description: service-nlp-score-ja has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_JA>
 
      <RUN_NLP_ZH>
-      - alert: NLP_ZH_TRAIN Deployment Down
+      - alert: NLP_ZH_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-zh"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-zh Deployment is down.
-          description: service-nlp-train-zh Deployment has been down for the last 1 minute(s).
+          summary: service-nlp-train-zh is down.
+          description: service-nlp-train-zh has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: NLP_ZH_SCORE Deployment Down
+      - alert: NLP_ZH_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-zh"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-zh Deployment is down.
-          description: service-nlp-score-zh Deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-zh is down.
+          description: service-nlp-score-zh has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_ZH>
 
      <RUN_NLP_KO>
-      - alert: NLP_KO_TRAIN Deployment Down
+      - alert: NLP_KO_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-ko"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-ko Deployment is down.
-          description: service-nlp-train-ko Deployment has been down for the last 1 minute(s).
+          summary: service-nlp-train-ko is down.
+          description: service-nlp-train-ko has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: NLP_KO_SCORE Deployment Down
+      - alert: NLP_KO_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-ko"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-ko Deployment is down.
-          description: service-nlp-score-ko Deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-ko is down.
+          description: service-nlp-score-ko has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_KO>
 
      <RUN_NLP_AR>
-      - alert: NLP_AR_TRAIN Deployment Down
+      - alert: NLP_AR_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-ar"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-ar-ko Deployment is down.
-          description: service-nlp-train-ar Deployment has been down for the last 1 minute(s).
-      - alert: NLP_AR_SCORE Deployment Down
+          summary: service-nlp-train-ar-ko is down.
+          description: service-nlp-train-ar has been down for the last 1 minute(s). No container of the service is running.
+      
+      - alert: NLP_AR_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-ar"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-ar Deployment is down.
-          description: service-nlp-score-ar Deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-ar is down.
+          description: service-nlp-score-ar has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_AR>
 
      <RUN_NLP_FI>
-      - alert: NLP_FI_TRAIN Deployment Down
+      - alert: NLP_FI_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-fi"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-ar-ko Deployment is down.
-          description: service-nlp-train-ar Deployment has been down for the last 1 minute(s).
+          summary: service-nlp-train-ar-ko is down.
+          description: service-nlp-train-ar has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: NLP_FI_SCORE Deployment Down
+      - alert: NLP_FI_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-fi"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-ar Deployment is down.
-          description: service-nlp-score-ar Deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-ar is down.
+          description: service-nlp-score-ar has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_FI>
 
      <RUN_NLP_SV>
-      - alert: NLP_FI_TRAIN Deployment Down
+      - alert: NLP_FI_TRAIN Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-train-sv"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-train-ar-ko Deployment is down.
-          description: service-nlp-train-ar Deployment has been down for the last 1 minute(s). 
+          summary: service-nlp-train-ar-ko is down.
+          description: service-nlp-train-ar has been down for the last 1 minute(s). No container of the service is running.
       
-      - alert: NLP_FI_SCORE Deployment Down
+      - alert: NLP_FI_SCORE Down
         expr: absent(count(kube_deployment_status_replicas{deployment="service-nlp-score-sv"})) == 1
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: service-nlp-score-ar Deployment is down.
-          description: service-nlp-score-ar Deployment has been down for the last 1 minute(s).
+          summary: service-nlp-score-ar is down.
+          description: service-nlp-score-ar has been down for the last 1 minute(s). No container of the service is running.
      </RUN_NLP_SV>
 
 
