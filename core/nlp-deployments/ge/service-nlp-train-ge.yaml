@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-ge
-          image: 'office-docker.cognigy.com:5000/service-nlp:14d934b7ca9fd3838921c983cca9f07260da461a'
+          image: 'office-docker.cognigy.com:5000/service-nlp-ge:f19c9f810d3c82d39bfbd0ec9e08632a79a4317a'
           resources:
             requests:
               cpu: '0.350'
@@ -53,7 +53,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: 'da-DK,nn-NO,it-IT,pl-PL,ge-GE,pt-PT,pt-BR,th-TH,ru-RU,tr-TR'
+              value: 'sv-SE,fi-FI,da-DK,nn-NO,it-IT,pl-PL,ge-GE,pt-PT,pt-BR,th-TH,ru-RU,tr-TR'
             - name: TRAIN
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
