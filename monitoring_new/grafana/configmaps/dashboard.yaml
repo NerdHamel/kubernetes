@@ -187,7 +187,7 @@ data:
               "tableColumn": "",
               "targets": [
                   {
-                      "expr": "sum (traefik_backend_request_duration_seconds_sum{backend=\"<endpoint-url>/\"}) / sum (traefik_backend_request_duration_seconds_count{backend=\"<endpoint-url>/\"})",
+                      "expr": "sum (traefik_backend_request_duration_seconds_sum{backend=\"<endpoint-url>/\", protocol=\"http\"}) / sum (traefik_backend_request_duration_seconds_count{backend=\"<endpoint-url>/\", protocol=\"http\"})",
                       "format": "time_series",
                       "intervalFactor": 1,
                       "refId": "A"
@@ -537,7 +537,7 @@ data:
               "tableColumn": "",
               "targets": [
                   {
-                      "expr": "sum( traefik_backend_request_duration_seconds_sum{backend=\"<api-url>/\"} ) / sum( traefik_backend_request_duration_seconds_count{backend=\"<api-url>/\"} )",
+                      "expr": "sum( traefik_backend_request_duration_seconds_sum{backend=\"<api-url>/\", protocol=\"http\"} ) / sum( traefik_backend_request_duration_seconds_count{backend=\"<api-url>/\", protocol=\"http\"} )",
                       "format": "time_series",
                       "intervalFactor": 1,
                       "refId": "A"
