@@ -80,6 +80,33 @@ data:
           summary: RabbitMQ got restared
           description: RabbitMQ got restared
       
+      - alert: RabbitMQ High watermark limit crossed 
+        expr: rabbitmq_resident_memory_limit_bytes - rabbitmq_process_resident_memory_bytes < 0
+        for: 1m
+        labels:
+          hostname: <Host>
+        annotations:
+          summary: High watermark limit has been crossed 
+          description: High watermark limit has been crossed
+      
+      - alert: RabbitMQ Memory useages is too high 
+        expr: avg(container_memory_usage_bytes{container="rabbitmq"}) > 786432000
+        for: 1m
+        labels:
+          hostname: <Host>
+        annotations:
+          summary: RabbitMQ Memory useages is too high 
+          description: RabbitMQ Memory useages is too high
+      
+      - alert: RabbitMQ Unackted message is getting high 
+        expr: sum(rabbitmq_queue_messages_unacked ) > 15
+        for: 1m
+        labels:
+          hostname: <Host>
+        annotations:
+          summary: RabbitMQ Unackted message is getting high 
+          description: RabbitMQ Unackted message is getting high
+      
       - alert: Redis Deployment Down
         expr: absent(count(kube_deployment_status_replicas{deployment="redis"})) == 1
         for: 1m
