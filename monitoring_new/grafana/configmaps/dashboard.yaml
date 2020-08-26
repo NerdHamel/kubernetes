@@ -8881,7 +8881,7 @@ data:
             "alignLevel": null
           }
         },
-        <NLP_DE>
+        </NLP_DE>
         <NLP_EN>
         {
           "aliasColors": {},
@@ -9267,7 +9267,7 @@ data:
             "alignLevel": null
           }
         }
-        <NLP_EN>
+        </NLP_EN>
       ],
       "schemaVersion": 18,
       "style": "dark",
