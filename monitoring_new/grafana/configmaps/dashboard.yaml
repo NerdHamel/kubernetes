@@ -8496,6 +8496,7 @@ data:
       "id": 7,
       "links": [],
       "panels": [
+        <NLP_DE>
         {
           "aliasColors": {},
           "bars": false,
@@ -8880,6 +8881,8 @@ data:
             "alignLevel": null
           }
         },
+        <NLP_DE>
+        <NLP_EN>
         {
           "aliasColors": {},
           "bars": false,
@@ -9264,6 +9267,7 @@ data:
             "alignLevel": null
           }
         }
+        <NLP_EN>
       ],
       "schemaVersion": 18,
       "style": "dark",
