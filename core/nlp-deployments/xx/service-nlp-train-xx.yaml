@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-score-nl
+  name: service-nlp-train-xx
 spec:
   selector:
     matchLabels:
-      app: service-nlp-score-nl
+      app: service-nlp-train-xx
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-score-nl
+        app: service-nlp-train-xx
     spec:
       containers:
-        - name: service-nlp-score-nl
-          image: 'office-docker.cognigy.com:5000/service-nlp:14d934b7ca9fd3838921c983cca9f07260da461a'
+        - name: service-nlp-train-xx
+          image: 'office-docker.cognigy.com:5000/service-nlp:8d93e98376834d79ba9fb2b1fd5290502fa07b09'
           resources:
             requests:
               cpu: '0.350'
@@ -53,8 +53,8 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: nl-NL
-            - name: SCORE
+              value: es-ES,fr-FR,nl-NL,it-IT,pl-PL,pt-PT,pt-BR,th-TH,ru-RU,tr-TR
+            - name: TRAIN
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
               value: /languages/languages.json

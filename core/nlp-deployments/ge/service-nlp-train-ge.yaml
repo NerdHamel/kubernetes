@@ -14,14 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-ge
-          image: 'office-docker.cognigy.com:5000/service-nlp-ge:f19c9f810d3c82d39bfbd0ec9e08632a79a4317a'
-          resources:
-            requests:
-              cpu: '0.350'
-              memory: 800M
-            limits:
-              cpu: '1'
-              memory: 2500M
+          image: 'office-docker.cognigy.com:5000/service-nlp-ge:8d93e98376834d79ba9fb2b1fd5290502fa07b09'
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
@@ -53,7 +46,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: 'sv-SE,fi-FI,da-DK,nn-NO,it-IT,pl-PL,ge-GE,pt-PT,pt-BR,th-TH,ru-RU,tr-TR'
+              value: 'ge-GE,sv-SE,fi-FI,da-DK,nn-NO,vi-VN'
             - name: TRAIN
               value: 'true'
             - name: LANGUAGE_CONFIG_PATH
