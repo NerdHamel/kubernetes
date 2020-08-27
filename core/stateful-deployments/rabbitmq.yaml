@@ -17,10 +17,10 @@ spec:
               image: docker.cognigy.com:5000/rabbitmq:3.8.3_cognigy-4.X
               resources:
                 limits:
-                    memory: "1Gi"
+                    memory: "2Gi"
                     cpu: "2"
                 requests:
-                    memory: "300Mi"
+                    memory: "1Gi"
                     cpu: "1"
               ports:
               - name: rabbitmq
