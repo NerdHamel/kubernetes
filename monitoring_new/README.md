@@ -1,8 +1,8 @@
 # Prometheus setting up guide
 
-To monitor COGNIGY installation on kubernetes we use prometheus. [Prometheus](https://prometheus.io/docs/introduction/overview/) is an open-source systems monitoring and alerting toolkit originally built at SoundCloud. Prometheus can scrape metrics and build a data model with time series data identified by metrics name and key/value pair. 
+To monitor COGNIGY installation on kubernetes we use Prometheus. [Prometheus](https://prometheus.io/docs/introduction/overview/) is an open-source systems monitoring and alerting toolkit originally built at SoundCloud. Prometheus can scrape metrics and build a data model with time series data identified by metrics name and key/value pair. 
 
-Here to all the necessary files to install prometheus are kept in under `monitoring_new` folder. The folder structure looks like below 
+Here to all the necessary files to install Prometheus are kept in under `monitoring_new` folder. The folder structure looks like below 
 
 ```
 .
@@ -46,21 +46,21 @@ Here to all the necessary files to install prometheus are kept in under `monitor
     └── service.yaml
 
 ```
-We will discuss the installation procedure for monitoring, but before all of that lets talk about the architechture first. 
+We will discuss the installation procedure for monitoring, but before all of that let's talk about the architecture first. 
 
-## Architechture 
+## Architecture 
 
-An ideal prometheus based microservice architechture looks like below 
+An ideal Prometheus based monitoring architecture looks like below 
 
 ![](architechture.jpeg)
 
-Where prometheus can talk with every kubernetes node and pull the necessary metrics from there. All the other external component can use those metrics by taking from prometheus. Such as alertmanager, grafana etc. Also some external persistent storage can use to store the metrics for longer period. 
+Where Prometheus can talk with every Kubernetes node and pull the necessary metrics from there. All the other external components can use those metrics by taking from Prometheus. Such as alertmanager, grafana etc. Also, some external persistent storage can use to store the metrics for a longer period. 
 
-> Please note, at the beginneing we will use the TSDB available with prometheus. 
+> Please note, in the beginning, we will use the TSDB available with Prometheus. 
 
-We are using `kube-state-metrics` to monitor pods, services and deployment and `Node-exporter` to monitor nodes system metrics. Though `Kube-state-metrics` can provide some metrics about kubernetes node too, but its better to use `node-exporter` for more information.
+We are using `kube-state-metrics` to monitor pods, services and deployment, and `Node-exporter` to monitor nodes system metrics. Though `Kube-state-metrics` can provide some metrics about Kubernetes nodes too, but its better to use `node-exporter` for more information.
 
-To monitor some core metrics of product, we use a service called `service-monitoring`. This will give you more clear overview about the product performance. 
+To monitor some core metrics of the product, we use a service called `service-monitoring`. This will give you more clear overview about the product performance. 
 
 ## Prerequisites
 
