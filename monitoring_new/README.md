@@ -50,7 +50,7 @@ We will discuss the installation procedure for monitoring, but before all of tha
 
 ## Architechture 
 
-An ideal kubernetes based microservice architechture looks like below 
+An ideal prometheus based microservice architechture looks like below 
 
 ![](architechture.jpeg)
 
@@ -58,13 +58,13 @@ Where prometheus can talk with every kubernetes node and pull the necessary metr
 
 > Please note, at the beginneing we will use the TSDB available with prometheus. 
 
-We are aiming to use `kube-state-metrics` to monitor pods, services and deployment and `Node-exporter` to monitor nodes system metrics. Though `Kube-state-metrics` can provide some metrics about kubernetes node too, but its better to use `node-exporter` for more information.
+We are using `kube-state-metrics` to monitor pods, services and deployment and `Node-exporter` to monitor nodes system metrics. Though `Kube-state-metrics` can provide some metrics about kubernetes node too, but its better to use `node-exporter` for more information.
 
-To monitor some core metrics we use a service called `service-monitoring`. This will give you more clear overview about the product performance. 
+To monitor some core metrics of product, we use a service called `service-monitoring`. This will give you more clear overview about the product performance. 
 
 ## Prerequisites
 
-Before installing core monitoring infrastructure we need to make sure that all the metrics are up properly. For that we need to setup the following components
+Before installing core monitoring infrastructure we need to make sure that all the necessary metrics are up properly. For that we need to setup the following components
 
 1. Kube-state-metrics
 2. Node-exporter
@@ -101,7 +101,7 @@ kubectl apply -f node-exporter/
 ```
 ### Service-monitoring
 
-Service monitoring is the core monitoring service which is integrated in Cognigy AI product. Before deploying the service monitoring we required to create a secret for the basic auth between service-monitoring and prometheus. To create the secret first rename `secrets.dist` to `secrets`. After that enter your desired password in `secrets/prometheus-password.yaml` file. 
+Service monitoring is the core monitoring service which is integrated in Cognigy AI product. Before deploying the service monitoring we required to create a secret for the basic auth between service-monitoring and prometheus. To create the secret first rename `service-monitoring/secrets.dist` to `service-monitoring/secrets`. After that enter your desired password in `secrets/prometheus-password.yaml` file. 
 
 ```
 data:
@@ -156,7 +156,7 @@ kubectl apply -f prometheus/configmaps
 kubectl apply -f prometheus/deployment.yaml
 kubectl apply -f prometheus/service.yaml
 ```
-Once created, we can access the prometheus dashboard over `kubernetes-IP` and port `30000`. 
+Once created, we can access the prometheus dashboard over `kubernetes-node-IP` and port `30000`. 
 
 ## Grafana
 
