@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-task-manager
-          image: 'office-docker.cognigy.com:5000/service-task-manager:c7fd6affefb518a8a033983322cfdd570e386d1e'
+          image: 'office-docker.cognigy.com:5000/service-task-manager:4bd3337140734850d2d22ff513670316fb877494'
           resources:
             requests:
               cpu: '0.1'
