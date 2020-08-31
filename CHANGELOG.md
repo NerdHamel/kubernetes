@@ -7,7 +7,7 @@ We added the following new files:
 - core/deployments/service-resources
 - core/secrets.dist/cognigy-service-resources
 
-The ``service-resources`` microservice is our new way of managing all resources within Cognigy.AI. A lot of other service (like ``service-secrets``) will vanish at some point.
+The ``service-resources`` microservice is our new way of managing all resources within Cognigy.AI.
 
 ---
 
