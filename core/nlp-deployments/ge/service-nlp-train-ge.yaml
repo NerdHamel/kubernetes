@@ -14,7 +14,14 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-ge
-          image: 'office-docker.cognigy.com:5000/service-nlp-ge:8d93e98376834d79ba9fb2b1fd5290502fa07b09'
+          image: 'office-docker.cognigy.com:5000/service-nlp:43c277ef324dcd140a3d87b972ed2b4681687d93'
+          resources:
+            requests:
+              cpu: '1'
+              memory: 3000M
+            limits:
+              cpu: '2'
+              memory: 3500M
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
