@@ -21,7 +21,7 @@ spec:
               memory: 3000M
             limits:
               cpu: '2'
-              memory: 3200M
+              memory: 4200M
           volumeMounts:
             - name: nlp-models-nfs
               mountPath: /data/models
