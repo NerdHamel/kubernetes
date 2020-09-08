@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-es
-          image: 'office-docker.cognigy.com:5000/service-nlp:78e5e5e2fccbcab64926bdfb1a34d548d44c8011'
+          image: 'office-docker.cognigy.com:5000/service-nlp:def0feb1a7dc0b9045d89e4fd5a6723a9d22519f'
           resources:
             requests:
               cpu: '0.350'

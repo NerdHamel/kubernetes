@@ -13,7 +13,7 @@ spec:
         app: service-handover
     spec:
       containers:
-        - image: 'office-docker.cognigy.com:5000/service-handover:d2058c47b61e7878e7f1af849204e11a55db4936'
+        - image: 'office-docker.cognigy.com:5000/service-handover:a861d8a13a92b918ed20b3ab0b9c2364b471855f'
           name: service-handover
           resources:
             requests:
