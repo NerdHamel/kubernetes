@@ -75,6 +75,7 @@ then
   perl -0 -i -pe "s/<RUN_NLP_KO>((\W|\w)*?)<\/RUN_NLP_KO>//g" prometheus/configmaps/alertrule.yaml
   perl -0 -i -pe "s/<RUN_NLP_AR>((\W|\w)*?)<\/RUN_NLP_AR>//g" prometheus/configmaps/alertrule.yaml
   perl -0 -i -pe "s/<RUN_NLP_FI>((\W|\w)*?)<\/RUN_NLP_FI>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_FR>((\W|\w)*?)<\/RUN_NLP_FR>//g" prometheus/configmaps/alertrule.yaml
   perl -0 -i -pe "s/<RUN_NLP_SV>((\W|\w)*?)<\/RUN_NLP_SV>//g" prometheus/configmaps/alertrule.yaml
 fi
 
