@@ -24,7 +24,7 @@ There is no need to stop rabbitmq as it did not change!
 Once everything stopped, you can apply the new files (mongo-server, redis, redis-persistent) from this repository in order to update to the patched versions.
 
 ### Updated authentication for Redis
-We have also implemented changes regarding authentication for the ``redis.yaml`` - these changes do not apply to the ``redis-persistent.yaml`` deployment. Please get in touch with ``support@cognigy.com`` to get all details on how you can change your installation in order to adopt to these changes. We will more information and documentation.
+We have also implemented changes regarding authentication for the ``redis.yaml`` - these changes do not apply to the ``redis-persistent.yaml`` deployment. Please get in touch with ``support@cognigy.com`` to get all details on how you can change your installation in order to adopt to these changes. We will provide more information and documentation.
 
 If you are sure that your setup is properly secured and not accessible from outside, you may also omit this step.
 
