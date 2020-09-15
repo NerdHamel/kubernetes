@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: mongo-server
-              image: docker.cognigy.com:5000/mongo:3.4.3
+              image: docker.cognigy.com:5000/mongo:3.4.10
               args: ["--auth"]
               resources:
                 limits:

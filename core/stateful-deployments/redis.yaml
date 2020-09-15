@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: redis
-              image: docker.cognigy.com:5000/redis:4.0.2-alpine
+              image: docker.cognigy.com:5000/redis:4.0.10-alpine
               resources:
                 limits:
                     memory: "512Mi"
