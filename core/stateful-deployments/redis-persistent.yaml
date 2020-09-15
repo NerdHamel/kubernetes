@@ -28,9 +28,9 @@ spec:
               - name: redis-data
                 mountPath: /data
               - name: redis-password-config
-                mountPath: /var/run/secrets/
+                mountPath: /run/secrets/
               - name: redis-persistent-config
-                mountPath: /var/run/config
+                mountPath: /run/config
             volumes:
             - name: redis-password-config
               secret:
