@@ -1,3 +1,35 @@
+# 3.6.5
+## Modification of files
+The referenced Docker images were changed.
+
+### stateful services
+Cognigy.AI uses several other software products as dependencies. These are:
+- MongoDB: The main database in which all of the data is being stored
+- RabbitMQ: A powerful message broker we are using to inter-connect our microservices
+- Redis: Used as a fast in-memory cache (redis.yaml) and as a fast key-value persistent database (redis-persistent.yaml)
+
+We have updated MongoDB and Redis so they contain the latest patches (patches for the minor release we are using):
+- Updated MongoDB from version 3.4.3 to 3.4.10
+- Updated Redis (redis.yaml and redis-persistent.yaml) from version 4.0.2 to 4.0.10
+
+The RabbitMQ version did not change.
+
+In order to receive the new versions you have to completely stop your installation including the following deployments:
+- core/stateful-deployments/mongo-server.yaml
+- core/stateful-deployments/redis.yaml
+- core/stateful-deployments/redis-persistent.yaml
+
+There is no need to stop rabbitmq as it did not change!
+
+Once everything stopped, you can apply the new files (mongo-server, redis, redis-persistent) from this repository in order to update to the patched versions.
+
+### Updated authentication for Redis
+We have also implemented changes regarding authentication for the ``redis.yaml`` - these changes do not apply to the ``redis-persistent.yaml`` deployment. Please get in touch with ``support@cognigy.com`` to get all details on how you can change your installation in order to adopt to these changes. We will more information and documentation.
+
+If you are sure that your setup is properly secured and not accessible from outside, you may also omit this step.
+
+---
+
 # 3.6.4
 ## Modification of files
 The referenced Docker images were changed.
