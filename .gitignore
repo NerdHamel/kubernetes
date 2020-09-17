@@ -1,11 +1,3 @@
-core/secrets/
-core/volumes/
-core/reverse-proxy/
-
-monitoring/secrets/
-monitoring/volumes/
-
-node_modules/
 dbinit.js
 
 core/volume-claims/cognigy-repo.yaml
