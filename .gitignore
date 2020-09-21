@@ -1,9 +1,15 @@
 # ignore everything except certain folders in 'core'
 core/*
 !core/cloudproviders
-!core/customer.dist
+!core/template.dist
 !core/manifests
 !core/make_environment.sh
+
+# ignore everything except certain folders in 'management-ui'
+management-ui/*
+!management-ui/manifests
+!management-ui/template.dist
+!management-ui/make.sh
 
 dbinit.js
 

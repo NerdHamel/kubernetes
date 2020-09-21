@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: management-ui
-              image: docker.cognigy.com:5000/cognigy-management-ui:15
+              image: office-docker.cognigy.com:5000/management-ui:0ae0cb40dfc2114355827d012e55a8a9486425ee
               resources:
                 limits:
                     memory: "30Mi"
