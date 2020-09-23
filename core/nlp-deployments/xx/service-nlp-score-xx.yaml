@@ -23,10 +23,6 @@ spec:
               cpu: '1'
               memory: 2500M
           volumeMounts:
-            - name: nlp-models-nfs
-              mountPath: /data/models
-            - name: languages-config
-              mountPath: /languages
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
@@ -56,10 +52,6 @@ spec:
               value: ar-AE,es-ES,fr-FR,nl-NL,it-IT,pl-PL,pt-PT,pt-BR,th-TH,ru-RU,tr-TR,zh-CN
             - name: SCORE
               value: 'true'
-            - name: LANGUAGE_CONFIG_PATH
-              value: /languages/languages.json
-            - name: NLP_REDIS_LOCK
-              value: 'false'
       volumes:
         - name: rabbitmq-connection-string
           secret:
