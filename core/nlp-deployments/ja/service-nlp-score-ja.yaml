@@ -61,12 +61,6 @@ spec:
             - name: NLP_REDIS_LOCK
               value: 'false'
       volumes:
-        - name: nlp-models-nfs
-          persistentVolumeClaim:
-            claimName: nlp-models-nfs
-        - name: languages-config
-          configMap:
-            name: languages-config
         - name: rabbitmq-connection-string
           secret:
             secretName: cognigy-rabbitmq
