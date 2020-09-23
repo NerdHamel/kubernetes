@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-journeys
-          image: 'office-docker.cognigy.com:5000/service-journeys:fed0a6bc3ecdd51d78cc844d42f5b87cd509cf88'
+          image: 'office-docker.cognigy.com:5000/service-journeys:20af2a144ceaf4aa54c7025cbcfa145663e85ac3'
           resources:
             requests:
               cpu: '0.1'
