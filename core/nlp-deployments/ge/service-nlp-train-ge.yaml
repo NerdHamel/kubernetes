@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-ge
-          image: 'office-docker.cognigy.com:5000/service-nlp:43c277ef324dcd140a3d87b972ed2b4681687d93'
+          image: 'office-docker.cognigy.com:5000/service-nlp-ge:9d8f18b3735270ac0244c73c787ea503efe08c42'
           resources:
             requests:
-              cpu: '1'
+              cpu: '0.350'
               memory: 3000M
             limits:
               cpu: '2'
-              memory: 4200M
+              memory: 4000M
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-logs
-          image: 'office-docker.cognigy.com:5000/service-logs:388eb19fa934d3deffbf40d82b9321472760022b'
+          image: 'office-docker.cognigy.com:5000/service-logs:f2b5428f685454e591c8b943e901a9e2babab36c'
           resources:
             requests:
               cpu: '0.1'

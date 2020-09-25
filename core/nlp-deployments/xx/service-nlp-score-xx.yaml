@@ -14,11 +14,11 @@ spec:
     spec:
       containers:
         - name: service-nlp-score-xx
-          image: 'office-docker.cognigy.com:5000/service-nlp:8d93e98376834d79ba9fb2b1fd5290502fa07b09'
+          image: 'office-docker.cognigy.com:5000/service-nlp:9d8f18b3735270ac0244c73c787ea503efe08c42'
           resources:
             requests:
               cpu: '0.350'
-              memory: 960M
+              memory: 800M
             limits:
               cpu: '1'
               memory: 2500M
@@ -49,7 +49,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: ar-AE,es-ES,fr-FR,nl-NL,it-IT,pl-PL,pt-PT,pt-BR,th-TH,ru-RU,tr-TR,zh-CN
+              value: 'ar-AE,es-ES,fr-FR,nl-NL,it-IT,pl-PL,pt-PT,pt-BR,th-TH,ru-RU,tr-TR,zh-CN'
             - name: SCORE
               value: 'true'
       volumes:
