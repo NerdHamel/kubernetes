@@ -68,7 +68,6 @@ data:
 
     # NLP configuration
     CNLP_CORES: "4"
-    LANGUAGE_CONFIG_PATH: /data/config/languages.json
 
     # If the livechat should be used, uncomment
     # FEATURE_LIVECHAT: "true"
