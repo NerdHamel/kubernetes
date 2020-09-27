@@ -1,32 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-score-fi
+  name: service-nlp-train-xx
 spec:
   selector:
     matchLabels:
-      app: service-nlp-score-fi
+      app: service-nlp-train-xx
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-score-fi
+        app: service-nlp-train-xx
     spec:
       containers:
-        - name: service-nlp-score-fi
+        - name: service-nlp-train-es
           image: 'office-docker.cognigy.com:5000/service-nlp:eac3a919178a4080bab80fe2b4802b02cd206bee'
           resources:
             requests:
               cpu: '0.350'
-              memory: 960M
+              memory: 800M
             limits:
               cpu: '1'
-              memory: 1500M
+              memory: 2500M
           volumeMounts:
-            - name: nlp-models-nfs
-              mountPath: /data/models
-            - name: languages-config
-              mountPath: /languages
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
@@ -53,20 +49,10 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: fi-FI
-            - name: SCORE
+              value: 'ar-AE,es-ES,fr-FR,nl-NL,it-IT,pl-PL,pt-PT,pt-BR,th-TH,ru-RU,tr-TR,zh-CN'
+            - name: TRAIN
               value: 'true'
-            - name: LANGUAGE_CONFIG_PATH
-              value: /languages/languages.json
-            - name: NLP_REDIS_LOCK
-              value: 'false'
       volumes:
-        - name: nlp-models-nfs
-          persistentVolumeClaim:
-            claimName: nlp-models-nfs
-        - name: languages-config
-          configMap:
-            name: languages-config
         - name: rabbitmq-connection-string
           secret:
             secretName: cognigy-rabbitmq
