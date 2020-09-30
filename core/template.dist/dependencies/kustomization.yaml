@@ -1,0 +1,38 @@
+# ----------------------------------------------------
+# apiVersion and kind of Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Adds namespace to all resources.
+namespace: default
+
+resources:
+# storage: persistent volumes
+- manifests/volumes/flow-modules.yaml
+- manifests/volumes/mongodb.yaml
+- manifests/volumes/redis-persistent.yaml
+
+# storage: persistent volume claims
+- manifests/volume-claims/flow-modules.yaml
+- manifests/volume-claims/mongodb.yaml
+- manifests/volume-claims/redis-persistent.yaml
+
+patchesJson6902:
+# storage: persistent volumes
+- target:
+    version: v1
+    kind: PersistentVolume
+    name: mongodb
+  path: overlays/volumes/mongodb_patch.yaml
+
+- target:
+    version: v1
+    kind: PersistentVolume
+    name: flow-modules
+  path: overlays/volumes/flow-modules_patch.yaml
+
+- target:
+    version: v1
+    kind: PersistentVolume
+    name: redis-persistent
+  path: overlays/volumes/redis-persistent_patch.yaml
