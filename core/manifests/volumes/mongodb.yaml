@@ -9,7 +9,7 @@ spec:
     accessModes:
         - ReadWriteOnce
     persistentVolumeReclaimPolicy: Delete
-    storageClassName: local-storage
+    storageClassName: mongodb
     local:
         path: /var/opt/cognigy/mongodb
     nodeAffinity:

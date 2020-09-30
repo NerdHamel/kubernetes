@@ -9,7 +9,7 @@ spec:
     accessModes:
         - ReadWriteMany
     persistentVolumeReclaimPolicy: Delete
-    storageClassName: "flow-modules"
+    storageClassName: flow-modules
     local:
         path: /var/opt/cognigy/flow-modules
     nodeAffinity:

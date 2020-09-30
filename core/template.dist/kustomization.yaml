@@ -8,9 +8,14 @@ namespace: default
 
 resources:
 # storage: persistent volumes
-- manifests/volumes/mongodb.yaml
 - manifests/volumes/flow-modules.yaml
+- manifests/volumes/mongodb.yaml
 - manifests/volumes/redis-persistent.yaml
+
+# storage: persistent volume claims
+- manifests/volume-claims/flow-modules.yaml
+- manifests/volume-claims/mongodb.yaml
+- manifests/volume-claims/redis-persistent.yaml
 
 # config-maps
 # - manifests/config-maps/config-map.yaml
@@ -112,7 +117,7 @@ resources:
 #   value: new value
 #
 patchesJson6902:
-# storage
+# storage: persistent volumes
 - target:
     version: v1
     kind: PersistentVolume
