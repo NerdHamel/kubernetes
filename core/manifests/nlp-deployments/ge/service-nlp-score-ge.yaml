@@ -14,19 +14,15 @@ spec:
     spec:
       containers:
         - name: service-nlp-score-ge
-          image: 'office-docker.cognigy.com:5000/service-nlp:8246e0e01bc1a51ae9a3fa8cf17b3e23bebc7b46'
+          image: 'office-docker.cognigy.com:5000/service-nlp-ge:567f1e221e2fcb5e1aba0c20350b5c6123559646'
           resources:
             requests:
               cpu: '0.350'
-              memory: 800M
+              memory: 3000M
             limits:
-              cpu: '1'
-              memory: 2500M
+              cpu: '2'
+              memory: 4000M
           volumeMounts:
-            - name: nlp-models-nfs
-              mountPath: /data/models
-            - name: languages-config
-              mountPath: /languages
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
@@ -53,20 +49,10 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: 'da-DK,nn-NO,it-IT,pl-PL,ge-GE,pt-PT,pt-BR,th-TH,ru-RU,tr-TR'
+              value: 'ge-GE,sv-SE,fi-FI,da-DK,nn-NO,vi-VN'
             - name: SCORE
               value: 'true'
-            - name: LANGUAGE_CONFIG_PATH
-              value: /languages/languages.json
-            - name: NLP_REDIS_LOCK
-              value: 'false'
       volumes:
-        - name: nlp-models-nfs
-          persistentVolumeClaim:
-            claimName: nlp-models-nfs
-        - name: languages-config
-          configMap:
-            name: languages-config
         - name: rabbitmq-connection-string
           secret:
             secretName: cognigy-rabbitmq

@@ -1,30 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-profiles
+  name: service-nlp-train-xx
 spec:
   selector:
     matchLabels:
-      app: service-profiles
+      app: service-nlp-train-xx
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-profiles
+        app: service-nlp-train-xx
     spec:
       containers:
-        - name: service-profiles
-          image: 'office-docker.cognigy.com:5000/service-profiles:eca3e70d93881d3565548eb0df764d9e6a1a0f12'
+        - name: service-nlp-train-es
+          image: 'office-docker.cognigy.com:5000/service-nlp:567f1e221e2fcb5e1aba0c20350b5c6123559646'
           resources:
             requests:
-              cpu: '0.1'
-              memory: 60M
+              cpu: '0.350'
+              memory: 800M
             limits:
-              cpu: '0.1'
-              memory: 75M
-          envFrom:
-            - configMapRef:
-                name: cognigy-env
+              cpu: '1'
+              memory: 2500M
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
@@ -32,18 +29,29 @@ spec:
             - name: mongodb-connection-string
               mountPath: /var/run/secrets/mongodbConnectionString
               subPath: mongodbConnectionString
+            - name: local
+              mountPath: /data/local
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
               subPath: redis-password.conf
           livenessProbe:
             exec:
               command:
-                - node
-                - /opt/healthcheck.js
-            failureThreshold: 3
-            initialDelaySeconds: 90
+                - python
+                - '-u'
+                - health_check.py
+            failureThreshold: 1
+            initialDelaySeconds: 900
             periodSeconds: 60
-            timeoutSeconds: 10
+            timeoutSeconds: 15
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+          env:
+            - name: LANGUAGES_TO_RUN
+              value: 'ar-AE,es-ES,fr-FR,nl-NL,it-IT,pl-PL,pt-PT,pt-BR,th-TH,ru-RU,tr-TR,zh-CN'
+            - name: TRAIN
+              value: 'true'
       volumes:
         - name: rabbitmq-connection-string
           secret:
@@ -53,10 +61,12 @@ spec:
                 path: rabbitmqConnectionString
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-profiles
+            secretName: cognigy-service-nlp
             items:
               - key: connection-string
                 path: mongodbConnectionString
+        - name: local
+          emptyDir: {}
         - name: redis-password
           secret:
             secretName: cognigy-redis-password

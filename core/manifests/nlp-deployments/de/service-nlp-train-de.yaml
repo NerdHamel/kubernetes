@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-de
-          image: 'office-docker.cognigy.com:5000/service-nlp:8246e0e01bc1a51ae9a3fa8cf17b3e23bebc7b46'
+          image: 'office-docker.cognigy.com:5000/service-nlp:567f1e221e2fcb5e1aba0c20350b5c6123559646'
           resources:
             requests:
               cpu: '0.350'
@@ -23,10 +23,6 @@ spec:
               cpu: '1'
               memory: 2500M
           volumeMounts:
-            - name: nlp-models-nfs
-              mountPath: /data/models
-            - name: languages-config
-              mountPath: /languages
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
@@ -56,17 +52,7 @@ spec:
               value: de-DE
             - name: TRAIN
               value: 'true'
-            - name: LANGUAGE_CONFIG_PATH
-              value: /languages/languages.json
-            - name: NLP_REDIS_LOCK
-              value: 'false'
       volumes:
-        - name: nlp-models-nfs
-          persistentVolumeClaim:
-            claimName: nlp-models-nfs
-        - name: languages-config
-          configMap:
-            name: languages-config
         - name: rabbitmq-connection-string
           secret:
             secretName: cognigy-rabbitmq
