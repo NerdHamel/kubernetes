@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-    name: redis-persistent
+    name: flow-modules
 spec:
     capacity:
-        storage: 10Gi
+        storage: 1Gi
     volumeMode: Filesystem
     accessModes:
-        - ReadWriteOnce
+        - ReadWriteMany
     persistentVolumeReclaimPolicy: Delete
-    storageClassName: redis-persistent
+    storageClassName: "flow-modules"
     local:
-        path: /var/opt/cognigy/redis-persistent
+        path: /var/opt/cognigy/flow-modules
     nodeAffinity:
         required:
             nodeSelectorTerms:
