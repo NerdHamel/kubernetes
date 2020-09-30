@@ -1,144 +1,110 @@
-# ----------------------------------------------------
-# apiVersion and kind of Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-# Adds namespace to all resources.
-namespace: default
-
 resources:
-# storage: persistent volumes
-- manifests/volumes/flow-modules.yaml
-- manifests/volumes/mongodb.yaml
-- manifests/volumes/redis-persistent.yaml
-
-# storage: persistent volume claims
-- manifests/volume-claims/flow-modules.yaml
-- manifests/volume-claims/mongodb.yaml
-- manifests/volume-claims/redis-persistent.yaml
-
 # config-maps
-# - manifests/config-maps/config-map.yaml
-# - manifests/config-maps/redis.yaml
-# - manifests/config-maps/redis-persistent.yaml
-
-# secrets?
+- manifests/config-maps/config-map.yaml
+- manifests/config-maps/redis.yaml
+- manifests/config-maps/redis-persistent.yaml
 
 # services
-# - manifests/services/service-analytics-odata.yaml
-# - manifests/services/service-api.yaml
-# - manifests/services/service-endpoint.yaml
-# - manifests/services/service-ui.yaml
-# - manifests/services/service-webchat.yaml
-# - manifests/services/stateful-mongo-server.yaml
-# - manifests/services/stateful-rabbitmq.yaml
-# - manifests/services/stateful-redis.yaml
-# - manifests/services/stateful-redis-persistent.yaml
+- manifests/services/service-analytics-odata.yaml
+- manifests/services/service-api.yaml
+- manifests/services/service-endpoint.yaml
+- manifests/services/service-ui.yaml
+- manifests/services/service-webchat.yaml
 
 # nlp deployments
 # todo
 
 # deployments
-# - manifests/deployments/service-ai.yaml
-# - manifests/deployments/service-alexa-management.yaml
-# - manifests/deployments/service-analytics-collector.yaml
-# - manifests/deployments/service-analytics-conversation-collector.yaml
-# - manifests/deployments/service-analytics-conversation-provider.yaml
-# - manifests/deployments/service-analytics-odata.yaml
-# - manifests/deployments/service-analytics-realtime.yaml
-# - manifests/deployments/service-analytics-reporter.yaml
-# - manifests/deployments/service-api.yaml
-# - manifests/deployments/service-cleanup.yaml
-# - manifests/deployments/service-conversation-manager.yaml
-# - manifests/deployments/service-custom-modules.yaml
-# - manifests/deployments/service-endpoint.yaml
-# - manifests/deployments/service-execution.yaml
-# - manifests/deployments/service-handover.yaml
-# - manifests/deployments/service-http.yaml
-# - manifests/deployments/service-journeys.yaml
-# - manifests/deployments/service-logs.yaml
-# - manifests/deployments/service-nlp-ner.yaml
-# - manifests/deployments/service-parser.yaml
-# - manifests/deployments/service-profiles.yaml
-# - manifests/deployments/service-resources.yaml
-# - manifests/deployments/service-security.yaml
-# - manifests/deployments/service-task-manager.yaml
-# - manifests/deployments/service-trainer.yaml
-# - manifests/deployments/service-ui.yaml
-# - manifests/deployments/service-webchat.yaml
+- manifests/deployments/service-ai.yaml
+- manifests/deployments/service-alexa-management.yaml
+- manifests/deployments/service-analytics-collector.yaml
+- manifests/deployments/service-analytics-conversation-collector.yaml
+- manifests/deployments/service-analytics-conversation-provider.yaml
+- manifests/deployments/service-analytics-odata.yaml
+- manifests/deployments/service-analytics-realtime.yaml
+- manifests/deployments/service-analytics-reporter.yaml
+- manifests/deployments/service-api.yaml
+- manifests/deployments/service-cleanup.yaml
+- manifests/deployments/service-conversation-manager.yaml
+- manifests/deployments/service-custom-modules.yaml
+- manifests/deployments/service-endpoint.yaml
+- manifests/deployments/service-execution.yaml
+- manifests/deployments/service-handover.yaml
+- manifests/deployments/service-http.yaml
+- manifests/deployments/service-journeys.yaml
+- manifests/deployments/service-logs.yaml
+- manifests/deployments/service-nlp-ner.yaml
+- manifests/deployments/service-parser.yaml
+- manifests/deployments/service-profiles.yaml
+- manifests/deployments/service-resources.yaml
+- manifests/deployments/service-security.yaml
+- manifests/deployments/service-task-manager.yaml
+- manifests/deployments/service-trainer.yaml
+- manifests/deployments/service-ui.yaml
+- manifests/deployments/service-webchat.yaml
 
 # reverse proxy
-# - manifests/reverse-proxy/deployments/traefik.yaml
-# - manifests/reverse-proxy/ingress/service-analytics-odata.yaml
-# - manifests/reverse-proxy/ingress/service-api.yaml
-# - manifests/reverse-proxy/ingress/service-endpoint.yaml
-# - manifests/reverse-proxy/ingress/service-ui.yaml
-# - manifests/reverse-proxy/ingress/service-webchat.yaml
-# - manifests/reverse-proxy/services/traefik.yaml
+- manifests/reverse-proxy/deployments/traefik.yaml
+- manifests/reverse-proxy/ingress/service-analytics-odata.yaml
+- manifests/reverse-proxy/ingress/service-api.yaml
+- manifests/reverse-proxy/ingress/service-endpoint.yaml
+- manifests/reverse-proxy/ingress/service-ui.yaml
+- manifests/reverse-proxy/ingress/service-webchat.yaml
+- manifests/reverse-proxy/services/traefik.yaml
 
-# Each entry in this list should resolve to
-# a partial or complete resource definition file.
-#
-# The names in these (possibly partial) resource files
-# must match names already loaded via the `resources`
-# field or via `resources` loaded transitively via the
-# `bases` entries.  These entries are used to _patch_
-# (modify) the known resources.
-#
-# Small patches that do one thing are best, e.g. modify
-# a memory request/limit, change an env var in a
-# ConfigMap, etc.  Small patches are easy to review and
-# easy to mix together in overlays.
-# patchesStrategicMerge:
-#   - replica_count.yaml
-
-# Each entry in this list should resolve to
-# a kubernetes object and a JSON patch that will be applied
-# to the object.
-# The JSON patch is documented at https://tools.ietf.org/html/rfc6902
-#
-# target field points to a kubernetes object within the same kustomization
-# by the object's group, version, kind, name and namespace.
-# path field is a relative file path of a JSON patch file.
-# The content in this patch file can be either in JSON format as
-#
-#  [
-#    {"op": "add", "path": "/some/new/path", "value": "value"},
-#    {"op": "replace", "path": "/some/existing/path", "value": "new value"}
-#  ]
-#
-# or in YAML format as
-#
-# - op: add
-#   path: /some/new/path
-#   value: value
-# - op:replace
-#   path: /some/existing/path
-#   value: new value
-#
 patchesJson6902:
-# storage: persistent volumes
+# configmaps
 - target:
     version: v1
-    kind: PersistentVolume
-    name: mongodb
-  path: overlays/volumes/mongodb_patch.yaml
+    kind: ConfigMap
+    name: cognigy-env
+  path: overlays/config-maps/config-map_patch.yaml
+
+# reverse-proxy, ingress
+- target:
+    group: extensions
+    version: v1beta1
+    kind: Ingress
+    name: service-analytics-odata
+  path: overlays/reverse-proxy/ingress/service-analytics-odata_patch.yaml
 
 - target:
-    version: v1
-    kind: PersistentVolume
-    name: flow-modules
-  path: overlays/volumes/flow-modules_patch.yaml
+    group: extensions
+    version: v1beta1
+    kind: Ingress
+    name: service-api
+  path: overlays/reverse-proxy/ingress/service-api_patch.yaml
 
 - target:
-    version: v1
-    kind: PersistentVolume
-    name: redis-persistent
-  path: overlays/volumes/redis-persistent_patch.yaml
+    group: extensions
+    version: v1beta1
+    kind: Ingress
+    name: service-endpoint
+  path: overlays/reverse-proxy/ingress/service-endpoint_patch.yaml
 
-# services
-# - target:
-#     version: v1
-#     kind: Service
-#     name: traefik
-#   path: overlays/reverse-proxy/services/traefik_patch.yaml
+- target:
+    group: extensions
+    version: v1beta1
+    kind: Ingress
+    name: service-ui
+  path: overlays/reverse-proxy/ingress/service-ui_patch.yaml
+
+- target:
+    group: extensions
+    version: v1beta1
+    kind: Ingress
+    name: service-webchat
+  path: overlays/reverse-proxy/ingress/service-webchat_patch.yaml
+
+# reverse-proxy, service
+- target:
+    version: v1
+    kind: Service
+    name: traefik
+  path: overlays/reverse-proxy/services/traefik_patch.yaml
+
+patchesStrategicMerge:
+  - replica_count.yaml

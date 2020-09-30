@@ -3,18 +3,18 @@ kind: Deployment
 metadata:
   name: service-ai
 spec:
-  replicas: 2
+  replicas: 1
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: service-endpoint
 spec:
-  replicas: 3
+  replicas: 1
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: service-resources
 spec:
-  replicas: 2
+  replicas: 1
