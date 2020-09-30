@@ -43,6 +43,6 @@ spec:
                 name: redis-persistent
             - name: redis-data
               persistentVolumeClaim:
-                  claimName: redis-persistent-pvc
+                  claimName: redis-persistent
             imagePullSecrets:
             - name: cognigy-registry-token

@@ -40,6 +40,6 @@ spec:
             volumes:
             - name: cognigy-mongo-storage
               persistentVolumeClaim:
-                  claimName: mongo-pv-claim
+                  claimName: mongodb
             imagePullSecrets:
             - name: cognigy-registry-token
