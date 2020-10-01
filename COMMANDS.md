@@ -48,7 +48,7 @@ sudo mkdir -p /var/opt/cognigy/mongodb
 sudo mkdir -p /var/opt/cognigy/redis-persistent
 sudo mkdir -p /var/opt/cognigy/flow-modules
 
-sudo chown -R systemd-coredump:root /var/opt/cognigy/mongodb
+sudo chown -R 999:999 /var/opt/cognigy/mongodb
 ```
 
 ### 3.5 Database, Message-Broker and Cache
