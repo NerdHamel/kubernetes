@@ -40,13 +40,13 @@ sudo chown -R systemd-coredump:root /var/opt/cognigy/mongodb
 ### 3.4 Secrets
 **Creating random secrets for Kuberentes**
 ```
-cd kubernetes.git/core/development/product
+cd kubernetes.git/core/<environment>/product
 wget https://github.com/Cognigy/kubernetes-tools/releases/download/v2.0.0/initialization
 chmod +x ./initialization
 ./initialization --generate
 ```
 
-**Creating secrets in Kubernetes**
+**Creating secrets in your Kubernetes cluster**
 ```
 kubectl apply -f secrets
 ```
@@ -54,7 +54,7 @@ kubectl apply -f secrets
 ### 3.5 Database, Message-Broker and Cache
 **Deploying our product dependencies**
 ```
-cd kubernetes.git/core/development/dependencies
+cd kubernetes.git/core/<environment>/dependencies
 kubectl apply -k ./
 ```
 
