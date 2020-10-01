@@ -17,6 +17,12 @@ resources:
 - manifests/volume-claims/mongodb.yaml
 - manifests/volume-claims/redis-persistent.yaml
 
+# deployments
+- manifests/stateful-deployments/mongo-server.yaml
+- manifests/stateful-deployments/rabbitmq.yaml
+- manifests/stateful-deployments/redis.yaml
+- manifests/stateful-deployments/redis-persistent.yaml
+
 patchesJson6902:
 # storage: persistent volumes
 - target:
