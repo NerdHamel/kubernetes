@@ -76,7 +76,8 @@ rs.initiate({
 // wait a couple of seconds and hit enter, your command promt should change
 // from "SECONDARY" to "PRIMARY"
 
-// insert contents of your "dbinit.js" script
+// insert contents of your "dbinit.js" script, located next to your 'secrets'
+// folder
 ```
 
 ### 3.6 Installing Cognigy.AI
