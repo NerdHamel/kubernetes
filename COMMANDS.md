@@ -52,7 +52,7 @@ kubectl apply -f secrets
 ```
 
 ### 3.5 Database, Message-Broker and Cache
-**Deploying our product dependencies**
+**Deploying our products dependencies**
 ```
 cd kubernetes.git/core/<environment>/dependencies
 kubectl apply -k ./
