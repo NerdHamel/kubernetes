@@ -41,7 +41,7 @@ spec:
             - name: redis-persistent-password
               mountPath: /var/run/secrets/redis-persistent-password.conf
               subPath: redis-persistent-password.conf
-            - name: flow-modules-nfs
+            - name: flow-modules
               mountPath: /app/flowModules
           livenessProbe:
             exec:
@@ -77,8 +77,8 @@ spec:
         - name: redis-persistent-password
           secret:
             secretName: cognigy-redis-persistent-password
-        - name: flow-modules-nfs
+        - name: flow-modules
           persistentVolumeClaim:
-            claimName: flow-modules-nfs
+            claimName: flow-modules
       imagePullSecrets:
         - name: cognigy-registry-token
