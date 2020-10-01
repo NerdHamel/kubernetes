@@ -10,7 +10,7 @@ git clone https://github.com/Cognigy/kubernetes.git
 ```
 
 ### 3.1.2 Using templates
-**Preparing the files for a Cognigy.AI stage**
+**Preparing the files for a Cognigy.AI environment**
 ```
 cd kubernetes.git
 cd core
