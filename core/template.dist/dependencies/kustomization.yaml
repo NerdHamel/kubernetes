@@ -17,6 +17,12 @@ resources:
 - manifests/volume-claims/mongodb.yaml
 - manifests/volume-claims/redis-persistent.yaml
 
+# services
+- manifests/services/stateful-mongo-server.yaml
+- manifests/services/stateful-rabbitmq.yaml
+- manifests/services/stateful-redis.yaml
+- manifests/services/stateful-redis-persistent.yaml
+
 # deployments
 - manifests/stateful-deployments/mongo-server.yaml
 - manifests/stateful-deployments/rabbitmq.yaml
