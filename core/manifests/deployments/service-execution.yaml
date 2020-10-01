@@ -23,7 +23,7 @@ spec:
               cpu: '0.500'
               memory: 300M
           volumeMounts:
-            - name: flow-modules-nfs
+            - name: flow-modules
               mountPath: /app/flowModules
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets
@@ -37,9 +37,9 @@ spec:
             periodSeconds: 60
             timeoutSeconds: 10
       volumes:
-        - name: flow-modules-nfs
+        - name: flow-modules
           persistentVolumeClaim:
-            claimName: flow-modules-nfs
+            claimName: flow-modules
         - name: rabbitmq-connection-string
           secret:
             secretName: cognigy-rabbitmq
