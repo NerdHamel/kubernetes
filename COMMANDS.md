@@ -27,17 +27,7 @@ kubectl create secret docker-registry cognigy-registry-token \
 --docker-password='<your-password>'
 ```
 
-### 3.3.2 Storage for single server installations
-**Creating directories for local storage**
-```
-sudo mkdir -p /var/opt/cognigy/mongodb
-sudo mkdir -p /var/opt/cognigy/redis-persistent
-sudo mkdir -p /var/opt/cognigy/flow-modules
-
-sudo chown -R systemd-coredump:root /var/opt/cognigy/mongodb
-```
-
-### 3.4 Secrets
+### 3.3 Secrets
 **Creating random secrets for Kuberentes**
 ```
 cd kubernetes.git/core/<environment>/product
@@ -49,6 +39,16 @@ chmod +x ./initialization
 **Creating secrets in your Kubernetes cluster**
 ```
 kubectl apply -f secrets
+```
+
+### 3.4.2 Storage for single server installations
+**Creating directories for local storage**
+```
+sudo mkdir -p /var/opt/cognigy/mongodb
+sudo mkdir -p /var/opt/cognigy/redis-persistent
+sudo mkdir -p /var/opt/cognigy/flow-modules
+
+sudo chown -R systemd-coredump:root /var/opt/cognigy/mongodb
 ```
 
 ### 3.5 Database, Message-Broker and Cache
