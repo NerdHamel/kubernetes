@@ -15,7 +15,7 @@ git clone https://github.com/Cognigy/kubernetes.git
 cd kubernetes.git
 cd core
 chmod +x make_environment.sh
-./make_environment development
+./make_environment.sh development
 ```
 
 ### 3.2 Configuring container registry access
