@@ -78,3 +78,17 @@ rs.initiate({
 
 // insert contents of your "dbinit.js" script
 ```
+
+### 3.6 Installing Cognigy.AI
+**Checking the state of your cluster**
+```
+kubectl get pv
+kubectl get pvc
+kubectl get deployments
+```
+
+**Deploying Cognigy.AI by using kustomize**
+```
+cd kubernetes.git/core/<environment>/product
+kubectl apply -k ./
+```
