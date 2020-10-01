@@ -103,3 +103,10 @@ watch -d kubectl get deployment
 ```
 kubectl logs -f --tail 100 deployment/service-security
 ```
+
+### 5.2 Retrieving the update
+**Make local repository current**
+```
+git fetch origin
+git checkout tags/v4.0.0
+```
