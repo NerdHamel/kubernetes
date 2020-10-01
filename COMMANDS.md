@@ -92,3 +92,14 @@ kubectl get deployments
 cd kubernetes.git/core/<environment>/product
 kubectl apply -k ./
 ```
+
+**Monitoring the deployment**
+```
+watch -d kubectl get deployment
+```
+
+### 3.7 Retrieve login credentials
+**Retrieving credentials from service-security logs**
+```
+kubectl logs -f --tail 100 deployment/service-security
+```
