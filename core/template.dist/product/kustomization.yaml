@@ -15,7 +15,29 @@ resources:
 - manifests/services/service-webchat.yaml
 
 # nlp deployments
-# todo
+# for languages: de-DE
+# - manifests/nlp-deployments/de/service-nlp-score-de.yaml
+# - manifests/nlp-deployments/de/service-nlp-train-de.yaml
+
+# for languages: en-US,en-AU,en-CA,en-IN,en-GB
+- manifests/nlp-deployments/de/service-nlp-score-en.yaml
+- manifests/nlp-deployments/de/service-nlp-train-en.yaml
+
+# for languages: ge-GE,sv-SE,fi-FI,da-DK,nn-NO,vi-VN
+# - manifests/nlp-deployments/de/service-nlp-score-ge.yaml
+# - manifests/nlp-deployments/de/service-nlp-train-ge.yaml
+
+# for languages: ja-JP
+# - manifests/nlp-deployments/de/service-nlp-score-ja.yaml
+# - manifests/nlp-deployments/de/service-nlp-train-ja.yaml
+
+# for languages: ko-KR
+# - manifests/nlp-deployments/de/service-nlp-score-ko.yaml
+# - manifests/nlp-deployments/de/service-nlp-train-ko.yaml
+
+# for languages: ar-AE,es-ES,fr-FR,nl-NL,it-IT,pl-PL,pt-PT,pt-BR,th-TH,ru-RU,tr-TR,zh-CN
+# - manifests/nlp-deployments/de/service-nlp-score-xx.yaml
+# - manifests/nlp-deployments/de/service-nlp-train-xx.yaml
 
 # deployments
 - manifests/deployments/service-ai.yaml
