@@ -6,4 +6,5 @@ if [ ! -d "template" ]; then
 fi
 
 echo "Making the 'manifests' current in your 'template' folder..."
+rm -fr template/manifests
 cp -R manifests template/manifests
