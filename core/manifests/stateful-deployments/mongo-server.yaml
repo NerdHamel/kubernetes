@@ -1,45 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: mongo-server
+  name: mongo-server
 spec:
-    selector:
-        matchLabels:
-            app: mongo-server
-    replicas: 1
-    template:
-        metadata:
-            labels:
-                app: mongo-server
-        spec:
-            containers:
+  selector:
+    matchLabels:
+      app: mongo-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mongo-server
+    spec:
+      containers:
+        - name: mongo-server
+          image: docker.cognigy.com:5000/mongo:4.2.5_cognigy-4.X
+          args: ["--auth", "--replSet=rs0"]
+          resources:
+            limits:
+              memory: "5Gi"
+              cpu: "2"
+            requests:
+              memory: "2Gi"
+              cpu: "1"
+          ports:
             - name: mongo-server
-              image: docker.cognigy.com:5000/mongo:4.2.5_cognigy-4.X
-              args: ["--auth", "--replSet=rs0"]
-              resources:
-                limits:
-                    memory: "5Gi"
-                    cpu: "2"
-                requests:
-                    memory: "2Gi"
-                    cpu: "1"
-              ports:
-              - name: mongo-server
-                containerPort: 27017
-              volumeMounts:
-              - name: cognigy-mongo-storage
-                mountPath: /data/db
-              env:
-              - name: MONGO_INITDB_ROOT_USERNAME
-                value: admin
-              - name: MONGO_INITDB_ROOT_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: cognigy-mongo-server
-                        key: mongo-initdb-root-password
-            volumes:
+              containerPort: 27017
+          volumeMounts:
             - name: cognigy-mongo-storage
-              persistentVolumeClaim:
-                  claimName: mongodb
-            imagePullSecrets:
-            - name: cognigy-registry-token
+              mountPath: /data/db
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: admin
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-mongo-server
+                  key: mongo-initdb-root-password
+      volumes:
+        - name: cognigy-mongo-storage
+          persistentVolumeClaim:
+            claimName: mongodb
+      imagePullSecrets:
+        - name: cognigy-registry-token

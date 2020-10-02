@@ -4,78 +4,75 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-    name: cognigy-env
+  name: cognigy-env
 
 data:
-    NODE_ENV: production
+  NODE_ENV: production
 
-    # Enable the creation of metrics which will then get consumed
-    # by our 'service-monitoring'.
-    MONITOR_RPC_CALLS: "true"
+  # Enable the creation of metrics which will then get consumed
+  # by our 'service-monitoring'.
+  MONITOR_RPC_CALLS: "true"
 
-    # Redis configuration, will soon be a connection string
-    REDIS_HOST: redis
-    REDIS_PORT: "6379"
+  # Redis configuration, will soon be a connection string
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
 
-    # Redis (persistent) configuration, will soon be a connection string
-    REDIS_PERSISTENT_PORT: "6379"
-    REDIS_PERSISTENT_HOST: redis-persistent
+  # Redis (persistent) configuration, will soon be a connection string
+  REDIS_PERSISTENT_PORT: "6379"
+  REDIS_PERSISTENT_HOST: redis-persistent
 
-    # cleanup and constraint configuration
-    QUEUE_CLEANUP_INTERVAL: "1"
-    QUEUE_CLEANUP_IDLE_SINCE_MINUTES: "1"
+  # cleanup and constraint configuration
+  QUEUE_CLEANUP_INTERVAL: "1"
+  QUEUE_CLEANUP_IDLE_SINCE_MINUTES: "1"
 
-    # limits (api requests, db queries, context-size)
-    MESSAGE_TTL_SECONDS: "120"
-    MAX_MEMORY_OBJECT_SIZE: "65536"
-    HTTP_JSON_BODY_LIMIT: "65536"
-    MAX_BYTE_SIZE: "524288"
-    RESPONSE_BYTES_LIMIT: "524288"
+  # limits (api requests, db queries, context-size)
+  MESSAGE_TTL_SECONDS: "120"
+  MAX_MEMORY_OBJECT_SIZE: "65536"
+  HTTP_JSON_BODY_LIMIT: "65536"
+  MAX_BYTE_SIZE: "524288"
+  RESPONSE_BYTES_LIMIT: "524288"
 
-    # features (enable / disable)
-    FEATURE_CUSTOM_NODES: "true"
-    RSS_FEED_URL: https://hello.cognigy.com/product/tag/enterprise/rss.xml
+  # features (enable / disable)
+  FEATURE_CUSTOM_NODES: "true"
+  RSS_FEED_URL: https://hello.cognigy.com/product/tag/enterprise/rss.xml
 
-    # log cleanup
-    LOG_ENTRIES_TTL_IN_MINUTES: "1440"
-    LOG_ENTRIES_BUFFER_IN_SECONDS: "5"
+  # log cleanup
+  LOG_ENTRIES_TTL_IN_MINUTES: "1440"
+  LOG_ENTRIES_BUFFER_IN_SECONDS: "5"
 
-    # SMTP server for 'forgot password' functionality
-    SYSTEM_SMTP_HOST: "test"
-    SYSTEM_SMTP_PORT: "test"
-    SYSTEM_SMTP_USERNAME: "test"
-    SYSTEM_SMTP_FROM: "test"
-    SYSTEM_SMTP_CONNECTION_TYPE: "starttls"
-    # SYSTEM_SMTP_PASSWORD is a secret!
+  # SMTP server for 'forgot password' functionality
+  SYSTEM_SMTP_HOST: "test"
+  SYSTEM_SMTP_PORT: "test"
+  SYSTEM_SMTP_USERNAME: "test"
+  SYSTEM_SMTP_FROM: "test"
+  SYSTEM_SMTP_CONNECTION_TYPE: "starttls"
+  # SYSTEM_SMTP_PASSWORD is a secret!
 
-    # Domains to whitelist for cors for the API (service-api)
-    API_CORS_WHITELIST: ""
+  # Domains to whitelist for cors for the API (service-api)
+  API_CORS_WHITELIST: ""
 
-    # Execution relevant configuration (service-execution)
-    MODULE_MAX_EVENT_EMISSIONS: "10"
-    MAX_MODULE_EXECUTION_TIME_IN_SECONDS: "20"
+  # Execution relevant configuration (service-execution)
+  MODULE_MAX_EVENT_EMISSIONS: "10"
+  MAX_MODULE_EXECUTION_TIME_IN_SECONDS: "20"
 
-    # DNS names
-    FRONTEND_BASE_URL_WITH_PROTOCOL: http://ui
-    BACKEND_BASE_URL_WITH_PROTOCOL: http://api
-    ENDPOINT_BASE_URL_WITH_PROTOCOL: http://endpoint
-    WEBCHAT_BASE_URL_WITH_PROTOCOL: http://webchat
-    ENDPOINT_BASE_URL: http://endpoint
-    ODATA_HOSTNAME: odata
+  # DNS names
+  FRONTEND_BASE_URL_WITH_PROTOCOL: http://ui
+  BACKEND_BASE_URL_WITH_PROTOCOL: http://api
+  ENDPOINT_BASE_URL_WITH_PROTOCOL: http://endpoint
+  WEBCHAT_BASE_URL_WITH_PROTOCOL: http://webchat
+  ENDPOINT_BASE_URL: http://endpoint
+  ODATA_HOSTNAME: odata
 
-    # Endpoint configuration for Alexa
-    ALEXA_END_SESSION_AFTER_EACH_REPLY: "true"
+  # Endpoint configuration for Alexa
+  ALEXA_END_SESSION_AFTER_EACH_REPLY: "true"
 
-    # NLP configuration
-    CNLP_CORES: "4"
-
-    # If the livechat should be used, uncomment
-    # FEATURE_LIVECHAT: "true"
-
-    # Insert if the 'management-ui' is used
-    # INTERNAL_API_USERNAME:
-    # INTERNAL_API_PASSWORD:
-
-    # MAX_CONTACT_PROFILE_TTL_IN_MINUTES=
-    # MAX_CONVERSATION_TTL_IN_MINUTES=
-    # MAX_SESSION_STATE_TTL_IN_MINUTES=
+  # NLP configuration
+  CNLP_CORES: "4"
+  # If the livechat should be used, uncomment
+  # FEATURE_LIVECHAT: "true"
+  # Insert if the 'management-ui' is used
+  # INTERNAL_API_USERNAME:
+  # INTERNAL_API_PASSWORD:
+  # MAX_CONTACT_PROFILE_TTL_IN_MINUTES=
+  # MAX_CONVERSATION_TTL_IN_MINUTES=
+  # MAX_SESSION_STATE_TTL_IN_MINUTES=
