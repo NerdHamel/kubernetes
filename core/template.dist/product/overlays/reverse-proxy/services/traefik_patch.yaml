@@ -1,0 +1,4 @@
+- op: add
+  path: /spec/externalIPs
+  value:
+    - "10.215.27.118"

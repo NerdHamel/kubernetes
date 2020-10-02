@@ -1,11 +1,16 @@
-core/secrets/
-core/volumes/
-core/reverse-proxy/
+# ignore everything except certain folders in 'core'
+core/*
+!core/cloudproviders
+!core/template.dist
+!core/manifests
+!core/make_environment.sh
 
-monitoring/secrets/
-monitoring/volumes/
+# ignore everything except certain folders in 'management-ui'
+management-ui/*
+!management-ui/manifests
+!management-ui/template.dist
+!management-ui/make_environment.sh
 
-node_modules/
 dbinit.js
 
 core/volume-claims/cognigy-repo.yaml

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: management-ui
+spec:
+    selector:
+        matchLabels:
+            app: management-ui
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: management-ui
+        spec:
+            containers:
+            - name: management-ui
+              image: office-docker.cognigy.com:5000/management-ui:0ae0cb40dfc2114355827d012e55a8a9486425ee
+              resources:
+                limits:
+                    memory: "30Mi"
+                    cpu: "20m"
+                requests:
+                    memory: "10Mi"
+                    cpu: "10m"
+              envFrom:
+              - configMapRef:
+                  name: cognigy-env
+            imagePullSecrets:
+              - name: cognigy-registry-token

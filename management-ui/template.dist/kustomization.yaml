@@ -1,0 +1,13 @@
+resources:
+- manifests/deployment.yaml
+- manifests/ingress.yaml
+- manifests/service.yaml
+
+patchesJson6902:
+# ingress
+- target:
+    group: extensions
+    version: v1beta1
+    kind: Ingress
+    name: management-ui
+  path: overlays/ingress_patch.yaml

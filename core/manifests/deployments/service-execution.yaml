@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-execution
+spec:
+  selector:
+    matchLabels:
+      app: service-execution
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-execution
+    spec:
+      containers:
+        - name: service-execution
+          image: 'office-docker.cognigy.com:5000/service-execution:d898bdd83da3839961cd63fefcf02a2d6d700ecf'
+          resources:
+            requests:
+              cpu: '0.500'
+              memory: 240M
+            limits:
+              cpu: '0.500'
+              memory: 300M
+          volumeMounts:
+            - name: flow-modules
+              mountPath: /app/flowModules
+            - name: rabbitmq-connection-string
+              mountPath: /var/run/secrets
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - /opt/healthcheck.js
+            failureThreshold: 3
+            initialDelaySeconds: 90
+            periodSeconds: 60
+            timeoutSeconds: 10
+      volumes:
+        - name: flow-modules
+          persistentVolumeClaim:
+            claimName: flow-modules
+        - name: rabbitmq-connection-string
+          secret:
+            secretName: cognigy-rabbitmq
+            items:
+              - key: connection-string
+                path: rabbitmqConnectionString
+      imagePullSecrets:
+        - name: cognigy-registry-token

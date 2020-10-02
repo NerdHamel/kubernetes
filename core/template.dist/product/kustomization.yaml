@@ -1,0 +1,130 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+# config-maps
+- manifests/config-maps/config-map.yaml
+
+# services
+- manifests/services/service-analytics-odata.yaml
+- manifests/services/service-api.yaml
+- manifests/services/service-endpoint.yaml
+- manifests/services/service-ui.yaml
+- manifests/services/service-webchat.yaml
+
+# nlp deployments
+# for languages: de-DE
+# - manifests/nlp-deployments/de/service-nlp-score-de.yaml
+# - manifests/nlp-deployments/de/service-nlp-train-de.yaml
+
+# for languages: en-US,en-AU,en-CA,en-IN,en-GB
+- manifests/nlp-deployments/en/service-nlp-score-en.yaml
+- manifests/nlp-deployments/en/service-nlp-train-en.yaml
+
+# for languages: ge-GE,sv-SE,fi-FI,da-DK,nn-NO,vi-VN
+# - manifests/nlp-deployments/ge/service-nlp-score-ge.yaml
+# - manifests/nlp-deployments/ge/service-nlp-train-ge.yaml
+
+# for languages: ja-JP
+# - manifests/nlp-deployments/ja/service-nlp-score-ja.yaml
+# - manifests/nlp-deployments/ja/service-nlp-train-ja.yaml
+
+# for languages: ko-KR
+# - manifests/nlp-deployments/ko/service-nlp-score-ko.yaml
+# - manifests/nlp-deployments/ko/service-nlp-train-ko.yaml
+
+# for languages: ar-AE,es-ES,fr-FR,nl-NL,it-IT,pl-PL,pt-PT,pt-BR,th-TH,ru-RU,tr-TR,zh-CN
+# - manifests/nlp-deployments/xx/service-nlp-score-xx.yaml
+# - manifests/nlp-deployments/xx/service-nlp-train-xx.yaml
+
+# deployments
+- manifests/deployments/service-ai.yaml
+- manifests/deployments/service-alexa-management.yaml
+- manifests/deployments/service-analytics-collector.yaml
+- manifests/deployments/service-analytics-conversation-collector.yaml
+- manifests/deployments/service-analytics-conversation-provider.yaml
+- manifests/deployments/service-analytics-odata.yaml
+- manifests/deployments/service-analytics-realtime.yaml
+- manifests/deployments/service-analytics-reporter.yaml
+- manifests/deployments/service-api.yaml
+- manifests/deployments/service-cleanup.yaml
+- manifests/deployments/service-conversation-manager.yaml
+- manifests/deployments/service-custom-modules.yaml
+- manifests/deployments/service-endpoint.yaml
+- manifests/deployments/service-execution.yaml
+- manifests/deployments/service-handover.yaml
+- manifests/deployments/service-http.yaml
+- manifests/deployments/service-journeys.yaml
+- manifests/deployments/service-logs.yaml
+- manifests/deployments/service-nlp-ner.yaml
+- manifests/deployments/service-parser.yaml
+- manifests/deployments/service-profiles.yaml
+- manifests/deployments/service-resources.yaml
+- manifests/deployments/service-security.yaml
+- manifests/deployments/service-task-manager.yaml
+- manifests/deployments/service-trainer.yaml
+- manifests/deployments/service-ui.yaml
+- manifests/deployments/service-webchat.yaml
+
+# reverse proxy
+- manifests/reverse-proxy/deployments/traefik.yaml
+- manifests/reverse-proxy/ingress/service-analytics-odata.yaml
+- manifests/reverse-proxy/ingress/service-api.yaml
+- manifests/reverse-proxy/ingress/service-endpoint.yaml
+- manifests/reverse-proxy/ingress/service-ui.yaml
+- manifests/reverse-proxy/ingress/service-webchat.yaml
+- manifests/reverse-proxy/services/traefik.yaml
+
+patchesJson6902:
+# configmaps
+- target:
+    version: v1
+    kind: ConfigMap
+    name: cognigy-env
+  path: overlays/config-maps/config-map_patch.yaml
+
+# reverse-proxy, ingress
+- target:
+    group: extensions
+    version: v1beta1
+    kind: Ingress
+    name: service-analytics-odata
+  path: overlays/reverse-proxy/ingress/service-analytics-odata_patch.yaml
+
+- target:
+    group: extensions
+    version: v1beta1
+    kind: Ingress
+    name: service-api
+  path: overlays/reverse-proxy/ingress/service-api_patch.yaml
+
+- target:
+    group: extensions
+    version: v1beta1
+    kind: Ingress
+    name: service-endpoint
+  path: overlays/reverse-proxy/ingress/service-endpoint_patch.yaml
+
+- target:
+    group: extensions
+    version: v1beta1
+    kind: Ingress
+    name: service-ui
+  path: overlays/reverse-proxy/ingress/service-ui_patch.yaml
+
+- target:
+    group: extensions
+    version: v1beta1
+    kind: Ingress
+    name: service-webchat
+  path: overlays/reverse-proxy/ingress/service-webchat_patch.yaml
+
+# reverse-proxy, service
+- target:
+    version: v1
+    kind: Service
+    name: traefik
+  path: overlays/reverse-proxy/services/traefik_patch.yaml
+
+patchesStrategicMerge:
+  - replica_count.yaml
