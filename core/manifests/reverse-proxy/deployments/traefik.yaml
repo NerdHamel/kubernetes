@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: traefik
-              image: docker.cognigy.com:5000/traefik:1.7.26-alpine
+              image: office-docker.cognigy.com:5000/traefik:1.7.26-alpine
               resources:
                 requests:
                     memory: "70Mi"
