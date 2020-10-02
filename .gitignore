@@ -9,7 +9,7 @@ core/*
 management-ui/*
 !management-ui/manifests
 !management-ui/template.dist
-!management-ui/make.sh
+!management-ui/make_environment.sh
 
 dbinit.js
 
