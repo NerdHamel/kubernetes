@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-ui
-          image: 'office-docker.cognigy.com:5000/service-ui:f375fa156853154e2028bb89faa56c53c6a4138d'
+          image: 'office-docker.cognigy.com:5000/service-ui:5688f52b1001a6db8ffddedc54c3bdd137986b43'
           resources:
             requests:
               cpu: '0.1'
