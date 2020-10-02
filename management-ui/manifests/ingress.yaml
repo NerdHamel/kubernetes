@@ -6,7 +6,7 @@ metadata:
         kubernetes.io/ingress.class: traefik
 spec:
     rules:
-    - host: management-ui-v4.cognigy.ai
+    - host: management-ui
       http:
         paths:
         - path: /
