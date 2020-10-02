@@ -1,13 +1,5 @@
 ## 4.0.0
-### Modificaton of files
-The referenced Docker images were changed.
-
-### New services
-We added the following new files:
-- core/deployments/service-resources
-- core/secrets.dist/cognigy-service-resources
-
-The ``service-resources`` microservice is our new way of managing all resources within Cognigy.AI.
+This is the public release of Cognigy.AI version 4.0.0! We have completely re-structured this repository. Please consult our updated `Installation and Dev-Ops guide` in order to stand how you can work with this updated repository.
 
 ---
 
