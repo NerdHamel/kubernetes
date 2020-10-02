@@ -22,8 +22,8 @@ data:
     REDIS_PERSISTENT_HOST: redis-persistent
 
     # cleanup and constraint configuration
-    QUEUE_CLEANUP_INTERVAL: "20"
-    QUEUE_CLEANUP_IDLE_SINCE_MINUTES: "3"
+    QUEUE_CLEANUP_INTERVAL: "1"
+    QUEUE_CLEANUP_IDLE_SINCE_MINUTES: "1"
 
     # limits (api requests, db queries, context-size)
     MESSAGE_TTL_SECONDS: "120"
@@ -68,8 +68,6 @@ data:
 
     # NLP configuration
     CNLP_CORES: "4"
-    LANGUAGE_CONFIG_PATH: /data/config/languages.json
-    NLP_MULTI_LANGUAGE_MODEL_PATH: /data/models/xx_ent_wiki_sm-2.0.0/xx_ent_wiki_sm/xx_ent_wiki_sm-2.0.0
 
     # If the livechat should be used, uncomment
     # FEATURE_LIVECHAT: "true"
