@@ -4,8 +4,6 @@ kind: Kustomization
 resources:
 # config-maps
 - manifests/config-maps/config-map.yaml
-- manifests/config-maps/redis.yaml
-- manifests/config-maps/redis-persistent.yaml
 
 # services
 - manifests/services/service-analytics-odata.yaml
