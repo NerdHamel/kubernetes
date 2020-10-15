@@ -54,6 +54,29 @@ then
   perl -0 -i -pe "s/<RUN_NLP_ZH>((\W|\w)*?)<\/RUN_NLP_ZH>//g" prometheus/configmaps/alertrule.yaml
   perl -0 -i -pe "s/<RUN_NLP_FI>((\W|\w)*?)<\/RUN_NLP_FI>//g" prometheus/configmaps/alertrule.yaml
   perl -0 -i -pe "s/<RUN_NLP_SV>((\W|\w)*?)<\/RUN_NLP_SV>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_JA>((\W|\w)*?)<\/RUN_NLP_JA>//g" prometheus/configmaps/alertrule.yaml
+fi
+
+if [ "$host" == "internal.cognigy.ai" ]
+then
+  perl -0 -i -pe "s/<RUN_NLP_ZH>((\W|\w)*?)<\/RUN_NLP_ZH>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_FI>((\W|\w)*?)<\/RUN_NLP_FI>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_SV>((\W|\w)*?)<\/RUN_NLP_SV>//g" prometheus/configmaps/alertrule.yaml
+fi
+
+if [ "$host" == "au-01.cognigy.ai" ]
+then
+  perl -0 -i -pe "s/<RUN_NLP_DE>((\W|\w)*?)<\/RUN_NLP_DE>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_GE>((\W|\w)*?)<\/RUN_NLP_GE>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_ES>((\W|\w)*?)<\/RUN_NLP_ES>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_NL>((\W|\w)*?)<\/RUN_NLP_NL>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_JA>((\W|\w)*?)<\/RUN_NLP_JA>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_ZH>((\W|\w)*?)<\/RUN_NLP_ZH>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_KO>((\W|\w)*?)<\/RUN_NLP_KO>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_AR>((\W|\w)*?)<\/RUN_NLP_AR>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_FI>((\W|\w)*?)<\/RUN_NLP_FI>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_FR>((\W|\w)*?)<\/RUN_NLP_FR>//g" prometheus/configmaps/alertrule.yaml
+  perl -0 -i -pe "s/<RUN_NLP_SV>((\W|\w)*?)<\/RUN_NLP_SV>//g" prometheus/configmaps/alertrule.yaml
 fi
 
 sed -i "s/<RUN_NLP_DE>//g" prometheus/configmaps/alertrule.yaml
