@@ -1,3 +1,9 @@
+# 3.6.6
+## Modification of files
+The referenced Docker images were changed.
+
+---
+
 # 3.6.5
 ## Modification of files
 The referenced Docker images were changed.
