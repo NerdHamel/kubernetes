@@ -1,3 +1,7 @@
+# 3.6.7
+## Change MongoDB reclaim policy
+The MongoDB reclaim policy has been changed from `Delete` to `Retain`
+
 # 3.6.5
 ## Modification of files
 The referenced Docker images were changed.
