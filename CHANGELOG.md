@@ -1,3 +1,7 @@
+# 4.0.3
+## Change MongoDB and Redis-Persistent reclaim policy
+The MongoDB and Redis-Persistent reclaim policy has been changed from `Delete` to `Retain`
+
 # 4.0.2
 ## Modification of files
 The referenced Docker images were changed.
@@ -14,6 +18,9 @@ The referenced Docker images were changed.
 This is the public release of Cognigy.AI version 4.0.0! We have completely re-structured this repository. Please consult our updated `Installation and Dev-Ops guide` in order to stand how you can work with this updated repository.
 
 ---
+# 3.6.7
+## Change MongoDB reclaim policy
+The MongoDB reclaim policy has been changed from `Delete` to `Retain`
 
 # 3.6.0
 ## Modification of files
