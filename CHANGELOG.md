@@ -1,3 +1,7 @@
+# 3.6.7
+## Change MongoDB and Redis-Persistent reclaim policy
+The MongoDB and Redis-Persistent reclaim policy have been changed from `Delete` to `Retain`
+
 # 3.6.5
 ## Modification of files
 The referenced Docker images were changed.
