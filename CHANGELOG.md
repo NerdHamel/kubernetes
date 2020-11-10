@@ -1,6 +1,6 @@
 # 4.0.3
-## Change MongoDB reclaim policy
-The MongoDB reclaim policy has been changed from `Delete` to `Retain`
+## Change MongoDB and Redis-Persistent reclaim policy
+The MongoDB and Redis-Persistent reclaim policy has been changed from `Delete` to `Retain`
 
 # 4.0.2
 ## Modification of files
