@@ -1,3 +1,12 @@
+# 3.6.6
+## Modification of files
+The referenced Docker images were changed.
+
+## Traefik
+We added http -> https redirect to the Traefik deployment, as well as the minimum supported TLS version
+
+---
+
 # 3.6.5
 ## Modification of files
 The referenced Docker images were changed.
