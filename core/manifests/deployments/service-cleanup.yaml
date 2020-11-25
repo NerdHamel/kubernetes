@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-cleanup
-          image: 'docker.cognigy.com:5000/service-cleanup:86a8b3ecc118b4e83376f976763ec0baa7f480ca'
+          image: 'docker.cognigy.com:5000/service-cleanup:1202a22df4de4d00ab97ece459795b6e7f4191b0'
           resources:
             requests:
               cpu: '0.1'
