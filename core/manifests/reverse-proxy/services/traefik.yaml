@@ -8,11 +8,11 @@ spec:
     ports:
     - name: traefik-http
       port: 80
-      targetPort: 80
+      targetPort: 8000
       protocol: TCP
     - name: traefik-https
       port: 443
-      targetPort: 443
+      targetPort: 4430
       protocol: TCP
     - protocol: TCP
       port: 8080
