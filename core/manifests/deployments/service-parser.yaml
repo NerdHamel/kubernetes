@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-parser
-          image: 'docker.cognigy.com:5000/service-parser:fa9a156598dadc18dc290d9f50fc65c97a8ac4cb'
+          image: 'docker.cognigy.com:5000/service-parser:685df9c46e0f2d4ba4bebcb322cd772b9fd8958a'
           resources:
             requests:
               cpu: '0.1'

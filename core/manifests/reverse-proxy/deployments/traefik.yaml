@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: traefik
-              image: docker.cognigy.com:5000/traefik:1.7.26-alpine
+              image: docker.cognigy.com:5000/traefik:1.7.26-alpine_non_priviledged
               resources:
                 requests:
                     memory: "70Mi"
@@ -25,16 +25,16 @@ spec:
               args: [
                 "--api",
                 "--kubernetes",
-                "--entryPoints=Name:http Address::80 Redirect.EntryPoint:https",
-                "--entryPoints=Name:https Address::443 TLS:/run/secrets/traefik.cert,/run/secrets/traefik.key TLS.MinVersion:VersionTLS12",
+                "--entryPoints=Name:http Address::8000 Redirect.EntryPoint:https",
+                "--entryPoints=Name:https Address::4430 TLS:/run/secrets/traefik.cert,/run/secrets/traefik.key TLS.MinVersion:VersionTLS12",
                 "--defaultentrypoints=http,https",
                 "--metrics.prometheus=true"
               ]
               ports:
                 - name: http
-                  containerPort: 80
+                  containerPort: 8000
                 - name: https
-                  containerPort: 443
+                  containerPort: 4430
               volumeMounts:
                  - name: traefik
                    mountPath: /var/run/secrets/
