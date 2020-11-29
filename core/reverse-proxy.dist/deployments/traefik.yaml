@@ -26,7 +26,7 @@ spec:
                 "--api",
                 "--kubernetes",
                 "--entryPoints=Name:http Address::80 Redirect.EntryPoint:https",
-                "--entryPoints=Name:https Address::443 TLS:/run/secrets/traefik.cert,/run/secrets/traefik.key TLS.MinVersion:VersionTLS12",
+                "--entryPoints=Name:https Address::443 TLS:/run/secrets/traefik.cert,/run/secrets/traefik.key TLS.MinVersion:VersionTLS12 WhiteList.UseXForwardedFor:true ProxyProtocol.TrustedIPs:0.0.0.0/0",
                 "--defaultentrypoints=http,https",
                 "--metrics.prometheus=true"
               ]
