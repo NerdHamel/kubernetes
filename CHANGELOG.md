@@ -8,6 +8,9 @@ The MongoDB and Redis-Persistent reclaim policies for PersistentVolumes have bee
 ## Management UI
 The Docker image for the management ui was updated.
 
+## Traefik
+We have added the necessary command line arguments to Traefik - our Ingress Controller - so client IP forwarding can work if the necessary adjustments in the Traefik service (enabling kube-proxy protocol) will be added as well.
+
 ---
 
 # 4.0.2
