@@ -5,6 +5,9 @@ The referenced Docker images were changed.
 ## Change MongoDB and Redis-Persistent reclaim policy
 The MongoDB and Redis-Persistent reclaim policies for PersistentVolumes have been changed from `Delete` to `Retain`. Using `Retain` as the reclaim policy is much safer as deleting the PV will not automatically delete the data when the product runs in e.g. a cloud environment.
 
+## Management UI
+The Docker image for the management ui was updated.
+
 ---
 
 # 4.0.2
