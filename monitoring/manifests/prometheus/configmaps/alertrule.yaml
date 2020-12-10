@@ -97,6 +97,15 @@ data:
         annotations:
           summary: RabbitMQ Memory useages is too high 
           description: RabbitMQ Memory useages is too high
+
+      - alert: RabbitMQ Ready message is getting high 
+        expr: sum(rate(rabbitmq_queue_messages_ready[15m])) > 5
+        for: 1m
+        labels:
+          hostname: <Host>
+        annotations:
+          summary: RabbitMQ Ready message is getting high 
+          description: RabbitMQ Ready message is getting high
       
       - alert: RabbitMQ Unackted message is getting high 
         expr: sum(rabbitmq_queue_messages_unacked ) > 15
