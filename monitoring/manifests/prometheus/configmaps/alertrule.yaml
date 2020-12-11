@@ -107,14 +107,14 @@ data:
           summary: RabbitMQ Ready message is getting high 
           description: RabbitMQ Ready message is getting high
       
-      - alert: RabbitMQ Unackted message is getting high 
-        expr: sum(rabbitmq_queue_messages_unacked ) > 15
+      - alert: RabbitMQ Unacked message is getting high 
+        expr: sum(rate(rabbitmq_queue_messages_unacked[15m])) > 10
         for: 1m
         labels:
           hostname: <Host>
         annotations:
-          summary: RabbitMQ Unackted message is getting high 
-          description: RabbitMQ Unackted message is getting high
+          summary: RabbitMQ Unacked message is getting high 
+          description: RabbitMQ Unacked message is getting high
       
       - alert: Redis Deployment Down
         expr: absent(count(kube_deployment_status_replicas{deployment="redis"})) == 1
