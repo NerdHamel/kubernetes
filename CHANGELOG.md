@@ -1,7 +1,19 @@
 # 3.6.7
-## Change MongoDB and Redis-Persistent reclaim policy
-The MongoDB and Redis-Persistent reclaim policy have been changed from `Delete` to `Retain`
+## Modification of files
+The referenced Docker images were changed.
 
+## Change MongoDB and Redis-Persistent reclaim policy
+The MongoDB and Redis-Persistent reclaim policy have been changed from `Delete` to `Retain`. Using `Retain` is safer especially in cloud environments as deleting PVs by accident will not de-privision and delete the data that resides within those.
+
+---
+# 3.6.6
+## Modification of files
+The referenced Docker images were changed.
+
+## Traefik
+We added http -> https redirect to the Traefik deployment, as well as the minimum supported TLS version
+
+---
 # 3.6.5
 ## Modification of files
 The referenced Docker images were changed.
