@@ -24,12 +24,12 @@ spec:
               memory: 75M
           envFrom:
             - configMapRef:
-                name: cognigy-env
+                name: livechat-env
           env:
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: cognigy-jwt
+                  name: live-agent-jwt
                   key: secret
           volumeMounts:
             - name: mongodb-connection-string

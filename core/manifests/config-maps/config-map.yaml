@@ -1,6 +1,4 @@
 # This file contains the main configuration for COGNIGY.AI.
-# This API object should be deployed first, since all API objects of
-# type deployment are dependent on it.
 apiVersion: v1
 kind: ConfigMap
 metadata:
