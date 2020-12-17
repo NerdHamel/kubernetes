@@ -24,6 +24,6 @@ spec:
               memory: 75M
           envFrom:
             - configMapRef:
-                name: cognigy-env
+                name: live-agent-env
       imagePullSecrets:
         - name: cognigy-registry-token

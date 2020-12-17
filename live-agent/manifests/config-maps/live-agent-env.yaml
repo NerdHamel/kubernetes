@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: livechat-env
+  name: live-agent-env
 
 data:
   # The TTL of the JWT + access token in seconds. If not set, a default
@@ -14,21 +14,25 @@ data:
   # HTTP_TEXT_BODY_LIMIT:
 
   # The DNS name for the live-agent-api
-  LIVECHAT_BACKEND_BASE_URL_WITH_PROTOCOL: live-agent-api
+  LIVECHAT_BACKEND_BASE_URL_WITH_PROTOCOL: http://live-agent-api
+
+  # The DNS name for the Cognigy.AI ui
+  FRONTEND_BASE_URL_WITH_PROTOCOL: http://ui
 
   # The DNS name of the Cognigy.AI api
-  BACKEND_BASE_URL_WITH_PROTOCOL: api
+  BACKEND_BASE_URL_WITH_PROTOCOL: http://api
 
   # The DNS name of the Cognigy.AI endpoint
-  ENDPOINT_BASE_URL_WITH_PROTOCOL: endpoint
+  ENDPOINT_BASE_URL_WITH_PROTOCOL: http://endpoint
 
   # OAuth client secret for Cognigy live-agent. This needs to match to the one
   # configured in Cognigy.AI (cognigy-env) configmap.
   LIVE_AGENT_CLIENT_SECRET:
 
-  # A secret that can be used to directly authenticate to the
-  # livechat api
-  # LIVE_AGENT_API_SECRET:
+  # A secret which will be used between Cognigy.AI and Cognigy Livechat API
+  # for authentication purpose. This also needs to be set on the Cognigy.AI
+  # side.
+  LIVE_AGENT_API_SECRET:
 
   # Cors whitelist for the live-agent API. By default all origins are allowed,
   # so the application sets it to "*"

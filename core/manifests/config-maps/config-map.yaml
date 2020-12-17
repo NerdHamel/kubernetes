@@ -66,11 +66,15 @@ data:
 
   # NLP configuration
   CNLP_CORES: "4"
-  # If the livechat should be used, uncomment
-  # FEATURE_LIVECHAT: "true"
+
   # Insert if the 'management-ui' is used
   # INTERNAL_API_USERNAME:
   # INTERNAL_API_PASSWORD:
+
   # MAX_CONTACT_PROFILE_TTL_IN_MINUTES=
   # MAX_CONVERSATION_TTL_IN_MINUTES=
   # MAX_SESSION_STATE_TTL_IN_MINUTES=
+
+  # Cognigy.AI Live Agent
+  # LIVE_AGENT_CLIENT_SECRET:
+  # LIVE_AGENT_API_SECRET:

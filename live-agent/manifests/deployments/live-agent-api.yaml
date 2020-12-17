@@ -24,7 +24,7 @@ spec:
               memory: 75M
           envFrom:
             - configMapRef:
-                name: livechat-env
+                name: live-agent-env
           env:
             - name: JWT_SECRET
               valueFrom:
