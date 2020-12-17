@@ -47,7 +47,7 @@ spec:
       volumes:
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-api
+            secretName: live-agent-api
             items:
               - key: connection-string
                 path: mongodbConnectionString
