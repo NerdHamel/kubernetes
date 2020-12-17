@@ -78,3 +78,6 @@ data:
   # Cognigy.AI Live Agent
   # LIVE_AGENT_CLIENT_SECRET:
   # LIVE_AGENT_API_SECRET:
+
+  # The DNS name for the live-agent-api
+  # LIVECHAT_BACKEND_BASE_URL_WITH_PROTOCOL
