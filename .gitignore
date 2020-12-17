@@ -11,6 +11,12 @@ management-ui/*
 !management-ui/template.dist
 !management-ui/make_environment.sh
 
+# ignore everything except certain folders in 'live-agent'
+live-agent/*
+!live-agent/manifests
+!live-agent/template.dist
+!live-agent/make_environment.sh
+
 dbinit.js
 
 core/volume-claims/cognigy-repo.yaml
