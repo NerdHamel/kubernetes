@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: live-agent-api
+spec:
+  selector:
+    matchLabels:
+      app: live-agent-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: live-agent-api
+    spec:
+      containers:
+        - name: live-agent-api
+          image: 'docker.cognigy.com:5000/service-api:1202a22df4de4d00ab97ece459795b6e7f4191b0'
+          resources:
+            requests:
+              cpu: '0.1'
+              memory: 60M
+            limits:
+              cpu: '0.1'
+              memory: 75M
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-jwt
+                  key: secret
+          volumeMounts:
+            - name: mongodb-connection-string
+              mountPath: /var/run/secrets/mongodbConnectionString
+              subPath: mongodbConnectionString
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - /opt/healthcheck.js
+            failureThreshold: 3
+            initialDelaySeconds: 90
+            periodSeconds: 60
+            timeoutSeconds: 10
+      volumes:
+        - name: mongodb-connection-string
+          secret:
+            secretName: cognigy-service-api
+            items:
+              - key: connection-string
+                path: mongodbConnectionString
+      imagePullSecrets:
+        - name: cognigy-registry-token
