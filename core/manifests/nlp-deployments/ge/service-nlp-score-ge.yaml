@@ -49,7 +49,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: 'ge-GE,sv-SE,fi-FI,da-DK,nn-NO,vi-VN'
+              value: 'ge-GE,sv-SE,fi-FI,da-DK,nn-NO,vi-VN','hi-IN','bn-IN','ta-IN'
             - name: SCORE
               value: 'true'
       volumes:
