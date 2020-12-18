@@ -37,3 +37,6 @@ data:
   # Cors whitelist for the live-agent API. By default all origins are allowed,
   # so the application sets it to "*"
   # LIVE_AGENT_API_CORS_WHITELIST:
+
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
