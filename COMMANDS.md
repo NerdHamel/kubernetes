@@ -106,6 +106,8 @@ watch -d kubectl get deployment
 kubectl logs -f --tail 100 deployment/service-security
 ```
 
+---
+## Chapter 4, Configuration
 ### 4.2 Custom theme
 **Configuring a theme**
 ```
@@ -199,9 +201,67 @@ kubectl create configmap theme-custom-config.json --from-file custom_config.json
   path: overlays/deployments/service-ui_patch.yaml
 ```
 
+---
+## Chapter 5, Updating
 ### 5.2 Retrieving the update
 **Make local repository current**
 ```
 git fetch origin
 git checkout tags/v4.0.0
+```
+
+---
+## Chapter 6, Cognigy Live Agent
+### 6.2.2 Using templates
+**Preparing the files for a Cognigy Live Agent installation**
+```
+cd kubernetes.git
+cd live-agent
+chmod +x make_environment.sh
+./make_environment.sh development
+```
+
+### 6.2.3 Secrets
+**Preparing the Live Agent secrets for your installation.**
+```
+cd kubernetes.git/live-agent/<environment>
+cp -R secrets.dist secrets
+```
+
+**Generating safe values for your Live Agent secrets.**
+```
+wget https://github.com/Cognigy/kubernetes-tools/releases/download/v2.0.0/initialization-linux
+chmod +x ./initialization-linux
+./initialization-linux --generate
+```
+
+**Creating Live Agent secrets in your Kubernetes cluster**
+```
+kubectl apply -f secrets
+```
+
+### 6.2.4 Storage
+**Creating additional database and user for Live Agent.**
+```
+kubectl exec -it deployment/mongo-server -- sh
+mongo -u admin -p $MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin
+
+// insert contents of your "dbinit.js" script, located next to your 'secrets' folder
+```
+
+### 6.2.5 Patch files
+**Applying Cognigy Live Agent files in order to initiate initial deployment.**
+```
+cd kubernetes.git/live-agent/<environment>
+kubectl apply -k ./
+```
+
+**Updating Cognigy.AI configuration and ensure that services have correct configuration.**
+```
+cd kubernetes.git/core/<environment>/product
+kubectl apply -k ./
+
+kubectl rollout restart deployments/service-api
+kubectl rollout restart deployments/service-ui
+kubectl rollout restart deployments/service-handover
 ```
