@@ -71,6 +71,24 @@ data:
           summary: Replica of RabbitMQ is down.
           description: Replica of RabbitMQ is down for the last 1 minute(s).
       
+      - alert: RabbitMQ Ready message is getting high 
+        expr: sum(rate(rabbitmq_queue_messages_ready[15m])) > 5
+        for: 1m
+        labels:
+          hostname: <Host>
+        annotations:
+          summary: RabbitMQ Ready message is getting high 
+          description: RabbitMQ Ready message is getting high
+      
+      - alert: RabbitMQ Ready message is getting high 
+        expr: sum(rate(rabbitmq_queue_messages_ready[15m])) > 5
+        for: 1m
+        labels:
+          hostname: <Host>
+        annotations:
+          summary: RabbitMQ Ready message is getting high 
+          description: RabbitMQ Ready message is getting high
+      
       - alert: RabbitMQ Restarted
         expr: rate(kube_pod_container_status_restarts_total{container="rabbitmq"}[15m]) > 0
         for: 1m
