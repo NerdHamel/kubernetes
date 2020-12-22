@@ -1,0 +1,42 @@
+# This file contains the main configuration for Cognigy live-agent.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: live-agent-env
+
+data:
+  # The TTL of the JWT + access token in seconds. If not set, a default
+  # value will be used.
+  # LIVE_AGENT_TOKEN_TTL_IN_SECONDS:
+
+  # Limits for the Livechat API
+  # HTTP_JSON_BODY_LIMIT:
+  # HTTP_TEXT_BODY_LIMIT:
+
+  # The DNS name for the live-agent-api
+  LIVE_AGENT_BACKEND_BASE_URL_WITH_PROTOCOL: http://live-agent-api
+
+  # The DNS name for the Cognigy.AI ui
+  FRONTEND_BASE_URL_WITH_PROTOCOL: http://ui
+
+  # The DNS name of the Cognigy.AI api
+  BACKEND_BASE_URL_WITH_PROTOCOL: http://api
+
+  # The DNS name of the Cognigy.AI endpoint
+  ENDPOINT_BASE_URL_WITH_PROTOCOL: http://endpoint
+
+  # OAuth client secret for Cognigy live-agent. This needs to match to the one
+  # configured in Cognigy.AI (cognigy-env) configmap.
+  LIVE_AGENT_CLIENT_SECRET:
+
+  # A secret which will be used between Cognigy.AI and Cognigy Livechat API
+  # for authentication purpose. This also needs to be set on the Cognigy.AI
+  # side.
+  LIVE_AGENT_API_SECRET:
+
+  # Cors whitelist for the live-agent API. By default all origins are allowed,
+  # so the application sets it to "*"
+  # LIVE_AGENT_API_CORS_WHITELIST:
+
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"

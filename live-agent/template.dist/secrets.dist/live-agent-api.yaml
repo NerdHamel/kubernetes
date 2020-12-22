@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: live-agent-api
+type: Opaque
+data:
+    # The full mongodb connection string, has a schema of:
+    # mongodb://service-ai:<password>@<host>:<port>/database or different for replica-set
+    connection-string:

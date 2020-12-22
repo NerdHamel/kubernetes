@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-trainer
-          image: 'docker.cognigy.com:5000/service-trainer:1202a22df4de4d00ab97ece459795b6e7f4191b0'
+          image: 'office-docker.cognigy.com:5000/service-trainer:d24d0de93c314b7ca59a71dbc25a01c222e60861'
           resources:
             requests:
               cpu: '0.1'
