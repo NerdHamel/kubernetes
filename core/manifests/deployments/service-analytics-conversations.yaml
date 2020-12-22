@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-analytics-conversation-collector
+  name: service-analytics-conversations
 spec:
   selector:
     matchLabels:
-      app: service-analytics-conversation-collector
+      app: service-analytics-conversations
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-analytics-conversation-collector
+        app: service-analytics-conversations
     spec:
       containers:
-        - name: service-analytics-conversation-collector
-          image: 'docker.cognigy.com:5000/service-analytics-conversation-collector:1202a22df4de4d00ab97ece459795b6e7f4191b0'
+        - name: service-analytics-conversations
+          image: 'docker.cognigy.com:5000/service-analytics-conversations:e2323e29b2405e50b8b17ae9323e65bac579a173'
           resources:
             requests:
               cpu: '0.1'

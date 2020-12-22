@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: live-agent-ui
+spec:
+  selector:
+    matchLabels:
+      app: live-agent-ui
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: live-agent-ui
+    spec:
+      containers:
+        - name: live-agent-ui
+          image: 'docker.cognigy.com:5000/live-agent-ui:e2323e29b2405e50b8b17ae9323e65bac579a173'
+          resources:
+            requests:
+              cpu: '0.1'
+              memory: 60M
+            limits:
+              cpu: '0.1'
+              memory: 75M
+          envFrom:
+            - configMapRef:
+                name: live-agent-env
+      imagePullSecrets:
+        - name: cognigy-registry-token

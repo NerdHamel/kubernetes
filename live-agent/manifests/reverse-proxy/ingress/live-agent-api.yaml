@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: live-agent-api
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: live-agent-api
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: live-agent-api
+          servicePort: 8000

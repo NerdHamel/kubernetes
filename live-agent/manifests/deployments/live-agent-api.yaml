@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-analytics-conversation-provider
+  name: live-agent-api
 spec:
   selector:
     matchLabels:
-      app: service-analytics-conversation-provider
+      app: live-agent-api
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-analytics-conversation-provider
+        app: live-agent-api
     spec:
       containers:
-        - name: service-analytics-conversation-provider
-          image: 'docker.cognigy.com:5000/service-analytics-conversation-provider:1202a22df4de4d00ab97ece459795b6e7f4191b0'
+        - name: live-agent-api
+          image: 'docker.cognigy.com:5000/live-agent-api:e2323e29b2405e50b8b17ae9323e65bac579a173'
           resources:
             requests:
               cpu: '0.1'
@@ -24,14 +24,20 @@ spec:
               memory: 75M
           envFrom:
             - configMapRef:
-                name: cognigy-env
+                name: live-agent-env
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: live-agent-jwt
+                  key: secret
           volumeMounts:
-            - name: rabbitmq-connection-string
-              mountPath: /var/run/secrets/rabbitmqConnectionString
-              subPath: rabbitmqConnectionString
             - name: mongodb-connection-string
               mountPath: /var/run/secrets/mongodbConnectionString
               subPath: mongodbConnectionString
+            - name: redis-password
+              mountPath: /var/run/secrets/redis-password.conf    
+              subPath: redis-password.conf          
           livenessProbe:
             exec:
               command:
@@ -42,17 +48,14 @@ spec:
             periodSeconds: 60
             timeoutSeconds: 10
       volumes:
-        - name: rabbitmq-connection-string
-          secret:
-            secretName: cognigy-rabbitmq
-            items:
-              - key: connection-string
-                path: rabbitmqConnectionString
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-analytics-conversation-collector-provider
+            secretName: live-agent-api
             items:
               - key: connection-string
                 path: mongodbConnectionString
+        - name: redis-password
+          secret:
+            secretName: cognigy-redis-password                
       imagePullSecrets:
         - name: cognigy-registry-token
