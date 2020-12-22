@@ -14,7 +14,7 @@ data:
   # HTTP_TEXT_BODY_LIMIT:
 
   # The DNS name for the live-agent-api
-  LIVECHAT_BACKEND_BASE_URL_WITH_PROTOCOL: http://live-agent-api
+  LIVE_AGENT_BACKEND_BASE_URL_WITH_PROTOCOL: http://live-agent-api
 
   # The DNS name for the Cognigy.AI ui
   FRONTEND_BASE_URL_WITH_PROTOCOL: http://ui

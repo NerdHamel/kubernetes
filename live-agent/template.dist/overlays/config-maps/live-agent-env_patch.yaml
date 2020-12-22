@@ -1,6 +1,6 @@
 # DNS names
 - op: add
-  path: /data/LIVECHAT_BACKEND_BASE_URL_WITH_PROTOCOL
+  path: /data/LIVE_AGENT_BACKEND_BASE_URL_WITH_PROTOCOL
   value: "http://live-agent-api"
 
 # DNS name of your Cognigy.AI API.
