@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-conversation-manager
-          image: 'office-docker.cognigy.com:5000/service-conversation-manager:d24d0de93c314b7ca59a71dbc25a01c222e60861'
+          image: 'docker.cognigy.com:5000/service-conversation-manager:e2323e29b2405e50b8b17ae9323e65bac579a173'
           resources:
             requests:
               cpu: '0.1'
