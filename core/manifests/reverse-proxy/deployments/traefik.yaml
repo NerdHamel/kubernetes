@@ -25,7 +25,7 @@ spec:
               args: [
                 "--api",
                 "--kubernetes",
-                "--entryPoints=Name:http Address::8000 Redirect.EntryPoint:https",
+                "--entryPoints=Name:http Address::8000 Redirect.EntryPoint:https ProxyProtocol.TrustedIPs:0.0.0.0/0 WhiteList.UseXForwardedFor:true",
                 "--entryPoints=Name:https Address::4430 TLS:/run/secrets/traefik.cert,/run/secrets/traefik.key TLS.MinVersion:VersionTLS12 ProxyProtocol.TrustedIPs:0.0.0.0/0 WhiteList.UseXForwardedFor:true",
                 "--defaultentrypoints=http,https",
                 "--metrics.prometheus=true"
