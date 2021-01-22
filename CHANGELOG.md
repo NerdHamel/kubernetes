@@ -1,3 +1,19 @@
+# 4.1.1
+
+## Modification of files
+The referenced Docker images were changed.
+
+## Management UI
+The referenced Docker images were changed.
+
+## Live Agent
+The referenced Docker images were changed.
+
+## Monitoring
+We have adjusted the alerting rules and have removed alerting rules for services which no longer exist.
+
+---
+
 # 4.1.0
 ## Modification of files
 The referenced Docker images were changed.
