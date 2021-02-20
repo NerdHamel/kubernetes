@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-alexa-management
-          image: "docker.cognigy.com:5000/service-alexa-management:d3b962ab75e62df68c2861b29e1f355d42f83988"
+          image: 'docker.cognigy.com:5000/service-alexa-management:d3b962ab75e62df68c2861b29e1f355d42f83988'
           resources:
             requests:
-              cpu: "0.1"
+              cpu: '0.1'
               memory: 60M
             limits:
-              cpu: "0.1"
+              cpu: '0.1'
               memory: 75M
           envFrom:
             - configMapRef:
@@ -68,5 +68,8 @@ spec:
             items:
               - key: connection-string
                 path: mongodbConnectionString
+        - name: redis-password
+          secret:
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token
