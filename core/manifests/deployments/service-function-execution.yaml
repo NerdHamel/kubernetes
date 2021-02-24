@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-function-execution
+spec:
+  selector:
+    matchLabels:
+      app: service-function-execution
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-function-execution
+    spec:
+      containers:
+        - name: service-function-execution
+          image: 'docker.cognigy.com:5000/service-function-execution:90b36db2ce048cdfb12240c7a67ce8aaf009b3f5'
+          resources:
+            requests:
+              cpu: '1'
+              memory: 512M
+            limits:
+              cpu: '2'
+              memory: 512M
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+          volumeMounts:
+            - name: rabbitmq-connection-string
+              mountPath: /var/run/secrets/rabbitmqConnectionString
+              subPath: rabbitmqConnectionString
+            - name: functions
+              mountPath: /app/functions
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - /opt/healthcheck.js
+            failureThreshold: 3
+            initialDelaySeconds: 90
+            periodSeconds: 60
+            timeoutSeconds: 10
+      volumes:
+        - name: rabbitmq-connection-string
+          secret:
+            secretName: cognigy-rabbitmq
+            items:
+              - key: connection-string
+                path: rabbitmqConnectionString
+        - name: functions
+          persistentVolumeClaim:
+            claimName: functions
+      imagePullSecrets:
+        - name: cognigy-registry-token
