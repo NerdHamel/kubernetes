@@ -43,6 +43,8 @@ spec:
               subPath: redis-persistent-password.conf
             - name: flow-modules
               mountPath: /app/flowModules
+            - name: functions
+              mountPath: /app/functions
           livenessProbe:
             exec:
               command:
@@ -80,5 +82,8 @@ spec:
         - name: flow-modules
           persistentVolumeClaim:
             claimName: flow-modules
+        - name: functions
+          persistentVolumeClaim:
+            claimName: functions
       imagePullSecrets:
         - name: cognigy-registry-token
