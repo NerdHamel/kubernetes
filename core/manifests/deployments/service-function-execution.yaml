@@ -31,6 +31,9 @@ spec:
               subPath: rabbitmqConnectionString
             - name: functions
               mountPath: /app/functions
+            - name: redis-password
+              mountPath: /var/run/secrets/redis-password.conf
+              subPath: redis-password.conf
           livenessProbe:
             exec:
               command:
@@ -50,5 +53,8 @@ spec:
         - name: functions
           persistentVolumeClaim:
             claimName: functions
+        - name: redis-password
+          secret:
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token
