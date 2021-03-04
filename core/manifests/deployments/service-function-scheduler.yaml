@@ -53,7 +53,7 @@ spec:
                 path: rabbitmqConnectionString
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-ai
+            secretName: cognigy-service-function-scheduler
             items:
               - key: connection-string
                 path: mongodbConnectionString
