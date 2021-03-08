@@ -52,6 +52,8 @@ resources:
 - manifests/deployments/service-custom-modules.yaml
 - manifests/deployments/service-endpoint.yaml
 - manifests/deployments/service-execution.yaml
+# - manifests/deployments/service-function-scheduler.yaml
+# - manifests/deployments/service-function-execution.yaml
 - manifests/deployments/service-handover.yaml
 - manifests/deployments/service-http.yaml
 - manifests/deployments/service-journeys.yaml
