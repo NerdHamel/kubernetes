@@ -113,16 +113,36 @@ kubectl logs -f --tail 100 deployment/service-security
 ```
 cd /path/to/your/theme
 
-kubectl create configmap theme-logo.png --from-file ./logo.png
-kubectl create configmap theme-logo-primary.png --from-file ./logo_primary.png
-kubectl create configmap theme-logo-square.png --from-file ./logo_square.png
+kubectl create configmap theme-custom-config --from-file custom_config.json
 
-kubectl create configmap theme-main-background.png --from-file ./main_background.png
-kubectl create configmap theme-static-content3.png --from-file ./static_content3.png
-kubectl create configmap theme-static-content2.png --from-file ./static_content2.png
-kubectl create configmap theme-static-content1.png --from-file ./static_content1.png
+kubectl create configmap theme-logo --from-file ./logo.png
+kubectl create configmap theme-logo-primary --from-file ./logo_primary.png
+kubectl create configmap theme-logo-square --from-file ./logo_square.png
 
-kubectl create configmap theme-custom-config.json --from-file custom_config.json
+kubectl create configmap theme-main-background --from-file ./main_background.png
+kubectl create configmap theme-static-content3 --from-file ./static_content3.png
+kubectl create configmap theme-static-content2 --from-file ./static_content2.png
+kubectl create configmap theme-static-content1 --from-file ./static_content1.png
+
+kubectl create configmap theme-android-icon-192x192 --from-file favicon/android-icon-192x192.png
+kubectl create configmap theme-apple-icon-57x57 --from-file favicon/apple-icon-57x57.png
+kubectl create configmap theme-apple-icon-60x60 --from-file favicon/apple-icon-60x60.png
+kubectl create configmap theme-apple-icon-72x72 --from-file favicon/apple-icon-72x72.png
+kubectl create configmap theme-apple-icon-76x76 --from-file favicon/apple-icon-76x76.png
+kubectl create configmap theme-apple-icon-114x114 --from-file favicon/apple-icon-114x114.png
+kubectl create configmap theme-apple-icon-120x120 --from-file favicon/apple-icon-120x120.png
+kubectl create configmap theme-apple-icon-144x144 --from-file favicon/apple-icon-144x144.png
+kubectl create configmap theme-apple-icon-152x152 --from-file favicon/apple-icon-152x152.png
+kubectl create configmap theme-apple-icon-180x180 --from-file favicon/apple-icon-180x180.png
+kubectl create configmap theme-favicon.ico --from-file favicon/favicon.ico
+kubectl create configmap theme-favicon-16x16 --from-file favicon/favicon-16x16.png
+kubectl create configmap theme-favicon-32x32 --from-file favicon/favicon-32x32.png
+kubectl create configmap theme-favicon-96x96 --from-file favicon/favicon-96x96.png
+kubectl create configmap theme-favicon-256x256 --from-file favicon/favicon-256x256.png
+kubectl create configmap theme-ms-icon-70x70 --from-file favicon/ms-icon-70x70.png
+kubectl create configmap theme-ms-icon-144x144 --from-file favicon/ms-icon-144x144.png
+kubectl create configmap theme-ms-icon-150x150 --from-file favicon/ms-icon-150x150.png
+kubectl create configmap theme-ms-icon-310x310 --from-file favicon/ms-icon-310x310.png
 ```
 
 **service-ui patch to apply the theme**
@@ -136,58 +156,172 @@ kubectl create configmap theme-custom-config.json --from-file custom_config.json
 - op: add
   path: /spec/template/spec/containers/0/volumeMounts
   value:
-    - name: theme-custom-config-json
+    - name: theme-custom-config
       mountPath: /app/build/custom/theme/custom_config.json
       subPath: custom_config.json
-    - name: theme-logo-png
+    - name: theme-logo
       mountPath: /app/build/custom/theme/logo.png
       subPath: logo.png
-    - name: theme-logo-primary-png
+    - name: theme-logo-primary
       mountPath: /app/build/custom/theme/logo_primary.png
       subPath: logo_primary.png
-    - name: theme-logo-square-png
+    - name: theme-logo-square
       mountPath: /app/build/custom/theme/logo_square.png
       subPath: logo_square.png
-    - name: theme-main-background-png
+    - name: theme-main-background
       mountPath: /app/build/custom/theme/main_background.png
       subPath: main_background.png
-    - name: theme-static-content1-png
+    - name: theme-static-content1
       mountPath: /app/build/custom/theme/static_content1.png
       subPath: static_content1.png
-    - name: theme-static-content2-png
+    - name: theme-static-content2
       mountPath: /app/build/custom/theme/static_content2.png
       subPath: static_content2.png
-    - name: theme-static-content3-png
+    - name: theme-static-content3
       mountPath: /app/build/custom/theme/static_content3.png
       subPath: static_content3.png
+    - name: theme-android-icon-192x192
+      mountPath: /app/build/custom/theme/favicon/android-icon-192x192.png
+      subPath: android-icon-192x192.png
+    - name: theme-apple-icon-57x57
+      mountPath: /app/build/custom/theme/favicon/apple-icon-57x57.png
+      subPath: apple-icon-57x57.png
+    - name: theme-apple-icon-60x60
+      mountPath: /app/build/custom/theme/favicon/apple-icon-60x60.png
+      subPath: apple-icon-60x60.png
+    - name: theme-apple-icon-72x72
+      mountPath: /app/build/custom/theme/favicon/apple-icon-72x72.png
+      subPath: apple-icon-72x72.png
+    - name: theme-apple-icon-76x76
+      mountPath: /app/build/custom/theme/favicon/apple-icon-76x76.png
+      subPath: apple-icon-76x76.png
+    - name: theme-apple-icon-114x114
+      mountPath: /app/build/custom/theme/favicon/apple-icon-114x114.png
+      subPath: apple-icon-114x114.png
+    - name: theme-apple-icon-120x120
+      mountPath: /app/build/custom/theme/favicon/apple-icon-120x120.png
+      subPath: apple-icon-120x120.png
+    - name: theme-apple-icon-144x144
+      mountPath: /app/build/custom/theme/favicon/apple-icon-144x144.png
+      subPath: apple-icon-144x144.png
+    - name: theme-apple-icon-152x152
+      mountPath: /app/build/custom/theme/favicon/apple-icon-152x152.png
+      subPath: apple-icon-152x152.png
+    - name: theme-apple-icon-180x180
+      mountPath: /app/build/custom/theme/favicon/apple-icon-180x180.png
+      subPath: apple-icon-180x180.png
+    - name: theme-favicon-ico
+      mountPath: /app/build/custom/theme/favicon/favicon.ico
+      subPath: favicon.ico
+    - name: theme-favicon-16x16
+      mountPath: /app/build/custom/theme/favicon/favicon-16x16.png
+      subPath: favicon-16x16.png
+    - name: theme-favicon-32x32
+      mountPath: /app/build/custom/theme/favicon/favicon-32x32.png
+      subPath: favicon-32x32.png
+    - name: theme-favicon-96x96
+      mountPath: /app/build/custom/theme/favicon/favicon-96x96.png
+      subPath: favicon-96x96.png
+    - name: theme-favicon-256x256
+      mountPath: /app/build/custom/theme/favicon/favicon-256x256.png
+      subPath: favicon-256x256.png
+    - name:  theme-ms-icon-70x70
+      mountPath: /app/build/custom/theme/favicon/ms-icon-70x70.png
+      subPath: ms-icon-70x70.png
+    - name:  theme-ms-icon-144x144
+      mountPath: /app/build/custom/theme/favicon/ms-icon-144x144.png
+      subPath: ms-icon-144x144.png
+    - name:  theme-ms-icon-150x150
+      mountPath: /app/build/custom/theme/favicon/ms-icon-150x150.png
+      subPath: ms-icon-150x150.png
+    - name:  theme-ms-icon-310x310
+      mountPath: /app/build/custom/theme/favicon/ms-icon-310x310.png
+      subPath: ms-icon-310x310.png
 
 - op: add
   path: /spec/template/spec/volumes
   value:
-    - name: theme-custom-config-json
+    - name: theme-custom-config
       configMap:
-        name: theme-custom-config.json
-    - name: theme-logo-png
+        name: theme-custom-config
+    - name: theme-logo
       configMap:
-        name: theme-logo.png
-    - name: theme-logo-primary-png
+        name: theme-logo
+    - name: theme-logo-primary
       configMap:
-        name: theme-logo-primary.png
-    - name: theme-logo-square-png
+        name: theme-logo-primary
+    - name: theme-logo-square
       configMap:
-        name: theme-logo-square.png
-    - name: theme-main-background-png
+        name: theme-logo-square
+    - name: theme-main-background
       configMap:
-        name: theme-main-background.png
-    - name: theme-static-content1-png
+        name: theme-main-background
+    - name: theme-static-content1
       configMap:
-        name: theme-static-content1.png
-    - name: theme-static-content2-png
+        name: theme-static-content1
+    - name: theme-static-content2
       configMap:
-        name: theme-static-content2.png
-    - name: theme-static-content3-png
+        name: theme-static-content2
+    - name: theme-static-content3
       configMap:
-        name: theme-static-content3.png
+        name: theme-static-content3
+    - name: theme-android-icon-192x192
+      configMap:
+        name: theme-android-icon-192x192
+    - name: theme-apple-icon-57x57
+      configMap:
+        name: theme-apple-icon-57x57
+    - name: theme-apple-icon-60x60
+      configMap:
+        name: theme-apple-icon-60x60
+    - name: theme-apple-icon-72x72
+      configMap:
+        name: theme-apple-icon-72x72
+    - name: theme-apple-icon-76x76
+      configMap:
+        name: theme-apple-icon-76x76
+    - name: theme-apple-icon-114x114
+      configMap:
+        name: theme-apple-icon-114x114
+    - name: theme-apple-icon-120x120
+      configMap:
+        name: theme-apple-icon-120x120
+    - name: theme-apple-icon-144x144
+      configMap:
+        name: theme-apple-icon-144x144
+    - name: theme-apple-icon-152x152
+      configMap:
+        name: theme-apple-icon-152x152
+    - name: theme-apple-icon-180x180
+      configMap:
+        name: theme-apple-icon-180x180
+    - name: theme-favicon-ico
+      configMap:
+        name: theme-favicon.ico
+    - name: theme-favicon-16x16
+      configMap:
+        name: theme-favicon-16x16
+    - name: theme-favicon-32x32
+      configMap:
+        name: theme-favicon-32x32
+    - name: theme-favicon-96x96
+      configMap:
+        name: theme-favicon-96x96
+    - name: theme-favicon-256x256
+      configMap:
+        name: theme-favicon-256x256
+    - name: theme-ms-icon-70x70
+      configMap:
+        name: theme-ms-icon-70x70
+    - name: theme-ms-icon-144x144
+      configMap:
+        name: theme-ms-icon-144x144
+    - name: theme-ms-icon-150x150
+      configMap:
+        name: theme-ms-icon-150x150
+    - name: theme-ms-icon-310x310
+      configMap:
+        name: theme-ms-icon-310x310
 ```
 
 **Loading your additional patch**
