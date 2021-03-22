@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-analytics-collector
-          image: 'docker.cognigy.com:5000/service-analytics-collector:0954c574395bc58bd0f868cfbb29e56dc95eee7b'
+          image: 'docker.cognigy.com:5000/service-analytics-collector:77192f189c27bf30ce4b801ffadc273f3654a864'
           resources:
             requests:
               cpu: '0.300'
