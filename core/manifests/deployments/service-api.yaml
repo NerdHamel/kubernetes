@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-api
-          image: 'docker.cognigy.com:5000/service-api:77192f189c27bf30ce4b801ffadc273f3654a864'
+          image: 'docker.cognigy.com:5000/service-api:6e1b04fa9079ca444d06097285a826b0ac345661'
           resources:
             requests:
               cpu: '0.2'
