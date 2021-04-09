@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: live-agent-ui
-          image: 'docker.cognigy.com:5000/live-agent-ui:6fd66ea4c8ef15c3f4f85ff51cb7c771822bd2ca'
+          image: 'docker.cognigy.com:5000/live-agent-ui:6e1b04fa9079ca444d06097285a826b0ac345661'
           resources:
             requests:
               cpu: '0.1'
