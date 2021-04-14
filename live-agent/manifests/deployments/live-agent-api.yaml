@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: live-agent-api
-          image: 'docker.cognigy.com:5000/live-agent-api:6e1b04fa9079ca444d06097285a826b0ac345661'
+          image: docker.cognigy.com:5000/live-agent-api:0bb71f02b5805b2662a39dd1bb5b994f6b702807
           resources:
             requests:
               cpu: '0.1'
@@ -36,8 +36,8 @@ spec:
               mountPath: /var/run/secrets/mongodbConnectionString
               subPath: mongodbConnectionString
             - name: redis-password
-              mountPath: /var/run/secrets/redis-password.conf    
-              subPath: redis-password.conf          
+              mountPath: /var/run/secrets/redis-password.conf
+              subPath: redis-password.conf
           livenessProbe:
             exec:
               command:
@@ -56,6 +56,6 @@ spec:
                 path: mongodbConnectionString
         - name: redis-password
           secret:
-            secretName: cognigy-redis-password                
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token

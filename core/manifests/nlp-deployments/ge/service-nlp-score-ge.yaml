@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-score-ge
-          image: 'docker.cognigy.com:5000/service-nlp-ge:27f215124731f641119850df3552952d14aef79d'
+          image: 'docker.cognigy.com:5000/service-nlp-ge:0bb71f02b5805b2662a39dd1bb5b994f6b702807'
           resources:
             requests:
               cpu: '0.350'
