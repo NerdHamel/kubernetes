@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-resources
+  name: service-function-scheduler
 spec:
   selector:
     matchLabels:
-      app: service-resources
+      app: service-function-scheduler
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-resources
+        app: service-function-scheduler
     spec:
       containers:
-        - name: service-resources
-          image: 'cognigydevelopment.azurecr.io/service-resources:63303cf83964f9e29ff7b72e52ba686050839b06'
+        - name: service-function-scheduler
+          image: 'docker.cognigy.com:5000/service-function-scheduler:77192f189c27bf30ce4b801ffadc273f3654a864'
           resources:
             requests:
-              cpu: '0.2'
-              memory: 512M
+              cpu: '0.1'
+              memory: 60M
             limits:
-              cpu: '0.5'
-              memory: 512M
+              cpu: '0.1'
+              memory: 75M
           envFrom:
             - configMapRef:
                 name: cognigy-env
@@ -32,19 +32,9 @@ spec:
             - name: mongodb-connection-string
               mountPath: /var/run/secrets/mongodbConnectionString
               subPath: mongodbConnectionString
-            - name: nlu-db-connection-string
-              mountPath: /var/run/secrets/nluDBConnectionString
-              subPath: nluDBConnectionString
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
               subPath: redis-password.conf
-            - name: redis-persistent-password
-              mountPath: /var/run/secrets/redis-persistent-password.conf
-              subPath: redis-persistent-password.conf
-            - name: flow-modules
-              mountPath: /app/flowModules
-            - name: functions
-              mountPath: /app/functions
           livenessProbe:
             exec:
               command:
@@ -63,27 +53,12 @@ spec:
                 path: rabbitmqConnectionString
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-resources
+            secretName: cognigy-service-function-scheduler
             items:
               - key: connection-string
                 path: mongodbConnectionString
-        - name: nlu-db-connection-string
-          secret:
-            secretName: cognigy-service-nlp
-            items:
-              - key: connection-string
-                path: nluDBConnectionString
         - name: redis-password
           secret:
             secretName: cognigy-redis-password
-        - name: redis-persistent-password
-          secret:
-            secretName: cognigy-redis-persistent-password
-        - name: flow-modules
-          persistentVolumeClaim:
-            claimName: flow-modules
-        - name: functions
-          persistentVolumeClaim:
-            claimName: functions
       imagePullSecrets:
         - name: cognigy-registry-token

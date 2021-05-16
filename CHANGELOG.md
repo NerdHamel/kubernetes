@@ -1,3 +1,16 @@
+# 4.3.0
+## Modification of files
+### Core (Cognigy.AI)
+A lot of files have been changed for our Cognigy.AI product. We have:
+- removed 2 Microservices
+- added 2 new Microservices
+- a new storage volume is required
+- a new database is required
+
+In order to make it simpler for you, we have created a dedicated migration-guide which explains how you can upgrade your `Cognigy.AI v4.2.X` system to `Cognigy.AI v4.3.0`. Please make sure that you are on the latest version of our product before you start migrating. You can find our migration guide [here](./docs/migration/4_2_to_4_3.md).
+
+---
+
 # 4.2.2
 ## Modification of files
 ### Core (Cognigy.AI)
