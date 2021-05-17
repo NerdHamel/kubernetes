@@ -8,4 +8,4 @@ spec:
   storageClassName: flow-modules
   resources:
     requests:
-      storage: 1Gi
+      storage: 100Gi
