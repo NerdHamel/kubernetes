@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-database-connections
-          image: 'docker.cognigy.com:5000/service-database-connections:202f2308df37e6194d9c26a7074d030e4ae5ee66'
+          image: 'docker.cognigy.com:5000/service-database-connections:88906a2460dd59a4f121357594ef82b34ed225fd'
           resources:
             requests:
               cpu: '0.1'
