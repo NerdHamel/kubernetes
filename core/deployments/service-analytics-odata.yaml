@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-analytics-odata
-          image: 'docker.cognigy.com:5000/service-analytics-odata:75dd377c3c56ceeff4f04849eadaca9f17f78840'
+          image: 'docker.cognigy.com:5000/service-analytics-odata:23376d6bc2f9d2d83494651f561a6cd9d5c1110e'
           resources:
             requests:
               cpu: '0.1'
