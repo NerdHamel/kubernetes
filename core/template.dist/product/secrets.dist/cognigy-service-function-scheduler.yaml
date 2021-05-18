@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cognigy-service-function-scheduler
+type: Opaque
+data:
+  # The full mongodb connection string, has a schema of:
+  # mongodb://service-xx:<password>@<host>:<port>/xx or different for replica-set
+  connection-string:

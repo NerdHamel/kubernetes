@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-conversation-manager
+  name: service-function-execution
 spec:
   selector:
     matchLabels:
-      app: service-conversation-manager
+      app: service-function-execution
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-conversation-manager
+        app: service-function-execution
     spec:
       containers:
-        - name: service-conversation-manager
-          image: 'docker.cognigy.com:5000/service-conversation-manager:785445c43507de571ad9804dcf56d1ee5338da9d'
+        - name: service-function-execution
+          image: 'docker.cognigy.com:5000/service-function-execution:e6ca695d10da30b0a96be6db12b121ab77ea24a9'
           resources:
             requests:
-              cpu: '0.1'
-              memory: 60M
+              cpu: '1'
+              memory: 512M
             limits:
-              cpu: '0.1'
-              memory: 75M
+              cpu: '2'
+              memory: 512M
           envFrom:
             - configMapRef:
                 name: cognigy-env
@@ -29,9 +29,11 @@ spec:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
-            - name: rabbitmq-api-connection-string
-              mountPath: /var/run/secrets/rabbitmqAPIConnectionString
-              subPath: rabbitmqAPIConnectionString
+            - name: functions
+              mountPath: /app/functions
+            - name: redis-password
+              mountPath: /var/run/secrets/redis-password.conf
+              subPath: redis-password.conf
           livenessProbe:
             exec:
               command:
@@ -48,11 +50,11 @@ spec:
             items:
               - key: connection-string
                 path: rabbitmqConnectionString
-        - name: rabbitmq-api-connection-string
+        - name: functions
+          persistentVolumeClaim:
+            claimName: functions
+        - name: redis-password
           secret:
-            secretName: cognigy-rabbitmq
-            items:
-              - key: connection-string-api
-                path: rabbitmqAPIConnectionString
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token

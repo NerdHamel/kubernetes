@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-cleanup
+  name: service-function-scheduler
 spec:
   selector:
     matchLabels:
-      app: service-cleanup
+      app: service-function-scheduler
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-cleanup
+        app: service-function-scheduler
     spec:
       containers:
-        - name: service-cleanup
-          image: 'docker.cognigy.com:5000/service-cleanup:785445c43507de571ad9804dcf56d1ee5338da9d'
+        - name: service-function-scheduler
+          image: 'docker.cognigy.com:5000/service-function-scheduler:e6ca695d10da30b0a96be6db12b121ab77ea24a9'
           resources:
             requests:
               cpu: '0.1'
@@ -29,9 +29,12 @@ spec:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
-            - name: rabbitmq-api-connection-string
-              mountPath: /var/run/secrets/rabbitmqAPIConnectionString
-              subPath: rabbitmqAPIConnectionString
+            - name: mongodb-connection-string
+              mountPath: /var/run/secrets/mongodbConnectionString
+              subPath: mongodbConnectionString
+            - name: redis-password
+              mountPath: /var/run/secrets/redis-password.conf
+              subPath: redis-password.conf
           livenessProbe:
             exec:
               command:
@@ -48,11 +51,14 @@ spec:
             items:
               - key: connection-string
                 path: rabbitmqConnectionString
-        - name: rabbitmq-api-connection-string
+        - name: mongodb-connection-string
           secret:
-            secretName: cognigy-rabbitmq
+            secretName: cognigy-service-function-scheduler
             items:
-              - key: connection-string-api
-                path: rabbitmqAPIConnectionString
+              - key: connection-string
+                path: mongodbConnectionString
+        - name: redis-password
+          secret:
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token

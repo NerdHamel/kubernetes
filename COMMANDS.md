@@ -47,9 +47,11 @@ kubectl apply -f secrets
 sudo mkdir -p /var/opt/cognigy/mongodb
 sudo mkdir -p /var/opt/cognigy/redis-persistent
 sudo mkdir -p /var/opt/cognigy/flow-modules
+sudo mkdir -p /var/opt/cognigy/functions
 
 sudo chown -R 999:999 /var/opt/cognigy/mongodb
 sudo chown -R 1000:1000 /var/opt/cognigy/flow-modules
+sudo chown -R 1000:1000 /var/opt/cognigy/functions
 ```
 
 ### 3.5 Database, Message-Broker and Cache

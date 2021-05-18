@@ -19,10 +19,6 @@ data:
   REDIS_PERSISTENT_PORT: "6379"
   REDIS_PERSISTENT_HOST: redis-persistent
 
-  # cleanup and constraint configuration
-  QUEUE_CLEANUP_INTERVAL: "1"
-  QUEUE_CLEANUP_IDLE_SINCE_MINUTES: "1"
-
   # limits (api requests, db queries, context-size)
   MESSAGE_TTL_SECONDS: "120"
   MAX_MEMORY_OBJECT_SIZE: "65536"
