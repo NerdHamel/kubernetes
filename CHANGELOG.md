@@ -11,6 +11,27 @@ In order to make it simpler for you, we have created a dedicated migration-guide
 
 ---
 
+# 4.2.5
+## Modification of files
+### Core (Cognigy.AI)
+The referenced Docker images have been changed.
+
+---
+
+# 4.2.4
+## Modification of files
+### Core (Cognigy.AI)
+The referenced Docker images have been changed.
+
+---
+
+# 4.2.3
+## Modification of files
+### Core (Cognigy.AI)
+The referenced Docker images have been changed.
+
+---
+
 # 4.2.2
 ## Modification of files
 ### Core (Cognigy.AI)
