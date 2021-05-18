@@ -12,4 +12,4 @@ mountOptions:
   - mfsymlinks
   - cache=strict
 parameters:
-  skuName: Standard_LRS
+  skuName: Premium_LRS
