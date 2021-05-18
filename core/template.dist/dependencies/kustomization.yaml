@@ -8,11 +8,13 @@ namespace: default
 
 resources:
 # storage: persistent volumes
+- manifests/volumes/functions.yaml
 - manifests/volumes/flow-modules.yaml
 - manifests/volumes/mongodb.yaml
 - manifests/volumes/redis-persistent.yaml
 
 # storage: persistent volume claims
+- manifests/volume-claims/functions.yaml
 - manifests/volume-claims/flow-modules.yaml
 - manifests/volume-claims/mongodb.yaml
 - manifests/volume-claims/redis-persistent.yaml
@@ -40,6 +42,12 @@ patchesJson6902:
     kind: PersistentVolume
     name: mongodb
   path: overlays/volumes/mongodb_patch.yaml
+
+- target:
+    version: v1
+    kind: PersistentVolume
+    name: functions
+  path: overlays/volumes/functions_patch.yaml
 
 - target:
     version: v1
