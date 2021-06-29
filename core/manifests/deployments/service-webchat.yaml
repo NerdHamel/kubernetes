@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-webchat
-          image: 'docker.cognigy.com:5000/service-webchat:2581f47230cf503b2c01795cc3d2c4fc4ae55a69'
+          image: 'docker.cognigy.com:5000/service-webchat:812343b2b49545f46f3cecc2eff01f6e4abc06d3'
           resources:
             requests:
               cpu: '0.1'
