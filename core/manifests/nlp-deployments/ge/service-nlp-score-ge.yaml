@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-score-ge
-          image: 'docker.cognigy.com:5000/service-nlp-ge:1eea0eae08fd830ada010bc5c21c61d81191ff64'
+          image: cognigydevelopment.azurecr.io/service-nlp-ge:f389a1a175909b5c79b42546fd9a9c4b7999c6a3
           resources:
             requests:
               cpu: '0.350'
@@ -49,7 +49,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: 'ge-GE,sv-SE,fi-FI,da-DK,nn-NO,vi-VN,hi-IN,bn-IN,ta-IN'
+              value: ge-GE,sv-SE,fi-FI,da-DK,nn-NO,vi-VN,hi-IN,bn-IN,ta-IN
             - name: SCORE
               value: 'true'
       volumes:
