@@ -14,24 +14,29 @@ spec:
     spec:
       containers:
         - name: service-execution
-          image: 'docker.cognigy.com:5000/service-execution:6ee692bd16e75a0d54a416c339cb9ed84a670478'
+          image: "docker.cognigy.com:5000/service-execution:6ee692bd16e75a0d54a416c339cb9ed84a670478"
           resources:
             requests:
-              cpu: '0.500'
+              cpu: "0.500"
               memory: 240M
             limits:
-              cpu: '0.500'
+              cpu: "0.500"
               memory: 300M
           volumeMounts:
             - name: flow-modules
               mountPath: /app/flowModules
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001
+            failureThreshold: 30
+            periodSeconds: 10
           livenessProbe:
-            exec:
-              command:
-                - node
-                - /opt/healthcheck.js
+            httpGet:
+              path: /health/liveness
+              port: 8001
             failureThreshold: 3
             initialDelaySeconds: 90
             periodSeconds: 60
