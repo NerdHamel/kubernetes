@@ -1,33 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-matcher-write
+  name: service-nlp-matcher
 spec:
   selector:
     matchLabels:
-      app: service-nlp-matcher-write
+      app: service-nlp-matcher
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-matcher-write
+        app: service-nlp-matcher
     spec:
       containers:
-        - name: service-nlp-matcher-write
+        - name: service-nlp-matcher
           image: cognigydevelopment.azurecr.io/service-nlp-matcher:0adff207e6e87e1c54ad29063ea1004ff4f3cd4c
           resources:
             requests:
               cpu: '0.2'
-              memory: 500M
+              memory: 300M
             limits:
-              cpu: '0.3'
-              memory: 750M
+              cpu: '0.5'
+              memory: 500M
           envFrom:
             - configMapRef:
                 name: cognigy-env
-          env:
-            - name: NLP_MATCHER_WRITE_PRIORITY
-              value: 'true'
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
@@ -42,9 +39,9 @@ spec:
             httpGet:
               path: /
               port: 8001
-            failureThreshold: 1
+            failureThreshold: 3
             initialDelaySeconds: 90
-            periodSeconds: 60
+            periodSeconds: 30
             timeoutSeconds: 10
       volumes:
         - name: rabbitmq-connection-string
