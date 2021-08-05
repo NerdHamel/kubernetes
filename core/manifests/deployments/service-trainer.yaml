@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-trainer
-          image: cognigydevelopment.azurecr.io/service-trainer:724bad91e073595d389b6c6f28138b076e512aa8
+          image: cognigydevelopment.azurecr.io/service-trainer:a9a0491a9c20b788758cb2241123736832fddb80
           resources:
             requests:
               cpu: '0.1'
