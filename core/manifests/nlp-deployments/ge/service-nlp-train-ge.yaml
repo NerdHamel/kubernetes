@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-ge
-          image: cognigydevelopment.azurecr.io/service-nlp-ge:a9a0491a9c20b788758cb2241123736832fddb80
+          image: docker.cognigy.com:5000/service-nlp-ge:a9a0491a9c20b788758cb2241123736832fddb80
           resources:
             requests:
               cpu: '0.350'
