@@ -1,3 +1,14 @@
+# 4.8.0
+## Modification of files
+### Core (Cognigy.AI)
+The referenced Docker images have been changed.
+
+### Cognigy Live Agent
+The referenced Docker images have been changed.
+
+
+---
+
 # 4.7.1
 ## Modification of files
 ### Core (Cognigy.AI)
