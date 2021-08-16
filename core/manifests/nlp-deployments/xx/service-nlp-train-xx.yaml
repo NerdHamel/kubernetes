@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-xx
-          image: 'docker.cognigy.com:5000/service-nlp:040df1c45c2775e69a619db78f068cf4309e50eb'
+          image: docker.cognigy.com:5000/service-nlp:fa4c5a978f41eda2d6b455abfc9965c6f7c73954
           resources:
             requests:
               cpu: '0.350'
@@ -49,7 +49,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: 'ar-AE,es-ES,fr-FR,nl-NL,it-IT,pl-PL,pt-PT,pt-BR,th-TH,ru-RU,tr-TR,zh-CN'
+              value: ar-AE,es-ES,fr-FR,nl-NL,it-IT,pl-PL,pt-PT,pt-BR,th-TH,ru-RU,tr-TR,zh-CN
             - name: TRAIN
               value: 'true'
       volumes:
