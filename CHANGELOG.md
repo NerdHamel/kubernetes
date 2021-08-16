@@ -3,6 +3,15 @@
 ### Core (Cognigy.AI)
 The referenced Docker images have been changed.
 
+### Cognigy Live Agent
+The referenced Docker images have been changed.
+
+### Cognigy Management UI
+The referenced Docker images have been changed.
+
+### Monitoring
+The referenced Docker images have been changed.
+
 ---
 
 # 4.8.1
