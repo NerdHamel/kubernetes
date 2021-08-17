@@ -49,7 +49,7 @@ spec:
                 name: cognigy-env
           env:
             - name: LANGUAGES_TO_RUN
-              value: 'en-US,en-AU,en-CA,en-IN,en-GB'
+              value: en-US,en-AU,en-CA,en-IN,en-GB
             - name: TRAIN
               value: 'true'
       volumes:
