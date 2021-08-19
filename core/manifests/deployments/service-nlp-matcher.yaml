@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-matcher
-          image: docker.cognigy.com:5000/service-nlp-matcher:39b0071b58873304518d44be516e99cdc185112e
+          image: docker.cognigy.com:5000/service-nlp-matcher:ad73d7aa9b13aa8a0999d8b1b69739697c818f79
           resources:
             requests:
               cpu: '0.2'
