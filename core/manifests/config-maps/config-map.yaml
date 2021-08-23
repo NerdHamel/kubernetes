@@ -28,7 +28,6 @@ data:
 
   # features (enable / disable)
   FEATURE_CUSTOM_NODES: "true"
-  RSS_FEED_URL: https://hello.cognigy.com/product/tag/enterprise/rss.xml
 
   # log cleanup
   LOG_ENTRIES_TTL_IN_MINUTES: "1440"

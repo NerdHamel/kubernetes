@@ -1,3 +1,25 @@
+# 4.9.0
+## Modification of files
+### Core (Cognigy.AI)
+The referenced Docker images have been changed.
+
+### New optional microservice
+In addition, we have introduced a new service called `service-nlp-matcher`. This is still experimental and an opt-in. We don't provide any further documentation for this service, yet. You will get the new service when deploying the `service-nlp-matcher.yaml` file located in the deployments folder. By default, this deployment will not be loaded when using the normal commands to update your product installation.
+
+## Networking - Ingress Controller
+We have also changed the `traefik` deployment definition and have added the so-called `Proxy-protocol` configuration which is required by some product features.
+
+### Cognigy Live Agent
+The referenced Docker images have been changed.
+
+### Cognigy Management UI
+The referenced Docker images have been changed.
+
+### Monitoring
+The referenced Docker images have been changed.
+
+---
+
 # 4.8.1
 ## Modification of files
 ### Core (Cognigy.AI)

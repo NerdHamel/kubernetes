@@ -1,41 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-alexa-management
+  name: service-nlp-matcher
 spec:
   selector:
     matchLabels:
-      app: service-alexa-management
+      app: service-nlp-matcher
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-alexa-management
+        app: service-nlp-matcher
     spec:
       containers:
-        - name: service-alexa-management
-          image: docker.cognigy.com:5000/service-alexa-management:e8e1aeccd08cd92bed972675f9607c02fb45205d
+        - name: service-nlp-matcher
+          image: docker.cognigy.com:5000/service-nlp-matcher:ad73d7aa9b13aa8a0999d8b1b69739697c818f79
           resources:
             requests:
-              cpu: '0.1'
-              memory: 60M
+              cpu: '0.2'
+              memory: 300M
             limits:
-              cpu: '0.1'
-              memory: 75M
+              cpu: '0.5'
+              memory: 500M
           envFrom:
             - configMapRef:
                 name: cognigy-env
-          env:
-            - name: AMAZON_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: cognigy-amazon-credentials
-                  key: amazon-client-id
-            - name: AMAZON_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: cognigy-amazon-credentials
-                  key: amazon-client-secret
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
@@ -43,17 +32,16 @@ spec:
             - name: mongodb-connection-string
               mountPath: /var/run/secrets/mongodbConnectionString
               subPath: mongodbConnectionString
-            - name: redis-password
-              mountPath: /var/run/secrets/redis-password.conf
-              subPath: redis-password.conf
+            - name: redis-persistent-password
+              mountPath: /var/run/secrets/redis-persistent-password.conf
+              subPath: redis-persistent-password.conf
           livenessProbe:
-            exec:
-              command:
-                - node
-                - /opt/healthcheck.js
+            httpGet:
+              path: /
+              port: 8001
             failureThreshold: 3
             initialDelaySeconds: 90
-            periodSeconds: 60
+            periodSeconds: 30
             timeoutSeconds: 10
       volumes:
         - name: rabbitmq-connection-string
@@ -64,12 +52,12 @@ spec:
                 path: rabbitmqConnectionString
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-analytics-collector-provider
+            secretName: cognigy-service-resources
             items:
               - key: connection-string
                 path: mongodbConnectionString
-        - name: redis-password
+        - name: redis-persistent-password
           secret:
-            secretName: cognigy-redis-password
+            secretName: cognigy-redis-persistent-password
       imagePullSecrets:
         - name: cognigy-registry-token
