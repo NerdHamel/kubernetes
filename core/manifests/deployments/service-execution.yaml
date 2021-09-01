@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-execution
-          image: docker.cognigy.com:5000/service-execution:da51882ceb70e18347efa13733cab063d37d2e1c
+          image: docker.cognigy.com:5000/service-execution:42d0bc187b32d0108087c37ab9706253b20d1f19
           resources:
             requests:
-              cpu: "0.500"
+              cpu: '0.500'
               memory: 240M
             limits:
-              cpu: "0.500"
+              cpu: '0.500'
               memory: 300M
           volumeMounts:
             - name: flow-modules
