@@ -59,9 +59,6 @@ data:
   # Endpoint configuration for Alexa
   ALEXA_END_SESSION_AFTER_EACH_REPLY: "true"
 
-  # NLP configuration
-  CNLP_CORES: "4"
-
   # Insert if the 'management-ui' is used
   # INTERNAL_API_USERNAME:
   # INTERNAL_API_PASSWORD:
