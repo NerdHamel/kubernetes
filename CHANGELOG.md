@@ -1,8 +1,14 @@
-# 4.9.1
+# 4.10.0
 ## Modification of files
 ### Core (Cognigy.AI)
 The referenced Docker images have been changed.
 
+---
+
+# 4.9.1
+## Modification of files
+### Core (Cognigy.AI)
+The referenced Docker images have been changed.
 
 ---
 
