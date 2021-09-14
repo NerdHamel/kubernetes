@@ -7,13 +7,13 @@ This file contains a general guideline to install Cognigy.AI version 4.X.
 git clone https://github.com/Cognigy/kubernetes.git
 ```
 ## Configure volumes
-### Creating stroageclass
+### Creating storageclass
 
-We need to create a azure-file based stroageclass with uid and gid 1000. To do so 
+We need to create a azure-file based storageclass with uid and gid 1000. To do so 
 
 ```
 cd cloudproviders/azure/aks
-kubectl apply -f stroageclass
+kubectl apply -f storageclass
 ```
 ### Creating PVC
 
