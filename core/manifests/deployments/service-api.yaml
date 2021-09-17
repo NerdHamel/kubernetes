@@ -59,6 +59,9 @@ spec:
             - name: redis-persistent-password
               mountPath: /var/run/secrets/redis-persistent-password.conf
               subPath: redis-persistent-password.conf
+            - name: management-ui-creds
+              mountPath: /var/run/secrets/management-ui-creds.json
+              subPath: management-ui-creds.json
           livenessProbe:
             exec:
               command:
@@ -87,5 +90,8 @@ spec:
         - name: redis-persistent-password
           secret:
             secretName: cognigy-redis-persistent-password
+        - name: management-ui-creds
+          secret:
+            secretName: cognigy-management-ui-creds
       imagePullSecrets:
         - name: cognigy-registry-token
