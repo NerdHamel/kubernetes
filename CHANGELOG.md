@@ -1,10 +1,10 @@
+-> Benni:
+We need to document the "file change" for management-ui + update the referenced Docker Image
+=======
 # 4.11.0
 ## Modification of files
 ### Core (Cognigy.AI)
 The referenced Docker images have been changed.
-
----
-
 # 4.10.1
 ## Modification of files
 ### Core (Cognigy.AI)
