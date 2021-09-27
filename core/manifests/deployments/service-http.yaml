@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-http
-          image: docker.cognigy.com:5000/service-http:d51eacb46aed4e9c7eb8000e9d8fc67e4735e7cc
+          image: docker.cognigy.com:5000/service-http:0d43464224fcfb1ff30ce6f555635dd97006b49a
           resources:
             requests:
               cpu: '0.1'
