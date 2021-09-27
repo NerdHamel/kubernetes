@@ -1,10 +1,20 @@
--> Benni:
-We need to document the "file change" for management-ui + update the referenced Docker Image
-=======
+# 4.12.0
+## Modification of files
+### Core (Cognigy.AI)
+-> Todo document about new secret "cognigy-management-ui" as service-api will not start otherwise!
+
+### ManagementUI
+-> Todo document how to use the mui after the change
+
+---
+
 # 4.11.0
 ## Modification of files
 ### Core (Cognigy.AI)
 The referenced Docker images have been changed.
+
+---
+
 # 4.10.1
 ## Modification of files
 ### Core (Cognigy.AI)
