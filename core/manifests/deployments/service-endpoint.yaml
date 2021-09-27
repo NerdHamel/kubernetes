@@ -51,15 +51,22 @@ spec:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001
           livenessProbe:
-            exec:
-              command:
-                - node
-                - /opt/healthcheck.js
+            httpGet:
+              path: /health/liveness
+              port: 8001
             failureThreshold: 3
             initialDelaySeconds: 90
             periodSeconds: 60
             timeoutSeconds: 10
+          ports:
+            - name: metrics
+              containerPort: 8002
+              protocol: TCP
       volumes:
         - name: redis-persistent-password
           secret:
