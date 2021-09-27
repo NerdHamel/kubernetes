@@ -234,7 +234,7 @@ data:
           description: AI Pod has been down for the last 1 minute(s).
       
       - alert: AI Restarted
-        expr: rate(kube_pod_container_status_restarts_total{container="service-ai"}[15m]) > 0
+        expr: rate(kube_pod_container_status_restarts_total{container="service-ai"}[15m]) > 5
         for: 1m
         labels:
           hostname: <Host>
