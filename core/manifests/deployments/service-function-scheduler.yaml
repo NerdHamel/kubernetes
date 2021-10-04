@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-function-scheduler
-          image: docker.cognigy.com:5000/service-function-scheduler:b3ebf2263929900ddbfda03d836a93291b67adb6
+          image: docker.cognigy.com:5000/service-function-scheduler:d6f4e5c2eacb678b5d6035232b7ee5358d54f102
           resources:
             requests:
               cpu: '0.1'
