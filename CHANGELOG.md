@@ -1,3 +1,42 @@
+# 4.12.0
+## Modification of files
+### Core (Cognigy.AI)
+This release of Cognigy.AI requires you to apply an additional Kubernetes secret to your Kubernetes cluster. The secret is called `cognigy-management-ui` and located under `core/template.dist/product/secrets.dist`. We suggest to copy this file from the `secrets.dist` folder into your `secrets` folders. The secret - by default - does not have a real value set.
+
+We have also removed the following environment variables from our product:
+```
+INTERNAL_API_USERNAME
+INTERNAL_API_PASSWORD
+```
+
+These environment variables were used for the `Cognigy Management UI` to be able to authenticate with Cognigy.AI. We have replaced the single pair of credentials with the `cognigy-management-ui` secret (see above). The secret looks like the following:
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+    name: cognigy-management-ui-creds
+type: Opaque
+data:
+    # the management ui credentials should contain a base64 encoded JSON string,
+    # which consists of an array of {"username": "example_username", "password": "example_password"} pairs
+    management-ui-creds.json: ""
+```
+
+If you want to replace the old INTERNAL_API_USERNAME/INTERNAL_API_PASSWORD with the new approach, you can just the following JSON array:
+```json
+[{"username": "<insert-INTERNAL_API_USERNAME>", "password": "<insert-INTERNAL_API_PASSWORD>"}]
+```
+
+You then have to base64 encode this JSON-array and then use it as the value in the secret.
+
+
+**Important**
+Not applying this secret into your cluster before upgrading to Cognigy.AI v4.12.0 will make `service-api` unavailable! Please be sure to apply the secret to your cluster.
+
+All referenced Docker images have been changed.
+
+---
+
 # 4.11.0
 ## Modification of files
 ### Core (Cognigy.AI)
