@@ -401,3 +401,33 @@ kubectl rollout restart deployments/service-api
 kubectl rollout restart deployments/service-ui
 kubectl rollout restart deployments/service-handover
 ```
+
+## Chapter 7, Cognigy Management UI
+### 7.2.2 Using templates
+**Preparing the files for a Cognigy Management UI installation**
+```
+cd kubernetes.git
+cd management-ui
+chmod +x make_environment.sh
+./make_environment.sh
+```
+
+### 7.2.3 Secrets
+**Preparing the Management UI secrets for your Cognigy AI deployment.**
+```
+cd kubernetes.git/core/<environment>/product/secrets
+nano cognigy-management-ui-credentials.yaml
+```
+
+**Applying the changes to you Cognigy AI deployment**
+```
+kubectl apply -f secrets
+kubectl rollout restart deployments/service-api
+```
+
+### 7.2.4 Patch files
+**Applying Cognigy Management UI files in order to initiate initial deployment.**
+```
+cd kubernetes.git/management-ui/template
+kubectl apply -k ./
+```
