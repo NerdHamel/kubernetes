@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-score-de
-          image: docker.cognigy.com:5000/service-nlp:0671b846b0024613212959ea901bd17004a35fb4
+          image: docker.cognigy.com:5000/service-nlp:08648353f7861090f17165b550f89613348fd9fa
           resources:
             requests:
               cpu: '0.350'
