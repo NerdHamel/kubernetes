@@ -22,6 +22,9 @@ spec:
             limits:
               cpu: '0.5'
               memory: 500M
+          ports:
+            - name: metrics
+              containerPort: 8002
           envFrom:
             - configMapRef:
                 name: cognigy-env
