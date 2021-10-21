@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-matcher
-          image: docker.cognigy.com:5000/service-nlp-matcher:7fd13e9c5d8f0b178cf88aa9f9f8b62e137b47b4
+          image: docker.cognigy.com:5000/service-nlp-matcher:9fdc04be39db777b30e41c9a5557ba8d78bd0c7c
           resources:
             requests:
               cpu: '0.2'
@@ -22,6 +22,9 @@ spec:
             limits:
               cpu: '0.5'
               memory: 500M
+          ports:
+            - name: metrics
+              containerPort: 8002
           envFrom:
             - configMapRef:
                 name: cognigy-env

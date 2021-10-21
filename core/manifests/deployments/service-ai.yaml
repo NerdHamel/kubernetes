@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-ai
-          image: docker.cognigy.com:5000/service-ai:d51eacb46aed4e9c7eb8000e9d8fc67e4735e7cc
+          image: docker.cognigy.com:5000/service-ai:f4edbc1e73ddacaf9e29b177fc4320b95b6a2558
           resources:
             requests:
               cpu: '0.4'
@@ -22,6 +22,9 @@ spec:
             limits:
               cpu: '0.4'
               memory: 500M
+          ports:
+            - name: metrics
+              containerPort: 8002
           envFrom:
             - configMapRef:
                 name: cognigy-env
