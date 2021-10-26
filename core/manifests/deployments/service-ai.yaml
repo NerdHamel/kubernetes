@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-ai
-          image: docker.cognigy.com:5000/service-ai:f4edbc1e73ddacaf9e29b177fc4320b95b6a2558
+          image: docker.cognigy.com:5000/service-ai:afe389c7e26fb8a421c13596926b1918e0ed038d
           resources:
             requests:
               cpu: '0.4'
@@ -57,7 +57,7 @@ spec:
             failureThreshold: 3
             initialDelaySeconds: 90
             periodSeconds: 60
-            timeoutSeconds: 10          
+            timeoutSeconds: 10
       volumes:
         - name: rabbitmq-connection-string
           secret:
