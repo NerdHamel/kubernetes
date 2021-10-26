@@ -66,10 +66,6 @@ spec:
             initialDelaySeconds: 90
             periodSeconds: 60
             timeoutSeconds: 10
-          ports:
-            - name: metrics
-              containerPort: 8002
-              protocol: TCP
       volumes:
         - name: redis-persistent-password
           secret:
