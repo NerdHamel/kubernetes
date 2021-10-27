@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-function-execution
-          image: docker.cognigy.com:5000/service-function-execution:734ebd1178ba6e53cc7b6e8156858aff36a685e3
+          image: docker.cognigy.com:5000/service-function-execution:3549d6a1f2293e542feeba19c2fc7ded62f915cd
           resources:
             requests:
               cpu: '1'
@@ -22,6 +22,9 @@ spec:
             limits:
               cpu: '2'
               memory: 512M
+          ports:
+            - name: metrics
+              containerPort: 8002
           envFrom:
             - configMapRef:
                 name: cognigy-env

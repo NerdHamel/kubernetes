@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-endpoint
-          image: docker.cognigy.com:5000/service-endpoint:b2c226a0c41f361d88f7f5ac0e3d67898b5df53a
+          image: docker.cognigy.com:5000/service-endpoint:3549d6a1f2293e542feeba19c2fc7ded62f915cd
           resources:
             requests:
               cpu: '0.2'
@@ -22,6 +22,9 @@ spec:
             limits:
               cpu: '0.2'
               memory: 150M
+          ports:
+            - name: metrics
+              containerPort: 8002
           envFrom:
             - configMapRef:
                 name: cognigy-env
