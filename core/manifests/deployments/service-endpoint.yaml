@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-endpoint
-          image: docker.cognigy.com:5000/service-endpoint:1324a28966576cd2c83d4df34e3c4897af9691e4
+          image: docker.cognigy.com:5000/service-endpoint:cb647bb6b4fb5ba9b6d76a2e9b895ff0906e560a
           resources:
             requests:
               cpu: '0.2'
