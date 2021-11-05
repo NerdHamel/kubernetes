@@ -1,3 +1,9 @@
+# 4.14.0
+## Modification of files
+The referenced Docker images have been changed.
+
+---
+
 # 4.13.1
 ## Modification of files
 ### Core (Cognigy.AI)
@@ -5,8 +11,6 @@ The container image for service-endpoint has changed. The image does not contain
 
 ### Monitoring
 We have also added so-called PodMonitor CR (custom resources) to our Kubernetes repository. They will be used by our future monitoring solution which we are currently crafting.
-
-
 
 ---
 
