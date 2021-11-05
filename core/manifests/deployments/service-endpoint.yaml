@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-endpoint
-          image: docker.cognigy.com:5000/service-endpoint:3549d6a1f2293e542feeba19c2fc7ded62f915cd
+          image: docker.cognigy.com:5000/service-endpoint:d25dc88dd438937b0cfd09d9b16b2370b99117e5
           resources:
             requests:
               cpu: '0.2'
@@ -54,11 +54,14 @@ spec:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001
           livenessProbe:
-            exec:
-              command:
-                - node
-                - /opt/healthcheck.js
+            httpGet:
+              path: /health/liveness
+              port: 8001
             failureThreshold: 3
             initialDelaySeconds: 90
             periodSeconds: 60
