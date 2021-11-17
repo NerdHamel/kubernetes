@@ -1,6 +1,9 @@
 # 4.15.0
-## Modifcation of files
-The referenced Docker images have been changed.
+## Modification of files
+### Core (Cognigy.AI)
+In addition to container images which have changes for this release, we have also
+increased the Kubernetes resources for our microservice "analytics-reporter" as
+this is an essential component driving the report generation in Cognigy Insights.
 
 ---
 
