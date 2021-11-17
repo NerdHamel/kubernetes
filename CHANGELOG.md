@@ -7,6 +7,12 @@ this is an essential component driving the report generation in Cognigy Insights
 
 ---
 
+# 4.14.1
+## Modification of files
+The referenced Docker images have been changed.
+
+---
+
 # 4.14.0
 ## Modification of files
 The referenced Docker images have been changed.
