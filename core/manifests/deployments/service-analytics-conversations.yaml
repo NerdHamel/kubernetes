@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-analytics-conversations
-          image: docker.cognigy.com:5000/service-analytics-conversations:a843784185b11e8a66183c24d213d48783a74319
+          image: docker.cognigy.com:5000/service-analytics-conversations:9c7febe4f27823803ba8fc9684f8dfec681a0d00
           resources:
             requests:
               cpu: '0.1'
