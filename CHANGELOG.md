@@ -1,3 +1,9 @@
+# 4.15.2
+## Modification of files
+The referenced Docker images have been changed.
+
+---
+
 # 4.15.1
 ## Modification of files
 The referenced Docker images have been changed.
