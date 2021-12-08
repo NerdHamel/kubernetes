@@ -1,12 +1,22 @@
-# 4.16.0
-## Modification of files
-### Cognigy (Cognigy.AI)
+# Release Notes
+
+## 4.16.0
+### Modification of files
+#### Cognigy (Cognigy.AI)
 The "service-webchat" deployment has been modified. It will now also mount additional 
 secrets. None of these secrets are new - so no additional secret has to be applied 
 to your Kubernetes cluster.
 
 
 ---
+
+## 4.15.3
+### Modification of files
+The referenced Docker images have been changed.
+
+
+---
+
 # 4.15.2
 ## Modification of files
 The referenced Docker images have been changed.
