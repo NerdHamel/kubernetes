@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-webchat
-          image: cognigy.azurecr.io/service-webchat:e68d8181e6e6ff454edb3f60741adb21d1adc8c2
+          image: cognigy.azurecr.io/service-webchat:3db053b6c6b1b7d77f3384791681e507bc23fcea
           resources:
             requests:
               cpu: '0.1'
@@ -28,5 +28,34 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognigy-env
+          volumeMounts:
+            - name: redis-password
+              mountPath: /var/run/secrets/redis-password.conf
+              subPath: redis-password.conf
+            - name: rabbitmq-connection-string
+              mountPath: /var/run/secrets/rabbitmqConnectionString
+              subPath: rabbitmqConnectionString
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8001
+            failureThreshold: 3
+            initialDelaySeconds: 90
+            periodSeconds: 60
+            timeoutSeconds: 10
+      volumes:
+        - name: redis-password
+          secret:
+            secretName: cognigy-redis-password
+        - name: rabbitmq-connection-string
+          secret:
+            secretName: cognigy-rabbitmq
+            items:
+              - key: connection-string
+                path: rabbitmqConnectionString
       imagePullSecrets:
         - name: cognigy-registry-token
