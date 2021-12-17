@@ -1,5 +1,9 @@
 # Release Notes
 
+## 4.16.1
+### Modification of files
+The referenced Docker images have been changed.
+
 ## 4.16.0
 ### Modification of files
 #### Cognigy (Cognigy.AI)
