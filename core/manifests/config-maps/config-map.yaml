@@ -49,12 +49,12 @@ data:
   MAX_MODULE_EXECUTION_TIME_IN_SECONDS: "20"
 
   # DNS names
-  FRONTEND_BASE_URL_WITH_PROTOCOL: "https://ui.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
-  BACKEND_BASE_URL_WITH_PROTOCOL: "https://api.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
-  ENDPOINT_BASE_URL_WITH_PROTOCOL: "https://endpoint.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
-  WEBCHAT_BASE_URL_WITH_PROTOCOL: "https://webchat.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
-  ENDPOINT_BASE_URL: "https://endpoint.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
-  ODATA_HOSTNAME: "odata.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  FRONTEND_BASE_URL_WITH_PROTOCOL: "https://ui.chatbot-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  BACKEND_BASE_URL_WITH_PROTOCOL: "https://api.chatbot-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  ENDPOINT_BASE_URL_WITH_PROTOCOL: "https://endpoint.chatbot-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  WEBCHAT_BASE_URL_WITH_PROTOCOL: "https://webchat.chatbot-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  ENDPOINT_BASE_URL: "https://endpoint.chatbot-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  ODATA_HOSTNAME: "odata.chatbot-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
   ODATA_PROTOCOL: "https"
   
   # Endpoint configuration for Alexa
