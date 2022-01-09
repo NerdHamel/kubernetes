@@ -49,13 +49,14 @@ data:
   MAX_MODULE_EXECUTION_TIME_IN_SECONDS: "20"
 
   # DNS names
-  FRONTEND_BASE_URL_WITH_PROTOCOL: http://ui
-  BACKEND_BASE_URL_WITH_PROTOCOL: http://api
-  ENDPOINT_BASE_URL_WITH_PROTOCOL: http://endpoint
-  WEBCHAT_BASE_URL_WITH_PROTOCOL: http://webchat
-  ENDPOINT_BASE_URL: http://endpoint
-  ODATA_HOSTNAME: odata
-
+  FRONTEND_BASE_URL_WITH_PROTOCOL: "https://ui.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  BACKEND_BASE_URL_WITH_PROTOCOL: "https://api.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  ENDPOINT_BASE_URL_WITH_PROTOCOL: "https://endpoint.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  WEBCHAT_BASE_URL_WITH_PROTOCOL: "https://webchat.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  ENDPOINT_BASE_URL: "https://endpoint.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  ODATA_HOSTNAME: "odata.chat-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
+  ODATA_PROTOCOL: "https"
+  
   # Endpoint configuration for Alexa
   ALEXA_END_SESSION_AFTER_EACH_REPLY: "true"
   
