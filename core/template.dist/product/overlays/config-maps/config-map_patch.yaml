@@ -18,22 +18,22 @@
 # DNS names
 - op: add
   path: /data/FRONTEND_BASE_URL_WITH_PROTOCOL
-  value: "http://ui"
+  value: "https://ui.chatbot-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
 - op: add
   path: /data/BACKEND_BASE_URL_WITH_PROTOCOL
-  value: "http://api"
+  value: "https://api.chatbot-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
 - op: add
   path: /data/ENDPOINT_BASE_URL_WITH_PROTOCOL
-  value: "http://endpoint"
+  value: "https://endpoint.chatbot-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
 - op: add
   path: /data/WEBCHAT_BASE_URL_WITH_PROTOCOL
-  value: "http://webchat"
+  value: "https://webchat.chatbot-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
 - op: add
   path: /data/ODATA_HOSTNAME
-  value: "odata"
+  value: "odata.chatbot-app-cognigy-platform.apps.esale-dev.prod.mobily.lan"
 - op: add
   path: /data/ODATA_PROTOCOL
-  value: "http"
+  value: "https"
 
 # INTERNAL API for management ui
 # - op: add
